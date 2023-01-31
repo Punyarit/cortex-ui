@@ -1,6 +1,6 @@
-import { createComponent } from '@lit-labs/react';
+import {createComponent} from '@lit-labs/react';
 import * as React from 'react';
-import { tagName, Theme } from '../../cx/components/materials/theme/theme';
+import {tagName, Theme} from '../cx/components/theme/theme';
 
 export const CxTheme = createComponent({
   tagName,

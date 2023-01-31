@@ -1,6 +1,6 @@
 import { createComponent, EventName } from '@lit-labs/react';
 import * as React from 'react';
-import { Button, onPressed, tagName } from '../../cx/components/materials/button/button';
+import { Button, onPressed, tagName } from '../cx/components/button/button';
 
 export const CxButton = createComponent({
   tagName,
