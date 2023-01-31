@@ -1,6 +1,6 @@
-import { ColorTypesV2 } from '../../../../types/colors.v2.type';
-import { SizeTypes } from '../../../../types/sizes.type';
-import { ButtonFactoryColors } from '../../types/button.factory.types';
+import {ColorTypesV2} from '../../../../types/colors.v2.type';
+import {SizeTypes} from '../../../../types/sizes.type';
+import {ButtonFactoryColors} from '../../types/button.factory.types';
 
 export default class ConcreteButtonColors implements ButtonFactoryColors {
   textColor!: ColorTypesV2;

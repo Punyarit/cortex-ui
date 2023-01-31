@@ -1,6 +1,6 @@
 import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { ComponentBase } from '../../../base/componentBase/component.base';
+import { ComponentBase } from '../../base/componentBase/component.base';
 
 export const tagName = 'cx-layout';
 // export const onPressed = 'pressed';

@@ -1,6 +1,6 @@
 import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { ComponentBase } from '../../../base/componentBase/component.base';
+import { ComponentBase } from '../../base/componentBase/component.base';
 import { ProgressDirector } from './builder/progress.builder';
 import { ColorKeyTypes, SizeKeyTypes } from './types/progress.types';
 

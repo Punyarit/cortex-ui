@@ -1,7 +1,7 @@
 import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
-import { ComponentBase } from '../../../base/componentBase/component.base';
+import { ComponentBase } from '../../base/componentBase/component.base';
 import { SnackbarModalSlot } from '../snackbar/types/snackbar.types';
 import { ModalSingleton } from './singleton/modal.singleton';
 import { DialogState } from './state/dialog.state';

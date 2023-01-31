@@ -1,11 +1,11 @@
-import { css, html, TemplateResult } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { ComponentBase } from '../../../base/componentBase/component.base';
-import { ColorTypes } from '../../../types/colors.version-control';
-import { SizeTypes } from '../../../types/sizes.type';
-import { ThemeVersion } from '../theme/types/theme.types';
-import { SpinnerDirector } from './builder/spinner.builder';
-import { ColorKeyTypes, SizeKeyTypes } from './types/spinner.types';
+import {css, html, TemplateResult} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {ComponentBase} from '../../base/componentBase/component.base';
+import {ColorTypes} from '../../types/colors.version-control';
+import {SizeTypes} from '../../types/sizes.type';
+import {ThemeVersion} from '../theme/types/theme.types';
+import {SpinnerDirector} from './builder/spinner.builder';
+import {ColorKeyTypes, SizeKeyTypes} from './types/spinner.types';
 
 export const tagName = 'cx-spinner';
 // export const onPressed = 'pressed';
@@ -87,7 +87,7 @@ export class Spinner extends ComponentBase<CXSpinner.Props> {
   updated(changedProperties: Map<PropertyKey, unknown>): void {
     if (changedProperties.has('set')) {
       const spinnerBuilder = SpinnerDirector.construct(this.set);
-      const spinnerVars = { color: spinnerBuilder.color, ...spinnerBuilder.size };
+      const spinnerVars = {color: spinnerBuilder.color, ...spinnerBuilder.size};
       this.setVariablesToElement(spinnerVars);
     }
     super.update(changedProperties);
@@ -110,7 +110,7 @@ declare global {
       color?: ColorKeyTypes;
     };
 
-    type Fix = { [K in keyof Set]: (value: Set[K]) => Fix } & { exec: () => Ref };
+    type Fix = {[K in keyof Set]: (value: Set[K]) => Fix} & {exec: () => Ref};
 
     type Props = {
       var: Pick<Var, never>;

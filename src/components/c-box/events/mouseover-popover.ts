@@ -1,4 +1,4 @@
-import { getCxModalRef } from '../../../../helpers/getCxModalRef';
+import { getCxModalRef } from '../../../helpers/getCxModalRef';
 import { EventStrategy } from '../types/event-straegy';
 
 export class MouseoverPopover implements EventStrategy {

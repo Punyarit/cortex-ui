@@ -1,5 +1,5 @@
-import { useCxDialog } from '../../../../hooks/useCxDialog';
-import { EventStrategy } from '../types/event-straegy';
+import {useCxDialog} from '../../../helpers/useCxDialog';
+import {EventStrategy} from '../types/event-straegy';
 
 export class ClickDialog implements EventStrategy {
   public events: (keyof HTMLElementEventMap)[] = ['click'];

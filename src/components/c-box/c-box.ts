@@ -1,8 +1,12 @@
-import { IconSrcTypes } from '../icon/types/icon.types';
+import {IconSrcTypes} from '../icon/types/icon.types';
 import EventFactory from './factory/events.factory';
-import { DxDivTypes } from './types/cx-div.types';
-import { eventAttributes, EventAttributes, EventStrategy } from './types/event-straegy';
-export const tagName = 'cx-div';
+import {DxDivTypes} from './types/c-box.types';
+import {
+  eventAttributes,
+  EventAttributes,
+  EventStrategy,
+} from './types/event-straegy';
+export const tagName = 'c-box';
 
 export class CxDiv extends HTMLElement {
   #eventStrategy?: EventStrategy;
@@ -11,17 +15,25 @@ export class CxDiv extends HTMLElement {
     return eventAttributes;
   }
 
-  async attributeChangedCallback(event: EventAttributes, oldValue: string, newValue: string | 'none') {
+  async attributeChangedCallback(
+    event: EventAttributes,
+    oldValue: string,
+    newValue: string | 'none'
+  ) {
     // 📌"none" mean that event dont need to execute.
     if (newValue === 'none') return;
-    this.#eventStrategy = await EventFactory.getEventDetail(this, event, newValue);
+    this.#eventStrategy = await EventFactory.getEventDetail(
+      this,
+      event,
+      newValue
+    );
   }
 
   eventDetail(): EventStrategy | undefined {
     return this.#eventStrategy?.eventDetail();
   }
 
-  // 📌call when cx-div is destroyed
+  // 📌call when c-box is destroyed
   disconnectedCallback() {
     if (!this.#eventStrategy) return;
 
@@ -56,7 +68,12 @@ declare global {
 
   namespace JSX {
     interface IntrinsicElements {
-      [tagName]: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> | DxDivTypes;
+      [tagName]:
+        | React.DetailedHTMLProps<
+            React.HTMLAttributes<HTMLDivElement>,
+            HTMLDivElement
+          >
+        | DxDivTypes;
     }
   }
 

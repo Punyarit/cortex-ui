@@ -1,8 +1,8 @@
 $displays: block, inline, inline-block, flex, inline-flex;
 
 @each $display in $displays {
-  cx-div[ui*='#{$display}'],
-  cx-div[#{$display}] {
+  c-box[ui*='#{$display}'],
+  c-box[#{$display}] {
     display: #{$display};
   }
 }

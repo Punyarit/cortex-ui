@@ -1,5 +1,5 @@
-import { useCxSnackbar } from '../../../../hooks/useCxSnackbar';
-import { EventStrategy } from '../types/event-straegy';
+import {useCxSnackbar} from '../../../helpers/useCxSnackbar';
+import {EventStrategy} from '../types/event-straegy';
 
 export class ClickSnackbar implements EventStrategy {
   public events: (keyof HTMLElementEventMap)[] = ['click'];
