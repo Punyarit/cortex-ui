@@ -1,6 +1,6 @@
 {
   "name": "@cortex-ui/core",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "description": "Cortex-UI is Web Component develop from Cortex Design System from Hlab Designer Team.",
   "main": "index.js",
   "scripts": {
@@ -21,8 +21,8 @@
   },
   "homepage": "https://github.com/Punyarit/cortex-ui#readme",
   "files": [
-    "cx/**/*",
-    "hook/**/*",
+    "cx/*",
+    "hook/*",
     "jsx/*"
   ],
   "dependencies": {
