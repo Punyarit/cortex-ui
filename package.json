@@ -1,6 +1,6 @@
 {
   "name": "@cortex-ui/core",
-  "version": "0.0.1",
+  "version": "0.0.38",
   "description": "Cortex-UI is Web Component develop from Cortex Design System from Hlab Designer Team.",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,22 @@
   "bugs": {
     "url": "https://github.com/Punyarit/cortex-ui/issues"
   },
-  "homepage": "https://github.com/Punyarit/cortex-ui#readme"
+  "homepage": "https://github.com/Punyarit/cortex-ui#readme",
+  "dependencies": {
+    "@lit-labs/react": "^1.1.1",
+    "lit": "^2.6.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "html-webpack-plugin": "^5.5.0",
+    "node-sass": "^8.0.0",
+    "sass": "^1.57.1",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  }
 }

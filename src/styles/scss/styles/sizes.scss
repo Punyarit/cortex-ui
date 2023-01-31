@@ -1,0 +1,68 @@
+.round-full {
+  border-radius: 50%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+$start: 0;
+$end: 1000;
+
+@for $i from $start through $end {
+  @if $i == 0 or $i > 100 and $i % 2 == 0 or $i < 100 {
+    cx-div[ui*='round-#{$i}'],
+    cx-div[round-#{$i}] {
+      border-radius: var(--size-#{$i});
+    }
+
+    cx-div[ui*='left-#{$i}'],
+    cx-div[left-#{$i}] {
+      left: var(--size-#{$i});
+    }
+
+    cx-div[ui*='right-#{$i}'],
+    cx-div[right-#{$i}] {
+      right: var(--size-#{$i});
+    }
+
+    cx-div[ui*='top-#{$i}'],
+    cx-div[top-#{$i}] {
+      top: var(--size-#{$i});
+    }
+
+    cx-div[ui*='bottom-#{$i}'],
+    cx-div[bottom-#{$i}] {
+      bottom: var(--size-#{$i});
+    }
+
+    cx-div[ui*='tx-#{$i}'],
+    cx-div[tx-#{$i}] {
+      font-size: var(--size-#{$i});
+    }
+
+    cx-div[ui*='h-#{$i}'],
+    cx-div[h-#{$i}] {
+      height: var(--size-#{$i});
+    }
+
+    cx-div[ui*='w-#{$i}'],
+    cx-div[w-#{$i}] {
+      width: var(--size-#{$i});
+    }
+
+    cx-div[ui*='m-#{$i}'],
+    cx-div[m-#{$i}] {
+      margin: var(--size-#{$i});
+    }
+
+    cx-div[ui*='p-#{$i}'],
+    cx-div[p-#{$i}] {
+      padding: var(--size-#{$i});
+    }
+  }
+}

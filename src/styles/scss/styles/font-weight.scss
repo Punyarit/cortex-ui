@@ -1,0 +1,8 @@
+$weights: thin, extralight, light, regular, medium, semibold, bold, extrabold;
+
+@each $weight in $weights {
+  cx-div[ui*='tx-#{$weight}'],
+  cx-div[tx-#{$weight}] {
+    font-family: var(--#{$weight}) !important;
+  }
+}
