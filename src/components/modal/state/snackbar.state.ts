@@ -1,8 +1,8 @@
-import { Ref } from 'lit/directives/ref';
-import { observeElement } from '../../../helpers/observeElement';
-import { SnackbarModalSlot } from '../../snackbar/types/snackbar.types';
-import { Modal } from '../modal';
-import { ModalSnackbarState } from '../types/modal.types';
+import {Ref} from 'lit/directives/ref';
+import {observeElement} from '../../../helpers/observeElement';
+import {SnackbarModalSlot} from '../../snackbar/types/snackbar.types';
+import {Modal} from '../modal';
+import {ModalSnackbarState} from '../types/modal.types';
 
 export class SnackbarState implements ModalSnackbarState {
   public readonly SNACKBAR_SLOT_DEFAULT = 'snackbar-slot';
@@ -12,12 +12,16 @@ export class SnackbarState implements ModalSnackbarState {
   private snackbarRef?: CXSnackbar.Ref;
   private snackbarSlot?: Ref<HTMLSlotElement>;
 
-  private snackbarTimeStart?: NodeJS.Timeout;
-  private snackbarTimeEnd?: NodeJS.Timeout;
+  private snackbarTimeStart?: unknown;
+  private snackbarTimeEnd?: unknown;
 
   constructor(public modal: Modal) {}
 
-  public open = (detail: { slotRef: Ref<HTMLSlotElement>; slotName: SnackbarModalSlot; duration: number }): void => {
+  public open = (detail: {
+    slotRef: Ref<HTMLSlotElement>;
+    slotName: SnackbarModalSlot;
+    duration: number;
+  }): void => {
     if (!this.snackbarSlot) this.snackbarSlot = detail.slotRef;
 
     this.startTransition();
@@ -57,7 +61,8 @@ export class SnackbarState implements ModalSnackbarState {
   private toggleSnackbarClasses(duration: number): void {
     if (!this.snackbarSlot?.value?.parentElement) return;
     this.clearSnackbarTimeout();
-    const snackbarParent = this.snackbarSlot.value.parentElement as CXSnackbar.Ref;
+    const snackbarParent = this.snackbarSlot.value
+      .parentElement as CXSnackbar.Ref;
     this.enabledSnackbarClass(snackbarParent);
     this.transitionEndSnackbar(duration);
     this.disabledSnackbarClass(snackbarParent, duration);
@@ -68,7 +73,10 @@ export class SnackbarState implements ModalSnackbarState {
     snackbarParent.classList.remove(this.MODAL_DISABLED);
   }
 
-  private disabledSnackbarClass(snackbarParent: CXSnackbar.Ref, duration: number): void {
+  private disabledSnackbarClass(
+    snackbarParent: CXSnackbar.Ref,
+    duration: number
+  ): void {
     this.snackbarTimeStart = setTimeout(() => {
       if (!this.snackbarSlot?.value) return;
       this.snackbarSlot.value.name = this.SNACKBAR_SLOT_DEFAULT;
@@ -84,7 +92,7 @@ export class SnackbarState implements ModalSnackbarState {
   }
 
   private clearSnackbarTimeout(): void {
-    clearTimeout(this.snackbarTimeEnd);
-    clearTimeout(this.snackbarTimeStart);
+    clearTimeout(this.snackbarTimeEnd as number);
+    clearTimeout(this.snackbarTimeStart as number);
   }
 }
