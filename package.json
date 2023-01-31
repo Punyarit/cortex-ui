@@ -22,7 +22,7 @@
   "homepage": "https://github.com/Punyarit/cortex-ui#readme",
   "files": [
     "cx/*",
-    "hook/*",
+    "hooks/*",
     "jsx/*"
   ],
   "dependencies": {
