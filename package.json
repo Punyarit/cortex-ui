@@ -1,6 +1,6 @@
 {
   "name": "@cortex-ui/core",
-  "version": "0.0.47",
+  "version": "0.0.49",
   "description": "Cortex-UI is Web Component develop from Cortex Design System from Hlab Designer Team.",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "cx/*",
     "jsx/*",
     "assets/*",
-    "styles/css/*"
+    "styles/index.css"
   ],
   "dependencies": {
     "@lit-labs/react": "^1.1.1",
