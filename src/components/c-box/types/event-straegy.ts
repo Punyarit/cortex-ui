@@ -1,7 +1,13 @@
-export const eventAttributes = ['mouseover-popover', 'mouseover-tooltip', 'click-dialog', 'click-snackbar'] as const;
+export const eventAttributes = [
+  'mouseover-popover',
+  'mouseover-tooltip',
+  'click-dialog',
+  'click-snackbar',
+] as const;
+
+export const eventAttributesSet = new Set(eventAttributes);
 
 export type EventAttributes = typeof eventAttributes[number];
-
 export type EventStrategy = {
   events: (keyof HTMLElementEventMap)[];
   eventDetail: () => EventStrategy;

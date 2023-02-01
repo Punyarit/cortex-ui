@@ -14,5 +14,14 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "declaration": true
   },
-  "exclude": ["tests", "stories", "node_modules", "jsx", "docs", "@types", "cx"]
+  "exclude": [
+    ".storybook",
+    "tests",
+    "stories",
+    "node_modules",
+    "jsx",
+    "docs",
+    "@types",
+    "cx"
+  ]
 }

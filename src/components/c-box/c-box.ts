@@ -4,29 +4,35 @@ import {DxDivTypes} from './types/c-box.types';
 import {
   eventAttributes,
   EventAttributes,
+  eventAttributesSet,
   EventStrategy,
 } from './types/event-straegy';
+import {StyleAttributes, styleAttributes} from './types/style-builder';
 export const tagName = 'c-box';
 
-export class CxDiv extends HTMLElement {
+export class Box extends HTMLElement {
   #eventStrategy?: EventStrategy;
 
   static get observedAttributes() {
-    return eventAttributes;
+    return [...eventAttributes, ...styleAttributes];
   }
 
   async attributeChangedCallback(
-    event: EventAttributes,
+    attr: EventAttributes | StyleAttributes,
     oldValue: string,
     newValue: string | 'none'
   ) {
     // 📌"none" mean that event dont need to execute.
     if (newValue === 'none') return;
-    this.#eventStrategy = await EventFactory.getEventDetail(
-      this,
-      event,
-      newValue
-    );
+
+    if (eventAttributesSet.has(attr as EventAttributes)) {
+      this.#eventStrategy = await EventFactory.getEventDetail(
+        this,
+        attr as EventAttributes,
+        newValue
+      );
+    } else {
+    }
   }
 
   eventDetail(): EventStrategy | undefined {
@@ -44,11 +50,11 @@ export class CxDiv extends HTMLElement {
     }
   }
 }
-customElements.define(tagName, CxDiv);
+customElements.define(tagName, Box);
 
 declare global {
   namespace CXDiv {
-    type Ref = CxDiv | DxDivTypes;
+    type Ref = Box | DxDivTypes;
 
     /**
      * @type ClickSnackbar [Tuple]
