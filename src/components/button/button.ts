@@ -1,6 +1,6 @@
 import {css, html, TemplateResult} from 'lit';
 import {customElement} from 'lit/decorators.js';
-import {ComponentBase} from '../../base/componentBase/component.base';
+import {ComponentBase} from '../../base/component-base/component.base';
 import {ColorTypes} from '../../types/colors.version-control';
 import {BaseSizeTypes, SizeTypes} from '../../types/sizes.type';
 import {

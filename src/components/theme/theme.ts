@@ -2,7 +2,7 @@ import { TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { html, StaticValue, unsafeStatic } from 'lit/static-html.js';
-import { ComponentBase } from '../../base/componentBase/component.base';
+import { ComponentBase } from '../../base/component-base/component.base';
 import { ThemeSingleton } from './singleton/theme.singleton';
 import { ThemeColorTypes, ThemeSizeTypes, ThemeVersion } from './types/theme.types';
 

@@ -1,7 +1,7 @@
 import { css, html, TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
-import { ComponentBase } from '../../base/componentBase/component.base';
+import { ComponentBase } from '../../base/component-base/component.base';
 import { TransitionBuilder } from './builder/transition.builder';
 import { TransitionAttributes, WhenTypes } from './types/transition.types';
 

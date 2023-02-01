@@ -1,11 +1,14 @@
 {
   "name": "@cortex-ui/core",
-  "version": "0.0.50",
+  "version": "0.0.52",
   "description": "Cortex-UI is Web Component develop from Cortex Design System from Hlab Designer Team.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "public": "npm publish --acess=publish"
+    "public": "npm publish --acess=publish",
+    "build": "tsc",
+    "dev": "tsc -w",
+    "compress": "yarn gulp compress",
+    "css": "yarn sass styles/scss/main.scss styles/css/index.css --style compressed"
   },
   "repository": {
     "type": "git",
@@ -21,15 +24,22 @@
   },
   "homepage": "https://github.com/Punyarit/cortex-ui#readme",
   "files": [
-    "cx/*",
+    "cx/**/*.js",
+    "cx/**/*.d.ts",
     "jsx/*",
     "assets/*",
-    "styles/index.css"
+    "styles/css/index.css"
   ],
   "dependencies": {
     "@lit-labs/react": "^1.1.1",
+    "@types/react": "^18.0.27",
     "lit": "^2.6.1",
-    "react": "^18.2.0",
-    "@types/react": "^18.0.27"
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.58.0",
+    "uglify-js": "^3.17.4"
   }
 }
