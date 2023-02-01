@@ -44,7 +44,7 @@ export class Transition extends ComponentBase<CXTransition.Props> {
 
   private initConfig(): void {
     this.fixConfig();
-    this.setConfig(this.config);
+    this.cacheConfig(this.config);
     this.exec();
   }
 

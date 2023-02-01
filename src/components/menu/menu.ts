@@ -18,7 +18,7 @@ export class Menu extends ComponentBase<CXMenu.Props> {
 
   private initConfig(): void {
     this.fixConfig();
-    this.setConfig(this.config);
+    this.cacheConfig(this.config);
     this.exec();
   }
 

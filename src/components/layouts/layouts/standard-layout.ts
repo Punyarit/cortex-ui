@@ -18,7 +18,7 @@ export class StandardLayout extends ComponentBase<StandardLayout.Props> {
 
   private initConfig(): void {
     this.fixConfig();
-    this.setConfig(this.config);
+    this.cacheConfig(this.config);
     this.exec();
   }
 

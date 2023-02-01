@@ -19,7 +19,7 @@ export class Tooltip extends ComponentBase<CXTooltip.Props> {
 
   private initConfig(): void {
     this.fixConfig();
-    this.setConfig(this.config);
+    this.cacheConfig(this.config);
     this.exec();
   }
 

@@ -13,20 +13,26 @@ export type Properties = {
 
 export type OnVariable<Var extends Properties[VarKey]> = {
   oldVar: Var;
-  setVariablesToElement: (vars: Var) => void;
-  storeVariables: (vars: Var) => void;
-  setCssText: (vars: Var) => string;
+  setVariablesStyleSheet: () => void;
+  cacheVariables: (vars: Var) => void;
+  getCssText: (vars: Var) => string;
 };
 
-export type OnConfig<Set extends Properties['set'], Fix extends Properties[FixKey]> = {
+export type OnConfig<
+  Set extends Properties['set'],
+  Fix extends Properties[FixKey]
+> = {
   fix?: Fix;
   config?: Set;
-  setConfig: (vars: Set) => void;
+  cacheConfig: (vars: Set) => void;
   fixConfig: (vars: Set) => void;
   exec: (vars: Set) => void;
 };
 
-export type WatchCallback = (mutation: MutationRecord, observer: MutationObserver) => void;
+export type WatchCallback = (
+  mutation: MutationRecord,
+  observer: MutationObserver
+) => void;
 
 export type WatchTypes = {
   attributes?: WatchCallback;

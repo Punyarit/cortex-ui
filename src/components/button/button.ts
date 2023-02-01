@@ -138,12 +138,13 @@ export class Button extends ComponentBase<CXButton.Props> {
 
   private initConfig(): void {
     this.fixConfig();
-    this.setConfig(this.config);
+    this.cacheConfig(this.config);
     this.exec();
   }
 
-  render(): TemplateResult<1> {
+  render(): TemplateResult {
     return html`
+      <style></style>
       <button
         icon-only="${this.set.iconOnly!}"
         class="cx-button-container"
@@ -216,7 +217,8 @@ export class Button extends ComponentBase<CXButton.Props> {
   // life cycle
   updated(changedProperties: Map<PropertyKey, unknown>): void {
     if (changedProperties.has('set')) {
-      this.setVariablesToElement(ButtonFactory.getCSSVariables(this.set)!);
+      this.cacheVariables(ButtonFactory.getCSSVariables(this.set)!);
+      this.setVariablesStyleSheet();
     }
     super.update(changedProperties);
   }

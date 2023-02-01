@@ -1,11 +1,14 @@
-import { css, html, TemplateResult } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { createRef, ref } from 'lit/directives/ref.js';
-import { ComponentBase } from '../../base/component-base/component.base';
-import { getCxModalRef } from '../../helpers/getCxModalRef';
-import { DialogState } from '../modal/state/dialog.state';
+import {css, html, TemplateResult} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {createRef, ref} from 'lit/directives/ref.js';
+import {ComponentBase} from '../../base/component-base/component.base';
+import {getCxModalRef} from '../../helpers/getCxModalRef';
+import {DialogState} from '../modal/state/dialog.state';
 import '../transition/transition';
-import { TransitionDefaultFadeTypes, WhenTypes } from '../transition/types/transition.types';
+import {
+  TransitionDefaultFadeTypes,
+  WhenTypes,
+} from '../transition/types/transition.types';
 
 export const tagName = 'cx-dialog';
 export const onAfterClosed = 'afterClosed';
@@ -46,7 +49,7 @@ export class Dialog extends ComponentBase<CXDialog.Props> {
 
   private initConfig(): void {
     this.fixConfig();
-    this.setConfig(this.config);
+    this.cacheConfig(this.config);
     this.exec();
   }
 
@@ -57,7 +60,11 @@ export class Dialog extends ComponentBase<CXDialog.Props> {
   render(): TemplateResult | undefined {
     return this.slot
       ? html`
-          <cx-transition ${ref(this.transitionRef)} .set="${this.set.transition}">
+          <style></style>
+          <cx-transition
+            ${ref(this.transitionRef)}
+            .set="${this.set.transition}"
+          >
             <div class="dialog" ${ref(this.dialogRef)}>
               <slot></slot>
             </div>
@@ -102,7 +109,9 @@ export class Dialog extends ComponentBase<CXDialog.Props> {
   }
 
   public afterClosed(): void {
-    this.setCustomEvent<CXDialog.Details[typeof onAfterClosed]>(onAfterClosed, { event: onAfterClosed });
+    this.setCustomEvent<CXDialog.Details[typeof onAfterClosed]>(onAfterClosed, {
+      event: onAfterClosed,
+    });
   }
 }
 
@@ -119,12 +128,12 @@ declare global {
     };
 
     type Details = {
-      [onAfterClosed]: { event: string };
+      [onAfterClosed]: {event: string};
     };
 
     type Fix = {
       [K in keyof Set]: (value: Set[K]) => Fix;
-    } & { exec: () => Ref };
+    } & {exec: () => Ref};
 
     type Props = {
       var: Pick<Var, never>;

@@ -69,12 +69,14 @@ export class Spinner extends ComponentBase<CXSpinner.Props> {
 
   private initConfig(): void {
     this.fixConfig();
-    this.setConfig(this.config);
+    this.cacheConfig(this.config);
     this.exec();
   }
 
   render(): TemplateResult {
     return html`
+      <style></style>
+
       <div class="spinner">
         <div></div>
         <div></div>
@@ -88,7 +90,8 @@ export class Spinner extends ComponentBase<CXSpinner.Props> {
     if (changedProperties.has('set')) {
       const spinnerBuilder = SpinnerDirector.construct(this.set);
       const spinnerVars = {color: spinnerBuilder.color, ...spinnerBuilder.size};
-      this.setVariablesToElement(spinnerVars);
+      this.cacheVariables(spinnerVars);
+      this.setVariablesStyleSheet();
     }
     super.update(changedProperties);
   }

@@ -1,8 +1,8 @@
-import { css, html, TemplateResult } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { ComponentBase } from '../../base/component-base/component.base';
-import { ProgressDirector } from './builder/progress.builder';
-import { ColorKeyTypes, SizeKeyTypes } from './types/progress.types';
+import {css, html, TemplateResult} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {ComponentBase} from '../../base/component-base/component.base';
+import {ProgressDirector} from './builder/progress.builder';
+import {ColorKeyTypes, SizeKeyTypes} from './types/progress.types';
 
 export const tagName = 'cx-progress';
 
@@ -24,7 +24,8 @@ export class Progress extends ComponentBase<CXProgress.Props> {
       width: var(--width);
       height: var(--height);
       box-sizing: border-box;
-      transform: scale(var(--scale)) translate(var(--translate), var(--translate));
+      transform: scale(var(--scale))
+        translate(var(--translate), var(--translate));
     }
     .progress div {
       animation: progress 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
@@ -100,12 +101,13 @@ export class Progress extends ComponentBase<CXProgress.Props> {
 
   private initConfig(): void {
     this.fixConfig();
-    this.setConfig(this.config);
+    this.cacheConfig(this.config);
     this.exec();
   }
 
   render(): TemplateResult {
     return html`
+      <style></style>
       <div class="progress">
         <div></div>
         <div></div>
@@ -120,9 +122,10 @@ export class Progress extends ComponentBase<CXProgress.Props> {
   updated(changedProperties: Map<PropertyKey, unknown>): void {
     if (changedProperties.has('set')) {
       const spinnerBuilder = ProgressDirector.construct(this.set);
-      const spinnerVars = { color: spinnerBuilder.color, ...spinnerBuilder.size };
+      const spinnerVars = {color: spinnerBuilder.color, ...spinnerBuilder.size};
+      this.cacheVariables(spinnerVars);
 
-      this.setVariablesToElement(spinnerVars);
+      this.setVariablesStyleSheet();
     }
     super.update(changedProperties);
   }
@@ -140,7 +143,7 @@ declare global {
       color: ColorKeyTypes;
     };
 
-    type Fix = { [K in keyof Set]: (value: Set[K]) => Fix } & { exec: () => Ref };
+    type Fix = {[K in keyof Set]: (value: Set[K]) => Fix} & {exec: () => Ref};
 
     type Props = {
       var: Partial<Pick<Var, never>>;
