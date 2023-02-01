@@ -1,6 +1,6 @@
 {
   "name": "@cortex-ui/core",
-  "version": "0.0.53",
+  "version": "0.0.54",
   "description": "Cortex-UI is Web Component develop from Cortex Design System from Hlab Designer Team.",
   "main": "index.js",
   "scripts": {
@@ -26,22 +26,15 @@
   "files": [
     "cx/**/*.js",
     "cx/**/*.d.ts",
-    "jsx/*",
     "assets/*",
     "styles/css/index.css"
   ],
   "dependencies": {
-    "@lit-labs/react": "^1.1.1",
     "@types/react": "^18.0.27",
-    "lit": "^2.6.1",
-    "react": "^18.2.0"
+    "lit": "^2.6.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.20.7",
-    "@babel/core": "^7.20.12",
-    "@babel/preset-env": "^7.20.2",
     "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
     "gulp-uglify": "^3.0.2",
     "sass": "^1.58.0",
     "uglify-js": "^3.17.4"

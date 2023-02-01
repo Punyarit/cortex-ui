@@ -16,16 +16,5 @@
     "declarationDir": "./cx",
     "declarationMap": true
   },
-  "exclude": [
-    ".storybook",
-    "tests",
-    "stories",
-    "node_modules",
-    "jsx",
-    "docs",
-    "cx",
-    "build",
-    "minify",
-    "types"
-  ]
+  "exclude": ["node_modules", "cx", "build"]
 }
