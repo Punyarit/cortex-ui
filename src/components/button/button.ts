@@ -133,12 +133,7 @@ export class Button extends ComponentBase<CXButton.Props> {
 
   constructor() {
     super();
-    if (this.config) this.initConfig();
-  }
-
-  private initConfig(): void {
-    this.fixConfig();
-    this.exec();
+    if (this.config) this.exec();
   }
 
   render(): TemplateResult {

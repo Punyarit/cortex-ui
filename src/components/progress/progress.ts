@@ -96,13 +96,7 @@ export class Progress extends ComponentBase<CXProgress.Props> {
 
   constructor() {
     super();
-    if (this.config) this.initConfig();
-  }
-
-  private initConfig(): void {
-    this.fixConfig();
-    this.cacheConfig(this.config);
-    this.exec();
+    if (this.config) this.exec();
   }
 
   render(): TemplateResult {

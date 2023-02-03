@@ -1,7 +1,7 @@
-import { css, html, TemplateResult } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { ComponentBase } from '../../base/component-base/component.base';
-import { ThemeVersion } from '../theme/types/theme.types';
+import {css, html, TemplateResult} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {ComponentBase} from '../../base/component-base/component.base';
+import {ThemeVersion} from '../theme/types/theme.types';
 
 export const tagName = 'cx-tooltip';
 // export const onPressed = 'pressed';
@@ -14,13 +14,7 @@ export class Tooltip extends ComponentBase<CXTooltip.Props> {
 
   constructor() {
     super();
-    if (this.config) this.initConfig();
-  }
-
-  private initConfig(): void {
-    this.fixConfig();
-    this.cacheConfig(this.config);
-    this.exec();
+    if (this.config) this.exec();
   }
 
   render(): TemplateResult {
@@ -49,7 +43,7 @@ declare global {
 
     type Set<T extends ThemeVersion = 2> = unknown;
 
-    type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
+    type Fix = Required<{[K in keyof Set]: (value: Set[K]) => Fix}> & {exec: () => void};
 
     type Props = {
       var: Pick<Var, never>;

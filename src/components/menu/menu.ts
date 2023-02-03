@@ -13,13 +13,7 @@ export class Menu extends ComponentBase<CXMenu.Props> {
 
   constructor() {
     super();
-    if (this.config) this.initConfig();
-  }
-
-  private initConfig(): void {
-    this.fixConfig();
-    this.cacheConfig(this.config);
-    this.exec();
+    if (this.config) this.exec();
   }
 
   render(): TemplateResult {

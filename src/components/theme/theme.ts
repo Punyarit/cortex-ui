@@ -1,10 +1,10 @@
-import { TemplateResult } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { createRef, ref } from 'lit/directives/ref.js';
-import { html, StaticValue, unsafeStatic } from 'lit/static-html.js';
-import { ComponentBase } from '../../base/component-base/component.base';
-import { ThemeSingleton } from './singleton/theme.singleton';
-import { ThemeColorTypes, ThemeSizeTypes, ThemeVersion } from './types/theme.types';
+import {TemplateResult} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {createRef, ref} from 'lit/directives/ref.js';
+import {html, StaticValue, unsafeStatic} from 'lit/static-html.js';
+import {ComponentBase} from '../../base/component-base/component.base';
+import {ThemeSingleton} from './singleton/theme.singleton';
+import {ThemeColorTypes, ThemeSizeTypes, ThemeVersion} from './types/theme.types';
 
 export const tagName = 'cx-theme';
 @customElement(tagName)
@@ -17,13 +17,7 @@ export class Theme extends ComponentBase<CXTheme.Props> {
 
   constructor() {
     super();
-    if (this.config) this.initConfig();
-  }
-
-  private initConfig(): void {
-    this.fixConfig();
-    this.cacheConfig(this.config);
-    this.exec();
+    if (this.config) this.exec();
   }
 
   private themeRef = createRef<HTMLSlotElement>();
@@ -92,7 +86,7 @@ declare global {
 
     type Fix = {
       [K in keyof Set]: (value: Set[K]) => Fix;
-    } & { exec: () => Ref };
+    } & {exec: () => void};
 
     type Props = {
       var: Pick<Var, never>;

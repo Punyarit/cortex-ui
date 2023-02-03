@@ -44,13 +44,7 @@ export class Dialog extends ComponentBase<CXDialog.Props> {
 
   constructor() {
     super();
-    if (this.config) this.initConfig();
-  }
-
-  private initConfig(): void {
-    this.fixConfig();
-    this.cacheConfig(this.config);
-    this.exec();
+    if (this.config) this.exec();
   }
 
   private dialogRef = createRef<HTMLSlotElement>();

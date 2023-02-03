@@ -21,12 +21,12 @@ export type OnVariable<Var extends Properties[VarKey]> = {
 
 export type OnConfig<
   Set extends Properties['set'],
-  Fix extends Properties[FixKey]
+  Fix extends Properties['fix']
 > = {
   fix?: Fix;
+  fixConfig?: Fix;
   config?: Set;
   cacheConfig: (vars: Set) => void;
-  fixConfig: (vars: Set) => void;
   exec: (vars: Set) => void;
 };
 

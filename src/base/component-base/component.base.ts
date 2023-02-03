@@ -14,11 +14,28 @@ export abstract class ComponentBase<Props extends Properties>
 {
   @property({type: Object}) public var!: Props['var'];
   @property({type: Object}) public set!: Props['set'];
-  fix!: Props['fix'];
+
   config!: Props['set'];
   oldVar: Props['var'] = {};
   make = (styles: Props['make']) => {
     this.var = styles;
+  };
+
+  fixConfig?: Props['fix'];
+  fix = (): Props['fix'] => {
+    if (this.fixConfig) return this.fixConfig;
+    this.fixConfig = {
+      exec: this.exec.bind(this),
+    };
+    for (const configKey in this.config) {
+      (this.fixConfig as Record<keyof NonNullable<Props['set']>, Props['fix']>)[
+        configKey
+      ] = (val: any) => {
+        this.cacheConfig({[configKey]: val});
+        return this.fixConfig;
+      };
+    }
+    return this.fixConfig;
   };
 
   willUpdate(changedProperties: Map<PropertyKey, unknown>): void {
@@ -45,21 +62,6 @@ export abstract class ComponentBase<Props extends Properties>
 
   exec(): void {
     this.set = {...(this.config as Record<keyof Props['set'], unknown>)};
-  }
-
-  fixConfig(): void {
-    this.fix = {
-      exec: this.exec.bind(this),
-    } as Record<keyof NonNullable<Props['set']>, Props['fix']>;
-
-    for (const configKey in this.config) {
-      (this.fix as Record<keyof NonNullable<Props['set']>, Props['fix']>)[
-        configKey
-      ] = (configValue: unknown): Props['fix'] => {
-        this.cacheConfig({[configKey]: configValue});
-        return this.fix;
-      };
-    }
   }
 
   setVariablesStyleSheet(): void {
