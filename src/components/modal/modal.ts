@@ -95,8 +95,7 @@ export class Modal extends ComponentBase<CXModal.Props> {
         <slot
           @click="${(e: PointerEvent) => e.stopPropagation()}"
           ${ref(this.dialogSlot)}
-          name="${DialogState.DIALOG_SLOT_DEFAULT}"
-        ></slot>
+          name="${DialogState.DIALOG_SLOT_DEFAULT}"></slot>
       </div>
       <slot></slot>
     `;
@@ -127,10 +126,6 @@ export class Modal extends ComponentBase<CXModal.Props> {
 
   public popoverMouseleave() {
     this.popoverState.mouseleave(this.popoverSlot);
-  }
-
-  public toggleBackdrop(status: 'enabled' | 'disabled') {
-    this.dialogState.toggleBackdrop(status, this.dialogSlot.value?.parentElement as HTMLElement);
   }
 
   // 📌need to use arrow function becoz this function is called from outside scope
