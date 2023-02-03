@@ -9,7 +9,7 @@ export type Properties = {
   var?: unknown;
   set?: unknown;
   fix?: unknown;
-  stx?: unknown;
+  make?: unknown;
 };
 
 export type OnVariable<Var extends Properties[VarKey]> = {

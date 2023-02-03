@@ -138,7 +138,6 @@ export class Button extends ComponentBase<CXButton.Props> {
 
   private initConfig(): void {
     this.fixConfig();
-    this.cacheConfig(this.config);
     this.exec();
   }
 
@@ -288,7 +287,7 @@ declare global {
       var: Pick<Var, ButtonExposeVar>;
       set: Set;
       fix: Fix;
-      stx: Var;
+      make: Var;
     };
 
     type Details = {

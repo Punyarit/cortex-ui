@@ -17,7 +17,7 @@ export abstract class ComponentBase<Props extends Properties>
   fix!: Props['fix'];
   config!: Props['set'];
   oldVar: Props['var'] = {};
-  make = (styles: Props['stx']) => {
+  make = (styles: Props['make']) => {
     this.var = styles;
   };
 
