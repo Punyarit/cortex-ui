@@ -1,16 +1,13 @@
-import {css, html, TemplateResult} from 'lit';
-import {customElement} from 'lit/decorators.js';
-import {createRef, ref} from 'lit/directives/ref.js';
-import {ComponentBase} from '../../base/component-base/component.base';
+import { css, html, TemplateResult } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { createRef, ref } from 'lit/directives/ref.js';
+import { ComponentBase } from '../../base/component-base/component.base';
 import '../icon/icon';
-import {IconSrcTypes} from '../icon/types/icon.types';
+import { IconSrcTypes } from '../icon/types/icon.types';
 import '../transition/transition';
-import {WhenTypes} from '../transition/types/transition.types';
-import {SnackbarSingleton} from './singleton/snackbar.singleton';
-import {
-  snackbarDurationDefault,
-  snackbarModalSlot,
-} from './types/snackbar.types';
+import { WhenTypes } from '../transition/types/transition.types';
+import { SnackbarSingleton } from './singleton/snackbar.singleton';
+import { snackbarDurationDefault, snackbarModalSlot } from './types/snackbar.types';
 
 export const tagName = 'cx-snackbar';
 // export const onPressed = 'pressed';
@@ -60,10 +57,7 @@ export class Snackbar extends ComponentBase<CXSnackbar.Props> {
     return this.slot
       ? html`
           <style></style>
-          <cx-transition
-            ${ref(this.transitionRef)}
-            .set="${this.set.transition}"
-          >
+          <cx-transition ${ref(this.transitionRef)} .set="${this.set.transition}">
             <div class="snackbar">
               ${this.renderIcon()}
               <div>${this.set.text}</div>
@@ -97,7 +91,7 @@ export class Snackbar extends ComponentBase<CXSnackbar.Props> {
     this.requestUpdate();
   }
 
-  public open(): void {
+  public setSnackbarAppear(): void {
     this.setSlotName();
     this.executeTransition('start');
   }
@@ -126,7 +120,7 @@ declare global {
       transition?: CXTransition.Set;
     };
 
-    type Fix = Required<{[K in keyof Set]: (value: Set[K]) => Fix}> & {
+    type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & {
       exec: () => Ref;
     };
 

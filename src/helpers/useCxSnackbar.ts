@@ -7,7 +7,7 @@ export function useCxSnackbar(config: CXSnackbar.Set) {
 
   if (!CxModalRef || !CxSnackbar) return;
   CxSnackbar.fix().text(config.text).iconSrc(config.iconSrc).exec();
-  CxSnackbar.open();
+  CxSnackbar.setSnackbarAppear();
   CxModalRef.openSnackbar(
     'global-snackbar',
     config?.duration || (CxSnackbar.set.duration as number)
