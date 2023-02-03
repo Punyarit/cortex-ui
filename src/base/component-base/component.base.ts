@@ -17,6 +17,9 @@ export abstract class ComponentBase<Props extends Properties>
   fix!: Props['fix'];
   config!: Props['set'];
   oldVar: Props['var'] = {};
+  make = (styles: Props['stx']) => {
+    this.var = styles;
+  };
 
   willUpdate(changedProperties: Map<PropertyKey, unknown>): void {
     if (changedProperties.has(set)) {
@@ -25,7 +28,10 @@ export abstract class ComponentBase<Props extends Properties>
     }
 
     if (changedProperties.has(vars)) {
-      this.cacheVariables(this.var);
+      requestAnimationFrame(() => {
+        this.cacheVariables(this.var);
+        this.setVariablesStyleSheet();
+      });
     }
 
     super.willUpdate(changedProperties);
@@ -72,7 +78,7 @@ export abstract class ComponentBase<Props extends Properties>
   getCssText(): string {
     let cssText = ``;
     for (const key in this.oldVar) {
-      cssText = `${cssText}--${key}:var(--${this.oldVar[key]});`;
+      cssText = `${cssText}--${key}:var(--${this.oldVar[key]})!important;`;
     }
     return cssText;
   }

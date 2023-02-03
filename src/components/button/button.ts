@@ -215,12 +215,13 @@ export class Button extends ComponentBase<CXButton.Props> {
   }
 
   // life cycle
-  updated(changedProperties: Map<PropertyKey, unknown>): void {
-    if (changedProperties.has('set')) {
+  updated(changedPros: Map<PropertyKey, unknown>): void {
+    if (changedPros.has('set')) {
       this.cacheVariables(ButtonFactory.getCSSVariables(this.set)!);
       this.setVariablesStyleSheet();
     }
-    super.update(changedProperties);
+
+    super.update(changedPros);
   }
 
   // Methods
@@ -287,6 +288,7 @@ declare global {
       var: Pick<Var, ButtonExposeVar>;
       set: Set;
       fix: Fix;
+      stx: Var;
     };
 
     type Details = {
