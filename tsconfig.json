@@ -16,5 +16,5 @@
     "declarationDir": "./cx",
     "sourceMap": true
   },
-  "exclude": ["node_modules", "cx"]
+  "exclude": ["node_modules", "cx", "script"]
 }
