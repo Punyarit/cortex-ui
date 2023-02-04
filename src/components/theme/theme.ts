@@ -34,7 +34,7 @@ export class Theme extends ComponentBase<CXTheme.Props> {
   }
 
   createSharedCxThemeRef() {
-    ThemeSingleton.CxThemeRef = this;
+    ThemeSingleton.ref = this;
   }
 
   willUpdate(changedProperties: Map<PropertyKey, unknown>): void {

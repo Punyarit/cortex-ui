@@ -1,10 +1,10 @@
 export class ThemeSingleton {
   private static instance: ThemeSingleton;
 
-  public static CxThemeRef: CXTheme.Ref;
+  public static ref: CXTheme.Ref;
   constructor(CxThemeRef: CXTheme.Ref) {
-    if (!ThemeSingleton.CxThemeRef) {
-      ThemeSingleton.CxThemeRef = CxThemeRef;
+    if (!ThemeSingleton.ref) {
+      ThemeSingleton.ref = CxThemeRef;
     }
 
     if (ThemeSingleton.instance) {

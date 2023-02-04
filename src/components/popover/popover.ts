@@ -1,8 +1,8 @@
-import {css, html, TemplateResult} from 'lit';
-import {customElement} from 'lit/decorators.js';
-import {ComponentBase} from '../../base/component-base/component.base';
-import {getCxModalRef} from '../../helpers/getCxModalRef';
-import {ThemeVersion} from '../theme/types/theme.types';
+import { css, html, TemplateResult } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { ComponentBase } from '../../base/component-base/component.base';
+import { ModalSingleton } from '../modal/singleton/modal.singleton';
+import { ThemeVersion } from '../theme/types/theme.types';
 
 export const tagName = 'cx-popover';
 // export const onPressed = 'pressed';
@@ -31,8 +31,7 @@ export class Popover extends ComponentBase<CXPopover.Props> {
   }
 
   updated() {
-    const CxModalRef = getCxModalRef();
-    CxModalRef?.append(this);
+    ModalSingleton.ref?.append(this);
   }
   // Method
   // public log(config: { text: string }): void {
@@ -56,7 +55,7 @@ declare global {
 
     type Set<T extends ThemeVersion = 2> = unknown;
 
-    type Fix = Required<{[K in keyof Set]: (value: Set[K]) => Fix}> & {
+    type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & {
       exec: () => void;
     };
 

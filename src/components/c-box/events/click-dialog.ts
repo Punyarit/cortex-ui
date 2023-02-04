@@ -1,18 +1,19 @@
-import {useCxDialog} from '../../../helpers/useCxDialog';
+// import {useCxDialog} from '../../../helpers/useCxDialog';
 import {EventStrategy} from '../types/event-straegy';
 
 export class ClickDialog implements EventStrategy {
   public events: (keyof HTMLElementEventMap)[] = ['click'];
-  private valuesArray: CXDiv.ClickDialog;
+  private valuesArray: CXBox.ClickDialog;
 
-  constructor(public CxDiv: HTMLElement, public values: string) {
-    this.valuesArray = values.split(',') as CXDiv.ClickDialog;
-    CxDiv.addEventListener('click', this.click);
+  constructor(public CxBox: HTMLElement, public values: string) {
+    this.valuesArray = values.split(',') as CXBox.ClickDialog;
+    CxBox.addEventListener('click', this.click);
   }
 
   click = () => {
     const [dialogName, dialogStatus] = this.valuesArray;
-    useCxDialog(dialogName)[dialogStatus]();
+    // FIXME: dialog
+    // useCxDialog(dialogName)[dialogStatus]();
   };
 
   eventDetail(): EventStrategy {

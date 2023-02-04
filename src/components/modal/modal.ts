@@ -114,7 +114,7 @@ export class Modal extends ComponentBase<CXModal.Props> {
   }
 
   private createSharedCXModalRef(): void {
-    ModalSingleton.CxModalRef = this;
+    ModalSingleton.ref = this;
   }
 
   public popoverMouseover(popoverName: string) {

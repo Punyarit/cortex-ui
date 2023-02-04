@@ -73,7 +73,7 @@ export class Snackbar extends ComponentBase<CXSnackbar.Props> {
   }
 
   private createSharedCxSnackbarRef() {
-    SnackbarSingleton.CxSnackbarRef = this;
+    SnackbarSingleton.ref = this;
   }
 
   private renderIcon() {

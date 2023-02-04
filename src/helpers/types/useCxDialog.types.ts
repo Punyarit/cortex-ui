@@ -3,3 +3,5 @@ export type CxDialogConfigTypes = {
   disableBackdrop?: boolean | undefined;
   backdrop?: boolean | undefined;
 };
+
+export type CxGlobalDialogName = 'decide-dialog' | 'lang-choice';

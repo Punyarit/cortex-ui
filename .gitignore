@@ -3,3 +3,6 @@ cx
 build
 
 index.html
+
+src/**/*.d.ts
+src/**/*.js

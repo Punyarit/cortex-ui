@@ -1,3 +1,4 @@
+import { CxGlobalDialogName } from '../../helpers/types/useCxDialog.types'
 import {IconSrcTypes} from '../icon/types/icon.types';
 import EventFactory from './factory/events.factory';
 import {DxDivTypes} from './types/c-box.types';
@@ -53,7 +54,7 @@ export class Box extends HTMLElement {
 customElements.define(tagName, Box);
 
 declare global {
-  namespace CXDiv {
+  namespace CXBox {
     type Ref = Box | DxDivTypes;
 
     /**
@@ -69,7 +70,7 @@ declare global {
      * @index 0: String [Dialog Name]
      * @index 1: "open" | "close" [Dialog Status]
      */
-    type ClickDialog = [string, 'open' | 'close'];
+    type ClickDialog = [CxGlobalDialogName, 'open' | 'close'];
   }
 
   namespace JSX {
@@ -84,6 +85,6 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXDiv.Ref;
+    [tagName]: CXBox.Ref;
   }
 }

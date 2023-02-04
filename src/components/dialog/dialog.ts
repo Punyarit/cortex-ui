@@ -1,14 +1,11 @@
-import {css, html, TemplateResult} from 'lit';
-import {customElement} from 'lit/decorators.js';
-import {createRef, ref} from 'lit/directives/ref.js';
-import {ComponentBase} from '../../base/component-base/component.base';
-import {getCxModalRef} from '../../helpers/getCxModalRef';
-import {DialogState} from '../modal/state/dialog.state';
+import { css, html, TemplateResult } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { createRef, ref } from 'lit/directives/ref.js';
+import { ComponentBase } from '../../base/component-base/component.base';
+import { ModalSingleton } from '../modal/singleton/modal.singleton';
+import { DialogState } from '../modal/state/dialog.state';
 import '../transition/transition';
-import {
-  TransitionDefaultFadeTypes,
-  WhenTypes,
-} from '../transition/types/transition.types';
+import { TransitionDefaultFadeTypes, WhenTypes } from '../transition/types/transition.types';
 
 export const tagName = 'cx-dialog';
 export const onAfterClosed = 'afterClosed';
@@ -49,16 +46,12 @@ export class Dialog extends ComponentBase<CXDialog.Props> {
 
   private dialogRef = createRef<HTMLSlotElement>();
   private transitionRef = createRef<CXTransition.Ref>();
-  private CxModalRef?: CXModal.Ref | null;
 
   render(): TemplateResult | undefined {
     return this.slot
       ? html`
           <style></style>
-          <cx-transition
-            ${ref(this.transitionRef)}
-            .set="${this.set.transition}"
-          >
+          <cx-transition ${ref(this.transitionRef)} .set="${this.set.transition}">
             <div class="dialog" ${ref(this.dialogRef)}>
               <slot></slot>
             </div>
@@ -86,20 +79,12 @@ export class Dialog extends ComponentBase<CXDialog.Props> {
   }
 
   private openLocalDialog() {
-    this.setCxModalRef();
-    if (!this.CxModalRef) return;
-    this.CxModalRef.append(this);
-    this.CxModalRef.openDialog(DialogState.LOCAL_DIALO_SLOT);
-  }
-
-  private setCxModalRef() {
-    if (this.CxModalRef) return;
-    this.CxModalRef = getCxModalRef();
+    ModalSingleton.ref.append(this);
+    ModalSingleton.ref.openDialog(DialogState.LOCAL_DIALO_SLOT);
   }
 
   public close(): void {
-    if (!this.CxModalRef) return;
-    this.CxModalRef?.closeDialog();
+    ModalSingleton.ref?.closeDialog();
   }
 
   public afterClosed(): void {
@@ -122,12 +107,12 @@ declare global {
     };
 
     type Details = {
-      [onAfterClosed]: {event: string};
+      [onAfterClosed]: { event: string };
     };
 
     type Fix = {
       [K in keyof Set]: (value: Set[K]) => Fix;
-    } & {exec: () => Ref};
+    } & { exec: () => Ref };
 
     type Props = {
       var: Pick<Var, never>;
