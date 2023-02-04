@@ -1,19 +1,13 @@
-import {LitElement} from 'lit';
-import {property} from 'lit/decorators.js';
-import {
-  OnConfig,
-  OnVariable,
-  Properties,
-  set,
-  vars,
-} from './types/components.base.types';
+import { LitElement } from 'lit';
+import { property } from 'lit/decorators.js';
+import { OnConfig, OnVariable, Properties, set, vars } from './types/components.base.types';
 
 export abstract class ComponentBase<Props extends Properties>
   extends LitElement
   implements OnVariable<Props['var']>, OnConfig<Props['set'], Props['fix']>
 {
-  @property({type: Object}) public var!: Props['var'];
-  @property({type: Object}) public set!: Props['set'];
+  @property({ type: Object }) public var!: Props['var'];
+  @property({ type: Object }) public set!: Props['set'];
 
   config!: Props['set'];
   oldVar: Props['var'] = {};
@@ -28,10 +22,10 @@ export abstract class ComponentBase<Props extends Properties>
       exec: this.exec.bind(this),
     };
     for (const configKey in this.config) {
-      (this.fixConfig as Record<keyof NonNullable<Props['set']>, Props['fix']>)[
-        configKey
-      ] = (val: any) => {
-        this.cacheConfig({[configKey]: val});
+      (this.fixConfig as Record<keyof NonNullable<Props['set']>, Props['fix']>)[configKey] = (
+        val: any
+      ) => {
+        this.cacheConfig({ [configKey]: val });
         return this.fixConfig;
       };
     }
@@ -47,7 +41,7 @@ export abstract class ComponentBase<Props extends Properties>
     if (changedProperties.has(vars)) {
       requestAnimationFrame(() => {
         this.cacheVariables(this.var);
-        this.setVariablesStyleSheet();
+        this.setHostVatiables();
       });
     }
 
@@ -61,14 +55,14 @@ export abstract class ComponentBase<Props extends Properties>
   }
 
   exec(): void {
-    this.set = {...(this.config as Record<keyof Props['set'], unknown>)};
+    this.set = { ...(this.config as Record<keyof Props['set'], unknown>) };
   }
 
-  setVariablesStyleSheet(): void {
+  setHostVatiables(initialVar?: string): void {
     const shadowRootSheet = this.shadowRoot?.styleSheets[0];
     if (!shadowRootSheet) return;
     if (shadowRootSheet.cssRules.length !== 0) shadowRootSheet.deleteRule(0);
-    shadowRootSheet.insertRule(`:host {${this.getCssText()}}`, 0);
+    shadowRootSheet.insertRule(`:host {${this.getCssText()} ${initialVar}}`, 0);
   }
 
   cacheVariables(vars: Props['var']): void {

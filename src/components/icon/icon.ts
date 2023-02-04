@@ -1,8 +1,8 @@
-import {css, html, TemplateResult} from 'lit';
-import {customElement} from 'lit/decorators.js';
-import {ComponentBase} from '../../base/component-base/component.base';
-import {IconDirector} from './builder/icon.builder';
-import {IconSizeTypes, IconSrcTypes} from './types/icon.types';
+import { css, html, TemplateResult } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { ComponentBase } from '../../base/component-base/component.base';
+import { IconDirector } from './builder/icon.builder';
+import { IconSizeTypes, IconSrcTypes } from './types/icon.types';
 
 export const tagName = 'cx-icon';
 // export const onPressed = 'pressed';
@@ -31,20 +31,15 @@ export class Icon extends ComponentBase<CXIcon.Props> {
     if (this.config) this.exec();
   }
 
-  render(): TemplateResult<1> {
-    return html`<style>
-        :host {
-          --src: ${this.set?.src};
-        }
-      </style>
-      &#xe800;`;
+  render(): TemplateResult {
+    return html`<style></style> &#xe800;`;
   }
 
   updated(changedProperties: Map<PropertyKey, unknown>): void {
     if (changedProperties.has('set')) {
       const iconBuilder = IconDirector.construct(this.set);
       this.cacheVariables(iconBuilder);
-      this.setVariablesStyleSheet();
+      this.setHostVatiables(`--src: ${this.set?.src};`);
     }
     super.update(changedProperties);
   }
@@ -63,7 +58,7 @@ declare global {
       size?: IconSizeTypes;
     };
 
-    type Fix = {[K in keyof Set]: (value: Set[K]) => Fix} & {exec: () => Ref};
+    type Fix = { [K in keyof Set]: (value: Set[K]) => Fix } & { exec: () => Ref };
 
     type Props = {
       var: Pick<Var, never>;

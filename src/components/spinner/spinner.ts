@@ -85,7 +85,7 @@ export class Spinner extends ComponentBase<CXSpinner.Props> {
       const spinnerBuilder = SpinnerDirector.construct(this.set);
       const spinnerVars = {color: spinnerBuilder.color, ...spinnerBuilder.size};
       this.cacheVariables(spinnerVars);
-      this.setVariablesStyleSheet();
+      this.setHostVatiables();
     }
     super.update(changedProperties);
   }

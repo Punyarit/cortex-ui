@@ -119,7 +119,7 @@ export class Progress extends ComponentBase<CXProgress.Props> {
       const spinnerVars = {color: spinnerBuilder.color, ...spinnerBuilder.size};
       this.cacheVariables(spinnerVars);
 
-      this.setVariablesStyleSheet();
+      this.setHostVatiables();
     }
     super.update(changedProperties);
   }

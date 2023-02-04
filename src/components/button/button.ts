@@ -212,7 +212,7 @@ export class Button extends ComponentBase<CXButton.Props> {
   updated(changedPros: Map<PropertyKey, unknown>): void {
     if (changedPros.has('set')) {
       this.cacheVariables(ButtonFactory.getCSSVariables(this.set)!);
-      this.setVariablesStyleSheet();
+      this.setHostVatiables();
     }
 
     super.update(changedPros);

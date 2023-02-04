@@ -14,7 +14,7 @@ export type Properties = {
 
 export type OnVariable<Var extends Properties[VarKey]> = {
   oldVar: Var;
-  setVariablesStyleSheet: () => void;
+  setHostVatiables: () => void;
   cacheVariables: (vars: Var) => void;
   getCssText: (vars: Var) => string;
 };

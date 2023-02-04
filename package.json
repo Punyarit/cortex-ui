@@ -9,7 +9,8 @@
     "dev": "tsc -w",
     "compress": "yarn gulp compress",
     "css": "yarn sass styles/scss/main.scss styles/css/index.css --style compressed",
-    "cx": "yarn build & yarn css & yarn compress"
+    "cx": "yarn build & yarn css & yarn compress & yarn export",
+    "export": "node export.script.js"
   },
   "repository": {
     "type": "git",
