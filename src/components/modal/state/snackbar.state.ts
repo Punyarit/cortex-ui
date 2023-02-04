@@ -1,5 +1,5 @@
 import {Ref} from 'lit/directives/ref';
-import {observeElement} from '../../../helpers/observeElement';
+import {observeElement} from '../../../helpers/functions/observeElement/observeElement';
 import {SnackbarModalSlot} from '../../snackbar/types/snackbar.types';
 import {Modal} from '../modal';
 import {ModalSnackbarState} from '../types/modal.types';

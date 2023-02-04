@@ -1,5 +1,5 @@
-import { SnackbarSingleton } from '../../../snackbar/singleton/snackbar.singleton';
-import { ModalSingleton } from '../../singleton/modal.singleton';
+import { SnackbarSingleton } from '../../../components/snackbar/singleton/snackbar.singleton';
+import { ModalSingleton } from '../../../components/modal/singleton/modal.singleton';
 
 export class SnackbarCaller {
   constructor(public config: CXSnackbar.Set) {}

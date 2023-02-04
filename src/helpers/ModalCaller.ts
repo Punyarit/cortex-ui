@@ -1,6 +1,6 @@
-import { ChooseLangCaller } from './callers/chooseLang.caller';
-import { DecideCaller } from './callers/dialog.caller';
-import { SnackbarCaller } from './callers/snackbar.caller';
+import { ChooseLangCaller } from './functions/modal-callers/chooseLang.caller';
+import { DecideCaller } from './functions/modal-callers/dialog.caller';
+import { SnackbarCaller } from './functions/modal-callers/snackbar.caller';
 
 export class ModalCaller {
   static snackbar(config: CXSnackbar.Set) {

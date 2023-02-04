@@ -1,5 +1,5 @@
 import { Ref } from 'lit/directives/ref';
-import { observeElement } from '../../../helpers/observeElement';
+import { observeElement } from '../../../helpers/functions/observeElement/observeElement';
 import { Modal } from '../modal';
 import { ModalDialogState } from '../types/modal.types';
 

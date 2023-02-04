@@ -1,4 +1,4 @@
-import { ObserveTypes } from './types/observerElement.types';
+import { ObserveTypes } from '../../types/observerElement.types';
 
 export function observeElement<T extends HTMLElement>(watch: { target: T } & ObserveTypes) {
   const config: Record<'attributes' | 'characterData' | 'childList' | string, boolean> = {};
