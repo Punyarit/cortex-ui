@@ -5,9 +5,8 @@ import { ComponentBase } from '../../base/component-base/component.base';
 import { SnackbarModalSlot } from '../snackbar/types/snackbar.types';
 import { ModalSingleton } from './singleton/modal.singleton';
 import { DialogState } from './state/dialog.state';
-import { ModalPopoverState } from './state/popover.state';
+import { PopoverState } from './state/popover.state';
 import { SnackbarState } from './state/snackbar.state';
-import { ModalDialogState, ModalSnackbarState } from './types/modal.types';
 
 export const tagName = 'cx-modal';
 // export const onPressed = 'pressed';
@@ -17,9 +16,9 @@ export class Modal extends ComponentBase<CXModal.Props> {
     disabledBackdrop: false,
   };
 
-  private dialogState!: ModalDialogState;
-  private snackbarState!: ModalSnackbarState;
-  private popoverState!: ModalPopoverState;
+  private dialogState!: DialogState;
+  private snackbarState!: SnackbarState;
+  private popoverState!: PopoverState;
 
   private dialogSlot = createRef<HTMLSlotElement>();
   private snackbarSlot = createRef<HTMLSlotElement>();
@@ -110,7 +109,7 @@ export class Modal extends ComponentBase<CXModal.Props> {
   private createModalState(): void {
     this.dialogState = new DialogState(this);
     this.snackbarState = new SnackbarState(this);
-    this.popoverState = new ModalPopoverState(this);
+    this.popoverState = new PopoverState(this);
   }
 
   private createSharedCXModalRef(): void {
@@ -140,9 +139,8 @@ export class Modal extends ComponentBase<CXModal.Props> {
     this.dialogState.close();
   };
 
-  public openSnackbar = (slot: SnackbarModalSlot, duration: number): void => {
+  public openSnackbar = (slot: SnackbarModalSlot): void => {
     this.snackbarState.open({
-      duration,
       slotName: slot,
       slotRef: this.snackbarSlot,
     });

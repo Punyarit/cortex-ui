@@ -18,6 +18,7 @@ export class Snackbar extends ComponentBase<CXSnackbar.Props> {
     text: 'The snackbar has been opened.',
     iconSrc: 'favorite',
     duration: snackbarDurationDefault,
+    color: 'primary',
     transition: {
       start: {
         name: 'scale-up',

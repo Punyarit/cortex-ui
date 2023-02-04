@@ -8,13 +8,19 @@ fs.readdir(componentsDirectory, (err, componentDirectories) => {
 
   componentDirectories.forEach((componentDirectory) => {
     const componentName = path.basename(componentDirectory);
-    const exportedFilePath = `cx/${componentName}.js`;
+    const exportedJsFilePath = `cx/${componentName}.js`;
+    const exportedJsFileCode = `export * from "./components/${componentDirectory}/${componentName}"`;
+    const exportedTsFilePath = `cx/${componentName}.d.ts`;
+    const exportedTsFileCode = `export * from "./components/${componentDirectory}/${componentName}"`;
 
-    const exportedFileCode = `export * from "./components/${componentDirectory}/${componentName}"`;
-
-    fs.writeFile(exportedFilePath, exportedFileCode, (err) => {
+    fs.writeFile(exportedJsFilePath, exportedJsFileCode, (err) => {
       if (err) throw err;
-      console.log(`${exportedFilePath} was created`);
+      console.log(`${exportedJsFilePath} was created`);
+    });
+
+    fs.writeFile(exportedTsFilePath, exportedTsFileCode, (err) => {
+      if (err) throw err;
+      console.log(`${exportedTsFilePath} was created`);
     });
   });
 });

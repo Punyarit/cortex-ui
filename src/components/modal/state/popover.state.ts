@@ -1,7 +1,7 @@
 import { Ref } from 'lit/directives/ref';
 import { Modal } from '../modal';
 
-export class ModalPopoverState {
+export class PopoverState {
   public POPOVER_SLOT_DEFAULT = 'popover-slot';
 
   constructor(public modal: Modal) {}

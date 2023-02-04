@@ -2,12 +2,16 @@ import { SnackbarSingleton } from '../../../components/snackbar/singleton/snackb
 import { ModalSingleton } from '../../../components/modal/singleton/modal.singleton';
 
 export class SnackbarCaller {
-  constructor(public config: CXSnackbar.Set) {}
+  constructor(private readonly config: CXSnackbar.Set) {}
   open() {
     SnackbarSingleton.ref.setSnackbarAppear();
-    ModalSingleton.ref.openSnackbar(
-      'global-snackbar',
-      this.config?.duration || (SnackbarSingleton.ref.set.duration as number)
-    );
+    SnackbarSingleton.ref
+      .fix()
+      .text(this.config.text)
+      .duration(this.config?.duration || SnackbarSingleton.ref.set.duration)
+      .color(this.config?.color || SnackbarSingleton.ref.set.color)
+      .iconSrc(this.config?.iconSrc || SnackbarSingleton.ref.set.iconSrc)
+      .exec();
+    ModalSingleton.ref.openSnackbar('global-snackbar');
   }
 }

@@ -1,9 +1,8 @@
 import { Ref } from 'lit/directives/ref';
 import { observeElement } from '../../../helpers/functions/observeElement/observeElement';
 import { Modal } from '../modal';
-import { ModalDialogState } from '../types/modal.types';
 
-export class DialogState implements ModalDialogState {
+export class DialogState {
   static readonly DIALOG_SLOT_DEFAULT = 'dialog-slot';
   static readonly DIALOG_ENABLED = 'dialog__enabled';
   static readonly LOCAL_DIALO_SLOT = 'local-dialog-slot';
@@ -20,7 +19,7 @@ export class DialogState implements ModalDialogState {
     if (this.dialogSlot?.value?.name === DialogState.DIALOG_SLOT_DEFAULT) {
       this.startTransition();
       this.toggleBackdrop('enabled');
-      this.SetOpacity("1");
+      this.SetOpacity('1');
       this.setModalSlot(detail.slotName);
     } else {
       this.close(false);
