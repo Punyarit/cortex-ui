@@ -1,4 +1,3 @@
-// create export components
 const fs = require('fs');
 const path = require('path');
 
