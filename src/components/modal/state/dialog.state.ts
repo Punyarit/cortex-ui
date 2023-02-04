@@ -13,7 +13,10 @@ export class DialogState {
 
   constructor(public modal: Modal) {}
 
-  public open = (detail: { slotRef?: Ref<HTMLSlotElement>; slotName: string }): void => {
+  public open = (detail: {
+    slotRef?: Ref<HTMLSlotElement>;
+    slotName: string;
+  }): Promise<CXDialog.Ref> => {
     if (!this.dialogSlot) this.dialogSlot = detail.slotRef;
 
     if (this.dialogSlot?.value?.name === DialogState.DIALOG_SLOT_DEFAULT) {
@@ -22,10 +25,22 @@ export class DialogState {
       this.SetOpacity('1');
       this.setModalSlot(detail.slotName);
     } else {
+      // 📌close when call new dialog while current dialog still appear
       this.close(false);
+      // 📌after close then it will open new dialog immediately
       this.openChildDialog(detail.slotName);
     }
+
+    return this.getAsyncDialogRef();
   };
+
+  private getAsyncDialogRef(): Promise<CXDialog.Ref> {
+    return new Promise((resolve) => {
+      requestAnimationFrame(() => {
+        if (this.dialogRef) resolve(this.dialogRef);
+      });
+    });
+  }
 
   public close = (shouldTriggerAfterClosed = true): void => {
     this.removeEscapeKeyupEvent();

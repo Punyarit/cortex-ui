@@ -80,16 +80,17 @@ export class Modal extends ComponentBase<CXModal.Props> {
 
   render(): TemplateResult {
     return html`
+      <!-- 📌popover / tooltip area -->
       <div class="popover area">
         <slot name="${this.popoverState.POPOVER_SLOT_DEFAULT}" ${ref(this.popoverSlot)}></slot>
       </div>
-      <!-- popover / tooltip -->
 
+      <!-- 📌snackbar area -->
       <div class="snackbar area disabled">
         <slot name="${this.snackbarState.SNACKBAR_SLOT_DEFAULT}" ${ref(this.snackbarSlot)}></slot>
       </div>
 
-      <!-- global dialog -->
+      <!-- 📌 dialog area -->
       <div @click="${this.dialogState.closeBackdrop}" class="dialog area disabled">
         <slot
           @click="${(e: PointerEvent) => e.stopPropagation()}"
@@ -128,12 +129,11 @@ export class Modal extends ComponentBase<CXModal.Props> {
   }
 
   // 📌need to use arrow function becoz this function is called from outside scope
-  public openDialog = (slot: string): void => {
-    this.dialogState.open({
+  public openDialog = async (slot: string) =>
+    await this.dialogState.open({
       slotRef: this.dialogSlot,
       slotName: slot,
     });
-  };
 
   public closeDialog = (): void => {
     this.dialogState.close();

@@ -1,4 +1,4 @@
-export class ChooseLangCaller {
+export class ChooseLangDialogCaller {
   open() {
     // logic to open chooseLang dialog
   }
