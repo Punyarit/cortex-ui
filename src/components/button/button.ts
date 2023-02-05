@@ -222,6 +222,7 @@ export class Button extends ComponentBase<CXButton.Props> {
 
   // Events
   private pressed(): void {
+    // test
     this.setCustomEvent<CXButton.Details[typeof onPressed]>(onPressed, {
       event: onPressed,
     });
