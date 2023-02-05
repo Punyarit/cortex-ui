@@ -2,6 +2,7 @@ import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { ComponentBase } from '../../base/component-base/component.base';
+import { GlobalDialogSingleton } from '../dialog/singleton/global-dialog.singleton';
 import { SnackbarModalSlot } from '../snackbar/types/snackbar.types';
 import { ModalSingleton } from './singleton/modal.singleton';
 import { DialogState } from './state/dialog.state';
@@ -115,6 +116,9 @@ export class Modal extends ComponentBase<CXModal.Props> {
 
   private createSharedCXModalRef(): void {
     ModalSingleton.ref = this;
+    requestAnimationFrame(() => {
+      GlobalDialogSingleton.ref = this.querySelector('cx-dialog')!;
+    });
   }
 
   public popoverMouseover(popoverName: string) {
@@ -129,10 +133,10 @@ export class Modal extends ComponentBase<CXModal.Props> {
   }
 
   // 📌need to use arrow function becoz this function is called from outside scope
-  public openDialog = async (slot: string) =>
+  public openDialog = async (slotName: string) =>
     await this.dialogState.open({
       slotRef: this.dialogSlot,
-      slotName: slot,
+      slotName,
     });
 
   public closeDialog = (): void => {

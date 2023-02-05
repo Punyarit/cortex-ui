@@ -72,9 +72,9 @@ export class Dialog extends ComponentBase<CXDialog.Props> {
     this.openLocalDialog();
   }
 
-  private setSlotName(): void {
+  public setSlotName(globalSlotName?: 'global-dialog'): void {
     if (this.slot) return;
-    this.slot = DialogState.LOCAL_DIALO_SLOT;
+    this.slot = globalSlotName || DialogState.LOCAL_DIALO_SLOT;
     this.requestUpdate();
   }
 

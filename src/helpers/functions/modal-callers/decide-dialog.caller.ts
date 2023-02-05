@@ -1,29 +1,41 @@
+import { GlobalDialogSingleton } from '../../../components/dialog/singleton/global-dialog.singleton';
 import { ModalSingleton } from '../../../components/modal/singleton/modal.singleton';
 
 export class DecideDialogCaller {
-  private dialogRef?: CXDialog.Ref;
-  private decideDialogRef: CXDecideDialog.Ref;
+  private decideDialogRef?: CXDecideDialog.Ref;
 
-  constructor(private config: CXDecideDialog.Set) {
+  constructor(private config: CXDecideDialog.Set) {}
+
+  public async open() {
+    this.removeFirstElement();
+    this.setDecideDialog();
+    GlobalDialogSingleton.ref.setSlotName('global-dialog');
+    ModalSingleton.ref.openDialog('global-dialog');
+    GlobalDialogSingleton.ref.append(this.decideDialogRef!);
+    GlobalDialogSingleton.ref.addEventListener('afterClosed', this.removeFirstElement);
+  }
+
+  public close() {
+    ModalSingleton.ref.closeDialog();
+  }
+
+  private setDecideDialog() {
+    // 📌need to create cx-decide-dialog everytime when call open because it need to update very component inside cx-decide-dialog
+    // 📌if not create element agian it will cache component. thene bug will occur
     this.decideDialogRef = document.createElement('cx-decide-dialog');
     this.decideDialogRef
       .fix()
       .title(this.config.title)
       .description(this.config.description)
-      .actionLeft(config.actionLeft)
-      .actionRight(config.actionRight)
+      .actionLeft(this.config.actionLeft)
+      .actionRight(this.config.actionRight)
       .exec();
   }
 
-  async open() {
-    this.dialogRef = await ModalSingleton.ref.openDialog('global-dialog');
-    this.dialogRef.append(this.decideDialogRef);
-  }
-
-  close() {
-    ModalSingleton.ref.closeDialog();
-    this.dialogRef?.firstElementChild?.remove();
-
-    // logic to close decide dialog
-  }
+  // 📌need to use arrow function because scope of addEventListener that recognized firstELementChild = undefiend
+  private removeFirstElement = () => {
+    if (!GlobalDialogSingleton.ref?.firstElementChild) return;
+    GlobalDialogSingleton.ref?.removeEventListener('afterClosed', this.removeFirstElement);
+    GlobalDialogSingleton.ref.firstElementChild.remove();
+  };
 }

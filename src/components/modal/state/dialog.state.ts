@@ -10,6 +10,7 @@ export class DialogState {
 
   private dialogRef?: CXDialog.Ref;
   private dialogSlot?: Ref<HTMLSlotElement>;
+  private slotName?: string;
 
   constructor(public modal: Modal) {}
 
@@ -17,22 +18,31 @@ export class DialogState {
     slotRef?: Ref<HTMLSlotElement>;
     slotName: string;
   }): Promise<CXDialog.Ref> => {
-    if (!this.dialogSlot) this.dialogSlot = detail.slotRef;
+    this.setSlotName(detail.slotName);
+    this.setDialogSlot(detail.slotRef);
 
     if (this.dialogSlot?.value?.name === DialogState.DIALOG_SLOT_DEFAULT) {
       this.startTransition();
       this.toggleBackdrop('enabled');
       this.SetOpacity('1');
-      this.setModalSlot(detail.slotName);
+      this.setModalSlot();
     } else {
       // 📌close when call new dialog while current dialog still appear
       this.close(false);
       // 📌after close then it will open new dialog immediately
-      this.openChildDialog(detail.slotName);
+      this.openChildDialog();
     }
 
     return this.getAsyncDialogRef();
   };
+
+  private setSlotName(slotName: string) {
+    this.slotName = slotName;
+  }
+
+  private setDialogSlot(slotRef?: Ref<HTMLSlotElement>) {
+    if (!this.dialogSlot) this.dialogSlot = slotRef;
+  }
 
   private getAsyncDialogRef(): Promise<CXDialog.Ref> {
     return new Promise((resolve) => {
@@ -80,10 +90,10 @@ export class DialogState {
     }, 0);
   }
 
-  private openChildDialog(slotName: string) {
+  private openChildDialog() {
     setTimeout(() => {
       this.setModalSlot(DialogState.DIALOG_SLOT_DEFAULT);
-      this.open({ slotName });
+      this.open({ slotName: this.slotName! });
     }, 250);
   }
 
@@ -102,9 +112,9 @@ export class DialogState {
   }
 
   // 📌need to use arrow function becoz this function is called from another scope
-  private setModalSlot = (slot: string): void => {
+  private setModalSlot = (slotName?: string): void => {
     if (this.dialogSlot?.value) {
-      this.dialogSlot.value.name = slot;
+      this.dialogSlot.value.name = slotName || this.slotName!;
     }
   };
 

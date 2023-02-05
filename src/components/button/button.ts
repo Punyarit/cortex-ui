@@ -1,8 +1,8 @@
-import {css, html, TemplateResult} from 'lit';
-import {customElement} from 'lit/decorators.js';
-import {ComponentBase} from '../../base/component-base/component.base';
-import {ColorTypes} from '../../types/colors.version-control';
-import {BaseSizeTypes, SizeTypes} from '../../types/sizes.type';
+import { css, html, TemplateResult } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { ComponentBase } from '../../base/component-base/component.base';
+import { ColorTypes } from '../../types/colors.version-control';
+import { BaseSizeTypes, SizeTypes } from '../../types/sizes.type';
 import {
   ButtonColors,
   ButtonExposeVar,
@@ -11,9 +11,9 @@ import {
   ButtonTypes,
 } from './types/button.config.types';
 import '../icon/icon';
-import {IconSrcTypes} from '../icon/types/icon.types';
+import { IconSrcTypes } from '../icon/types/icon.types';
 import '../spinner/spinner';
-import {ThemeVersion} from '../theme/types/theme.types';
+import { ThemeVersion } from '../theme/types/theme.types';
 import ButtonFactory from './factory/factories/button.factory';
 
 export const tagName = 'cx-button';
@@ -63,8 +63,8 @@ export class Button extends ComponentBase<CXButton.Props> {
       user-select: none;
       border-width: var(--borderWidth);
       border-color: var(--borderColor);
-      transition: background-color 0.125s, outline-width 0.25s,
-        outline-color 0.25s, box-shadow 0.25s;
+      transition: background-color 0.125s, outline-width 0.25s, outline-color 0.25s,
+        box-shadow 0.25s;
       box-sizing: border-box;
       display: inline-flex;
       align-items: center;
@@ -144,10 +144,8 @@ export class Button extends ComponentBase<CXButton.Props> {
         class="cx-button-container"
         @click="${this.pressed}"
         data-disabled="${this.set.disabled!}"
-        data-loading="${this.set.loading!}"
-      >
-        ${this.renderIconLeft()} ${this.renderContent()}
-        ${this.renderIconRight()}
+        data-loading="${this.set.loading!}">
+        ${this.renderIconLeft()} ${this.renderContent()} ${this.renderIconRight()}
       </button>
     `;
   }
@@ -181,8 +179,7 @@ export class Button extends ComponentBase<CXButton.Props> {
         .set="${{
           src: this.set?.iconSrc,
           color: (<CXButton.Var>this.var)?.textColor,
-        }}"
-      ></cx-icon>`;
+        }}"></cx-icon>`;
     }
   }
 
@@ -203,8 +200,7 @@ export class Button extends ComponentBase<CXButton.Props> {
         .set="${{
           src: this.set?.iconSrc,
           color: (<CXButton.Var>this.var)?.textColor,
-        }}"
-      ></cx-icon>`;
+        }}"></cx-icon>`;
     }
   }
 
@@ -220,7 +216,7 @@ export class Button extends ComponentBase<CXButton.Props> {
 
   // Methods
   // FIXME: remove this method when everything is done!
-  public onLog(config: {text: string}): void {
+  public onLog(config: { text: string }): void {
     console.log('Log:', config.text);
   }
 
@@ -276,7 +272,7 @@ declare global {
 
     type Fix = Required<{
       [K in keyof Set]: (value: Set[K]) => Fix;
-    }> & {exec: () => void};
+    }> & { exec: () => void };
 
     type Props = {
       var: Pick<Var, ButtonExposeVar>;
@@ -286,7 +282,7 @@ declare global {
     };
 
     type Details = {
-      [onPressed]: {event: string};
+      [onPressed]: { event: string };
     };
 
     type Events = {
