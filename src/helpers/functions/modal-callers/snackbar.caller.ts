@@ -1,5 +1,6 @@
 import { SnackbarSingleton } from '../../../components/snackbar/singleton/snackbar.singleton';
 import { ModalSingleton } from '../../../components/modal/singleton/modal.singleton';
+import { snackbarModalSlot } from '../../../components/snackbar/types/snackbar.types';
 
 export class SnackbarCaller {
   constructor(private readonly config: CXSnackbar.Set) {}
@@ -12,6 +13,6 @@ export class SnackbarCaller {
       .color(this.config?.color || SnackbarSingleton.ref.set.color)
       .iconSrc(this.config?.iconSrc || SnackbarSingleton.ref.set.iconSrc)
       .exec();
-    ModalSingleton.ref.openSnackbar('global-snackbar');
+    ModalSingleton.modalRef.openSnackbar(snackbarModalSlot);
   }
 }

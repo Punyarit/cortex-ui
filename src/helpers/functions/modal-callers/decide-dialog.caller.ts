@@ -10,13 +10,13 @@ export class DecideDialogCaller {
     this.removeFirstElement();
     this.setDecideDialog();
     GlobalDialogSingleton.ref.setSlotName('global-dialog');
-    ModalSingleton.ref.openDialog('global-dialog');
+    ModalSingleton.modalRef.openDialog('global-dialog');
     GlobalDialogSingleton.ref.append(this.decideDialogRef!);
     GlobalDialogSingleton.ref.addEventListener('afterClosed', this.removeFirstElement);
   }
 
   public close() {
-    ModalSingleton.ref.closeDialog();
+    ModalSingleton.modalRef.closeDialog();
   }
 
   private setDecideDialog() {

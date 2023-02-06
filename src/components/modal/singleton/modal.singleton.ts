@@ -1,6 +1,7 @@
 export class ModalSingleton {
   private static instance: ModalSingleton;
-  public static ref: CXModal.Ref;
+  public static modalRef: CXModal.Ref;
+  public static popoverSlotRef: HTMLSlotElement;
   constructor() {
     if (ModalSingleton.instance) {
       return ModalSingleton.instance;

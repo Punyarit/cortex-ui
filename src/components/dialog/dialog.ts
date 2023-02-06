@@ -79,12 +79,12 @@ export class Dialog extends ComponentBase<CXDialog.Props> {
   }
 
   private openLocalDialog() {
-    ModalSingleton.ref.append(this);
-    ModalSingleton.ref.openDialog(DialogState.LOCAL_DIALO_SLOT);
+    ModalSingleton.modalRef.append(this);
+    ModalSingleton.modalRef.openDialog(DialogState.LOCAL_DIALO_SLOT);
   }
 
   public close(): void {
-    ModalSingleton.ref?.closeDialog();
+    ModalSingleton.modalRef?.closeDialog();
   }
 
   public afterClosed(): void {

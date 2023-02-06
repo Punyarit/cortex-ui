@@ -17,13 +17,15 @@ export class Modal extends ComponentBase<CXModal.Props> {
     disabledBackdrop: false,
   };
 
+  public static readonly MODAL_DISABLED = 'disabled';
+
   private dialogState!: DialogState;
   private snackbarState!: SnackbarState;
   private popoverState!: PopoverState;
 
-  private dialogSlot = createRef<HTMLSlotElement>();
-  private snackbarSlot = createRef<HTMLSlotElement>();
-  private popoverSlot = createRef<HTMLSlotElement>();
+  private dialogSlotRef = createRef<HTMLSlotElement>();
+  private snackbarSlotRef = createRef<HTMLSlotElement>();
+  private popoverSlotRef = createRef<HTMLSlotElement>();
 
   static styles = css`
     :host {
@@ -69,8 +71,11 @@ export class Modal extends ComponentBase<CXModal.Props> {
     }
 
     .popover {
-      z-index: 2;
+      z-index: 3;
       pointer-events: none;
+    }
+    .popover > slot {
+      pointer-events: auto;
     }
   `;
 
@@ -82,20 +87,20 @@ export class Modal extends ComponentBase<CXModal.Props> {
   render(): TemplateResult {
     return html`
       <!-- 📌popover / tooltip area -->
-      <div class="popover area">
-        <slot name="${this.popoverState.POPOVER_SLOT_DEFAULT}" ${ref(this.popoverSlot)}></slot>
+      <div class="popover area disabled">
+        <slot name="${PopoverState.POPOVER_SLOT_DISABLED}" ${ref(this.popoverSlotRef)}></slot>
       </div>
 
       <!-- 📌snackbar area -->
       <div class="snackbar area disabled">
-        <slot name="${this.snackbarState.SNACKBAR_SLOT_DEFAULT}" ${ref(this.snackbarSlot)}></slot>
+        <slot name="${SnackbarState.SNACKBAR_SLOT_DISABLED}" ${ref(this.snackbarSlotRef)}></slot>
       </div>
 
       <!-- 📌 dialog area -->
       <div @click="${this.dialogState.closeBackdrop}" class="dialog area disabled">
         <slot
           @click="${(e: PointerEvent) => e.stopPropagation()}"
-          ${ref(this.dialogSlot)}
+          ${ref(this.dialogSlotRef)}
           name="${DialogState.DIALOG_SLOT_DEFAULT}"></slot>
       </div>
       <slot></slot>
@@ -109,33 +114,24 @@ export class Modal extends ComponentBase<CXModal.Props> {
   }
 
   private createModalState(): void {
-    this.dialogState = new DialogState(this);
-    this.snackbarState = new SnackbarState(this);
-    this.popoverState = new PopoverState(this);
+    this.dialogState = new DialogState();
+    this.snackbarState = new SnackbarState();
+    this.popoverState = new PopoverState();
   }
 
   private createSharedCXModalRef(): void {
-    ModalSingleton.ref = this;
+    ModalSingleton.modalRef = this;
+
     requestAnimationFrame(() => {
+      ModalSingleton.popoverSlotRef = this.popoverSlotRef.value!;
       GlobalDialogSingleton.ref = this.querySelector('cx-dialog')!;
     });
-  }
-
-  public popoverMouseover(popoverName: string) {
-    this.popoverState.mouseover({
-      popoverName,
-      slotRef: this.popoverSlot,
-    });
-  }
-
-  public popoverMouseleave() {
-    this.popoverState.mouseleave(this.popoverSlot);
   }
 
   // 📌need to use arrow function becoz this function is called from outside scope
   public openDialog = async (slotName: string) =>
     await this.dialogState.open({
-      slotRef: this.dialogSlot,
+      slotRef: this.dialogSlotRef,
       slotName,
     });
 
@@ -146,8 +142,12 @@ export class Modal extends ComponentBase<CXModal.Props> {
   public openSnackbar = (slot: SnackbarModalSlot): void => {
     this.snackbarState.open({
       slotName: slot,
-      slotRef: this.snackbarSlot,
+      slotRef: this.snackbarSlotRef,
     });
+  };
+
+  public openPopovre = (popoverContent: HTMLElement) => {
+    this.popoverState.open(popoverContent);
   };
 }
 

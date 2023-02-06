@@ -5,17 +5,14 @@ import { SnackbarModalSlot } from '../../snackbar/types/snackbar.types';
 import { Modal } from '../modal';
 
 export class SnackbarState {
-  public readonly SNACKBAR_SLOT_DEFAULT = 'snackbar-slot';
+  public static readonly SNACKBAR_SLOT_DISABLED = 'snackbar-disabled';
   private readonly SNACKBAR_ENABLED = 'snackbar__enabled';
-  private readonly MODAL_DISABLED = 'disabled';
 
   private snackbarRef?: CXSnackbar.Ref;
   private snackbarSlot?: Ref<HTMLSlotElement>;
 
   private snackbarTimeStart?: unknown;
   private snackbarTimeEnd?: unknown;
-
-  constructor(public modal: Modal) {}
 
   public open = (detail: { slotRef: Ref<HTMLSlotElement>; slotName: SnackbarModalSlot }): void => {
     if (!this.snackbarSlot) this.snackbarSlot = detail.slotRef;
@@ -65,14 +62,14 @@ export class SnackbarState {
 
   private enabledSnackbarClass(snackbarParent: CXSnackbar.Ref): void {
     snackbarParent.classList.add(this.SNACKBAR_ENABLED);
-    snackbarParent.classList.remove(this.MODAL_DISABLED);
+    snackbarParent.classList.remove(Modal.MODAL_DISABLED);
   }
 
   private disabledSnackbarClass(snackbarParent: CXSnackbar.Ref): void {
     this.snackbarTimeStart = setTimeout(() => {
       if (!this.snackbarSlot?.value) return;
-      this.snackbarSlot.value.name = this.SNACKBAR_SLOT_DEFAULT;
-      snackbarParent.classList.add(this.MODAL_DISABLED);
+      this.snackbarSlot.value.name = SnackbarState.SNACKBAR_SLOT_DISABLED;
+      snackbarParent.classList.add(Modal.MODAL_DISABLED);
       snackbarParent.classList.remove(this.SNACKBAR_ENABLED);
     }, SnackbarSingleton.ref.set.duration!);
   }

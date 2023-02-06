@@ -13,11 +13,11 @@ export class MouseoverPopover implements EventStrategy {
   }
 
   mouseover = () => {
-    ModalSingleton.ref.popoverMouseover(this.popoverName);
+    // ModalSingleton.ref.popoverMouseover(this.popoverName);
   };
 
   mouseleave = () => {
-    ModalSingleton.ref.popoverMouseleave();
+    // ModalSingleton.ref.popoverMouseleave();
   };
 
   eventDetail(): EventStrategy {

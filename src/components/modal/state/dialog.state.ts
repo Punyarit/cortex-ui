@@ -1,18 +1,16 @@
 import { Ref } from 'lit/directives/ref';
 import { observeElement } from '../../../helpers/functions/observeElement/observeElement';
 import { Modal } from '../modal';
+import { ModalSingleton } from '../singleton/modal.singleton';
 
 export class DialogState {
-  static readonly DIALOG_SLOT_DEFAULT = 'dialog-slot';
+  static readonly DIALOG_SLOT_DEFAULT = 'dialog-disabled';
   static readonly DIALOG_ENABLED = 'dialog__enabled';
   static readonly LOCAL_DIALO_SLOT = 'local-dialog-slot';
-  static readonly MODAL_DISABLED = 'disabled';
 
   private dialogRef?: CXDialog.Ref;
   private dialogSlot?: Ref<HTMLSlotElement>;
   private slotName?: string;
-
-  constructor(public modal: Modal) {}
 
   public open = (detail: {
     slotRef?: Ref<HTMLSlotElement>;
@@ -65,7 +63,8 @@ export class DialogState {
   }
 
   public closeBackdrop = (): void => {
-    if (this.modal.set.disabledBackdrop || this.dialogRef?.set.disabledBackdrop) return;
+    if (ModalSingleton.modalRef.set.disabledBackdrop || this.dialogRef?.set.disabledBackdrop)
+      return;
     this.close();
   };
 
@@ -86,7 +85,7 @@ export class DialogState {
 
   private SetOpacity(value: '0' | '1') {
     setTimeout(() => {
-      this.modal.style.setProperty('--opacity', value);
+      ModalSingleton.modalRef.style.setProperty('--opacity', value);
     }, 0);
   }
 
@@ -128,17 +127,18 @@ export class DialogState {
   private enabledBackdrop(dialogParent: HTMLElement, status: 'enabled' | 'disabled'): void {
     if (status !== 'enabled') return;
     dialogParent.classList.add(DialogState.DIALOG_ENABLED);
-    dialogParent.classList.remove(DialogState.MODAL_DISABLED);
+    dialogParent.classList.remove(Modal.MODAL_DISABLED);
   }
 
   private disabledBackdrop(dialogParent: HTMLElement, status: 'enabled' | 'disabled'): void {
     if (status !== 'disabled') return;
-    dialogParent.classList.add(DialogState.MODAL_DISABLED);
+    dialogParent.classList.add(Modal.MODAL_DISABLED);
     dialogParent.classList.remove(DialogState.DIALOG_ENABLED);
   }
 
   private attachEscapeKeyupEvent(): void {
-    if (this.modal.set.disabledBackdrop || this.dialogRef?.set.disabledBackdrop) return;
+    if (ModalSingleton.modalRef.set.disabledBackdrop || this.dialogRef?.set.disabledBackdrop)
+      return;
     document.addEventListener('keydown', this.disabledBackdropByEscape);
   }
 
