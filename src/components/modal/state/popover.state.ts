@@ -10,16 +10,19 @@ export class PopoverState {
   private hostRect!: DOMRect;
   private position!: PopoverPositionType;
   private popoverContent!: HTMLElement;
+  private popoverRoot!: Element;
 
   async open(
     popoverContent: HTMLElement,
     hostRect: DOMRect,
-    position: PopoverPositionType
+    position: PopoverPositionType,
+    popoverRoot: Element
   ): Promise<void> {
-    this.setProperties(popoverContent, hostRect, position);
+    this.setProperties(popoverContent, hostRect, position, popoverRoot);
     this.setOpacity('0');
     this.setContentInlineBlock();
     this.setPosition();
+    this.setBlurEventListener();
     this.setPopoverAppear();
     requestAnimationFrame(() => {
       this.setOpacity('1');
@@ -35,11 +38,13 @@ export class PopoverState {
   private setProperties(
     popoverContent: HTMLElement,
     hostRect: DOMRect,
-    position: PopoverPositionType
+    position: PopoverPositionType,
+    popoverRoot: Element
   ) {
     this.popoverContent = popoverContent;
     this.hostRect = hostRect;
     this.position = position;
+    this.popoverRoot = popoverRoot;
   }
 
   private async setPosition() {
@@ -52,13 +57,36 @@ export class PopoverState {
     this.popoverContent.style.translate = position;
   }
 
+  popoverContentFocus = () => {
+    this.popoverContent.focus();
+  };
+
+  private setBlurEventListener() {
+    this.popoverContent.tabIndex = 0;
+    this.popoverContent.addEventListener('focusout', (e) => {
+      const isInsidePopover = e.relatedTarget as HTMLElement;
+      if (isInsidePopover?.closest('div[slot="popover"]')) return;
+      this.closePopover();
+    });
+    requestAnimationFrame(() => {
+      this.popoverContent.focus();
+    });
+  }
+
+  private closePopover() {
+    this.appendBackToParentRoot();
+  }
+
+  private appendBackToParentRoot() {
+    this.popoverRoot.append(this.popoverContent);
+  }
+
   private setContentInlineBlock() {
     this.popoverContent.style.display = 'inline-block';
   }
 
   private setOpacity(opacity: string) {
     this.popoverContent.style.opacity = opacity;
-    console.log('popover.state |this.popoverContent|', this.popoverContent);
   }
 }
 

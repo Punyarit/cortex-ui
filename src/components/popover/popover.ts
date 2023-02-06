@@ -64,11 +64,11 @@ export class Popover extends ComponentBase<CXPopover.Props> {
 
   private setOpenPopover = async () => {
     await this.setPopoverContentElement();
-
     ModalSingleton.modalRef.openPopovre(
       this.popoverContentElement!,
       this.hostElement!.getBoundingClientRect(),
-      this.set.position!
+      this.set.position!,
+      this.shadowRoot!.host
     );
   };
 
@@ -79,8 +79,7 @@ export class Popover extends ComponentBase<CXPopover.Props> {
   private getPopoverContent(): Promise<HTMLElement> {
     return new Promise((resolve) => {
       requestAnimationFrame(() => {
-        const popoverContent = this.popoverSlotRef.value?.assignedElements()[0] as HTMLElement;
-        resolve(popoverContent);
+        resolve(this.popoverSlotRef.value?.assignedElements()[0] as HTMLElement);
       });
     });
   }
