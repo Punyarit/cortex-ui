@@ -4,7 +4,7 @@ import { ComponentBase } from '../../base/component-base/component.base';
 import { ModalSingleton } from '../modal/singleton/modal.singleton';
 import { ThemeVersion } from '../theme/types/theme.types';
 import { createRef, ref } from 'lit/directives/ref.js';
-import { PopoverState } from '../modal/state/popover.state';
+import { PopoverPositionType } from './types/popover.types';
 
 export const tagName = 'cx-popover';
 // export const onPressed = 'pressed';
@@ -20,35 +20,31 @@ export const tagName = 'cx-popover';
 export class Popover extends ComponentBase<CXPopover.Props> {
   config: CXPopover.Set = {
     event: 'click',
+    position: 'bottom-center',
+    arrowPoint: false,
   };
 
   static styles = css`
-    .popover {
-      display: inline-block;
-      background-color: var(--white);
-      border-radius: var(--base-size-8);
+    .popover-disabled {
+      display: none;
     }
   `;
 
   private hostSlotRef = createRef<HTMLSlotElement>();
   private popoverSlotRef = createRef<HTMLSlotElement>();
   private hostElement?: HTMLElement;
-
-  @state() status: 'open' | 'closed' = 'closed';
+  private popoverContentElement?: HTMLElement;
 
   render(): TemplateResult {
     return html`
       <slot name="host" ${ref(this.hostSlotRef)}></slot>
-      ${this.status === 'open'
-        ? html`<slot name="popover" ${ref(this.popoverSlotRef)}></slot>`
-        : undefined}
+      <slot class="popover-disabled" name="popover" ${ref(this.popoverSlotRef)}></slot>
     `;
   }
 
   async connectedCallback() {
     super.connectedCallback();
     if (this.config) this.exec();
-
     this.hostElement = await this.setHostElement();
 
     this.setHostEvent();
@@ -67,20 +63,24 @@ export class Popover extends ComponentBase<CXPopover.Props> {
   }
 
   private setOpenPopover = async () => {
-    this.setStatus('open');
-    const popoverContent = await this.getPopoverContent();
-    ModalSingleton.modalRef.openPopovre(popoverContent);
-    // refactor to popoverState
+    await this.setPopoverContentElement();
+
+    ModalSingleton.modalRef.openPopovre(
+      this.popoverContentElement!,
+      this.hostElement!.getBoundingClientRect(),
+      this.set.position!
+    );
   };
 
-  private setStatus(status: 'open' | 'closed') {
-    this.status = status;
+  private async setPopoverContentElement() {
+    this.popoverContentElement = await this.getPopoverContent();
   }
 
   private getPopoverContent(): Promise<HTMLElement> {
     return new Promise((resolve) => {
       requestAnimationFrame(() => {
-        resolve(this.popoverSlotRef.value?.assignedElements()[0] as HTMLElement);
+        const popoverContent = this.popoverSlotRef.value?.assignedElements()[0] as HTMLElement;
+        resolve(popoverContent);
       });
     });
   }
@@ -110,6 +110,8 @@ declare global {
 
     type Set<T extends ThemeVersion = 2> = {
       event?: 'click' | 'mouseover';
+      position?: PopoverPositionType;
+      arrowPoint?: boolean;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & {

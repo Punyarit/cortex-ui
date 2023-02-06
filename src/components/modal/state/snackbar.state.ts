@@ -1,5 +1,5 @@
 import { Ref } from 'lit/directives/ref';
-import { observeElement } from '../../../helpers/functions/observeElement/observeElement';
+import { observeElementManyTypes } from '../../../helpers/functions/observeElement/observeElement';
 import { SnackbarSingleton } from '../../snackbar/singleton/snackbar.singleton';
 import { SnackbarModalSlot } from '../../snackbar/types/snackbar.types';
 import { Modal } from '../modal';
@@ -30,7 +30,7 @@ export class SnackbarState {
   }
 
   private createSlotRef(target: HTMLSlotElement, callback?: () => void): void {
-    observeElement({
+    observeElementManyTypes({
       target,
       attributes: (mutation, observer) => {
         this.setComponentRef(mutation.target);

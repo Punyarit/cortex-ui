@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { GlobalDialogSingleton } from '../dialog/singleton/global-dialog.singleton';
+import { PopoverPositionType } from '../popover/types/popover.types';
 import { SnackbarModalSlot } from '../snackbar/types/snackbar.types';
 import { ModalSingleton } from './singleton/modal.singleton';
 import { DialogState } from './state/dialog.state';
@@ -144,8 +145,12 @@ export class Modal extends ComponentBase<CXModal.Props> {
     });
   };
 
-  public openPopovre = (popoverContent: HTMLElement) => {
-    this.popoverState.open(popoverContent);
+  public openPopovre = (
+    popoverContent: HTMLElement,
+    hostRect: DOMRect,
+    position: PopoverPositionType
+  ) => {
+    this.popoverState.open(popoverContent, hostRect, position);
   };
 }
 
