@@ -47,9 +47,12 @@ export class Snackbar extends ComponentBase<CXSnackbar.Props> {
     }
   `;
 
-  constructor() {
-    super();
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
+    super.connectedCallback();
+    this.createSharedCxSnackbarRef();
   }
 
   private transitionRef = createRef<CXTransition.Ref>();
@@ -66,11 +69,6 @@ export class Snackbar extends ComponentBase<CXSnackbar.Props> {
           </cx-transition>
         `
       : undefined;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.createSharedCxSnackbarRef();
   }
 
   private createSharedCxSnackbarRef() {

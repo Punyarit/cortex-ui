@@ -26,8 +26,9 @@ export class Icon extends ComponentBase<CXIcon.Props> {
     }
   `;
 
-  constructor() {
-    super();
+    connectedCallback() {
+    super.connectedCallback();
+    if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
   }
 

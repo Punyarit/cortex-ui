@@ -15,9 +15,12 @@ export class Theme extends ComponentBase<CXTheme.Props> {
     version: 2,
   };
 
-  constructor() {
-    super();
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
+    super.connectedCallback();
+    this.createSharedCxThemeRef();
   }
 
   private themeRef = createRef<HTMLSlotElement>();
@@ -26,11 +29,6 @@ export class Theme extends ComponentBase<CXTheme.Props> {
 
   render(): TemplateResult {
     return html`<${this.themeHTML} ${ref(this.themeRef)}><slot></slot></${this.themeHTML}>`;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.createSharedCxThemeRef();
   }
 
   createSharedCxThemeRef() {

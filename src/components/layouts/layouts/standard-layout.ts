@@ -11,8 +11,9 @@ export class StandardLayout extends ComponentBase<StandardLayout.Props> {
 
   static styles = css``;
 
-  constructor() {
-    super();
+    connectedCallback() {
+    super.connectedCallback();
+    if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
   }
 

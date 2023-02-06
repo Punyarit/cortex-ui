@@ -12,8 +12,9 @@ export class Sidebar extends ComponentBase<CXSidebar.Props> {
 
   static styles = css``;
 
-  constructor() {
-    super();
+    connectedCallback() {
+    super.connectedCallback();
+    if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
   }
 

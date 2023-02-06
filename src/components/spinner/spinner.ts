@@ -62,8 +62,9 @@ export class Spinner extends ComponentBase<CXSpinner.Props> {
     }
   `;
 
-  constructor() {
-    super();
+    connectedCallback() {
+    super.connectedCallback();
+    if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
   }
 

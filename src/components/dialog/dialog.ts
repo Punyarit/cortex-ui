@@ -39,8 +39,9 @@ export class Dialog extends ComponentBase<CXDialog.Props> {
     }
   `;
 
-  constructor() {
-    super();
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
   }
 

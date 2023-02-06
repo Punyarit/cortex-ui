@@ -79,9 +79,13 @@ export class Modal extends ComponentBase<CXModal.Props> {
     }
   `;
 
-  constructor() {
-    super();
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
+    super.connectedCallback();
+    this.createModalState();
+    this.createSharedCXModalRef();
   }
 
   render(): TemplateResult {
@@ -105,12 +109,6 @@ export class Modal extends ComponentBase<CXModal.Props> {
       </div>
       <slot></slot>
     `;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.createModalState();
-    this.createSharedCXModalRef();
   }
 
   private createModalState(): void {
