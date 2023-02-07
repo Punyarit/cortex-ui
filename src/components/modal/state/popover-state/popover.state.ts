@@ -9,7 +9,7 @@ export class PopoverState {
   public static POPOVER_SLOT_OPEN = 'popover';
 
   private hostRect!: DOMRect;
-  private position!: PopoverPositionType;
+  private positionType!: PopoverPositionType;
   private popoverContent!: HTMLElement;
   private popoverRoot!: Element;
   private resizeObserver!: ResizeObserver;
@@ -50,25 +50,25 @@ export class PopoverState {
   private setProperties(
     popoverContent: HTMLElement,
     hostRect: DOMRect,
-    position: PopoverPositionType,
+    positionType: PopoverPositionType,
     popoverRoot: Element
   ) {
     this.popoverContent = popoverContent;
     this.hostRect = hostRect;
-    this.position = position;
+    this.positionType = positionType;
     this.popoverRoot = popoverRoot;
   }
 
-  public async setPosition(resizeEntry: ResizeObserverEntry) {
-    const position = await new PopoverPosition(
-      this.position,
+  public async setPosition(resizeEntry: ResizeObserverEntry): Promise<void> {
+    const translateValue = await new PopoverPosition(
+      this.positionType,
       this.hostRect,
       this.popoverContent,
       resizeEntry
     ).getResult();
 
-    console.log('popover.state |position|', position);
-    this.popoverContent.style.translate = position!;
+    if (this.popoverContent.style.translate === translateValue) return;
+    this.popoverContent.style.translate = translateValue!;
   }
 
   private setFocusOutEventListener() {

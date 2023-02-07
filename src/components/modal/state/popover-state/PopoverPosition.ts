@@ -7,7 +7,7 @@ export class PopoverPosition {
   private popoverRect?: DOMRect;
 
   constructor(
-    private position: PopoverPositionType,
+    private positionType: PopoverPositionType,
     private hostRect: DOMRect,
     private popoverContent: HTMLElement,
     private resizeEntry: ResizeObserverEntry
@@ -34,14 +34,14 @@ export class PopoverPosition {
     // 📌true = position of popover is over the screen
     if (position !== positionChecked || side !== sideChecked) {
       // 📌reversed position
-      this.position = `${positionChecked}-${sideChecked}` as PopoverPositionType;
+      this.positionType = `${positionChecked}-${sideChecked}` as PopoverPositionType;
       return this.getPosition().translate;
     }
     return positionResult.translate;
   }
 
   private speretePosition() {
-    return this.position.split('-') as [
+    return this.positionType.split('-') as [
       keyof typeof positionReverseOverScreen,
       typeof sidePopoverAppear[number]
     ];
@@ -113,7 +113,7 @@ export class PopoverPosition {
 
     const { width: popoverWidth, height: popoverHeight } = this.popoverRect!;
 
-    switch (this.position) {
+    switch (this.positionType) {
       default:
       case 'bottom-left':
         return format({ x: hostLeft, y: hostBottom });
