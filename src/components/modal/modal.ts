@@ -7,7 +7,7 @@ import { PopoverPositionType } from '../popover/types/popover.types';
 import { SnackbarModalSlot } from '../snackbar/types/snackbar.types';
 import { ModalSingleton } from './singleton/modal.singleton';
 import { DialogState } from './state/dialog.state';
-import { PopoverState } from './state/popover.state';
+import { PopoverState } from './state/popover-state/popover.state';
 import { SnackbarState } from './state/snackbar.state';
 
 export const tagName = 'cx-modal';
