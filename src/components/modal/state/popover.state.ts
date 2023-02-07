@@ -150,21 +150,70 @@ class PopoverPosition {
       keyof typeof positionReverseOverScreen,
       typeof sidePopoverAppear[number]
     ];
-    let isOverScreen: boolean = false;
-    if (position === 'right') {
-      isOverScreen = this.popoverRect!.width + positionResult.x > resizeEntry!.contentRect.width;
-    } else if (position === 'left') {
-      isOverScreen = positionResult.x < 0;
-    } else if (position === 'bottom') {
-      isOverScreen = this.popoverRect!.height + positionResult.y > resizeEntry!.contentRect.height;
-    } else if (position === 'top') {
-      isOverScreen = positionResult.y < 0;
+    let checkedPosition = position;
+    let checkedSide = side;
+
+    if (
+      position === 'right' &&
+      this.popoverRect!.width + positionResult.x > resizeEntry!.contentRect.width
+    ) {
+      checkedPosition = 'left';
+    } else if (position === 'left' && positionResult.x < 0) {
+      checkedPosition = 'right';
+    } else if (
+      position === 'bottom' &&
+      this.popoverRect!.height + positionResult.y > resizeEntry!.contentRect.height
+    ) {
+      checkedPosition = 'top';
+    } else if (position === 'top' && positionResult.y < 0) {
+      checkedPosition = 'bottom';
     }
 
-    // 📌true = over screen
-    if (isOverScreen) {
+    console.log('popover.state | this.popoverRect|', this.popoverRect);
+    console.log('popover.state |positionResult|', positionResult);
+    console.log('popover.state |resizeEntry!.contentRect|', resizeEntry!.contentRect);
+    if (side === 'right' && positionResult.x < 0) {
+      checkedSide = 'left';
+    } else if (
+      side === 'left' &&
+      positionResult.x + this.popoverRect!.width > resizeEntry!.contentRect.width
+    ) {
+      checkedSide = 'right';
+    } else if (side === 'bottom' && positionResult.y < 0) {
+      checkedSide = 'top';
+    } else if (
+      side === 'top' &&
+      positionResult.y + this.popoverRect!.height > resizeEntry!.contentRect.width
+    ) {
+      checkedSide = 'bottom';
+    } else if (side === 'center') {
+      if (
+        (position === 'left' || position === 'right') &&
+        positionResult.y + this.popoverRect!.height > resizeEntry!.contentRect.height
+      ) {
+        checkedSide = 'bottom';
+      }
+
+      if ((position === 'left' || position === 'right') && positionResult.y < 0) {
+        checkedSide = 'top';
+      }
+
+      if ((position === 'top' || position === 'bottom') && positionResult.x < 0) {
+        checkedSide = 'left';
+      }
+
+      if (
+        (position === 'top' || position === 'bottom') &&
+        positionResult.x + this.popoverRect!.width > resizeEntry!.contentRect.width
+      ) {
+        checkedSide = 'right';
+      }
+    }
+
+    // 📌true = position of popover is over the screen
+    if (position !== checkedPosition || side !== checkedSide) {
       // 📌reverse position
-      this.position = `${positionReverseOverScreen[position]}-${side}` as PopoverPositionType;
+      this.position = `${checkedPosition}-${checkedSide}` as PopoverPositionType;
       return this.getPosition().translate;
     }
     return positionResult.translate;
