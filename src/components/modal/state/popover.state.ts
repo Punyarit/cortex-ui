@@ -1,8 +1,41 @@
 import { observeElement } from '../../../helpers/functions/observeElement/observeElement';
 import { PopoverPositionType } from '../../popover/types/popover.types';
 import { Modal } from '../modal';
+import { resizeEntry, resizeObserver } from '../../../observer/resize.observer';
 import { ModalSingleton } from '../singleton/modal.singleton';
 
+const positionReverseOverScreen = {
+  top: 'bottom',
+  bottom: 'top',
+  left: 'right',
+  right: 'left',
+} as const;
+
+function checkPositionType(
+  position: PopoverPositionType
+): (resizeEntry: ResizeObserverEntry) => number {
+  const [positionType] = position.split('-') as Array<keyof typeof positionReverseOverScreen>;
+  return (resizeValue: ResizeObserverEntry) => {
+    console.log('popover.state.js |positionType| = ', positionType);
+    console.log('popover.state.js |resizeValue| = ', resizeValue);
+    return 0;
+  };
+}
+
+function checkReverseOverScreen(position: PopoverPositionType) {
+  const checkOverScreen = checkPositionType(position);
+  return (e: ResizeObserverEntry) => checkOverScreen(e);
+}
+
+function calc({ x, y }: { x: number; y: number }) {
+  const xValue = Math.abs(Math.floor(x));
+  const yValue = Math.abs(Math.floor(y));
+  return {
+    x: xValue,
+    y: yValue,
+    translate: `${xValue}px ${yValue}px`,
+  };
+}
 export class PopoverState {
   public static POPOVER_SLOT_DISABLED = 'popover-disabled';
   public static POPOVER_SLOT_OPEN = 'popover';
@@ -19,6 +52,7 @@ export class PopoverState {
     popoverRoot: Element
   ): Promise<void> {
     this.setProperties(popoverContent, hostRect, position, popoverRoot);
+    this.setResizeEvent();
     this.setOpacity('0');
     this.setContentInlineBlock();
     this.setPosition();
@@ -28,6 +62,13 @@ export class PopoverState {
       this.setOpacity('1');
     });
   }
+
+  private setResizeEvent() {
+    resizeObserver.observe(document.body);
+  }
+  private removeResizeEvent = () => {
+    resizeObserver.unobserve(document.body);
+  };
 
   private setPopoverAppear() {
     ModalSingleton.popoverSlotRef.name = PopoverState.POPOVER_SLOT_OPEN;
@@ -48,7 +89,7 @@ export class PopoverState {
   }
 
   private async setPosition() {
-    let position = await new PopoverPosition(
+    const position = await new PopoverPosition(
       this.position,
       this.hostRect,
       this.popoverContent
@@ -74,6 +115,7 @@ export class PopoverState {
   }
 
   private closePopover() {
+    this.removeResizeEvent();
     this.appendBackToParentRoot();
   }
 
@@ -90,10 +132,6 @@ export class PopoverState {
   }
 }
 
-function calc(num: number) {
-  return Math.abs(Math.floor(num));
-}
-
 class PopoverPosition {
   private popoverRect?: DOMRect;
   private positionUsedPopoverRect = new Set([
@@ -104,6 +142,7 @@ class PopoverPosition {
     'left-top',
     'left-center',
   ]);
+
   constructor(
     private position: PopoverPositionType,
     private hostRect: DOMRect,
@@ -131,104 +170,73 @@ class PopoverPosition {
     switch (this.position) {
       default:
       case 'bottom-left':
-        return this.buttomLeft();
+        return calc({ x: this.hostRect.left, y: this.hostRect.bottom }).translate;
 
       case 'bottom-center':
-        return this.buttonCenter();
+        return calc({
+          x: this.hostRect.width / 2 + this.hostRect.left - this.popoverRect!.width / 2,
+          y: this.hostRect.bottom,
+        }).translate;
 
       case 'bottom-right':
-        return this.buttomRight();
+        return calc({
+          x: this.hostRect.right - this.popoverRect!.width,
+          y: this.hostRect.bottom,
+        }).translate;
 
       case 'top-left':
-        return this.topLeft();
+        return calc({
+          x: this.hostRect.left,
+          y: this.hostRect.top - this.popoverRect!.height,
+        }).translate;
 
       case 'top-center':
-        return this.topCenter();
+        return calc({
+          x: this.hostRect.width / 2 + this.hostRect.left - this.popoverRect!.width / 2,
+          y: this.hostRect.top - this.popoverRect!.height,
+        }).translate;
 
       case 'top-right':
-        return this.topRight();
+        return calc({
+          x: this.hostRect.right - this.popoverRect!.width,
+          y: this.hostRect.top - this.popoverRect!.height,
+        }).translate;
 
       case 'left-top':
-        return this.leftTop();
+        return calc({
+          x: this.hostRect.left - this.popoverRect!.width,
+          y: this.hostRect.top,
+        }).translate;
 
       case 'left-center':
-        return this.leftCenter();
+        return calc({
+          x: this.hostRect.left - this.popoverRect!.width,
+          y: this.hostRect.top + this.hostRect.height / 2 - this.popoverRect!.height / 2,
+        }).translate;
 
       case 'left-bottom':
-        return this.leftBottom();
+        return calc({
+          x: this.hostRect.left - this.popoverRect!.width,
+          y: this.popoverRect!.height - this.hostRect.bottom,
+        }).translate;
 
       case 'right-top':
-        return this.rightTop();
+        return calc({
+          x: this.hostRect.right,
+          y: this.hostRect.top,
+        }).translate;
 
       case 'right-center':
-        return this.rightcenter();
+        return calc({
+          x: this.hostRect.right,
+          y: this.hostRect.top + this.hostRect.height / 2 - this.popoverRect!.height / 2,
+        }).translate;
 
       case 'right-bottom':
-        return this.rightBottom();
+        return calc({
+          x: this.hostRect.right,
+          y: this.popoverRect!.height - this.hostRect.bottom,
+        }).translate;
     }
-  }
-
-  private buttomLeft() {
-    return `${calc(this.hostRect.left)}px ${calc(this.hostRect.bottom)}px`;
-  }
-
-  private buttonCenter() {
-    return `${calc(
-      this.hostRect.width / 2 + this.hostRect.left - this.popoverRect!.width / 2
-    )}px ${calc(this.hostRect.bottom)}px`;
-  }
-
-  private buttomRight() {
-    return `${calc(this.hostRect.right - this.popoverRect!.width)}px ${calc(
-      this.hostRect.bottom
-    )}px`;
-  }
-
-  private topLeft() {
-    return `${calc(this.hostRect.left)}px ${calc(this.hostRect.top - this.popoverRect!.height)}px`;
-  }
-
-  private topCenter() {
-    return `${calc(
-      this.hostRect.width / 2 + this.hostRect.left - this.popoverRect!.width / 2
-    )}px ${calc(this.hostRect.top - this.popoverRect!.height)}px`;
-  }
-
-  private topRight() {
-    return `${calc(this.hostRect.right - this.popoverRect!.width)}px ${calc(
-      this.hostRect.top - this.popoverRect!.height
-    )}px`;
-  }
-
-  private leftTop() {
-    return `${calc(this.hostRect.left - this.popoverRect!.width)}px ${calc(this.hostRect.top)}px`;
-  }
-
-  private leftCenter() {
-    return `${calc(this.hostRect.left - this.popoverRect!.width)}px ${calc(
-      this.hostRect.top + this.hostRect.height / 2 - this.popoverRect!.height / 2
-    )}px`;
-  }
-
-  private leftBottom() {
-    return `${calc(this.hostRect.left - this.popoverRect!.width)}px ${calc(
-      this.popoverRect!.height - this.hostRect.bottom
-    )}px`;
-  }
-
-  private rightTop() {
-    return `${calc(this.hostRect.right)}px ${calc(this.hostRect.top)}px`;
-  }
-
-  private rightcenter() {
-    return `${calc(this.hostRect.right)}px ${calc(
-      this.hostRect.top + this.hostRect.height / 2 - this.popoverRect!.height / 2
-    )}px`;
-  }
-
-  private rightBottom() {
-    return `${calc(this.hostRect.right)}px ${calc(
-      this.popoverRect!.height - this.hostRect.bottom
-    )}px`;
   }
 }
