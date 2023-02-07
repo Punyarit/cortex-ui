@@ -1,6 +1,6 @@
 import { PopoverPositionType } from '../../../popover/types/popover.types';
 import { Modal } from '../../modal';
-import { resizeObserver } from '../../../../observer/resize.observer';
+import { resizeObserver } from '../../obsrevers/resize.observer';
 import { ModalSingleton } from '../../singleton/modal.singleton';
 import { PopoverPosition } from './PopoverPosition';
 
@@ -12,6 +12,7 @@ export class PopoverState {
   private position!: PopoverPositionType;
   private popoverContent!: HTMLElement;
   private popoverRoot!: Element;
+  private resizeObserver!: ResizeObserver;
 
   async open(
     popoverContent: HTMLElement,
@@ -23,7 +24,6 @@ export class PopoverState {
     this.setResizeEvent();
     this.setOpacity('0');
     this.setContentInlineBlock();
-    this.setPosition();
     this.setFocusOutEventListener();
     this.setPopoverAppear();
     requestAnimationFrame(() => {
@@ -32,10 +32,13 @@ export class PopoverState {
   }
 
   private setResizeEvent() {
-    resizeObserver.observe(document.body);
+    this.resizeObserver = resizeObserver(document.body, (resizeEntry: ResizeObserverEntry) => {
+      this.setPosition(resizeEntry);
+    });
   }
+
   private removeResizeEvent = () => {
-    resizeObserver.unobserve(document.body);
+    this.resizeObserver.unobserve(document.body);
   };
 
   private setPopoverAppear() {
@@ -56,13 +59,15 @@ export class PopoverState {
     this.popoverRoot = popoverRoot;
   }
 
-  private async setPosition() {
+  public async setPosition(resizeEntry: ResizeObserverEntry) {
     const position = await new PopoverPosition(
       this.position,
       this.hostRect,
-      this.popoverContent
+      this.popoverContent,
+      resizeEntry
     ).getResult();
 
+    console.log('popover.state |position|', position);
     this.popoverContent.style.translate = position!;
   }
 

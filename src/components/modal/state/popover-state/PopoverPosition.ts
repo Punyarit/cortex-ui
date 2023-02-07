@@ -1,4 +1,3 @@
-import { resizeEntry } from '../../../../observer/resize.observer';
 import { PopoverPositionType } from '../../../popover/types/popover.types';
 import { format } from './format';
 import { positionReverseOverScreen } from './positionReverseOverScreen';
@@ -10,7 +9,8 @@ export class PopoverPosition {
   constructor(
     private position: PopoverPositionType,
     private hostRect: DOMRect,
-    private popoverContent: HTMLElement
+    private popoverContent: HTMLElement,
+    private resizeEntry: ResizeObserverEntry
   ) {}
 
   private getPopoverRect(): Promise<DOMRect> {
@@ -52,7 +52,7 @@ export class PopoverPosition {
     side: typeof sidePopoverAppear[number],
     positionResult: ReturnType<typeof format>
   ) {
-    const { height, width } = resizeEntry!.contentRect;
+    const { height, width } = this.resizeEntry!.contentRect;
     const { x, y } = positionResult;
     const { height: popoverHeight, width: popoverWidth } = this.popoverRect!;
 
@@ -79,7 +79,7 @@ export class PopoverPosition {
     position: keyof typeof positionReverseOverScreen,
     positionResult: ReturnType<typeof format>
   ) {
-    const { height, width } = resizeEntry!.contentRect;
+    const { height, width } = this.resizeEntry!.contentRect;
     const { x, y } = positionResult;
     const { width: popoverWidth, height: popoverHeight } = this.popoverRect!;
     let checkedPosition = position;
