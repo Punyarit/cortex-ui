@@ -22,6 +22,7 @@ export class Popover extends ComponentBase<CXPopover.Props> {
     event: 'click',
     position: 'bottom-center',
     arrowPoint: false,
+    mouseleave: 'none',
   };
 
   static styles = css`
@@ -64,11 +65,12 @@ export class Popover extends ComponentBase<CXPopover.Props> {
 
   private setOpenPopover = async () => {
     await this.setPopoverContentElement();
+    if (!this.popoverContentElement) return;
     ModalSingleton.modalRef.openPopovre(
       this.popoverContentElement!,
       this.hostElement!.getBoundingClientRect(),
-      this.set.position!,
-      this.shadowRoot!.host
+      this.set,
+      this.shadowRoot!.host as HTMLElement
     );
   };
 
@@ -83,21 +85,6 @@ export class Popover extends ComponentBase<CXPopover.Props> {
       });
     });
   }
-
-  updated() {
-    // ModalSingleton.ref?.append(this);
-  }
-  // Method
-  // public log(config: { text: string }): void {
-  //   console.log('log: ', config.text);
-  // }
-
-  // Event
-  // private pressed(): void {
-  //   this.setCustomEvent<CXPopover.Details[typeof onPressed]>(onPressed, {
-  //     event: onPressed,
-  //   });
-  // }
 }
 
 declare global {
@@ -111,6 +98,7 @@ declare global {
       event?: 'click' | 'mouseover';
       position?: PopoverPositionType;
       arrowPoint?: boolean;
+      mouseleave: 'none' | 'close';
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & {

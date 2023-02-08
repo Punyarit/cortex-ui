@@ -1,3 +1,4 @@
+import { debounce } from '../../../../helpers/debounceTimer';
 import { PopoverPositionType } from '../../../popover/types/popover.types';
 import { Modal } from '../../modal';
 import { resizeObserver } from '../../obsrevers/resize.observer';
@@ -11,21 +12,24 @@ export class PopoverState {
   private hostRect!: DOMRect;
   private positionType!: PopoverPositionType;
   private popoverContent!: HTMLElement;
-  private popoverRoot!: Element;
+  private popoverHost!: HTMLElement;
   private resizeObserver!: ResizeObserver;
+  private popoverSet!: CXPopover.Set;
+  #firstUpdated = true;
 
   async open(
     popoverContent: HTMLElement,
     hostRect: DOMRect,
-    position: PopoverPositionType,
-    popoverRoot: Element
+    popoverSet: CXPopover.Set,
+    popoverHost: HTMLElement
   ): Promise<void> {
-    this.setProperties(popoverContent, hostRect, position, popoverRoot);
+    this.setProperties(popoverContent, hostRect, popoverSet, popoverHost);
     this.setResizeEvent();
     this.setOpacity('0');
     this.setContentInlineBlock();
     this.setFocusOutEventListener();
     this.setPopoverAppear();
+    this.setMouseleaveEvent();
     requestAnimationFrame(() => {
       this.setOpacity('1');
     });
@@ -33,11 +37,16 @@ export class PopoverState {
 
   private setResizeEvent() {
     this.resizeObserver = resizeObserver(document.body, (resizeEntry: ResizeObserverEntry) => {
-      this.setPosition(resizeEntry);
+      if (this.#firstUpdated) {
+        this.setPosition(resizeEntry);
+        this.setFirstUpdatd(false);
+      } else {
+        debounce(() => this.setPosition(resizeEntry), 200);
+      }
     });
   }
 
-  private removeResizeEvent = () => {
+  private unObserveResizeEvent = () => {
     this.resizeObserver.unobserve(document.body);
   };
 
@@ -47,16 +56,23 @@ export class PopoverState {
     ModalSingleton.modalRef.append(this.popoverContent);
   }
 
+  private setMouseleaveEvent() {
+    if (this.popoverSet.mouseleave === 'none') return;
+    this.popoverContent.onmouseleave = this.closePopover;
+    this.popoverHost.onmouseleave = this.closePopover;
+  }
+
   private setProperties(
     popoverContent: HTMLElement,
     hostRect: DOMRect,
-    positionType: PopoverPositionType,
-    popoverRoot: Element
+    popoverSet: CXPopover.Set,
+    popoverHost: HTMLElement
   ) {
     this.popoverContent = popoverContent;
     this.hostRect = hostRect;
-    this.positionType = positionType;
-    this.popoverRoot = popoverRoot;
+    this.positionType = popoverSet.position!;
+    this.popoverSet = popoverSet;
+    this.popoverHost = popoverHost;
   }
 
   public async setPosition(resizeEntry: ResizeObserverEntry): Promise<void> {
@@ -73,23 +89,28 @@ export class PopoverState {
 
   private setFocusOutEventListener() {
     this.popoverContent.tabIndex = 0;
-    this.popoverContent.addEventListener('focusout', (e) => {
-      const isInsidePopover = e.relatedTarget as HTMLElement;
-      if (isInsidePopover?.closest('div[slot="popover"]')) return;
-      this.closePopover();
-    });
+    this.popoverContent.addEventListener('focusout', this.closePopover);
+
     requestAnimationFrame(() => {
       this.popoverContent.focus();
     });
   }
 
-  private closePopover() {
-    this.removeResizeEvent();
-    this.appendBackToParentRoot();
+  private setFirstUpdatd(update: boolean) {
+    this.#firstUpdated = update;
   }
 
+  private closePopover = (e: MouseEvent | FocusEvent) => {
+    if ((e.relatedTarget as HTMLElement)?.closest('div[slot="popover"]')) return;
+    this.setFirstUpdatd(true);
+    this.unObserveResizeEvent();
+    this.appendBackToParentRoot();
+  };
+
   private appendBackToParentRoot() {
-    this.popoverRoot.append(this.popoverContent);
+    requestAnimationFrame(() => {
+      this.popoverHost.append(this.popoverContent);
+    });
   }
 
   private setContentInlineBlock() {

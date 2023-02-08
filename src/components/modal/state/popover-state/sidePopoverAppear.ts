@@ -1,1 +1,3 @@
-export const sidePopoverAppear = ['center', 'left', 'right', 'top', 'bottom'] as const;
+export const sidePopover = ['center', 'left', 'right', 'top', 'bottom'] as const;
+
+export type SidePopoverType = typeof sidePopover[number];

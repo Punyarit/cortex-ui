@@ -1,6 +1,8 @@
-export const positionReverseOverScreen = {
+export const positionReversed = {
   top: 'bottom',
   bottom: 'top',
   left: 'right',
   right: 'left',
 } as const;
+
+export type PositionReversedType = keyof typeof positionReversed;

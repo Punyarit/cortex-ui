@@ -1,12 +1,12 @@
 /**
  * @Usage
- * @CxPerformance.start();
+ * @PerformanceTester.start();
  * doSomething()
- * CxPerformance.end()
- * CxPerformance.measure()
+ * PerformanceTester.end()
+ * PerformanceTester.measure()
  */
 
-export class CxPerformance {
+export class PerformanceTester {
   static observer = new PerformanceObserver((list) => {
     for (const entry of list.getEntriesByType('measure')) {
       if (entry.name === 'taskDuration') {
@@ -16,7 +16,7 @@ export class CxPerformance {
   });
 
   static start() {
-    CxPerformance.observer.observe({ entryTypes: ['measure'] });
+    PerformanceTester.observer.observe({ entryTypes: ['measure'] });
     performance.mark('startTask');
   }
 
