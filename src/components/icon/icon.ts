@@ -2,12 +2,12 @@ import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { IconDirector } from './builder/icon.builder';
+import { CxIconName } from './types/icon.name'
 import { IconSizeTypes, IconSrcTypes } from './types/icon.types';
 
-export const tagName = 'cx-icon';
 // export const onPressed = 'pressed';
 
-@customElement(tagName)
+@customElement(CxIconName)
 export class Icon extends ComponentBase<CXIcon.Props> {
   config: CXIcon.Props['set'] = {
     src: 'favorite',
@@ -26,7 +26,7 @@ export class Icon extends ComponentBase<CXIcon.Props> {
     }
   `;
 
-    connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
     if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
@@ -79,7 +79,7 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXIcon.Ref;
+    [CxIconName]: CXIcon.Ref;
   }
 
   // interface GlobalEventHandlersEventMap {

@@ -2,11 +2,11 @@ import {css, html, TemplateResult} from 'lit';
 import {customElement} from 'lit/decorators.js';
 import {ComponentBase} from '../../base/component-base/component.base';
 import {ProgressDirector} from './builder/progress.builder';
+import { CxProgressName } from './types/progress.name'
 import {ColorKeyTypes, SizeKeyTypes} from './types/progress.types';
 
-export const tagName = 'cx-progress';
 
-@customElement(tagName)
+@customElement(CxProgressName)
 export class Progress extends ComponentBase<CXProgress.Props> {
   config: CXProgress.Set = {
     color: 'primary',
@@ -148,7 +148,7 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXProgress.Ref;
+    [CxProgressName]: CXProgress.Ref;
   }
 
   // interface GlobalEventHandlersEventMap {

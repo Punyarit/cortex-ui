@@ -3,12 +3,12 @@ import { customElement, state } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { TransitionBuilder } from './builder/transition.builder';
+import { CxTransitionName } from './types/transition.name'
 import { TransitionAttributes, WhenTypes } from './types/transition.types';
 
-export const tagName = 'cx-transition';
 // export const onPressed = 'pressed';
 
-@customElement(tagName)
+@customElement(CxTransitionName)
 export class Transition extends ComponentBase<CXTransition.Props> {
   config: CXTransition.Set = {
     start: {
@@ -207,7 +207,7 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXTransition.Ref;
+    [CxTransitionName]: CXTransition.Ref;
   }
 
   // interface GlobalEventHandlersEventMap {

@@ -7,12 +7,12 @@ import { IconSrcTypes } from '../icon/types/icon.types';
 import '../transition/transition';
 import { WhenTypes } from '../transition/types/transition.types';
 import { SnackbarSingleton } from './singleton/snackbar.singleton';
+import { CxSnackbarName } from './types/snackbar.name';
 import { snackbarDurationDefault, snackbarModalSlot } from './types/snackbar.types';
 
-export const tagName = 'cx-snackbar';
 // export const onPressed = 'pressed';
 
-@customElement(tagName)
+@customElement(CxSnackbarName)
 export class Snackbar extends ComponentBase<CXSnackbar.Props> {
   config: CXSnackbar.Set = {
     text: 'The snackbar has been opened.',
@@ -141,7 +141,7 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXSnackbar.Ref;
+    [CxSnackbarName]: CXSnackbar.Ref;
   }
 
   // interface GlobalEventHandlersEventMap {

@@ -3,16 +3,15 @@ import { customElement } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { GlobalDialogSingleton } from '../dialog/singleton/global-dialog.singleton';
-import { PopoverPositionType } from '../popover/types/popover.types';
 import { SnackbarModalSlot } from '../snackbar/types/snackbar.types';
 import { ModalSingleton } from './singleton/modal.singleton';
 import { DialogState } from './state/dialog.state';
 import { PopoverState } from './state/popover-state/popover.state';
 import { SnackbarState } from './state/snackbar.state';
+import { CxModalName } from './types/modal.name'
 
-export const tagName = 'cx-modal';
 // export const onPressed = 'pressed';
-@customElement(tagName)
+@customElement(CxModalName)
 export class Modal extends ComponentBase<CXModal.Props> {
   config: CXModal.Set = {
     disabledBackdrop: false,
@@ -178,6 +177,6 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXModal.Ref;
+    [CxModalName]: CXModal.Ref;
   }
 }

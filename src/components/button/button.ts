@@ -15,11 +15,10 @@ import { IconSrcTypes } from '../icon/types/icon.types';
 import '../spinner/spinner';
 import { ThemeVersion } from '../theme/types/theme.types';
 import ButtonFactory from './factory/factories/button.factory';
+import { CxButtonPressed } from './types/button.types';
+import { CxbuttonName } from './types/button.name';
 
-export const tagName = 'cx-button';
-export const onPressed = 'pressed';
-
-@customElement(tagName)
+@customElement(CxbuttonName)
 export class Button extends ComponentBase<CXButton.Props> {
   config: CXButton.Props['set'] = {
     disabled: false,
@@ -224,8 +223,8 @@ export class Button extends ComponentBase<CXButton.Props> {
   // Events
   private pressed(): void {
     // test
-    this.setCustomEvent<CXButton.Details[typeof onPressed]>(onPressed, {
-      event: onPressed,
+    this.setCustomEvent<CXButton.Details[typeof CxButtonPressed]>(CxButtonPressed, {
+      event: CxButtonPressed,
     });
   }
 }
@@ -284,17 +283,17 @@ declare global {
     };
 
     type Details = {
-      [onPressed]: { event: string };
+      [CxButtonPressed]: { event: string };
     };
 
     type Events = {
-      [onPressed]: (detail: Pressed) => void;
+      [CxButtonPressed]: (detail: Pressed) => void;
     };
 
-    type Pressed = CustomEvent<Details[typeof onPressed]>;
+    type Pressed = CustomEvent<Details[typeof CxButtonPressed]>;
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXButton.Ref;
+    [CxbuttonName]: CXButton.Ref;
   }
 }

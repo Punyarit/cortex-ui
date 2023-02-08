@@ -6,11 +6,10 @@ import { ModalSingleton } from '../modal/singleton/modal.singleton';
 import { DialogState } from '../modal/state/dialog.state';
 import '../transition/transition';
 import { TransitionDefaultFadeTypes, WhenTypes } from '../transition/types/transition.types';
+import { CxDialogName } from './types/dialog.name'
+import { CxDialogAfterClosed } from './types/dialog.types'
 
-export const tagName = 'cx-dialog';
-export const onAfterClosed = 'afterClosed';
-
-@customElement(tagName)
+@customElement(CxDialogName)
 export class Dialog extends ComponentBase<CXDialog.Props> {
   config: CXDialog.Set = {
     disabledBackdrop: false,
@@ -89,8 +88,8 @@ export class Dialog extends ComponentBase<CXDialog.Props> {
   }
 
   public afterClosed(): void {
-    this.setCustomEvent<CXDialog.Details[typeof onAfterClosed]>(onAfterClosed, {
-      event: onAfterClosed,
+    this.setCustomEvent<CXDialog.Details[typeof CxDialogAfterClosed]>(CxDialogAfterClosed, {
+      event: CxDialogAfterClosed,
     });
   }
 }
@@ -108,7 +107,7 @@ declare global {
     };
 
     type Details = {
-      [onAfterClosed]: { event: string };
+      [CxDialogAfterClosed]: { event: string };
     };
 
     type Fix = {
@@ -122,19 +121,19 @@ declare global {
     };
 
     type Events = {
-      [onAfterClosed]: (detail: AfterClosed) => void;
+      [CxDialogAfterClosed]: (detail: AfterClosed) => void;
     };
 
-    type AfterClosed = CustomEvent<Details[typeof onAfterClosed]>;
+    type AfterClosed = CustomEvent<Details[typeof CxDialogAfterClosed]>;
   }
 
   namespace JSX {
     interface IntrinsicElements {
-      [tagName]: CXDialog.Ref;
+      [CxDialogName]: CXDialog.Ref;
     }
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXDialog.Ref;
+    [CxDialogName]: CXDialog.Ref;
   }
 }

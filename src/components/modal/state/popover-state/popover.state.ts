@@ -101,7 +101,7 @@ export class PopoverState {
   }
 
   private closePopover = (e: MouseEvent | FocusEvent) => {
-    if ((e.relatedTarget as HTMLElement)?.closest('div[slot="popover"]')) return;
+    if ((e.relatedTarget as HTMLElement)?.closest('c-box[slot="popover"]')) return;
     this.setFirstUpdatd(true);
     this.unObserveResizeEvent();
     this.appendBackToParentRoot();

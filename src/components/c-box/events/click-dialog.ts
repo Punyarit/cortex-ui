@@ -1,12 +1,12 @@
 // import {useCxDialog} from '../../../helpers/useCxDialog';
-import {EventStrategy} from '../types/event-straegy';
+import { EventStrategy } from '../types/event-straegy';
 
 export class ClickDialog implements EventStrategy {
   public events: (keyof HTMLElementEventMap)[] = ['click'];
-  private valuesArray: CXBox.ClickDialog;
+  private valuesArray: any;
 
   constructor(public CxBox: HTMLElement, public values: string) {
-    this.valuesArray = values.split(',') as CXBox.ClickDialog;
+    this.valuesArray = values.split(',') as any;
     CxBox.addEventListener('click', this.click);
   }
 

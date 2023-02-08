@@ -4,10 +4,10 @@ import { createRef, ref } from 'lit/directives/ref.js';
 import { html, StaticValue, unsafeStatic } from 'lit/static-html.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { ThemeSingleton } from './singleton/theme.singleton';
+import { CxThemeName } from './types/theme.name'
 import { ThemeColorTypes, ThemeSizeTypes, ThemeVersion } from './types/theme.types';
 
-export const tagName = 'cx-theme';
-@customElement(tagName)
+@customElement(CxThemeName)
 export class Theme extends ComponentBase<CXTheme.Props> {
   config: CXTheme.Set = {
     color: 'light',
@@ -94,6 +94,6 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXTheme.Ref;
+    [CxThemeName]: CXTheme.Ref;
   }
 }

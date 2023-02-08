@@ -5,23 +5,15 @@ import { ModalSingleton } from '../modal/singleton/modal.singleton';
 import { ThemeVersion } from '../theme/types/theme.types';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { PopoverPositionType } from './types/popover.types';
+import { REQUIRED_CBOX_CHILD_POPOVER_ERROR } from './errors/popover.errors';
+import { CxPopoverName } from './types/popover.name'
 
-export const tagName = 'cx-popover';
-// export const onPressed = 'pressed';
 
-/**
- * use case
- * position
- * left | top | buttom | right
- *
- */
-
-@customElement(tagName)
+@customElement(CxPopoverName)
 export class Popover extends ComponentBase<CXPopover.Props> {
   config: CXPopover.Set = {
-    event: 'click',
+    openby: 'click',
     position: 'bottom-center',
-    arrowPoint: false,
     mouseleave: 'none',
   };
 
@@ -60,7 +52,7 @@ export class Popover extends ComponentBase<CXPopover.Props> {
   }
 
   private setHostEvent() {
-    this.hostElement?.addEventListener(this.set.event!, this.setOpenPopover);
+    this.hostElement?.addEventListener(this.set.openby!, this.setOpenPopover);
   }
 
   private setOpenPopover = async () => {
@@ -79,13 +71,14 @@ export class Popover extends ComponentBase<CXPopover.Props> {
   }
 
   private getPopoverContent(): Promise<HTMLElement> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       requestAnimationFrame(() => {
-        resolve(this.popoverSlotRef.value?.assignedElements()[0] as HTMLElement);
+        const cBox = this.popoverSlotRef.value?.assignedElements()[0] as HTMLElement;
+        cBox.tagName === 'C-BOX' ? resolve(cBox) : reject(REQUIRED_CBOX_CHILD_POPOVER_ERROR);
       });
     });
   }
-}
+}  
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -95,9 +88,8 @@ declare global {
     type Var<T extends ThemeVersion = 2> = unknown;
 
     type Set<T extends ThemeVersion = 2> = {
-      event?: 'click' | 'mouseover';
+      openby?: 'click' | 'mouseover';
       position?: PopoverPositionType;
-      arrowPoint?: boolean;
       mouseleave: 'none' | 'close';
     };
 
@@ -123,7 +115,7 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXPopover.Ref;
+    [CxPopoverName]: CXPopover.Ref;
   }
 
   // namespace JSX {
