@@ -89,8 +89,9 @@ export class PopoverState {
 
   private setFocusOutEventListener() {
     this.popoverContent.tabIndex = 0;
-    this.popoverContent.addEventListener('focusout', this.closePopover);
-
+    if (this.popoverSet.focusout === 'close') {
+      this.popoverContent.addEventListener('focusout', this.closePopover);
+    }
     requestAnimationFrame(() => {
       this.popoverContent.focus();
     });
@@ -114,7 +115,12 @@ export class PopoverState {
   }
 
   private setContentInlineBlock() {
-    this.popoverContent.style.display = 'inline-block';
+    const [position] = this.popoverSet.position!.split('-');
+    if (position === 'top' || position === 'bottom') {
+      this.popoverContent.style.display = 'inline-block';
+    } else if (position === 'left' || position === 'right') {
+      this.popoverContent.style.display = 'inline-flex';
+    }
   }
 
   private setOpacity(opacity: string) {

@@ -6,8 +6,7 @@ import { ThemeVersion } from '../theme/types/theme.types';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { PopoverPositionType } from './types/popover.types';
 import { REQUIRED_CBOX_CHILD_POPOVER_ERROR } from './errors/popover.errors';
-import { CxPopoverName } from './types/popover.name'
-
+import { CxPopoverName } from './types/popover.name';
 
 @customElement(CxPopoverName)
 export class Popover extends ComponentBase<CXPopover.Props> {
@@ -15,6 +14,7 @@ export class Popover extends ComponentBase<CXPopover.Props> {
     openby: 'click',
     position: 'bottom-center',
     mouseleave: 'none',
+    focusout: 'close',
   };
 
   static styles = css`
@@ -74,11 +74,15 @@ export class Popover extends ComponentBase<CXPopover.Props> {
     return new Promise((resolve, reject) => {
       requestAnimationFrame(() => {
         const cBox = this.popoverSlotRef.value?.assignedElements()[0] as HTMLElement;
-        cBox.tagName === 'C-BOX' ? resolve(cBox) : reject(REQUIRED_CBOX_CHILD_POPOVER_ERROR);
+        if (cBox) {
+          cBox.tagName === 'C-BOX' ? resolve(cBox) : reject(REQUIRED_CBOX_CHILD_POPOVER_ERROR);
+        } else {
+          console.warn('You must close popover by close button');
+        }
       });
     });
   }
-}  
+}
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -90,7 +94,8 @@ declare global {
     type Set<T extends ThemeVersion = 2> = {
       openby?: 'click' | 'mouseover';
       position?: PopoverPositionType;
-      mouseleave: 'none' | 'close';
+      mouseleave?: 'none' | 'close';
+      focusout: 'none' | 'close';
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & {

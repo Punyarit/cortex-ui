@@ -1,3 +1,12 @@
 c-box {
   display: block;
 }
+
+c-box {
+  &[content] {
+    display: block;
+    padding: var(--size-12);
+    border-radius: var(--size-8);
+    background-color: var(--white);
+  }
+}

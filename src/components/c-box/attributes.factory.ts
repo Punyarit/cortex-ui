@@ -1,18 +1,20 @@
+import { ComponentNameTypes } from '../../types/component.names';
+
 export class AbilityFactory {
-  constructor(private box: CBox.Ref, private attr: string, private value: string) {
-    this.createAbility();
+  constructor(private box: CBox.Ref, private attr: ComponentNameTypes, private value: string) {
+    this.construct();
   }
 
-  private createAbility() {
+  private async construct() {
     switch (this.attr) {
       case 'cx-popover':
-        break;
+        return new (await import('./cx-popover.ability')).CxPopoverAbilityBuilder(
+          this.box,
+          this.value
+        );
 
       default:
         break;
     }
-    console.log('attributes.factory |this.box|', this.box);
-    console.log('attributes.factory |this.attr|', this.attr);
-    console.log('attributes.factory |this.value|', this.value);
   }
 }

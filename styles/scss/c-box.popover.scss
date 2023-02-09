@@ -1,0 +1,64 @@
+c-box[slot='popover'] [tabindex='0']:focus {
+  outline-style: solid;
+  outline-width: var(--size-3);
+  outline-color: var(--primary-100);
+  border-radius: var(--base-size-12);
+}
+
+c-box[slot='popover'] {
+  outline: none;
+}
+
+c-box[slot='popover'][cx-popover*='arrowpoint'] {
+  &[popover-arrowpoint-position-type='bottom'] {
+    &::before {
+      content: '';
+      display: block;
+      translate: var(--popover-arrowpoint-position);
+      width: 0;
+      height: 0;
+      border-left: var(--popover-arrowpoint-size) solid transparent;
+      border-right: var(--popover-arrowpoint-size) solid transparent;
+      border-bottom: var(--popover-arrowpoint-size) solid var(--popover-arrowpoint-color);
+    }
+  }
+
+  &[popover-arrowpoint-position-type='top'] {
+    &::after {
+      content: '';
+      display: block;
+      translate: var(--popover-arrowpoint-position);
+      width: 0;
+      height: 0;
+      border-left: var(--popover-arrowpoint-size) solid transparent;
+      border-right: var(--popover-arrowpoint-size) solid transparent;
+      border-top: var(--popover-arrowpoint-size) solid var(--popover-arrowpoint-color);
+    }
+  }
+
+  &[popover-arrowpoint-position-type='right'] {
+    &::before {
+      content: '';
+      translate: var(--popover-arrowpoint-position);
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-top: var(--popover-arrowpoint-size) solid transparent;
+      border-bottom: var(--popover-arrowpoint-size) solid transparent;
+      border-right: var(--popover-arrowpoint-size) solid var(--popover-arrowpoint-color);
+    }
+  }
+
+  &[popover-arrowpoint-position-type='left'] {
+    &::after {
+      content: '';
+      translate: var(--popover-arrowpoint-position);
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-top: var(--popover-arrowpoint-size) solid transparent;
+      border-bottom: var(--popover-arrowpoint-size) solid transparent;
+      border-left: var(--popover-arrowpoint-size) solid var(--popover-arrowpoint-color);
+    }
+  }
+}
