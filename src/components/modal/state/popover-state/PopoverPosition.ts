@@ -54,47 +54,88 @@ export class PopoverPosition {
     position: PositionType,
     side: SidePopoverType,
     positionResult: ReturnType<typeof format>
-  ) {
+  ): SidePopoverType {
     const { height, width } = this.resizeEntry!.contentRect;
     const { x, y } = positionResult;
     const { height: popoverHeight, width: popoverWidth } = this.popoverRect!;
 
-    let checkedSide = side;
-    if (side === 'center') {
-      if (position === 'left' || position === 'right') {
-        checkedSide = y + popoverHeight > height ? 'bottom' : y < 0 ? 'top' : side;
-      } else if (position === 'top' || position === 'bottom') {
-        checkedSide = x + popoverWidth > width ? 'right' : x < 0 ? 'left' : side;
-      }
-    } else if (side === 'right' && x < 0) {
-      checkedSide = 'left';
-    } else if (side === 'left' && x + popoverWidth > width) {
-      checkedSide = 'right';
-    } else if (side === 'bottom' && y < 0) {
-      checkedSide = 'top';
-    } else if (side === 'top' && y + popoverHeight > height) {
-      checkedSide = 'bottom';
-    }
+    switch (side) {
+      case 'center':
+        return this.checkCenteredSide(position, x, y, width, popoverWidth, height, popoverHeight);
 
-    return checkedSide;
+      case 'right':
+        return this.checkRightSide(x);
+
+      case 'left':
+        return this.checkLeftSide(x, width, popoverWidth);
+
+      case 'bottom':
+        return this.checkBottomSide(y);
+
+      case 'top':
+        return this.checkTopSide(y, height, popoverHeight);
+
+      default:
+        return side;
+    }
   }
+
+  private checkCenteredSide(
+    position: PositionType,
+    x: number,
+    y: number,
+    width: number,
+    popoverWidth: number,
+    height: number,
+    popoverHeight: number
+  ) {
+    switch (position) {
+      case 'left':
+      case 'right':
+        return y + popoverHeight > height ? 'bottom' : y < 0 ? 'top' : 'center';
+
+      case 'top':
+      case 'bottom':
+        return x + popoverWidth > width ? 'right' : x < 0 ? 'left' : 'center';
+
+      default:
+        return 'center';
+    }
+  }
+
+  private checkRightSide(x: number) {
+    return x < 0 ? 'left' : 'right';
+  }
+
+  private checkLeftSide(x: number, width: number, popoverWidth: number) {
+    return x + popoverWidth > width ? 'right' : 'left';
+  }
+
+  private checkBottomSide(y: number) {
+    return y < 0 ? 'top' : 'bottom';
+  }
+
+  private checkTopSide(y: number, height: number, popoverHeight: number) {
+    return y + popoverHeight > height ? 'bottom' : 'top';
+  }
+
   private checkPosition(position: PositionType, positionResult: ReturnType<typeof format>) {
     const { height, width } = this.resizeEntry!.contentRect;
     const { x, y } = positionResult;
     const { width: popoverWidth, height: popoverHeight } = this.popoverRect!;
-    let checkedPosition = position;
 
-    if (position === 'right') {
-      checkedPosition = popoverWidth + x > width ? 'left' : position;
-    } else if (position === 'left') {
-      checkedPosition = x < 0 ? 'right' : position;
-    } else if (position === 'bottom') {
-      checkedPosition = popoverHeight + y > height ? 'top' : position;
-    } else if (position === 'top') {
-      checkedPosition = y < 0 ? 'bottom' : position;
+    switch (position) {
+      case 'right':
+        return popoverWidth + x > width ? 'left' : position;
+      case 'left':
+        return x < 0 ? 'right' : position;
+      case 'bottom':
+        return popoverHeight + y > height ? 'top' : position;
+      case 'top':
+        return y < 0 ? 'bottom' : position;
+      default:
+        return position;
     }
-
-    return checkedPosition;
   }
 
   private async setPopoverRect() {

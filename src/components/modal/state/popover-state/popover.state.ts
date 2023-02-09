@@ -114,19 +114,20 @@ export class PopoverState {
   }
 
   private setArrowTranslate(arrowPosition: number, positionChecked: PositionType) {
-    // 📌8 is size of arrowpoint must - *because need to find actual position center
-    const actualPosition = arrowPosition - 8;
+    const arrowSize = 8;
+    const actualPosition = arrowPosition - arrowSize;
+    const popoverStyles = this.popoverContent.style;
+    const arrowPointProperty = '--popover-arrowpoint-position';
 
-    if (positionChecked === 'top' || positionChecked === 'bottom') {
-      this.popoverContent.style.setProperty(
-        '--popover-arrowpoint-position',
-        `${actualPosition}px 0`
-      );
-    } else if (positionChecked === 'left' || positionChecked === 'right') {
-      this.popoverContent.style.setProperty(
-        '--popover-arrowpoint-position',
-        `0 ${actualPosition}px`
-      );
+    switch (positionChecked) {
+      case 'top':
+      case 'bottom':
+        return popoverStyles.setProperty(arrowPointProperty, `${actualPosition}px 0`);
+      case 'left':
+      case 'right':
+        return popoverStyles.setProperty(arrowPointProperty, `0 ${actualPosition}px`);
+      default:
+        throw Error('positionChecked value is not "top" | "bottom" | "left" | "right"');
     }
   }
 
@@ -141,23 +142,36 @@ export class PopoverState {
     contentHeight: number,
     hostCenterWidth: number,
     hostCenterHeight: number
-  ) {
-    if (positionChecked === 'top' || positionChecked === 'bottom') {
-      if (sideChecked === 'center') {
-        return Math.floor(contentWidth / 2);
-      } else if (sideChecked === 'left') {
-        return Math.floor(hostCenterWidth);
-      } else if (sideChecked === 'right') {
-        return Math.abs(Math.floor(hostCenterWidth - contentWidth));
-      }
-    } else if (positionChecked === 'left' || positionChecked === 'right') {
-      if (sideChecked === 'center') {
-        return Math.abs(Math.floor(contentHeight / 2));
-      } else if (sideChecked === 'top') {
-        return hostCenterHeight;
-      } else if (sideChecked === 'bottom') {
-        return Math.abs(Math.floor(hostCenterHeight - contentHeight));
-      }
+  ): number | undefined {
+    switch (positionChecked) {
+      case 'top':
+      case 'bottom':
+        switch (sideChecked) {
+          case 'center':
+            return Math.floor(contentWidth / 2);
+
+          case 'left':
+            return Math.floor(hostCenterWidth);
+
+          case 'right':
+            return Math.abs(Math.floor(hostCenterWidth - contentWidth));
+        }
+
+      case 'left':
+      case 'right':
+        switch (sideChecked) {
+          case 'center':
+            return Math.abs(Math.floor(contentHeight / 2));
+
+          case 'top':
+            return hostCenterHeight;
+
+          case 'bottom':
+            return Math.abs(Math.floor(hostCenterHeight - contentHeight));
+        }
+
+      default:
+        throw Error('Method setArrowpoint constant arrowPosition is undefiend');
     }
   }
 
