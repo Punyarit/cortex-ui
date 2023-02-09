@@ -3,6 +3,7 @@ c-box[slot='popover'] [tabindex='0']:focus {
   outline-width: var(--size-3);
   outline-color: var(--primary-100);
   border-radius: var(--base-size-12);
+  transition: outline-width 0.125s ease;
 }
 
 c-box[slot='popover'] {

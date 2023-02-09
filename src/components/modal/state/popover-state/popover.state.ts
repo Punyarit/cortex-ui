@@ -6,6 +6,7 @@ import { ModalSingleton } from '../../singleton/modal.singleton';
 import { PopoverPosition, PositionResult } from './PopoverPosition';
 import { PositionType } from './positionReverseOverScreen';
 import { SidePopoverType } from './sidePopoverAppear';
+
 export const debouceTimerPopoverResize = 200;
 export class PopoverState {
   public static POPOVER_SLOT_DISABLED = 'popover-disabled';
@@ -17,6 +18,8 @@ export class PopoverState {
   private popoverHost!: HTMLElement;
   private resizeObserver!: ResizeObserver;
   private popoverSet!: CXPopover.Set;
+  private content!: HTMLElement;
+
   #firstUpdated = true;
 
   async open(
@@ -26,6 +29,7 @@ export class PopoverState {
     popoverHost: HTMLElement
   ): Promise<void> {
     this.setProperties(popoverContent, hostRect, popoverSet, popoverHost);
+    this.setContentTabindex();
     this.setResizeEvent();
     this.setOpacity('0');
     this.setContentInlineBlock();
@@ -75,6 +79,11 @@ export class PopoverState {
     this.positionType = popoverSet.position!;
     this.popoverSet = popoverSet;
     this.popoverHost = popoverHost;
+    this.content = popoverContent.childNodes[0] as HTMLElement;
+  }
+
+  private setContentTabindex() {
+    this.content.setAttribute('tabindex', '0');
   }
 
   public async setPosition(resizeEntry: ResizeObserverEntry): Promise<void> {
