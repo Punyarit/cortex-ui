@@ -1,17 +1,6 @@
-import { CxGlobalDialogName } from '../../helpers/types/useCxDialog.types';
 import { componentNames, ComponentNameTypes } from '../../types/component.names';
-import { IconSrcTypes } from '../icon/types/icon.types';
-import { AbilityFactory } from './attributes.factory';
-import EventFactory from './factory/events.factory';
 import { CBoxName } from './types/c-box.name';
 import { DxDivTypes } from './types/c-box.types';
-import {
-  eventAttributes,
-  EventAttributes,
-  eventAttributesSet,
-  EventStrategy,
-} from './types/event-straegy';
-import { StyleAttributes } from './types/style-builder';
 import { CxPopoverAbilityAttrKey } from './types2/box.cx-popover.types';
 
 export class Box extends HTMLElement {

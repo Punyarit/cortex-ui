@@ -3,6 +3,11 @@ import { format } from './format';
 import { PositionReversedType } from './positionReverseOverScreen';
 import { SidePopoverType } from './sidePopoverAppear';
 
+export type PositionResult = {
+  translate: string;
+  sideChecked: SidePopoverType;
+  positionChecked: PositionReversedType;
+};
 export class PopoverPosition {
   private popoverRect?: DOMRect;
 
@@ -20,7 +25,7 @@ export class PopoverPosition {
       });
     });
   }
-  public async getResult() {
+  public async getResult(): Promise<PositionResult> {
     await this.setPopoverRect();
     const [position, side] = this.speretePosition();
     // 📌positionResult = position that popover content will appear in screen (inject to translate)
@@ -28,13 +33,13 @@ export class PopoverPosition {
     const positionResult = this.getPosition();
     const positionChecked = this.checkPosition(position, positionResult);
     const sideChecked = this.checkSide(position, side, positionResult);
-
     // 📌true = position of popover is over the screen
     if (position !== positionChecked || side !== sideChecked) {
       this.setNewPositionType(positionChecked, sideChecked);
-      return this.getPosition().translate;
+      return { translate: this.getPosition().translate, sideChecked, positionChecked };
     }
-    return positionResult.translate;
+
+    return { translate: positionResult.translate, sideChecked, positionChecked };
   }
 
   private setNewPositionType(positionChecked: PositionReversedType, sideChecked: SidePopoverType) {

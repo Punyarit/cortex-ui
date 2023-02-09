@@ -3,8 +3,9 @@ import { PopoverPositionType } from '../../../popover/types/popover.types';
 import { Modal } from '../../modal';
 import { resizeObserver } from '../../obsrevers/resize.observer';
 import { ModalSingleton } from '../../singleton/modal.singleton';
-import { PopoverPosition } from './PopoverPosition';
-
+import { PopoverPosition, PositionResult } from './PopoverPosition';
+import { PositionReversedType } from './positionReverseOverScreen';
+export const debouceTimerPopoverResize = 200;
 export class PopoverState {
   public static POPOVER_SLOT_DISABLED = 'popover-disabled';
   public static POPOVER_SLOT_OPEN = 'popover';
@@ -41,7 +42,7 @@ export class PopoverState {
         this.setPosition(resizeEntry);
         this.setFirstUpdatd(false);
       } else {
-        debounce(() => this.setPosition(resizeEntry), 200);
+        debounce(() => this.setPosition(resizeEntry), debouceTimerPopoverResize);
       }
     });
   }
@@ -76,15 +77,22 @@ export class PopoverState {
   }
 
   public async setPosition(resizeEntry: ResizeObserverEntry): Promise<void> {
-    const translateValue = await new PopoverPosition(
+    const positionResult = await new PopoverPosition(
       this.positionType,
       this.hostRect,
       this.popoverContent,
       resizeEntry
     ).getResult();
 
-    if (this.popoverContent.style.translate === translateValue) return;
-    this.popoverContent.style.translate = translateValue!;
+    this.setCheckedPositionTypeAttribute(positionResult);
+    if (this.popoverContent.style.translate === positionResult.translate) return;
+    this.popoverContent.style.translate = positionResult.translate!;
+  }
+
+  // 📌set attribute for benefit to c-box
+  private setCheckedPositionTypeAttribute(positionResult: PositionResult) {
+    this.popoverContent.setAttribute('positionChecked', positionResult.positionChecked);
+    this.popoverContent.setAttribute('sideChecked', positionResult.sideChecked);
   }
 
   private setFocusOutEventListener() {

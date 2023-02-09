@@ -15,6 +15,12 @@ export class PerformanceTester {
     }
   });
 
+  static for(callback: Function, lengrg = 1000) {
+    for (let index = 0; index < lengrg; index++) {
+      callback();
+    }
+  }
+
   static start() {
     PerformanceTester.observer.observe({ entryTypes: ['measure'] });
     performance.mark('startTask');

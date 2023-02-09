@@ -15,7 +15,7 @@ export function observeElementManyTypes<T extends HTMLElement>(
   observer.observe(watch.target, config);
 }
 
-export function observeElement<T extends HTMLElement>(
+export function mutableElement<T extends HTMLElement>(
   target: T,
   mutationType: MutationRecordType,
   callback: (mutationRecord: MutationRecord, mutationObserver: MutationObserver) => void,
@@ -31,3 +31,25 @@ export function observeElement<T extends HTMLElement>(
   const config: MutationObserverInit = { [mutationType]: true, ...options };
   observer.observe(target, config);
 }
+
+export const IntersectElement = (
+  target: HTMLElement,
+  callback: (
+    entry: IntersectionObserverEntry,
+    obsrever: IntersectionObserver,
+    elementStatus: 'visible' | 'hidden'
+  ) => void,
+  options?: IntersectionObserverInit
+) => {
+  const obsrever = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        callback(entry, obsrever, 'visible');
+      } else {
+        callback(entry, obsrever, 'hidden');
+      }
+    });
+  }, options);
+
+  obsrever.observe(target);
+};
