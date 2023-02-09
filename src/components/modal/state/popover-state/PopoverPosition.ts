@@ -143,87 +143,76 @@ export class PopoverPosition {
   }
 
   private getPosition(): ReturnType<typeof format> {
+    const hostRect = this.hostRect;
     const {
-      bottom: hostBottom,
+      width: hostWidth,
       height: hostHeight,
       left: hostLeft,
       right: hostRight,
       top: hostTop,
-      width: hostWidth,
-    } = this.hostRect;
+      bottom: hostBottom,
+    } = hostRect;
+    const popoverRect = this.popoverRect!;
+    const { width: popoverWidth, height: popoverHeight } = popoverRect;
+    const positionType = this.positionType;
 
-    const { width: popoverWidth, height: popoverHeight } = this.popoverRect!;
+    let x: number, y: number;
 
-    switch (this.positionType) {
-      default:
+    switch (positionType) {
       case 'bottom-left':
-        return format({ x: hostLeft, y: hostBottom });
-
+        x = hostLeft;
+        y = hostBottom;
+        break;
       case 'bottom-center':
-        return format({
-          x: hostWidth / 2 + hostLeft - popoverWidth / 2,
-          y: hostBottom,
-        });
-
+        x = hostLeft + hostWidth / 2 - popoverWidth / 2;
+        y = hostBottom;
+        break;
       case 'bottom-right':
-        return format({
-          x: hostRight - popoverWidth,
-          y: hostBottom,
-        });
-
+        x = hostRight - popoverWidth;
+        y = hostBottom;
+        break;
       case 'top-left':
-        return format({
-          x: hostLeft,
-          y: hostTop - popoverHeight,
-        });
-
+        x = hostLeft;
+        y = hostTop - popoverHeight;
+        break;
       case 'top-center':
-        return format({
-          x: hostWidth / 2 + hostLeft - popoverWidth / 2,
-          y: hostTop - popoverHeight,
-        });
-
+        x = hostLeft + hostWidth / 2 - popoverWidth / 2;
+        y = hostTop - popoverHeight;
+        break;
       case 'top-right':
-        return format({
-          x: hostRight - popoverWidth,
-          y: hostTop - popoverHeight,
-        });
-
+        x = hostRight - popoverWidth;
+        y = hostTop - popoverHeight;
+        break;
       case 'left-top':
-        return format({
-          x: hostLeft - popoverWidth,
-          y: hostTop,
-        });
-
+        x = hostLeft - popoverWidth;
+        y = hostTop;
+        break;
       case 'left-center':
-        return format({
-          x: hostLeft - popoverWidth,
-          y: hostTop + hostHeight / 2 - popoverHeight / 2,
-        });
-
+        x = hostLeft - popoverWidth;
+        y = hostTop + hostHeight / 2 - popoverHeight / 2;
+        break;
       case 'left-bottom':
-        return format({
-          x: hostLeft - popoverWidth,
-          y: hostBottom - popoverHeight,
-        });
-
+        x = hostLeft - popoverWidth;
+        y = hostBottom - popoverHeight;
+        break;
       case 'right-top':
-        return format({
-          x: hostRight,
-          y: hostTop,
-        });
-
+        x = hostRight;
+        y = hostTop;
+        break;
       case 'right-center':
-        return format({
-          x: hostRight,
-          y: hostTop + hostHeight / 2 - popoverHeight / 2,
-        });
-
+        x = hostRight;
+        y = hostTop + hostHeight / 2 - popoverHeight / 2;
+        break;
       case 'right-bottom':
-        return format({
-          x: hostRight,
-          y: hostBottom - popoverHeight,
-        });
+        x = hostRight;
+        y = hostBottom - popoverHeight;
+        break;
+      default:
+        x = hostLeft;
+        y = hostBottom;
+        break;
     }
+
+    return format({ x, y });
   }
 }
