@@ -4,7 +4,8 @@ import { Modal } from '../../modal';
 import { resizeObserver } from '../../obsrevers/resize.observer';
 import { ModalSingleton } from '../../singleton/modal.singleton';
 import { PopoverPosition, PositionResult } from './PopoverPosition';
-import { PositionReversedType } from './positionReverseOverScreen';
+import { PositionType } from './positionReverseOverScreen';
+import { SidePopoverType } from './sidePopoverAppear';
 export const debouceTimerPopoverResize = 200;
 export class PopoverState {
   public static POPOVER_SLOT_DISABLED = 'popover-disabled';
@@ -84,15 +85,80 @@ export class PopoverState {
       resizeEntry
     ).getResult();
 
-    this.setCheckedPositionTypeAttribute(positionResult);
+    this.setArrowpoint(positionResult);
     if (this.popoverContent.style.translate === positionResult.translate) return;
     this.popoverContent.style.translate = positionResult.translate!;
   }
 
   // 📌set attribute for benefit to c-box
-  private setCheckedPositionTypeAttribute(positionResult: PositionResult) {
-    this.popoverContent.setAttribute('positionChecked', positionResult.positionChecked);
-    this.popoverContent.setAttribute('sideChecked', positionResult.sideChecked);
+  private setArrowpoint(positionResult: PositionResult) {
+    if (!this.popoverSet.arrowpoint) return;
+    const { width: hostWidth, height: hostHeight } = this.popoverHost.getBoundingClientRect();
+    const { width: contentWidth, height: contentHeight } =
+      this.popoverContent.getBoundingClientRect();
+    const { positionChecked, sideChecked } = positionResult;
+    const hostCenterWidth = hostWidth / 2;
+    const hostCenterHeight = hostHeight / 2;
+
+    this.setArrowPositionTypeAttr(positionChecked);
+    const arrowPosition = this.calcArrowPosition(
+      positionChecked,
+      sideChecked,
+      contentWidth,
+      contentHeight,
+      hostCenterWidth,
+      hostCenterHeight
+    )!;
+
+    this.setArrowTranslate(arrowPosition, positionChecked);
+  }
+
+  private setArrowTranslate(arrowPosition: number, positionChecked: PositionType) {
+    // 📌8 is size of arrowpoint must - *because need to find actual position center
+    const actualPosition = arrowPosition - 8;
+
+    if (positionChecked === 'top' || positionChecked === 'bottom') {
+      this.popoverContent.style.setProperty(
+        '--popover-arrowpoint-position',
+        `${actualPosition}px 0`
+      );
+    } else if (positionChecked === 'left' || positionChecked === 'right') {
+      this.popoverContent.style.setProperty(
+        '--popover-arrowpoint-position',
+        `0 ${actualPosition}px`
+      );
+    }
+  }
+
+  private setArrowPositionTypeAttr(positionChecked: PositionType) {
+    this.popoverContent.setAttribute(`popover-arrowpoint-position-type`, positionChecked);
+  }
+
+  private calcArrowPosition(
+    positionChecked: PositionType,
+    sideChecked: SidePopoverType,
+    contentWidth: number,
+    contentHeight: number,
+    hostCenterWidth: number,
+    hostCenterHeight: number
+  ) {
+    if (positionChecked === 'top' || positionChecked === 'bottom') {
+      if (sideChecked === 'center') {
+        return Math.floor(contentWidth / 2);
+      } else if (sideChecked === 'left') {
+        return Math.floor(hostCenterWidth);
+      } else if (sideChecked === 'right') {
+        return Math.abs(Math.floor(hostCenterWidth - contentWidth));
+      }
+    } else if (positionChecked === 'left' || positionChecked === 'right') {
+      if (sideChecked === 'center') {
+        return Math.abs(Math.floor(contentHeight / 2));
+      } else if (sideChecked === 'top') {
+        return hostCenterHeight;
+      } else if (sideChecked === 'bottom') {
+        return Math.abs(Math.floor(hostCenterHeight - contentHeight));
+      }
+    }
   }
 
   private setFocusOutEventListener() {

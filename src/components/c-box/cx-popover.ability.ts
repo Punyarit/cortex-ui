@@ -38,9 +38,11 @@ export class CxPopoverAbilityBuilder extends AbilityBase implements CxPopoverAbi
   }
 
   private findTranslateValue(position: string, side: string) {
+    // host
     const hostCenterWidth = this.findCenterWidthContentSibling();
     const hostCenterHeight = this.findCenterHeightContentSibling();
 
+    // content
     const { width: contentWidth, height: contentHeight } = this.box.getBoundingClientRect();
 
     if (position === 'top' || position === 'bottom') {

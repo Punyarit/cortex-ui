@@ -5,4 +5,4 @@ export const positionReversed = {
   right: 'left',
 } as const;
 
-export type PositionReversedType = keyof typeof positionReversed;
+export type PositionType = keyof typeof positionReversed;

@@ -18,11 +18,11 @@ export class Box extends HTMLElement {
   }
 
   async connectedCallback() {
-    requestAnimationFrame(async () => {
-      if (this.attr && this.value) {
-        new (await import('./attributes.factory')).AbilityFactory(this, this.attr, this.value);
-      }
-    });
+    // requestAnimationFrame(async () => {
+    //   if (this.attr && this.value) {
+    //     new (await import('./attributes.factory')).AbilityFactory(this, this.attr, this.value);
+    //   }
+    // });
   }
 }
 customElements.define(CBoxName, Box);

@@ -1,12 +1,12 @@
 import { PopoverPositionType } from '../../../popover/types/popover.types';
 import { format } from './format';
-import { PositionReversedType } from './positionReverseOverScreen';
+import { PositionType } from './positionReverseOverScreen';
 import { SidePopoverType } from './sidePopoverAppear';
 
 export type PositionResult = {
   translate: string;
   sideChecked: SidePopoverType;
-  positionChecked: PositionReversedType;
+  positionChecked: PositionType;
 };
 export class PopoverPosition {
   private popoverRect?: DOMRect;
@@ -42,16 +42,16 @@ export class PopoverPosition {
     return { translate: positionResult.translate, sideChecked, positionChecked };
   }
 
-  private setNewPositionType(positionChecked: PositionReversedType, sideChecked: SidePopoverType) {
+  private setNewPositionType(positionChecked: PositionType, sideChecked: SidePopoverType) {
     this.positionType = `${positionChecked}-${sideChecked}` as PopoverPositionType;
   }
 
   private speretePosition() {
-    return this.positionType.split('-') as [PositionReversedType, SidePopoverType];
+    return this.positionType.split('-') as [PositionType, SidePopoverType];
   }
 
   private checkSide(
-    position: PositionReversedType,
+    position: PositionType,
     side: SidePopoverType,
     positionResult: ReturnType<typeof format>
   ) {
@@ -78,7 +78,7 @@ export class PopoverPosition {
 
     return checkedSide;
   }
-  private checkPosition(position: PositionReversedType, positionResult: ReturnType<typeof format>) {
+  private checkPosition(position: PositionType, positionResult: ReturnType<typeof format>) {
     const { height, width } = this.resizeEntry!.contentRect;
     const { x, y } = positionResult;
     const { width: popoverWidth, height: popoverHeight } = this.popoverRect!;

@@ -9,7 +9,7 @@ c-box[slot='popover'] {
   outline: none;
 }
 
-c-box[slot='popover'][cx-popover*='arrowpoint'] {
+c-box[slot='popover'] {
   &[popover-arrowpoint-position-type='bottom'] {
     &::before {
       content: '';
@@ -17,9 +17,9 @@ c-box[slot='popover'][cx-popover*='arrowpoint'] {
       translate: var(--popover-arrowpoint-position);
       width: 0;
       height: 0;
-      border-left: var(--popover-arrowpoint-size) solid transparent;
-      border-right: var(--popover-arrowpoint-size) solid transparent;
-      border-bottom: var(--popover-arrowpoint-size) solid var(--popover-arrowpoint-color);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid var(--white);
     }
   }
 
@@ -30,9 +30,9 @@ c-box[slot='popover'][cx-popover*='arrowpoint'] {
       translate: var(--popover-arrowpoint-position);
       width: 0;
       height: 0;
-      border-left: var(--popover-arrowpoint-size) solid transparent;
-      border-right: var(--popover-arrowpoint-size) solid transparent;
-      border-top: var(--popover-arrowpoint-size) solid var(--popover-arrowpoint-color);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid var(--white);
     }
   }
 
@@ -43,9 +43,9 @@ c-box[slot='popover'][cx-popover*='arrowpoint'] {
       display: inline-block;
       width: 0;
       height: 0;
-      border-top: var(--popover-arrowpoint-size) solid transparent;
-      border-bottom: var(--popover-arrowpoint-size) solid transparent;
-      border-right: var(--popover-arrowpoint-size) solid var(--popover-arrowpoint-color);
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 8px solid var(--white);
     }
   }
 
@@ -56,9 +56,9 @@ c-box[slot='popover'][cx-popover*='arrowpoint'] {
       display: inline-block;
       width: 0;
       height: 0;
-      border-top: var(--popover-arrowpoint-size) solid transparent;
-      border-bottom: var(--popover-arrowpoint-size) solid transparent;
-      border-left: var(--popover-arrowpoint-size) solid var(--popover-arrowpoint-color);
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 8px solid var(--white);
     }
   }
 }
