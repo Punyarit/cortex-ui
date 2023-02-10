@@ -90,6 +90,10 @@ export class Modal extends ComponentBase<CXModal.Props> {
 
   render(): TemplateResult {
     return html`
+      <!-- 📌menu is a popover that can display multiple popovers -->
+      <!-- menu area -->
+      <div class="menu area disabled"></div>
+
       <!-- 📌popover / tooltip area -->
       <div class="popover area disabled">
         <slot name="${PopoverState.POPOVER_SLOT_DISABLED}" ${ref(this.popoverSlotRef)}></slot>

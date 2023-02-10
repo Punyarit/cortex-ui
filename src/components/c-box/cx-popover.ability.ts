@@ -8,6 +8,8 @@ export class CxPopoverAbilityBuilder extends AbilityBase implements CxPopoverAbi
   }
 
   close() {
+    this.box.textContent = '\ue800';
+    this.box.style.fontFamily = 'circle';
     this.box.onclick = () => {
       ModalSingleton.modalRef.closePopover();
     };

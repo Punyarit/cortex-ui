@@ -71,6 +71,10 @@ export class Popover extends ComponentBase<CXPopover.Props> {
     this.popoverContentElement = await this.getPopoverContent();
   }
 
+  public close() {
+    ModalSingleton.modalRef.closePopover();
+  }
+
   private getPopoverContent(): Promise<HTMLElement> {
     return new Promise((resolve, reject) => {
       requestAnimationFrame(() => {

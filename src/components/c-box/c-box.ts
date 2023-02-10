@@ -22,9 +22,6 @@ export class Box extends HTMLElement {
   async connectedCallback() {
     if (this.#firstUpdated) return;
     requestAnimationFrame(async () => {
-      if (!this.closest('cx-popover')) {
-        throw Error(REQUIRED_CXPOPOVER_PARENT);
-      }
       if (this.attr && this.value) {
         new (await import('./attributes.factory')).AbilityFactory(this, this.attr, this.value);
       }
