@@ -1,4 +1,4 @@
-export const iconSrcs = [
+export const iconSources = [
   'calendar-plus-custom',
   'calender-check-custom',
   'comment-check-custom',

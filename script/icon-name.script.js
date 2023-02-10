@@ -13,8 +13,7 @@ fs.readdirSync(assetsDir).forEach((type) => {
   });
 });
 
-const output = `const iconnames = [${iconnames.join(',')}];
-export default iconnames;`;
+const output = `export const iconSources = [${iconnames.join(',')}] as const;`;
 
-fs.writeFileSync('./icon.src.ts', output);
+fs.writeFileSync('src/components/icon/types/icon.src.ts', output);
 console.log('iconnames.ts file created successfully!');
