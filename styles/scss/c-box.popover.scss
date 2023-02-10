@@ -6,8 +6,71 @@ c-box[slot='popover'] [tabindex='0']:focus {
   transition: outline-width 0.125s ease;
 }
 
+$popover-position: bottom, top, left, right;
+$in-out: in, out;
+
+@each $position in $popover-position {
+  @each $io in $in-out {
+    @keyframes popover-#{$position}-#{$io} {
+      0% {
+        transform: translate#{if(
+            $position == bottom,
+            Y,
+            if($position == top, Y, if($position == left, X, X))
+          )
+          }(
+            #{if(
+                $position == bottom,
+                -40px,
+                if($position == top, 40px, if($position == left, 40px, -40px))
+              )}
+          );
+      }
+      100% {
+        transform: translate#{if(
+            $position == bottom,
+            Y,
+            if($position == top, Y, if($position == left, X, X))
+          )
+          }(0);
+      }
+    }
+  }
+}
+
+@each $position in $popover-position {
+  @keyframes popover-#{$position}-out {
+    0% {
+      opacity: 1;
+      transform: translate#{if(
+          $position == bottom,
+          Y,
+          if($position == top, Y, if($position == left, X, X))
+        )
+        }(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translate#{if(
+          $position == bottom,
+          Y,
+          if($position == top, Y, if($position == left, X, X))
+        )
+        }(
+          #{if(
+              $position == bottom,
+              28px,
+              if($position == top, -28px, if($position == left, -28px, 28px))
+            )}
+        );
+    }
+  }
+}
+
 c-box[slot='popover'] {
   outline: none;
+  transition: opacity 0.5s ease;
+  animation: popover-in 0.3s ease forwards;
 }
 
 c-box[slot='popover'] {

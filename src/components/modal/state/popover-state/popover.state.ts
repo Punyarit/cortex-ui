@@ -20,7 +20,7 @@ export class PopoverState {
   private resizeObserver!: ResizeObserver;
   private popoverSet!: CXPopover.Set;
   private content!: HTMLElement;
-
+  private separatedPositionType!: [PositionType, SidePopoverType];
   #firstUpdated = true;
 
   async open(
@@ -30,6 +30,7 @@ export class PopoverState {
     popoverHost: HTMLElement
   ): Promise<void> {
     this.setProperties(popoverContent, hostRect, popoverSet, popoverHost);
+    this.setPopoverContentAnimation('in');
     this.setPopoverContentOpacity('0');
     this.setContentTabindex();
     this.setPositionWithResizeEvent();
@@ -81,6 +82,7 @@ export class PopoverState {
     this.popoverSet = popoverSet;
     this.popoverHost = popoverHost;
     this.content = popoverContent.childNodes[0] as HTMLElement;
+    this.separatedPositionType = this.positionType.split('-') as [PositionType, SidePopoverType];
   }
 
   private setContentTabindex() {
@@ -92,7 +94,8 @@ export class PopoverState {
       this.positionType,
       this.hostRect,
       this.popoverContent,
-      resizeEntry
+      resizeEntry,
+      this.separatedPositionType
     ).getResult();
 
     this.setArrowpoint(positionResult);
@@ -199,12 +202,20 @@ export class PopoverState {
     this.#firstUpdated = update;
   }
 
-  private closePopover = (e: MouseEvent | FocusEvent) => {
+  public closePopover = (e: MouseEvent | FocusEvent) => {
     if ((e.relatedTarget as HTMLElement)?.closest('c-box[slot="popover"]')) return;
-    this.setFirstUpdatd(true);
-    this.unObserveResizeEvent();
-    this.appendBackToParentRoot();
+    this.setPopoverContentAnimation('out');
+    setTimeout(() => {
+      this.setFirstUpdatd(true);
+      this.unObserveResizeEvent();
+      this.appendBackToParentRoot();
+    }, 300);
   };
+
+  private setPopoverContentAnimation(status: 'in' | 'out') {
+    const [positionType] = this.separatedPositionType;
+    this.popoverContent.style.animation = `popover-${positionType}-${status} 0.3s ease forwards`;
+  }
 
   private appendBackToParentRoot() {
     requestAnimationFrame(() => {

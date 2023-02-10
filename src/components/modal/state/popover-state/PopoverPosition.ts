@@ -15,7 +15,8 @@ export class PopoverPosition {
     private positionType: PopoverPositionType,
     private hostRect: DOMRect,
     private popoverContent: HTMLElement,
-    private resizeEntry: ResizeObserverEntry
+    private resizeEntry: ResizeObserverEntry,
+    private separatedPositionType: [PositionType, SidePopoverType]
   ) {}
 
   private getPopoverRect(): Promise<DOMRect> {
@@ -27,7 +28,7 @@ export class PopoverPosition {
   }
   public async getResult(): Promise<PositionResult> {
     await this.setPopoverRect();
-    const [position, side] = this.speretePosition();
+    const [position, side] = this.separatedPositionType;
     // 📌positionResult = position that popover content will appear in screen (inject to translate)
     // 📌The Summary is the x / y position will place the popover on screen.
     const positionResult = this.getPosition();
@@ -44,10 +45,6 @@ export class PopoverPosition {
 
   private setNewPositionType(positionChecked: PositionType, sideChecked: SidePopoverType) {
     this.positionType = `${positionChecked}-${sideChecked}` as PopoverPositionType;
-  }
-
-  private speretePosition() {
-    return this.positionType.split('-') as [PositionType, SidePopoverType];
   }
 
   private checkSide(
