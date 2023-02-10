@@ -6,6 +6,7 @@ import { ModalSingleton } from '../../singleton/modal.singleton';
 import { PopoverPosition, PositionResult } from './PopoverPosition';
 import { PositionType } from './positionReverseOverScreen';
 import { SidePopoverType } from './sidePopoverAppear';
+import '../../../transition/transition';
 
 export const debouceTimerPopoverResize = 200;
 export class PopoverState {
@@ -29,19 +30,19 @@ export class PopoverState {
     popoverHost: HTMLElement
   ): Promise<void> {
     this.setProperties(popoverContent, hostRect, popoverSet, popoverHost);
+    this.setPopoverContentOpacity('0');
     this.setContentTabindex();
-    this.setResizeEvent();
-    this.setOpacity('0');
+    this.setPositionWithResizeEvent();
     this.setContentInlineBlock();
     this.setFocusOutEventListener();
-    this.setPopoverAppear();
+    this.setPopoverContentAppendToModal();
     this.setMouseleaveEvent();
     requestAnimationFrame(() => {
-      this.setOpacity('1');
+      this.setPopoverContentOpacity('1');
     });
   }
 
-  private setResizeEvent() {
+  private setPositionWithResizeEvent() {
     this.resizeObserver = resizeObserver(document.body, (resizeEntry: ResizeObserverEntry) => {
       if (this.#firstUpdated) {
         this.setPosition(resizeEntry);
@@ -56,7 +57,7 @@ export class PopoverState {
     this.resizeObserver.unobserve(document.body);
   };
 
-  private setPopoverAppear() {
+  private setPopoverContentAppendToModal() {
     ModalSingleton.popoverSlotRef.name = PopoverState.POPOVER_SLOT_OPEN;
     ModalSingleton.popoverSlotRef.parentElement!.classList.remove(Modal.MODAL_DISABLED);
     ModalSingleton.modalRef.append(this.popoverContent);
@@ -220,7 +221,7 @@ export class PopoverState {
     }
   }
 
-  private setOpacity(opacity: string) {
+  private setPopoverContentOpacity(opacity: string) {
     this.popoverContent.style.opacity = opacity;
   }
 }

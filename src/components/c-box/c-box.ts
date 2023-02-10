@@ -4,8 +4,8 @@ import { DxDivTypes } from './types/c-box.types';
 import { CxPopoverAbilityAttrKey } from './types2/box.cx-popover.types';
 
 export class Box extends HTMLElement {
-  private attr?: ComponentNameTypes;
-  private value?: string;
+  public attr?: ComponentNameTypes;
+  public value?: string;
 
   static get observedAttributes() {
     return componentNames;
