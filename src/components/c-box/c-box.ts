@@ -1,9 +1,11 @@
 import { componentNames, ComponentNameTypes } from '../../types/component.names';
+import { REQUIRED_CXPOPOVER_PARENT } from './errors/required-cx-popover-parent';
 import { CBoxName } from './types/c-box.name';
 import { DxDivTypes } from './types/c-box.types';
 import { CxPopoverAbilityAttrKey } from './types2/box.cx-popover.types';
 
 export class Box extends HTMLElement {
+  #firstUpdated = false;
   public attr?: ComponentNameTypes;
   public value?: string;
 
@@ -18,11 +20,17 @@ export class Box extends HTMLElement {
   }
 
   async connectedCallback() {
-    // requestAnimationFrame(async () => {
-    //   if (this.attr && this.value) {
-    //     new (await import('./attributes.factory')).AbilityFactory(this, this.attr, this.value);
-    //   }
-    // });
+    if (this.#firstUpdated) return;
+    requestAnimationFrame(async () => {
+      if (!this.closest('cx-popover')) {
+        throw Error(REQUIRED_CXPOPOVER_PARENT);
+      }
+      if (this.attr && this.value) {
+        new (await import('./attributes.factory')).AbilityFactory(this, this.attr, this.value);
+      }
+    });
+
+    this.#firstUpdated = true;
   }
 }
 customElements.define(CBoxName, Box);

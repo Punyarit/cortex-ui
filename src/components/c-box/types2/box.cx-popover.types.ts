@@ -1,6 +1,5 @@
 export type CxPopoverAbility = {
-  arrowpoint: () => void;
-  closebutton: () => void;
+  close: () => void;
 };
 
 export type CxPopoverAbilityAttrKey = keyof CxPopoverAbility;

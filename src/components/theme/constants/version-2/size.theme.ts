@@ -2,6 +2,8 @@ import { css } from 'lit';
 
 export const sizes = css`
   :host {
+    --base-size-half: 50%;
+    --base-size-full: 100%;
     --base-size-0: 0rem;
     --base-size-1: 0.063rem;
     --base-size-2: 0.125rem;

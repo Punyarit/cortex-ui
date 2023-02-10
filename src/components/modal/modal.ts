@@ -8,7 +8,7 @@ import { ModalSingleton } from './singleton/modal.singleton';
 import { DialogState } from './state/dialog.state';
 import { PopoverState } from './state/popover-state/popover.state';
 import { SnackbarState } from './state/snackbar.state';
-import { CxModalName } from './types/modal.name'
+import { CxModalName } from './types/modal.name';
 
 // export const onPressed = 'pressed';
 @customElement(CxModalName)
@@ -151,6 +151,10 @@ export class Modal extends ComponentBase<CXModal.Props> {
     popoverRoot: HTMLElement
   ) => {
     this.popoverState.open(popoverContent, hostRect, popoverSet, popoverRoot);
+  };
+
+  public closePopover = () => {
+    this.popoverState.closePopover(null);
   };
 }
 

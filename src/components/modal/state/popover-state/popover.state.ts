@@ -202,8 +202,8 @@ export class PopoverState {
     this.#firstUpdated = update;
   }
 
-  public closePopover = (e: MouseEvent | FocusEvent) => {
-    if ((e.relatedTarget as HTMLElement)?.closest('c-box[slot="popover"]')) return;
+  public closePopover = (e: MouseEvent | FocusEvent | null) => {
+    if ((e?.relatedTarget as HTMLElement)?.closest('c-box[slot="popover"]')) return;
     this.setPopoverContentAnimation('out');
     setTimeout(() => {
       this.setFirstUpdatd(true);
