@@ -16,7 +16,7 @@ import { snackbarDurationDefault, snackbarModalSlot } from './types/snackbar.typ
 export class Snackbar extends ComponentBase<CXSnackbar.Props> {
   config: CXSnackbar.Set = {
     text: 'The snackbar has been opened.',
-    iconSrc: 'favorite',
+    iconSrc: 'favorite-line',
     duration: snackbarDurationDefault,
     color: 'primary',
     transition: {

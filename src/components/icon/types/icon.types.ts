@@ -1,3 +1,5 @@
+import { iconSrcs } from './icon.src';
+
 export type SizeValue = 'size-16' | 'size-20' | 'size-24';
 export type ColorValue = 'primary-500' | 'white' | 'error-500' | 'gray-500';
 
@@ -29,10 +31,9 @@ export class IconAttributes {
   color: ColorValue = 'primary-500';
 }
 
-export const IconSrcs = ['', 'favorite', 'circle'] as const;
 export const iconSides = ['prefix', 'suffix'] as const;
 
 export type IconSizeTypes = typeof sizeKeys[number];
 export type IconColorTypes = typeof colorKeys[number];
 
-export type IconSrcTypes = typeof IconSrcs[number];
+export type IconSrcTypes = typeof iconSrcs[number];

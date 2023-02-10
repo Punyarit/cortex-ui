@@ -1,8 +1,5640 @@
 @font-face {
-  font-family: 'favorite';
-  src: url('../../assets/icons/favorite.woff2') format('woff2');
+  font-family: 'calendar-plus-custom';
+  src: url('../../assets/icons/custom/calendar-plus.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'circle';
-  src: url('../../assets/icons/circle.woff2') format('woff2');
+  font-family: 'calender-check-custom';
+  src: url('../../assets/icons/custom/calender-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-check-custom';
+  src: url('../../assets/icons/custom/comment-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'er-covid-alert-custom';
+  src: url('../../assets/icons/custom/er-covid-alert.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'er-covid-custom';
+  src: url('../../assets/icons/custom/er-covid.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'er-noncovid-custom';
+  src: url('../../assets/icons/custom/er-noncovid.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'er-noncovid1-custom';
+  src: url('../../assets/icons/custom/er-noncovid1.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'eye-glare-custom';
+  src: url('../../assets/icons/custom/eye-glare.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'eye-halo-custom';
+  src: url('../../assets/icons/custom/eye-halo.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-check-alt-custom';
+  src: url('../../assets/icons/custom/file-check-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-import-custom';
+  src: url('../../assets/icons/custom/file-import.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mobile-android-check-custom';
+  src: url('../../assets/icons/custom/mobile-android-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'nurse-hat-custom';
+  src: url('../../assets/icons/custom/nurse-hat.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'receipt-plus-custom';
+  src: url('../../assets/icons/custom/receipt-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'scalpel-custom';
+  src: url('../../assets/icons/custom/scalpel.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'task-custom';
+  src: url('../../assets/icons/custom/task.woff2') format('woff2');
+}
+@font-face {
+  font-family: '0-plus-line';
+  src: url('../../assets/icons/line/0-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: '10-plus-line';
+  src: url('../../assets/icons/line/10-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: '12-plus-line';
+  src: url('../../assets/icons/line/12-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: '13-plus-line';
+  src: url('../../assets/icons/line/13-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: '16-plus-line';
+  src: url('../../assets/icons/line/16-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: '17-plus-line';
+  src: url('../../assets/icons/line/17-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: '18-plus-line';
+  src: url('../../assets/icons/line/18-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: '21-plus-line';
+  src: url('../../assets/icons/line/21-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: '3-plus-line';
+  src: url('../../assets/icons/line/3-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: '500px-line';
+  src: url('../../assets/icons/line/500px.woff2') format('woff2');
+}
+@font-face {
+  font-family: '6-plus-line';
+  src: url('../../assets/icons/line/6-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'abacus-line';
+  src: url('../../assets/icons/line/abacus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'accessible-icon-alt-line';
+  src: url('../../assets/icons/line/accessible-icon-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'adjust-alt-line';
+  src: url('../../assets/icons/line/adjust-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'adjust-circle-line';
+  src: url('../../assets/icons/line/adjust-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'adjust-half-line';
+  src: url('../../assets/icons/line/adjust-half.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'adjust-line';
+  src: url('../../assets/icons/line/adjust.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'adobe-alt-line';
+  src: url('../../assets/icons/line/adobe-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'adobe-line';
+  src: url('../../assets/icons/line/adobe.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'airplay-line';
+  src: url('../../assets/icons/line/airplay.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-alt-line';
+  src: url('../../assets/icons/line/align-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-center-alt-line';
+  src: url('../../assets/icons/line/align-center-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-center-h-line';
+  src: url('../../assets/icons/line/align-center-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-center-justify-line';
+  src: url('../../assets/icons/line/align-center-justify.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-center-v-line';
+  src: url('../../assets/icons/line/align-center-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-center-line';
+  src: url('../../assets/icons/line/align-center.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-justify-line';
+  src: url('../../assets/icons/line/align-justify.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-left-justify-line';
+  src: url('../../assets/icons/line/align-left-justify.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-left-line';
+  src: url('../../assets/icons/line/align-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-letter-right-line';
+  src: url('../../assets/icons/line/align-letter-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-right-justify-line';
+  src: url('../../assets/icons/line/align-right-justify.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-right-line';
+  src: url('../../assets/icons/line/align-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-line';
+  src: url('../../assets/icons/line/align.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'amazon-line';
+  src: url('../../assets/icons/line/amazon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ambulance-line';
+  src: url('../../assets/icons/line/ambulance.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'analysis-line';
+  src: url('../../assets/icons/line/analysis.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'analytics-line';
+  src: url('../../assets/icons/line/analytics.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'anchor-line';
+  src: url('../../assets/icons/line/anchor.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'android-alt-line';
+  src: url('../../assets/icons/line/android-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'android-phone-slash-line';
+  src: url('../../assets/icons/line/android-phone-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'android-line';
+  src: url('../../assets/icons/line/android.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-double-down-line';
+  src: url('../../assets/icons/line/angle-double-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-double-left-line';
+  src: url('../../assets/icons/line/angle-double-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-double-right-line';
+  src: url('../../assets/icons/line/angle-double-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-double-up-line';
+  src: url('../../assets/icons/line/angle-double-up.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-down-line';
+  src: url('../../assets/icons/line/angle-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-left-b-line';
+  src: url('../../assets/icons/line/angle-left-b.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-left-line';
+  src: url('../../assets/icons/line/angle-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-right-b-line';
+  src: url('../../assets/icons/line/angle-right-b.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-right-line';
+  src: url('../../assets/icons/line/angle-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-up-line';
+  src: url('../../assets/icons/line/angle-up.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angry-line';
+  src: url('../../assets/icons/line/angry.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ankh-line';
+  src: url('../../assets/icons/line/ankh.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'annoyed-alt-line';
+  src: url('../../assets/icons/line/annoyed-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'annoyed-line';
+  src: url('../../assets/icons/line/annoyed.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'apple-alt-line';
+  src: url('../../assets/icons/line/apple-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'apple-line';
+  src: url('../../assets/icons/line/apple.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'apps-line';
+  src: url('../../assets/icons/line/apps.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'archive-alt-line';
+  src: url('../../assets/icons/line/archive-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'archive-line';
+  src: url('../../assets/icons/line/archive.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'archway-line';
+  src: url('../../assets/icons/line/archway.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-break-line';
+  src: url('../../assets/icons/line/arrow-break.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-circle-down-line';
+  src: url('../../assets/icons/line/arrow-circle-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-circle-left-line';
+  src: url('../../assets/icons/line/arrow-circle-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-circle-right-line';
+  src: url('../../assets/icons/line/arrow-circle-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-circle-up-line';
+  src: url('../../assets/icons/line/arrow-circle-up.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-compress-h-line';
+  src: url('../../assets/icons/line/arrow-compress-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-down-left-line';
+  src: url('../../assets/icons/line/arrow-down-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-down-right-line';
+  src: url('../../assets/icons/line/arrow-down-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-down-line';
+  src: url('../../assets/icons/line/arrow-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-from-right-line';
+  src: url('../../assets/icons/line/arrow-from-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-from-top-line';
+  src: url('../../assets/icons/line/arrow-from-top.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-growth-line';
+  src: url('../../assets/icons/line/arrow-growth.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-left-line';
+  src: url('../../assets/icons/line/arrow-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-random-line';
+  src: url('../../assets/icons/line/arrow-random.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-resize-diagonal-line';
+  src: url('../../assets/icons/line/arrow-resize-diagonal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-right-line';
+  src: url('../../assets/icons/line/arrow-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-to-bottom-line';
+  src: url('../../assets/icons/line/arrow-to-bottom.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-to-right-line';
+  src: url('../../assets/icons/line/arrow-to-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-up-left-line';
+  src: url('../../assets/icons/line/arrow-up-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-up-right-line';
+  src: url('../../assets/icons/line/arrow-up-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-up-line';
+  src: url('../../assets/icons/line/arrow-up.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-line';
+  src: url('../../assets/icons/line/arrow.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-h-alt-line';
+  src: url('../../assets/icons/line/arrows-h-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-h-line';
+  src: url('../../assets/icons/line/arrows-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-left-down-line';
+  src: url('../../assets/icons/line/arrows-left-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-maximize-line';
+  src: url('../../assets/icons/line/arrows-maximize.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-merge-line';
+  src: url('../../assets/icons/line/arrows-merge.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-resize-h-line';
+  src: url('../../assets/icons/line/arrows-resize-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-resize-v-line';
+  src: url('../../assets/icons/line/arrows-resize-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-resize-line';
+  src: url('../../assets/icons/line/arrows-resize.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-right-down-line';
+  src: url('../../assets/icons/line/arrows-right-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-shrink-h-line';
+  src: url('../../assets/icons/line/arrows-shrink-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-shrink-v-line';
+  src: url('../../assets/icons/line/arrows-shrink-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-up-right-line';
+  src: url('../../assets/icons/line/arrows-up-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-v-alt-line';
+  src: url('../../assets/icons/line/arrows-v-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrows-v-line';
+  src: url('../../assets/icons/line/arrows-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'assistive-listening-systems-line';
+  src: url('../../assets/icons/line/assistive-listening-systems.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'asterisk-line';
+  src: url('../../assets/icons/line/asterisk.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'at-line';
+  src: url('../../assets/icons/line/at.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'atom-line';
+  src: url('../../assets/icons/line/atom.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'auto-flash-line';
+  src: url('../../assets/icons/line/auto-flash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'award-alt-line';
+  src: url('../../assets/icons/line/award-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'award-line';
+  src: url('../../assets/icons/line/award.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'baby-carriage-line';
+  src: url('../../assets/icons/line/baby-carriage.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'backpack-line';
+  src: url('../../assets/icons/line/backpack.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'backspace-line';
+  src: url('../../assets/icons/line/backspace.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'backward-line';
+  src: url('../../assets/icons/line/backward.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bag-alt-line';
+  src: url('../../assets/icons/line/bag-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bag-slash-line';
+  src: url('../../assets/icons/line/bag-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bag-line';
+  src: url('../../assets/icons/line/bag.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'balance-scale-line';
+  src: url('../../assets/icons/line/balance-scale.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ban-line';
+  src: url('../../assets/icons/line/ban.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'band-aid-line';
+  src: url('../../assets/icons/line/band-aid.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bars-line';
+  src: url('../../assets/icons/line/bars.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'baseball-ball-line';
+  src: url('../../assets/icons/line/baseball-ball.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'basketball-hoop-line';
+  src: url('../../assets/icons/line/basketball-hoop.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'basketball-line';
+  src: url('../../assets/icons/line/basketball.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bath-line';
+  src: url('../../assets/icons/line/bath.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'battery-bolt-line';
+  src: url('../../assets/icons/line/battery-bolt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'battery-empty-line';
+  src: url('../../assets/icons/line/battery-empty.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bed-double-line';
+  src: url('../../assets/icons/line/bed-double.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bed-line';
+  src: url('../../assets/icons/line/bed.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'behance-alt-line';
+  src: url('../../assets/icons/line/behance-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'behance-line';
+  src: url('../../assets/icons/line/behance.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bell-school-line';
+  src: url('../../assets/icons/line/bell-school.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bell-slash-line';
+  src: url('../../assets/icons/line/bell-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bell-line';
+  src: url('../../assets/icons/line/bell.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bill-line';
+  src: url('../../assets/icons/line/bill.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bing-line';
+  src: url('../../assets/icons/line/bing.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bitcoin-alt-line';
+  src: url('../../assets/icons/line/bitcoin-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bitcoin-circle-line';
+  src: url('../../assets/icons/line/bitcoin-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bitcoin-sign-line';
+  src: url('../../assets/icons/line/bitcoin-sign.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bitcoin-line';
+  src: url('../../assets/icons/line/bitcoin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'black-berry-line';
+  src: url('../../assets/icons/line/black-berry.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'blogger-alt-line';
+  src: url('../../assets/icons/line/blogger-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'blogger-line';
+  src: url('../../assets/icons/line/blogger.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bluetooth-b-line';
+  src: url('../../assets/icons/line/bluetooth-b.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bold-line';
+  src: url('../../assets/icons/line/bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bolt-alt-line';
+  src: url('../../assets/icons/line/bolt-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bolt-slash-line';
+  src: url('../../assets/icons/line/bolt-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bolt-line';
+  src: url('../../assets/icons/line/bolt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'book-alt-line';
+  src: url('../../assets/icons/line/book-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'book-medical-line';
+  src: url('../../assets/icons/line/book-medical.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'book-open-line';
+  src: url('../../assets/icons/line/book-open.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'book-reader-line';
+  src: url('../../assets/icons/line/book-reader.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'book-line';
+  src: url('../../assets/icons/line/book.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bookmark-full-line';
+  src: url('../../assets/icons/line/bookmark-full.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bookmark-line';
+  src: url('../../assets/icons/line/bookmark.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'books-line';
+  src: url('../../assets/icons/line/books.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'boombox-line';
+  src: url('../../assets/icons/line/boombox.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-alt-line';
+  src: url('../../assets/icons/line/border-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-bottom-line';
+  src: url('../../assets/icons/line/border-bottom.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-clear-line';
+  src: url('../../assets/icons/line/border-clear.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-horizontal-line';
+  src: url('../../assets/icons/line/border-horizontal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-inner-line';
+  src: url('../../assets/icons/line/border-inner.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-left-line';
+  src: url('../../assets/icons/line/border-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-out-line';
+  src: url('../../assets/icons/line/border-out.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-right-line';
+  src: url('../../assets/icons/line/border-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-top-line';
+  src: url('../../assets/icons/line/border-top.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-vertical-line';
+  src: url('../../assets/icons/line/border-vertical.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bowling-ball-line';
+  src: url('../../assets/icons/line/bowling-ball.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'box-line';
+  src: url('../../assets/icons/line/box.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'brackets-curly-line';
+  src: url('../../assets/icons/line/brackets-curly.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'brain-line';
+  src: url('../../assets/icons/line/brain.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'briefcase-alt-line';
+  src: url('../../assets/icons/line/briefcase-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'briefcase-line';
+  src: url('../../assets/icons/line/briefcase.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bright-line';
+  src: url('../../assets/icons/line/bright.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'brightness-empty-line';
+  src: url('../../assets/icons/line/brightness-empty.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'brightness-half-line';
+  src: url('../../assets/icons/line/brightness-half.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'brightness-low-line';
+  src: url('../../assets/icons/line/brightness-low.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'brightness-minus-line';
+  src: url('../../assets/icons/line/brightness-minus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'brightness-plus-line';
+  src: url('../../assets/icons/line/brightness-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'brightness-line';
+  src: url('../../assets/icons/line/brightness.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bring-bottom-line';
+  src: url('../../assets/icons/line/bring-bottom.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bring-front-line';
+  src: url('../../assets/icons/line/bring-front.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'browser-line';
+  src: url('../../assets/icons/line/browser.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'brush-alt-line';
+  src: url('../../assets/icons/line/brush-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bug-line';
+  src: url('../../assets/icons/line/bug.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'building-line';
+  src: url('../../assets/icons/line/building.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bullseye-line';
+  src: url('../../assets/icons/line/bullseye.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bus-alt-line';
+  src: url('../../assets/icons/line/bus-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bus-school-line';
+  src: url('../../assets/icons/line/bus-school.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bus-line';
+  src: url('../../assets/icons/line/bus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'calculator-alt-line';
+  src: url('../../assets/icons/line/calculator-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'calculator-line';
+  src: url('../../assets/icons/line/calculator.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'calendar-alt-line';
+  src: url('../../assets/icons/line/calendar-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'calendar-slash-line';
+  src: url('../../assets/icons/line/calendar-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'calender-line';
+  src: url('../../assets/icons/line/calender.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'calling-line';
+  src: url('../../assets/icons/line/calling.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'camera-change-line';
+  src: url('../../assets/icons/line/camera-change.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'camera-plus-line';
+  src: url('../../assets/icons/line/camera-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'camera-slash-line';
+  src: url('../../assets/icons/line/camera-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'camera-line';
+  src: url('../../assets/icons/line/camera.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cancel-line';
+  src: url('../../assets/icons/line/cancel.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'capsule-line';
+  src: url('../../assets/icons/line/capsule.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'capture-line';
+  src: url('../../assets/icons/line/capture.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'car-sideview-line';
+  src: url('../../assets/icons/line/car-sideview.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'car-slash-line';
+  src: url('../../assets/icons/line/car-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'car-wash-line';
+  src: url('../../assets/icons/line/car-wash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'car-line';
+  src: url('../../assets/icons/line/car.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'card-atm-line';
+  src: url('../../assets/icons/line/card-atm.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'caret-right-line';
+  src: url('../../assets/icons/line/caret-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cell-line';
+  src: url('../../assets/icons/line/cell.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'celsius-line';
+  src: url('../../assets/icons/line/celsius.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'channel-add-line';
+  src: url('../../assets/icons/line/channel-add.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'channel-line';
+  src: url('../../assets/icons/line/channel.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chart-bar-alt-line';
+  src: url('../../assets/icons/line/chart-bar-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chart-bar-line';
+  src: url('../../assets/icons/line/chart-bar.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chart-down-line';
+  src: url('../../assets/icons/line/chart-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chart-growth-alt-line';
+  src: url('../../assets/icons/line/chart-growth-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chart-growth-line';
+  src: url('../../assets/icons/line/chart-growth.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chart-line-line';
+  src: url('../../assets/icons/line/chart-line.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chart-pie-alt-line';
+  src: url('../../assets/icons/line/chart-pie-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chart-pie-line';
+  src: url('../../assets/icons/line/chart-pie.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chart-line';
+  src: url('../../assets/icons/line/chart.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chat-bubble-user-line';
+  src: url('../../assets/icons/line/chat-bubble-user.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chat-info-line';
+  src: url('../../assets/icons/line/chat-info.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chat-line';
+  src: url('../../assets/icons/line/chat.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'check-circle-line';
+  src: url('../../assets/icons/line/check-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'check-square-line';
+  src: url('../../assets/icons/line/check-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'check-line';
+  src: url('../../assets/icons/line/check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'circle-layer-line';
+  src: url('../../assets/icons/line/circle-layer.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'circle-line';
+  src: url('../../assets/icons/line/circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'circuit-line';
+  src: url('../../assets/icons/line/circuit.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clapper-board-line';
+  src: url('../../assets/icons/line/clapper-board.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clinic-medical-line';
+  src: url('../../assets/icons/line/clinic-medical.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clipboard-alt-line';
+  src: url('../../assets/icons/line/clipboard-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clipboard-blank-line';
+  src: url('../../assets/icons/line/clipboard-blank.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clipboard-notes-line';
+  src: url('../../assets/icons/line/clipboard-notes.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clipboard-line';
+  src: url('../../assets/icons/line/clipboard.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-eight-line';
+  src: url('../../assets/icons/line/clock-eight.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-five-line';
+  src: url('../../assets/icons/line/clock-five.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-nine-line';
+  src: url('../../assets/icons/line/clock-nine.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-seven-line';
+  src: url('../../assets/icons/line/clock-seven.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-ten-line';
+  src: url('../../assets/icons/line/clock-ten.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-three-line';
+  src: url('../../assets/icons/line/clock-three.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-two-line';
+  src: url('../../assets/icons/line/clock-two.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-line';
+  src: url('../../assets/icons/line/clock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'close-circle-line';
+  src: url('../../assets/icons/line/close-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'close-square-line';
+  src: url('../../assets/icons/line/close-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'close-line';
+  src: url('../../assets/icons/line/close.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'closed-captioning-slash-line';
+  src: url('../../assets/icons/line/closed-captioning-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'closed-captioning-line';
+  src: url('../../assets/icons/line/closed-captioning.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-block-line';
+  src: url('../../assets/icons/line/cloud-block.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-bookmark-line';
+  src: url('../../assets/icons/line/cloud-bookmark.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-check-line';
+  src: url('../../assets/icons/line/cloud-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-computing-line';
+  src: url('../../assets/icons/line/cloud-computing.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-data-connection-line';
+  src: url('../../assets/icons/line/cloud-data-connection.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-database-tree-line';
+  src: url('../../assets/icons/line/cloud-database-tree.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-download-line';
+  src: url('../../assets/icons/line/cloud-download.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-drizzle-line';
+  src: url('../../assets/icons/line/cloud-drizzle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-exclamation-line';
+  src: url('../../assets/icons/line/cloud-exclamation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-hail-line';
+  src: url('../../assets/icons/line/cloud-hail.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-heart-line';
+  src: url('../../assets/icons/line/cloud-heart.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-info-line';
+  src: url('../../assets/icons/line/cloud-info.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-lock-line';
+  src: url('../../assets/icons/line/cloud-lock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-meatball-line';
+  src: url('../../assets/icons/line/cloud-meatball.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-moon-hail-line';
+  src: url('../../assets/icons/line/cloud-moon-hail.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-moon-meatball-line';
+  src: url('../../assets/icons/line/cloud-moon-meatball.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-moon-rain-line';
+  src: url('../../assets/icons/line/cloud-moon-rain.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-moon-showers-line';
+  src: url('../../assets/icons/line/cloud-moon-showers.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-moon-line';
+  src: url('../../assets/icons/line/cloud-moon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-question-line';
+  src: url('../../assets/icons/line/cloud-question.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-rain-sun-line';
+  src: url('../../assets/icons/line/cloud-rain-sun.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-rain-line';
+  src: url('../../assets/icons/line/cloud-rain.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-redo-line';
+  src: url('../../assets/icons/line/cloud-redo.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-share-line';
+  src: url('../../assets/icons/line/cloud-share.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-shield-line';
+  src: url('../../assets/icons/line/cloud-shield.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-showers-alt-line';
+  src: url('../../assets/icons/line/cloud-showers-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-showers-heavy-line';
+  src: url('../../assets/icons/line/cloud-showers-heavy.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-showers-line';
+  src: url('../../assets/icons/line/cloud-showers.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-slash-line';
+  src: url('../../assets/icons/line/cloud-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-sun-hail-line';
+  src: url('../../assets/icons/line/cloud-sun-hail.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-sun-meatball-line';
+  src: url('../../assets/icons/line/cloud-sun-meatball.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-sun-rain-alt-line';
+  src: url('../../assets/icons/line/cloud-sun-rain-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-sun-rain-line';
+  src: url('../../assets/icons/line/cloud-sun-rain.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-sun-tear-line';
+  src: url('../../assets/icons/line/cloud-sun-tear.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-sun-line';
+  src: url('../../assets/icons/line/cloud-sun.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-times-line';
+  src: url('../../assets/icons/line/cloud-times.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-unlock-line';
+  src: url('../../assets/icons/line/cloud-unlock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-upload-line';
+  src: url('../../assets/icons/line/cloud-upload.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-wifi-line';
+  src: url('../../assets/icons/line/cloud-wifi.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-wind-line';
+  src: url('../../assets/icons/line/cloud-wind.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cloud-line';
+  src: url('../../assets/icons/line/cloud.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clouds-line';
+  src: url('../../assets/icons/line/clouds.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'club-line';
+  src: url('../../assets/icons/line/club.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'code-branch-line';
+  src: url('../../assets/icons/line/code-branch.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'coffee-line';
+  src: url('../../assets/icons/line/coffee.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cog-line';
+  src: url('../../assets/icons/line/cog.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'coins-line';
+  src: url('../../assets/icons/line/coins.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'columns-line';
+  src: url('../../assets/icons/line/columns.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-add-line';
+  src: url('../../assets/icons/line/comment-add.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-block-line';
+  src: url('../../assets/icons/line/comment-alt-block.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-chart-lines-line';
+  src: url('../../assets/icons/line/comment-alt-chart-lines.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-check-line';
+  src: url('../../assets/icons/line/comment-alt-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-dots-line';
+  src: url('../../assets/icons/line/comment-alt-dots.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-download-line';
+  src: url('../../assets/icons/line/comment-alt-download.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-edit-line';
+  src: url('../../assets/icons/line/comment-alt-edit.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-exclamation-line';
+  src: url('../../assets/icons/line/comment-alt-exclamation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-heart-line';
+  src: url('../../assets/icons/line/comment-alt-heart.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-image-line';
+  src: url('../../assets/icons/line/comment-alt-image.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-info-line';
+  src: url('../../assets/icons/line/comment-alt-info.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-lines-line';
+  src: url('../../assets/icons/line/comment-alt-lines.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-lock-line';
+  src: url('../../assets/icons/line/comment-alt-lock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-medical-line';
+  src: url('../../assets/icons/line/comment-alt-medical.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-message-line';
+  src: url('../../assets/icons/line/comment-alt-message.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-notes-line';
+  src: url('../../assets/icons/line/comment-alt-notes.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-plus-line';
+  src: url('../../assets/icons/line/comment-alt-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-question-line';
+  src: url('../../assets/icons/line/comment-alt-question.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-redo-line';
+  src: url('../../assets/icons/line/comment-alt-redo.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-search-line';
+  src: url('../../assets/icons/line/comment-alt-search.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-share-line';
+  src: url('../../assets/icons/line/comment-alt-share.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-shield-line';
+  src: url('../../assets/icons/line/comment-alt-shield.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-slash-line';
+  src: url('../../assets/icons/line/comment-alt-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-upload-line';
+  src: url('../../assets/icons/line/comment-alt-upload.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-verify-line';
+  src: url('../../assets/icons/line/comment-alt-verify.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-alt-line';
+  src: url('../../assets/icons/line/comment-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-block-line';
+  src: url('../../assets/icons/line/comment-block.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-chart-line-line';
+  src: url('../../assets/icons/line/comment-chart-line.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-check-line';
+  src: url('../../assets/icons/line/comment-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-dots-line';
+  src: url('../../assets/icons/line/comment-dots.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-download-line';
+  src: url('../../assets/icons/line/comment-download.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-edit-line';
+  src: url('../../assets/icons/line/comment-edit.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-exclamation-line';
+  src: url('../../assets/icons/line/comment-exclamation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-heart-line';
+  src: url('../../assets/icons/line/comment-heart.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-image-line';
+  src: url('../../assets/icons/line/comment-image.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-info-alt-line';
+  src: url('../../assets/icons/line/comment-info-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-info-line';
+  src: url('../../assets/icons/line/comment-info.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-lines-line';
+  src: url('../../assets/icons/line/comment-lines.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-lock-line';
+  src: url('../../assets/icons/line/comment-lock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-medical-line';
+  src: url('../../assets/icons/line/comment-medical.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-message-line';
+  src: url('../../assets/icons/line/comment-message.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-notes-line';
+  src: url('../../assets/icons/line/comment-notes.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-plus-line';
+  src: url('../../assets/icons/line/comment-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-question-line';
+  src: url('../../assets/icons/line/comment-question.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-redo-line';
+  src: url('../../assets/icons/line/comment-redo.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-search-line';
+  src: url('../../assets/icons/line/comment-search.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-share-line';
+  src: url('../../assets/icons/line/comment-share.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-shield-line';
+  src: url('../../assets/icons/line/comment-shield.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-slash-line';
+  src: url('../../assets/icons/line/comment-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-upload-line';
+  src: url('../../assets/icons/line/comment-upload.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-verify-line';
+  src: url('../../assets/icons/line/comment-verify.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-line';
+  src: url('../../assets/icons/line/comment.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comments-alt-line';
+  src: url('../../assets/icons/line/comments-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comments-line';
+  src: url('../../assets/icons/line/comments.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'compact-disc-line';
+  src: url('../../assets/icons/line/compact-disc.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comparison-line';
+  src: url('../../assets/icons/line/comparison.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'compass-line';
+  src: url('../../assets/icons/line/compass.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'compress-alt-left-line';
+  src: url('../../assets/icons/line/compress-alt-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'compress-alt-line';
+  src: url('../../assets/icons/line/compress-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'compress-arrows-line';
+  src: url('../../assets/icons/line/compress-arrows.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'compress-lines-line';
+  src: url('../../assets/icons/line/compress-lines.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'compress-point-line';
+  src: url('../../assets/icons/line/compress-point.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'compress-v-line';
+  src: url('../../assets/icons/line/compress-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'compress-line';
+  src: url('../../assets/icons/line/compress.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'confused-line';
+  src: url('../../assets/icons/line/confused.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'constructor-line';
+  src: url('../../assets/icons/line/constructor.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'copy-alt-line';
+  src: url('../../assets/icons/line/copy-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'copy-landscape-line';
+  src: url('../../assets/icons/line/copy-landscape.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'copy-line';
+  src: url('../../assets/icons/line/copy.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'copyright-line';
+  src: url('../../assets/icons/line/copyright.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-down-left-line';
+  src: url('../../assets/icons/line/corner-down-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-down-right-alt-line';
+  src: url('../../assets/icons/line/corner-down-right-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-down-right-line';
+  src: url('../../assets/icons/line/corner-down-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-left-down-line';
+  src: url('../../assets/icons/line/corner-left-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-right-down-line';
+  src: url('../../assets/icons/line/corner-right-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-up-left-alt-line';
+  src: url('../../assets/icons/line/corner-up-left-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-up-left-line';
+  src: url('../../assets/icons/line/corner-up-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-up-right-alt-line';
+  src: url('../../assets/icons/line/corner-up-right-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-up-right-line';
+  src: url('../../assets/icons/line/corner-up-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'coronavirus-line';
+  src: url('../../assets/icons/line/coronavirus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'create-dashboard-line';
+  src: url('../../assets/icons/line/create-dashboard.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'creative-commons-pd-line';
+  src: url('../../assets/icons/line/creative-commons-pd.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'credit-card-search-line';
+  src: url('../../assets/icons/line/credit-card-search.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'credit-card-line';
+  src: url('../../assets/icons/line/credit-card.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'crockery-line';
+  src: url('../../assets/icons/line/crockery.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'crop-alt-rotate-left-line';
+  src: url('../../assets/icons/line/crop-alt-rotate-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'crop-alt-rotate-right-line';
+  src: url('../../assets/icons/line/crop-alt-rotate-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'crop-alt-line';
+  src: url('../../assets/icons/line/crop-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'crosshair-alt-line';
+  src: url('../../assets/icons/line/crosshair-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'crosshair-line';
+  src: url('../../assets/icons/line/crosshair.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'crosshairs-line';
+  src: url('../../assets/icons/line/crosshairs.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'css3-simple-line';
+  src: url('../../assets/icons/line/css3-simple.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'cube-line';
+  src: url('../../assets/icons/line/cube.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dashboard-line';
+  src: url('../../assets/icons/line/dashboard.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'data-sharing-line';
+  src: url('../../assets/icons/line/data-sharing.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'database-alt-line';
+  src: url('../../assets/icons/line/database-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'database-line';
+  src: url('../../assets/icons/line/database.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'desert-line';
+  src: url('../../assets/icons/line/desert.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'desktop-alt-slash-line';
+  src: url('../../assets/icons/line/desktop-alt-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'desktop-alt-line';
+  src: url('../../assets/icons/line/desktop-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'desktop-cloud-alt-line';
+  src: url('../../assets/icons/line/desktop-cloud-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'desktop-slash-line';
+  src: url('../../assets/icons/line/desktop-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'desktop-line';
+  src: url('../../assets/icons/line/desktop.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dialpad-alt-line';
+  src: url('../../assets/icons/line/dialpad-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dialpad-line';
+  src: url('../../assets/icons/line/dialpad.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'diamond-line';
+  src: url('../../assets/icons/line/diamond.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'diary-alt-line';
+  src: url('../../assets/icons/line/diary-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'diary-line';
+  src: url('../../assets/icons/line/diary.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dice-five-line';
+  src: url('../../assets/icons/line/dice-five.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dice-four-line';
+  src: url('../../assets/icons/line/dice-four.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dice-one-line';
+  src: url('../../assets/icons/line/dice-one.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dice-six-line';
+  src: url('../../assets/icons/line/dice-six.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dice-three-line';
+  src: url('../../assets/icons/line/dice-three.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dice-two-line';
+  src: url('../../assets/icons/line/dice-two.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'direction-line';
+  src: url('../../assets/icons/line/direction.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'directions-line';
+  src: url('../../assets/icons/line/directions.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'discord-line';
+  src: url('../../assets/icons/line/discord.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dizzy-meh-line';
+  src: url('../../assets/icons/line/dizzy-meh.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dna-line';
+  src: url('../../assets/icons/line/dna.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'docker-line';
+  src: url('../../assets/icons/line/docker.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'document-info-line';
+  src: url('../../assets/icons/line/document-info.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'document-layout-center-line';
+  src: url('../../assets/icons/line/document-layout-center.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'document-layout-left-line';
+  src: url('../../assets/icons/line/document-layout-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'document-layout-right-line';
+  src: url('../../assets/icons/line/document-layout-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dollar-alt-line';
+  src: url('../../assets/icons/line/dollar-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dollar-sign-alt-line';
+  src: url('../../assets/icons/line/dollar-sign-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dollar-sign-line';
+  src: url('../../assets/icons/line/dollar-sign.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'download-alt-line';
+  src: url('../../assets/icons/line/download-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'draggabledots-line';
+  src: url('../../assets/icons/line/draggabledots.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dribbble-line';
+  src: url('../../assets/icons/line/dribbble.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'drill-line';
+  src: url('../../assets/icons/line/drill.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dropbox-line';
+  src: url('../../assets/icons/line/dropbox.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dumbbell-line';
+  src: url('../../assets/icons/line/dumbbell.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ear-line';
+  src: url('../../assets/icons/line/ear.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'edit-alt-line';
+  src: url('../../assets/icons/line/edit-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'edit-line';
+  src: url('../../assets/icons/line/edit.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'elipsis-double-v-alt-line';
+  src: url('../../assets/icons/line/elipsis-double-v-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ellipsis-h-line';
+  src: url('../../assets/icons/line/ellipsis-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ellipsis-v-line';
+  src: url('../../assets/icons/line/ellipsis-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'emoji-line';
+  src: url('../../assets/icons/line/emoji.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'english-to-chinese-line';
+  src: url('../../assets/icons/line/english-to-chinese.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'enter-line';
+  src: url('../../assets/icons/line/enter.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-add-line';
+  src: url('../../assets/icons/line/envelope-add.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-alt-line';
+  src: url('../../assets/icons/line/envelope-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-block-line';
+  src: url('../../assets/icons/line/envelope-block.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-bookmark-line';
+  src: url('../../assets/icons/line/envelope-bookmark.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-check-line';
+  src: url('../../assets/icons/line/envelope-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-download-alt-line';
+  src: url('../../assets/icons/line/envelope-download-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-download-line';
+  src: url('../../assets/icons/line/envelope-download.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-edit-line';
+  src: url('../../assets/icons/line/envelope-edit.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-exclamation-line';
+  src: url('../../assets/icons/line/envelope-exclamation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-heart-line';
+  src: url('../../assets/icons/line/envelope-heart.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-info-line';
+  src: url('../../assets/icons/line/envelope-info.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-lock-line';
+  src: url('../../assets/icons/line/envelope-lock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-minus-line';
+  src: url('../../assets/icons/line/envelope-minus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-open-line';
+  src: url('../../assets/icons/line/envelope-open.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-question-line';
+  src: url('../../assets/icons/line/envelope-question.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-receive-line';
+  src: url('../../assets/icons/line/envelope-receive.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-redo-line';
+  src: url('../../assets/icons/line/envelope-redo.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-search-line';
+  src: url('../../assets/icons/line/envelope-search.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-send-line';
+  src: url('../../assets/icons/line/envelope-send.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-share-line';
+  src: url('../../assets/icons/line/envelope-share.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-shield-line';
+  src: url('../../assets/icons/line/envelope-shield.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-star-line';
+  src: url('../../assets/icons/line/envelope-star.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-times-line';
+  src: url('../../assets/icons/line/envelope-times.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-upload-alt-line';
+  src: url('../../assets/icons/line/envelope-upload-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-upload-line';
+  src: url('../../assets/icons/line/envelope-upload.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelope-line';
+  src: url('../../assets/icons/line/envelope.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'envelopes-line';
+  src: url('../../assets/icons/line/envelopes.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'equal-circle-line';
+  src: url('../../assets/icons/line/equal-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'estate-line';
+  src: url('../../assets/icons/line/estate.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'euro-circle-line';
+  src: url('../../assets/icons/line/euro-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'euro-line';
+  src: url('../../assets/icons/line/euro.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exchange-alt-line';
+  src: url('../../assets/icons/line/exchange-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exchange-line';
+  src: url('../../assets/icons/line/exchange.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exclamation-circle-line';
+  src: url('../../assets/icons/line/exclamation-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exclamation-octagon-line';
+  src: url('../../assets/icons/line/exclamation-octagon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exclamation-triangle-line';
+  src: url('../../assets/icons/line/exclamation-triangle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exclamation-line';
+  src: url('../../assets/icons/line/exclamation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exclude-line';
+  src: url('../../assets/icons/line/exclude.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exit-line';
+  src: url('../../assets/icons/line/exit.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'expand-alt-line';
+  src: url('../../assets/icons/line/expand-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'expand-arrows-alt-line';
+  src: url('../../assets/icons/line/expand-arrows-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'expand-arrows-line';
+  src: url('../../assets/icons/line/expand-arrows.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'expand-from-corner-line';
+  src: url('../../assets/icons/line/expand-from-corner.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'expand-left-line';
+  src: url('../../assets/icons/line/expand-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'expand-right-line';
+  src: url('../../assets/icons/line/expand-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'export-line';
+  src: url('../../assets/icons/line/export.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exposure-alt-line';
+  src: url('../../assets/icons/line/exposure-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exposure-increase-line';
+  src: url('../../assets/icons/line/exposure-increase.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'external-link-alt-line';
+  src: url('../../assets/icons/line/external-link-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'eye-slash-line';
+  src: url('../../assets/icons/line/eye-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'eye-line';
+  src: url('../../assets/icons/line/eye.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'facebook-f-line';
+  src: url('../../assets/icons/line/facebook-f.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'facebook-messenger-alt-line';
+  src: url('../../assets/icons/line/facebook-messenger-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'facebook-messenger-line';
+  src: url('../../assets/icons/line/facebook-messenger.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'facebook-line';
+  src: url('../../assets/icons/line/facebook.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'fahrenheit-line';
+  src: url('../../assets/icons/line/fahrenheit.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'fast-mail-alt-line';
+  src: url('../../assets/icons/line/fast-mail-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'fast-mail-line';
+  src: url('../../assets/icons/line/fast-mail.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'favorite-line';
+  src: url('../../assets/icons/line/favorite.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'feedback-line';
+  src: url('../../assets/icons/line/feedback.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'fidget-spinner-line';
+  src: url('../../assets/icons/line/fidget-spinner.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-alt-line';
+  src: url('../../assets/icons/line/file-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-blank-line';
+  src: url('../../assets/icons/line/file-blank.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-block-alt-line';
+  src: url('../../assets/icons/line/file-block-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-bookmark-alt-line';
+  src: url('../../assets/icons/line/file-bookmark-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-check-alt-line';
+  src: url('../../assets/icons/line/file-check-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-check-line';
+  src: url('../../assets/icons/line/file-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-contract-dollar-line';
+  src: url('../../assets/icons/line/file-contract-dollar.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-contract-line';
+  src: url('../../assets/icons/line/file-contract.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-copy-alt-line';
+  src: url('../../assets/icons/line/file-copy-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-download-alt-line';
+  src: url('../../assets/icons/line/file-download-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-download-line';
+  src: url('../../assets/icons/line/file-download.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-edit-alt-line';
+  src: url('../../assets/icons/line/file-edit-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-exclamation-alt-line';
+  src: url('../../assets/icons/line/file-exclamation-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-exclamation-line';
+  src: url('../../assets/icons/line/file-exclamation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-export-line';
+  src: url('../../assets/icons/line/file-export.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-graph-line';
+  src: url('../../assets/icons/line/file-graph.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-heart-line';
+  src: url('../../assets/icons/line/file-heart.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-import-line';
+  src: url('../../assets/icons/line/file-import.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-info-alt-line';
+  src: url('../../assets/icons/line/file-info-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-landscape-alt-line';
+  src: url('../../assets/icons/line/file-landscape-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-landscape-line';
+  src: url('../../assets/icons/line/file-landscape.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-lanscape-slash-line';
+  src: url('../../assets/icons/line/file-lanscape-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-lock-alt-line';
+  src: url('../../assets/icons/line/file-lock-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-medical-alt-line';
+  src: url('../../assets/icons/line/file-medical-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-medical-line';
+  src: url('../../assets/icons/line/file-medical.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-minus-alt-line';
+  src: url('../../assets/icons/line/file-minus-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-minus-line';
+  src: url('../../assets/icons/line/file-minus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-network-line';
+  src: url('../../assets/icons/line/file-network.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-plus-alt-line';
+  src: url('../../assets/icons/line/file-plus-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-plus-line';
+  src: url('../../assets/icons/line/file-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-question-alt-line';
+  src: url('../../assets/icons/line/file-question-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-question-line';
+  src: url('../../assets/icons/line/file-question.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-redo-alt-line';
+  src: url('../../assets/icons/line/file-redo-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-search-alt-line';
+  src: url('../../assets/icons/line/file-search-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-share-alt-line';
+  src: url('../../assets/icons/line/file-share-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-shield-alt-line';
+  src: url('../../assets/icons/line/file-shield-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-slash-line';
+  src: url('../../assets/icons/line/file-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-times-alt-line';
+  src: url('../../assets/icons/line/file-times-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-times-line';
+  src: url('../../assets/icons/line/file-times.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-upload-alt-line';
+  src: url('../../assets/icons/line/file-upload-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-upload-line';
+  src: url('../../assets/icons/line/file-upload.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'file-line';
+  src: url('../../assets/icons/line/file.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'files-landscapes-alt-line';
+  src: url('../../assets/icons/line/files-landscapes-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'files-landscapes-line';
+  src: url('../../assets/icons/line/files-landscapes.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'film-line';
+  src: url('../../assets/icons/line/film.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'filter-slash-line';
+  src: url('../../assets/icons/line/filter-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'filter-line';
+  src: url('../../assets/icons/line/filter.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'fire-line';
+  src: url('../../assets/icons/line/fire.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'flask-potion-line';
+  src: url('../../assets/icons/line/flask-potion.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'flask-line';
+  src: url('../../assets/icons/line/flask.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'flip-h-alt-line';
+  src: url('../../assets/icons/line/flip-h-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'flip-h-line';
+  src: url('../../assets/icons/line/flip-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'flip-v-alt-line';
+  src: url('../../assets/icons/line/flip-v-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'flip-v-line';
+  src: url('../../assets/icons/line/flip-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'flower-line';
+  src: url('../../assets/icons/line/flower.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'focus-add-line';
+  src: url('../../assets/icons/line/focus-add.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'focus-target-line';
+  src: url('../../assets/icons/line/focus-target.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'focus-line';
+  src: url('../../assets/icons/line/focus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-check-line';
+  src: url('../../assets/icons/line/folder-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-download-line';
+  src: url('../../assets/icons/line/folder-download.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-exclamation-line';
+  src: url('../../assets/icons/line/folder-exclamation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-heart-line';
+  src: url('../../assets/icons/line/folder-heart.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-info-line';
+  src: url('../../assets/icons/line/folder-info.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-lock-line';
+  src: url('../../assets/icons/line/folder-lock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-medical-line';
+  src: url('../../assets/icons/line/folder-medical.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-minus-line';
+  src: url('../../assets/icons/line/folder-minus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-network-line';
+  src: url('../../assets/icons/line/folder-network.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-open-line';
+  src: url('../../assets/icons/line/folder-open.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-plus-line';
+  src: url('../../assets/icons/line/folder-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-question-line';
+  src: url('../../assets/icons/line/folder-question.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-slash-line';
+  src: url('../../assets/icons/line/folder-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-times-line';
+  src: url('../../assets/icons/line/folder-times.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-upload-line';
+  src: url('../../assets/icons/line/folder-upload.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'folder-line';
+  src: url('../../assets/icons/line/folder.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'font-line';
+  src: url('../../assets/icons/line/font.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'football-american-line';
+  src: url('../../assets/icons/line/football-american.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'football-ball-line';
+  src: url('../../assets/icons/line/football-ball.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'football-line';
+  src: url('../../assets/icons/line/football.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'forecastcloud-moon-tear-line';
+  src: url('../../assets/icons/line/forecastcloud-moon-tear.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'forwaded-call-line';
+  src: url('../../assets/icons/line/forwaded-call.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'forward-line';
+  src: url('../../assets/icons/line/forward.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'frown-line';
+  src: url('../../assets/icons/line/frown.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'game-structure-line';
+  src: url('../../assets/icons/line/game-structure.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'gift-line';
+  src: url('../../assets/icons/line/gift.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'github-alt-line';
+  src: url('../../assets/icons/line/github-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'github-line';
+  src: url('../../assets/icons/line/github.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'gitlab-line';
+  src: url('../../assets/icons/line/gitlab.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'glass-martini-alt-slash-line';
+  src: url('../../assets/icons/line/glass-martini-alt-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'glass-martini-alt-line';
+  src: url('../../assets/icons/line/glass-martini-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'glass-martini-line';
+  src: url('../../assets/icons/line/glass-martini.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'glass-tea-line';
+  src: url('../../assets/icons/line/glass-tea.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'glass-line';
+  src: url('../../assets/icons/line/glass.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'globe-line';
+  src: url('../../assets/icons/line/globe.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'gold-line';
+  src: url('../../assets/icons/line/gold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'golf-ball-line';
+  src: url('../../assets/icons/line/golf-ball.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'google-drive-alt-line';
+  src: url('../../assets/icons/line/google-drive-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'google-drive-line';
+  src: url('../../assets/icons/line/google-drive.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'google-hangouts-alt-line';
+  src: url('../../assets/icons/line/google-hangouts-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'google-hangouts-line';
+  src: url('../../assets/icons/line/google-hangouts.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'google-play-line';
+  src: url('../../assets/icons/line/google-play.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'google-line';
+  src: url('../../assets/icons/line/google.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'graduation-cap-line';
+  src: url('../../assets/icons/line/graduation-cap.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'graph-bar-line';
+  src: url('../../assets/icons/line/graph-bar.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'grid-line';
+  src: url('../../assets/icons/line/grid.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'grids-line';
+  src: url('../../assets/icons/line/grids.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'grin-tongue-wink-alt-line';
+  src: url('../../assets/icons/line/grin-tongue-wink-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'grin-tongue-wink-line';
+  src: url('../../assets/icons/line/grin-tongue-wink.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'grin-line';
+  src: url('../../assets/icons/line/grin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'grip-horizontal-line-line';
+  src: url('../../assets/icons/line/grip-horizontal-line.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hard-hat-line';
+  src: url('../../assets/icons/line/hard-hat.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hdd-line';
+  src: url('../../assets/icons/line/hdd.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'head-side-cough-line';
+  src: url('../../assets/icons/line/head-side-cough.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'head-side-mask-line';
+  src: url('../../assets/icons/line/head-side-mask.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'head-side-line';
+  src: url('../../assets/icons/line/head-side.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'headphone-slash-line';
+  src: url('../../assets/icons/line/headphone-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'headphones-alt-line';
+  src: url('../../assets/icons/line/headphones-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'headphones-line';
+  src: url('../../assets/icons/line/headphones.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'heart-alt-line';
+  src: url('../../assets/icons/line/heart-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'heart-break-line';
+  src: url('../../assets/icons/line/heart-break.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'heart-medical-line';
+  src: url('../../assets/icons/line/heart-medical.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'heart-rate-line';
+  src: url('../../assets/icons/line/heart-rate.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'heart-sign-line';
+  src: url('../../assets/icons/line/heart-sign.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'heart-line';
+  src: url('../../assets/icons/line/heart.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'heartbeat-line';
+  src: url('../../assets/icons/line/heartbeat.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hindi-to-chinese-line';
+  src: url('../../assets/icons/line/hindi-to-chinese.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hipchat-line';
+  src: url('../../assets/icons/line/hipchat.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'history-alt-line';
+  src: url('../../assets/icons/line/history-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'history-line';
+  src: url('../../assets/icons/line/history.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'home-alt-line';
+  src: url('../../assets/icons/line/home-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'home-line';
+  src: url('../../assets/icons/line/home.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'horizontal-align-center-line';
+  src: url('../../assets/icons/line/horizontal-align-center.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'horizontal-align-left-line';
+  src: url('../../assets/icons/line/horizontal-align-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'horizontal-align-right-line';
+  src: url('../../assets/icons/line/horizontal-align-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'horizontal-distribution-center-line';
+  src: url('../../assets/icons/line/horizontal-distribution-center.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'horizontal-distribution-left-line';
+  src: url('../../assets/icons/line/horizontal-distribution-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'horizontal-distribution-right-line';
+  src: url('../../assets/icons/line/horizontal-distribution-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hospital-square-sign-line';
+  src: url('../../assets/icons/line/hospital-square-sign.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hospital-symbol-line';
+  src: url('../../assets/icons/line/hospital-symbol.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hospital-line';
+  src: url('../../assets/icons/line/hospital.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hourglass-line';
+  src: url('../../assets/icons/line/hourglass.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'house-user-line';
+  src: url('../../assets/icons/line/house-user.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'html3-alt-line';
+  src: url('../../assets/icons/line/html3-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'html3-line';
+  src: url('../../assets/icons/line/html3.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'html5-alt-line';
+  src: url('../../assets/icons/line/html5-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'html5-line';
+  src: url('../../assets/icons/line/html5.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hunting-line';
+  src: url('../../assets/icons/line/hunting.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'icons-line';
+  src: url('../../assets/icons/line/icons.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'illustration-line';
+  src: url('../../assets/icons/line/illustration.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-alt-slash-line';
+  src: url('../../assets/icons/line/image-alt-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-block-line';
+  src: url('../../assets/icons/line/image-block.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-broken-line';
+  src: url('../../assets/icons/line/image-broken.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-check-line';
+  src: url('../../assets/icons/line/image-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-download-line';
+  src: url('../../assets/icons/line/image-download.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-edit-line';
+  src: url('../../assets/icons/line/image-edit.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-lock-line';
+  src: url('../../assets/icons/line/image-lock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-minus-line';
+  src: url('../../assets/icons/line/image-minus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-plus-line';
+  src: url('../../assets/icons/line/image-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-question-line';
+  src: url('../../assets/icons/line/image-question.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-redo-line';
+  src: url('../../assets/icons/line/image-redo.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-resize-landscape-line';
+  src: url('../../assets/icons/line/image-resize-landscape.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-resize-square-line';
+  src: url('../../assets/icons/line/image-resize-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-search-line';
+  src: url('../../assets/icons/line/image-search.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-share-line';
+  src: url('../../assets/icons/line/image-share.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-shield-line';
+  src: url('../../assets/icons/line/image-shield.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-slash-line';
+  src: url('../../assets/icons/line/image-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-times-line';
+  src: url('../../assets/icons/line/image-times.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-upload-line';
+  src: url('../../assets/icons/line/image-upload.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-v-line';
+  src: url('../../assets/icons/line/image-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-line';
+  src: url('../../assets/icons/line/image.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'images-line';
+  src: url('../../assets/icons/line/images.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'import-line';
+  src: url('../../assets/icons/line/import.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'inbox-line';
+  src: url('../../assets/icons/line/inbox.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'incoming-call-line';
+  src: url('../../assets/icons/line/incoming-call.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'info-circle-line';
+  src: url('../../assets/icons/line/info-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'info-line';
+  src: url('../../assets/icons/line/info.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'instagram-alt-line';
+  src: url('../../assets/icons/line/instagram-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'instagram-line';
+  src: url('../../assets/icons/line/instagram.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'intercom-alt-line';
+  src: url('../../assets/icons/line/intercom-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'intercom-line';
+  src: url('../../assets/icons/line/intercom.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'invoice-line';
+  src: url('../../assets/icons/line/invoice.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'italic-line';
+  src: url('../../assets/icons/line/italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'jackhammer-line';
+  src: url('../../assets/icons/line/jackhammer.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'java-script-line';
+  src: url('../../assets/icons/line/java-script.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'kayak-line';
+  src: url('../../assets/icons/line/kayak.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'key-skeleton-alt-line';
+  src: url('../../assets/icons/line/key-skeleton-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'key-skeleton-line';
+  src: url('../../assets/icons/line/key-skeleton.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'keyboard-alt-line';
+  src: url('../../assets/icons/line/keyboard-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'keyboard-hide-line';
+  src: url('../../assets/icons/line/keyboard-hide.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'keyboard-show-line';
+  src: url('../../assets/icons/line/keyboard-show.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'keyboard-line';
+  src: url('../../assets/icons/line/keyboard.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'keyhole-circle-line';
+  src: url('../../assets/icons/line/keyhole-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'keyhole-square-full-line';
+  src: url('../../assets/icons/line/keyhole-square-full.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'keyhole-square-line';
+  src: url('../../assets/icons/line/keyhole-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'kid-line';
+  src: url('../../assets/icons/line/kid.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'label-alt-line';
+  src: url('../../assets/icons/line/label-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'label-line';
+  src: url('../../assets/icons/line/label.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lamp-line';
+  src: url('../../assets/icons/line/lamp.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'language-line';
+  src: url('../../assets/icons/line/language.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'laptop-cloud-line';
+  src: url('../../assets/icons/line/laptop-cloud.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'laptop-connection-line';
+  src: url('../../assets/icons/line/laptop-connection.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'laptop-line';
+  src: url('../../assets/icons/line/laptop.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'laughing-line';
+  src: url('../../assets/icons/line/laughing.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'layer-group-slash-line';
+  src: url('../../assets/icons/line/layer-group-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'layer-group-line';
+  src: url('../../assets/icons/line/layer-group.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'layers-alt-line';
+  src: url('../../assets/icons/line/layers-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'layers-slash-line';
+  src: url('../../assets/icons/line/layers-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'layers-line';
+  src: url('../../assets/icons/line/layers.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'left-arrow-from-left-line';
+  src: url('../../assets/icons/line/left-arrow-from-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'left-arrow-to-left-line';
+  src: url('../../assets/icons/line/left-arrow-to-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'left-indent-alt-line';
+  src: url('../../assets/icons/line/left-indent-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'left-indent-line';
+  src: url('../../assets/icons/line/left-indent.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'left-to-right-text-direction-line';
+  src: url('../../assets/icons/line/left-to-right-text-direction.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'letter-chinese-a-line';
+  src: url('../../assets/icons/line/letter-chinese-a.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'letter-english-a-line';
+  src: url('../../assets/icons/line/letter-english-a.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'letter-hindi-a-line';
+  src: url('../../assets/icons/line/letter-hindi-a.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'letter-japanese-a-line';
+  src: url('../../assets/icons/line/letter-japanese-a.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'life-ring-line';
+  src: url('../../assets/icons/line/life-ring.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lightbulb-alt-line';
+  src: url('../../assets/icons/line/lightbulb-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lightbulb-line';
+  src: url('../../assets/icons/line/lightbulb.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'line-alt-line';
+  src: url('../../assets/icons/line/line-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'line-spacing-line';
+  src: url('../../assets/icons/line/line-spacing.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'line-line';
+  src: url('../../assets/icons/line/line.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'link-add-line';
+  src: url('../../assets/icons/line/link-add.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'link-alt-line';
+  src: url('../../assets/icons/line/link-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'link-broken-line';
+  src: url('../../assets/icons/line/link-broken.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'link-h-line';
+  src: url('../../assets/icons/line/link-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'link-line';
+  src: url('../../assets/icons/line/link.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'linkedin-alt-line';
+  src: url('../../assets/icons/line/linkedin-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'linkedin-line';
+  src: url('../../assets/icons/line/linkedin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'linux-line';
+  src: url('../../assets/icons/line/linux.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lira-sign-line';
+  src: url('../../assets/icons/line/lira-sign.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'list-ol-alt-line';
+  src: url('../../assets/icons/line/list-ol-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'list-ol-line';
+  src: url('../../assets/icons/line/list-ol.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'list-ui-alt-line';
+  src: url('../../assets/icons/line/list-ui-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'list-ul-line';
+  src: url('../../assets/icons/line/list-ul.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'location-arrow-alt-line';
+  src: url('../../assets/icons/line/location-arrow-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'location-arrow-line';
+  src: url('../../assets/icons/line/location-arrow.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'location-pin-alt-line';
+  src: url('../../assets/icons/line/location-pin-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'location-point-line';
+  src: url('../../assets/icons/line/location-point.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lock-access-line';
+  src: url('../../assets/icons/line/lock-access.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lock-alt-line';
+  src: url('../../assets/icons/line/lock-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lock-open-alt-line';
+  src: url('../../assets/icons/line/lock-open-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lock-slash-line';
+  src: url('../../assets/icons/line/lock-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lock-line';
+  src: url('../../assets/icons/line/lock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lottiefiles-alt-line';
+  src: url('../../assets/icons/line/lottiefiles-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lottiefiles-line';
+  src: url('../../assets/icons/line/lottiefiles.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'luggage-cart-line';
+  src: url('../../assets/icons/line/luggage-cart.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mailbox-alt-line';
+  src: url('../../assets/icons/line/mailbox-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mailbox-line';
+  src: url('../../assets/icons/line/mailbox.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-marker-alt-line';
+  src: url('../../assets/icons/line/map-marker-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-marker-edit-line';
+  src: url('../../assets/icons/line/map-marker-edit.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-marker-info-line';
+  src: url('../../assets/icons/line/map-marker-info.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-marker-minus-line';
+  src: url('../../assets/icons/line/map-marker-minus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-marker-plus-line';
+  src: url('../../assets/icons/line/map-marker-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-marker-question-line';
+  src: url('../../assets/icons/line/map-marker-question.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-marker-shield-line';
+  src: url('../../assets/icons/line/map-marker-shield.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-marker-slash-line';
+  src: url('../../assets/icons/line/map-marker-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-marker-line';
+  src: url('../../assets/icons/line/map-marker.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-pin-alt-line';
+  src: url('../../assets/icons/line/map-pin-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-pin-line';
+  src: url('../../assets/icons/line/map-pin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'map-line';
+  src: url('../../assets/icons/line/map.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mars-line';
+  src: url('../../assets/icons/line/mars.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'master-card-line';
+  src: url('../../assets/icons/line/master-card.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'maximize-left-line';
+  src: url('../../assets/icons/line/maximize-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'medal-line';
+  src: url('../../assets/icons/line/medal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'medical-drip-line';
+  src: url('../../assets/icons/line/medical-drip.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'medical-square-full-line';
+  src: url('../../assets/icons/line/medical-square-full.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'medical-square-line';
+  src: url('../../assets/icons/line/medical-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'medium-m-line';
+  src: url('../../assets/icons/line/medium-m.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'medkit-line';
+  src: url('../../assets/icons/line/medkit.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'meeting-board-line';
+  src: url('../../assets/icons/line/meeting-board.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'megaphone-line';
+  src: url('../../assets/icons/line/megaphone.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'meh-alt-line';
+  src: url('../../assets/icons/line/meh-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'meh-closed-eye-line';
+  src: url('../../assets/icons/line/meh-closed-eye.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'meh-line';
+  src: url('../../assets/icons/line/meh.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'message-line';
+  src: url('../../assets/icons/line/message.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'metro-line';
+  src: url('../../assets/icons/line/metro.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'microphone-slash-line';
+  src: url('../../assets/icons/line/microphone-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'microphone-line';
+  src: url('../../assets/icons/line/microphone.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'microscope-line';
+  src: url('../../assets/icons/line/microscope.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'microsoft-line';
+  src: url('../../assets/icons/line/microsoft.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'minus-circle-line';
+  src: url('../../assets/icons/line/minus-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'minus-path-line';
+  src: url('../../assets/icons/line/minus-path.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'minus-square-full-line';
+  src: url('../../assets/icons/line/minus-square-full.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'minus-square-line';
+  src: url('../../assets/icons/line/minus-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'minus-line';
+  src: url('../../assets/icons/line/minus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'missed-call-line';
+  src: url('../../assets/icons/line/missed-call.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mobile-android-alt-line';
+  src: url('../../assets/icons/line/mobile-android-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mobile-android-line';
+  src: url('../../assets/icons/line/mobile-android.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mobile-vibrate-line';
+  src: url('../../assets/icons/line/mobile-vibrate.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'modem-line';
+  src: url('../../assets/icons/line/modem.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'money-bill-slash-line';
+  src: url('../../assets/icons/line/money-bill-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'money-bill-stack-line';
+  src: url('../../assets/icons/line/money-bill-stack.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'money-bill-line';
+  src: url('../../assets/icons/line/money-bill.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'money-insert-line';
+  src: url('../../assets/icons/line/money-insert.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'money-stack-line';
+  src: url('../../assets/icons/line/money-stack.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'money-withdraw-line';
+  src: url('../../assets/icons/line/money-withdraw.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'money-withdrawal-line';
+  src: url('../../assets/icons/line/money-withdrawal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'moneybag-alt-line';
+  src: url('../../assets/icons/line/moneybag-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'moneybag-line';
+  src: url('../../assets/icons/line/moneybag.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'monitor-heart-rate-line';
+  src: url('../../assets/icons/line/monitor-heart-rate.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'monitor-line';
+  src: url('../../assets/icons/line/monitor.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'moon-eclipse-line';
+  src: url('../../assets/icons/line/moon-eclipse.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'moon-line';
+  src: url('../../assets/icons/line/moon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'moonset-line';
+  src: url('../../assets/icons/line/moonset.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mountains-sun-line';
+  src: url('../../assets/icons/line/mountains-sun.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mountains-line';
+  src: url('../../assets/icons/line/mountains.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mouse-alt-2-line';
+  src: url('../../assets/icons/line/mouse-alt-2.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mouse-alt-line';
+  src: url('../../assets/icons/line/mouse-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'mouse-line';
+  src: url('../../assets/icons/line/mouse.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'multiply-line';
+  src: url('../../assets/icons/line/multiply.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'music-note-line';
+  src: url('../../assets/icons/line/music-note.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'music-tune-slash-line';
+  src: url('../../assets/icons/line/music-tune-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'music-line';
+  src: url('../../assets/icons/line/music.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'n-a-line';
+  src: url('../../assets/icons/line/n-a.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'navigator-line';
+  src: url('../../assets/icons/line/navigator.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'nerd-line';
+  src: url('../../assets/icons/line/nerd.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'newspaper-line';
+  src: url('../../assets/icons/line/newspaper.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ninja-line';
+  src: url('../../assets/icons/line/ninja.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'no-entry-line';
+  src: url('../../assets/icons/line/no-entry.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'notebooks-line';
+  src: url('../../assets/icons/line/notebooks.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'notes-line';
+  src: url('../../assets/icons/line/notes.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'object-group-line';
+  src: url('../../assets/icons/line/object-group.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'object-ungroup-line';
+  src: url('../../assets/icons/line/object-ungroup.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'octagon-line';
+  src: url('../../assets/icons/line/octagon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'okta-line';
+  src: url('../../assets/icons/line/okta.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'opera-alt-line';
+  src: url('../../assets/icons/line/opera-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'opera-line';
+  src: url('../../assets/icons/line/opera.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'outgoing-call-line';
+  src: url('../../assets/icons/line/outgoing-call.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'package-line';
+  src: url('../../assets/icons/line/package.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'padlock-line';
+  src: url('../../assets/icons/line/padlock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pagelines-line';
+  src: url('../../assets/icons/line/pagelines.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pagerduty-line';
+  src: url('../../assets/icons/line/pagerduty.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'paint-tool-line';
+  src: url('../../assets/icons/line/paint-tool.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'palette-line';
+  src: url('../../assets/icons/line/palette.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'panel-add-line';
+  src: url('../../assets/icons/line/panel-add.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'panorama-h-alt-line';
+  src: url('../../assets/icons/line/panorama-h-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'panorama-h-line';
+  src: url('../../assets/icons/line/panorama-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'panorama-v-line';
+  src: url('../../assets/icons/line/panorama-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'paperclip-line';
+  src: url('../../assets/icons/line/paperclip.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'paragraph-line';
+  src: url('../../assets/icons/line/paragraph.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'parcel-line';
+  src: url('../../assets/icons/line/parcel.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'parking-circle-line';
+  src: url('../../assets/icons/line/parking-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'parking-square-line';
+  src: url('../../assets/icons/line/parking-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pathfinder-unite-line';
+  src: url('../../assets/icons/line/pathfinder-unite.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pathfinder-line';
+  src: url('../../assets/icons/line/pathfinder.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pause-circle-line';
+  src: url('../../assets/icons/line/pause-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pause-line';
+  src: url('../../assets/icons/line/pause.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'paypal-line';
+  src: url('../../assets/icons/line/paypal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pen-line';
+  src: url('../../assets/icons/line/pen.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pentagon-line';
+  src: url('../../assets/icons/line/pentagon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'percentage-line';
+  src: url('../../assets/icons/line/percentage.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'phone-alt-line';
+  src: url('../../assets/icons/line/phone-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'phone-pause-line';
+  src: url('../../assets/icons/line/phone-pause.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'phone-slash-line';
+  src: url('../../assets/icons/line/phone-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'phone-times-line';
+  src: url('../../assets/icons/line/phone-times.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'phone-volume-line';
+  src: url('../../assets/icons/line/phone-volume.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'phone-line';
+  src: url('../../assets/icons/line/phone.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'picture-line';
+  src: url('../../assets/icons/line/picture.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pizza-slice-line';
+  src: url('../../assets/icons/line/pizza-slice.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'plane-arrival-line';
+  src: url('../../assets/icons/line/plane-arrival.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'plane-departure-line';
+  src: url('../../assets/icons/line/plane-departure.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'plane-fly-line';
+  src: url('../../assets/icons/line/plane-fly.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'plane-line';
+  src: url('../../assets/icons/line/plane.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'play-circle-line';
+  src: url('../../assets/icons/line/play-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'play-line';
+  src: url('../../assets/icons/line/play.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'plug-line';
+  src: url('../../assets/icons/line/plug.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'plus-circle-line';
+  src: url('../../assets/icons/line/plus-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'plus-square-line';
+  src: url('../../assets/icons/line/plus-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'plus-line';
+  src: url('../../assets/icons/line/plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'podium-line';
+  src: url('../../assets/icons/line/podium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'polygon-line';
+  src: url('../../assets/icons/line/polygon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'post-stamp-line';
+  src: url('../../assets/icons/line/post-stamp.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'postcard-line';
+  src: url('../../assets/icons/line/postcard.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pound-circle-line';
+  src: url('../../assets/icons/line/pound-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pound-line';
+  src: url('../../assets/icons/line/pound.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'power-line';
+  src: url('../../assets/icons/line/power.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'prescription-bottle-line';
+  src: url('../../assets/icons/line/prescription-bottle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'presentation-check-line';
+  src: url('../../assets/icons/line/presentation-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'presentation-edit-line';
+  src: url('../../assets/icons/line/presentation-edit.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'presentation-line-line';
+  src: url('../../assets/icons/line/presentation-line.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'presentation-lines-alt-line';
+  src: url('../../assets/icons/line/presentation-lines-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'presentation-minus-line';
+  src: url('../../assets/icons/line/presentation-minus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'presentation-play-line';
+  src: url('../../assets/icons/line/presentation-play.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'presentation-plus-line';
+  src: url('../../assets/icons/line/presentation-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'presentation-times-line';
+  src: url('../../assets/icons/line/presentation-times.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'presentation-line';
+  src: url('../../assets/icons/line/presentation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'previous-line';
+  src: url('../../assets/icons/line/previous.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pricetag-alt-line';
+  src: url('../../assets/icons/line/pricetag-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'print-slash-line';
+  src: url('../../assets/icons/line/print-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'print-line';
+  src: url('../../assets/icons/line/print.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'process-line';
+  src: url('../../assets/icons/line/process.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'processor-line';
+  src: url('../../assets/icons/line/processor.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'programming-language-line';
+  src: url('../../assets/icons/line/programming-language.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pump-line';
+  src: url('../../assets/icons/line/pump.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'puzzle-piece-line';
+  src: url('../../assets/icons/line/puzzle-piece.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'qrcode-scan-line';
+  src: url('../../assets/icons/line/qrcode-scan.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'question-circle-line';
+  src: url('../../assets/icons/line/question-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'question-line';
+  src: url('../../assets/icons/line/question.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'rainbow-line';
+  src: url('../../assets/icons/line/rainbow.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'raindrops-alt-line';
+  src: url('../../assets/icons/line/raindrops-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'raindrops-line';
+  src: url('../../assets/icons/line/raindrops.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'react-line';
+  src: url('../../assets/icons/line/react.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'receipt-alt-line';
+  src: url('../../assets/icons/line/receipt-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'receipt-line';
+  src: url('../../assets/icons/line/receipt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'record-audio-line';
+  src: url('../../assets/icons/line/record-audio.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'reddit-alien-alt-line';
+  src: url('../../assets/icons/line/reddit-alien-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'redo-line';
+  src: url('../../assets/icons/line/redo.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'refresh-line';
+  src: url('../../assets/icons/line/refresh.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'registered-line';
+  src: url('../../assets/icons/line/registered.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'repeat-line';
+  src: url('../../assets/icons/line/repeat.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'restaurant-line';
+  src: url('../../assets/icons/line/restaurant.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'right-indent-alt-line';
+  src: url('../../assets/icons/line/right-indent-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'right-to-left-text-direction-line';
+  src: url('../../assets/icons/line/right-to-left-text-direction.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'robot-line';
+  src: url('../../assets/icons/line/robot.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'rocket-line';
+  src: url('../../assets/icons/line/rocket.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'rope-way-line';
+  src: url('../../assets/icons/line/rope-way.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'rotate-360-line';
+  src: url('../../assets/icons/line/rotate-360.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'rss-alt-line';
+  src: url('../../assets/icons/line/rss-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'rss-interface-line';
+  src: url('../../assets/icons/line/rss-interface.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'rss-line';
+  src: url('../../assets/icons/line/rss.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ruler-combined-line';
+  src: url('../../assets/icons/line/ruler-combined.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ruler-line';
+  src: url('../../assets/icons/line/ruler.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'rupee-sign-line';
+  src: url('../../assets/icons/line/rupee-sign.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sad-cry-line';
+  src: url('../../assets/icons/line/sad-cry.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sad-crying-line';
+  src: url('../../assets/icons/line/sad-crying.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sad-dizzy-line';
+  src: url('../../assets/icons/line/sad-dizzy.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sad-squint-line';
+  src: url('../../assets/icons/line/sad-squint.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sad-line';
+  src: url('../../assets/icons/line/sad.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sanitizer-alt-line';
+  src: url('../../assets/icons/line/sanitizer-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sanitizer-line';
+  src: url('../../assets/icons/line/sanitizer.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'save-line';
+  src: url('../../assets/icons/line/save.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'scaling-left-line';
+  src: url('../../assets/icons/line/scaling-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'scaling-right-line';
+  src: url('../../assets/icons/line/scaling-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'scenery-line';
+  src: url('../../assets/icons/line/scenery.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'schedule-line';
+  src: url('../../assets/icons/line/schedule.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'screw-line';
+  src: url('../../assets/icons/line/screw.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'scroll-h-line';
+  src: url('../../assets/icons/line/scroll-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'scroll-line';
+  src: url('../../assets/icons/line/scroll.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'search-alt-line';
+  src: url('../../assets/icons/line/search-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'search-minus-line';
+  src: url('../../assets/icons/line/search-minus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'search-plus-line';
+  src: url('../../assets/icons/line/search-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'search-line';
+  src: url('../../assets/icons/line/search.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'selfie-line';
+  src: url('../../assets/icons/line/selfie.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'server-alt-line';
+  src: url('../../assets/icons/line/server-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'server-connection-line';
+  src: url('../../assets/icons/line/server-connection.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'server-network-alt-line';
+  src: url('../../assets/icons/line/server-network-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'server-network-line';
+  src: url('../../assets/icons/line/server-network.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'server-line';
+  src: url('../../assets/icons/line/server.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'servers-line';
+  src: url('../../assets/icons/line/servers.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'servicemark-line';
+  src: url('../../assets/icons/line/servicemark.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'setting-line';
+  src: url('../../assets/icons/line/setting.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'share-alt-line';
+  src: url('../../assets/icons/line/share-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'share-line';
+  src: url('../../assets/icons/line/share.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shield-check-line';
+  src: url('../../assets/icons/line/shield-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shield-exclamation-line';
+  src: url('../../assets/icons/line/shield-exclamation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shield-plus-line';
+  src: url('../../assets/icons/line/shield-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shield-question-line';
+  src: url('../../assets/icons/line/shield-question.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shield-slash-line';
+  src: url('../../assets/icons/line/shield-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shield-line';
+  src: url('../../assets/icons/line/shield.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ship-line';
+  src: url('../../assets/icons/line/ship.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shop-line';
+  src: url('../../assets/icons/line/shop.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shopping-bag-line';
+  src: url('../../assets/icons/line/shopping-bag.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shopping-basket-line';
+  src: url('../../assets/icons/line/shopping-basket.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shopping-cart-alt-line';
+  src: url('../../assets/icons/line/shopping-cart-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shopping-cart-line';
+  src: url('../../assets/icons/line/shopping-cart.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shovel-line';
+  src: url('../../assets/icons/line/shovel.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shrink-line';
+  src: url('../../assets/icons/line/shrink.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shuffle-line';
+  src: url('../../assets/icons/line/shuffle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shutter-alt-line';
+  src: url('../../assets/icons/line/shutter-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shutter-line';
+  src: url('../../assets/icons/line/shutter.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sick-line';
+  src: url('../../assets/icons/line/sick.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sigma-line';
+  src: url('../../assets/icons/line/sigma.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sign-alt-line';
+  src: url('../../assets/icons/line/sign-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sign-in-alt-line';
+  src: url('../../assets/icons/line/sign-in-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sign-left-line';
+  src: url('../../assets/icons/line/sign-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sign-out-alt-line';
+  src: url('../../assets/icons/line/sign-out-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sign-right-line';
+  src: url('../../assets/icons/line/sign-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'signal-alt-3-line';
+  src: url('../../assets/icons/line/signal-alt-3.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'signal-alt-line';
+  src: url('../../assets/icons/line/signal-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'signal-line';
+  src: url('../../assets/icons/line/signal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'signin-line';
+  src: url('../../assets/icons/line/signin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'signout-line';
+  src: url('../../assets/icons/line/signout.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'silence-line';
+  src: url('../../assets/icons/line/silence.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'silent-squint-line';
+  src: url('../../assets/icons/line/silent-squint.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sim-card-line';
+  src: url('../../assets/icons/line/sim-card.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sitemap-line';
+  src: url('../../assets/icons/line/sitemap.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'skip-forward-alt-line';
+  src: url('../../assets/icons/line/skip-forward-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'skip-forward-circle-line';
+  src: url('../../assets/icons/line/skip-forward-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'skip-forward-line';
+  src: url('../../assets/icons/line/skip-forward.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'skype-alt-line';
+  src: url('../../assets/icons/line/skype-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'skype-line';
+  src: url('../../assets/icons/line/skype.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'slack-alt-line';
+  src: url('../../assets/icons/line/slack-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'slack-line';
+  src: url('../../assets/icons/line/slack.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'slider-h-range-line';
+  src: url('../../assets/icons/line/slider-h-range.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'slider-h-line';
+  src: url('../../assets/icons/line/slider-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sliders-v-alt-line';
+  src: url('../../assets/icons/line/sliders-v-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sliders-v-line';
+  src: url('../../assets/icons/line/sliders-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'smile-beam-line';
+  src: url('../../assets/icons/line/smile-beam.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'smile-dizzy-line';
+  src: url('../../assets/icons/line/smile-dizzy.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'smile-squint-wink-alt-line';
+  src: url('../../assets/icons/line/smile-squint-wink-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'smile-squint-wink-line';
+  src: url('../../assets/icons/line/smile-squint-wink.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'smile-wink-alt-line';
+  src: url('../../assets/icons/line/smile-wink-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'smile-wink-line';
+  src: url('../../assets/icons/line/smile-wink.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'smile-line';
+  src: url('../../assets/icons/line/smile.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'snapchat-alt-line';
+  src: url('../../assets/icons/line/snapchat-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'snapchat-ghost-line';
+  src: url('../../assets/icons/line/snapchat-ghost.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'snapchat-square-line';
+  src: url('../../assets/icons/line/snapchat-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'snow-flake-line';
+  src: url('../../assets/icons/line/snow-flake.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'snowflake-alt-line';
+  src: url('../../assets/icons/line/snowflake-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'snowflake-line';
+  src: url('../../assets/icons/line/snowflake.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'social-distancing-line';
+  src: url('../../assets/icons/line/social-distancing.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sort-amount-down-line';
+  src: url('../../assets/icons/line/sort-amount-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sort-amount-up-line';
+  src: url('../../assets/icons/line/sort-amount-up.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sort-line';
+  src: url('../../assets/icons/line/sort.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sorting-line';
+  src: url('../../assets/icons/line/sorting.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'space-key-line';
+  src: url('../../assets/icons/line/space-key.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'spade-line';
+  src: url('../../assets/icons/line/spade.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sperms-line';
+  src: url('../../assets/icons/line/sperms.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'spin-line';
+  src: url('../../assets/icons/line/spin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'spinner-alt-line';
+  src: url('../../assets/icons/line/spinner-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'spinner-line';
+  src: url('../../assets/icons/line/spinner.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'square-full-line';
+  src: url('../../assets/icons/line/square-full.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'square-shape-line';
+  src: url('../../assets/icons/line/square-shape.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'square-line';
+  src: url('../../assets/icons/line/square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'squint-line';
+  src: url('../../assets/icons/line/squint.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'star-half-alt-line';
+  src: url('../../assets/icons/line/star-half-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'star-line';
+  src: url('../../assets/icons/line/star.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'step-backward-alt-line';
+  src: url('../../assets/icons/line/step-backward-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'step-backward-circle-line';
+  src: url('../../assets/icons/line/step-backward-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'step-backward-line';
+  src: url('../../assets/icons/line/step-backward.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'step-forward-line';
+  src: url('../../assets/icons/line/step-forward.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'stethoscope-alt-line';
+  src: url('../../assets/icons/line/stethoscope-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'stethoscope-line';
+  src: url('../../assets/icons/line/stethoscope.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'stop-circle-line';
+  src: url('../../assets/icons/line/stop-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'stopwatch-slash-line';
+  src: url('../../assets/icons/line/stopwatch-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'stopwatch-line';
+  src: url('../../assets/icons/line/stopwatch.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'store-alt-line';
+  src: url('../../assets/icons/line/store-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'store-slash-line';
+  src: url('../../assets/icons/line/store-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'store-line';
+  src: url('../../assets/icons/line/store.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'streering-line';
+  src: url('../../assets/icons/line/streering.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'stretcher-line';
+  src: url('../../assets/icons/line/stretcher.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'subject-line';
+  src: url('../../assets/icons/line/subject.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'subway-alt-line';
+  src: url('../../assets/icons/line/subway-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'subway-line';
+  src: url('../../assets/icons/line/subway.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'suitcase-alt-line';
+  src: url('../../assets/icons/line/suitcase-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'suitcase-line';
+  src: url('../../assets/icons/line/suitcase.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sun-line';
+  src: url('../../assets/icons/line/sun.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sunset-line';
+  src: url('../../assets/icons/line/sunset.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'surprise-line';
+  src: url('../../assets/icons/line/surprise.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'swatchbook-line';
+  src: url('../../assets/icons/line/swatchbook.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'swiggy-line';
+  src: url('../../assets/icons/line/swiggy.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'swimmer-line';
+  src: url('../../assets/icons/line/swimmer.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sync-exclamation-line';
+  src: url('../../assets/icons/line/sync-exclamation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sync-slash-line';
+  src: url('../../assets/icons/line/sync-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sync-line';
+  src: url('../../assets/icons/line/sync.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'syringe-line';
+  src: url('../../assets/icons/line/syringe.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'table-tennis-line';
+  src: url('../../assets/icons/line/table-tennis.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'table-line';
+  src: url('../../assets/icons/line/table.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tablet-line';
+  src: url('../../assets/icons/line/tablet.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tablets-line';
+  src: url('../../assets/icons/line/tablets.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tachometer-fast-alt-line';
+  src: url('../../assets/icons/line/tachometer-fast-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tachometer-fast-line';
+  src: url('../../assets/icons/line/tachometer-fast.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tag-alt-line';
+  src: url('../../assets/icons/line/tag-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tag-line';
+  src: url('../../assets/icons/line/tag.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tape-line';
+  src: url('../../assets/icons/line/tape.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'taxi-line';
+  src: url('../../assets/icons/line/taxi.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tear-line';
+  src: url('../../assets/icons/line/tear.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'telegram-alt-line';
+  src: url('../../assets/icons/line/telegram-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'telegram-line';
+  src: url('../../assets/icons/line/telegram.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'telescope-line';
+  src: url('../../assets/icons/line/telescope.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'temperature-empty-line';
+  src: url('../../assets/icons/line/temperature-empty.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'temperature-half-line';
+  src: url('../../assets/icons/line/temperature-half.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'temperature-minus-line';
+  src: url('../../assets/icons/line/temperature-minus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'temperature-plus-line';
+  src: url('../../assets/icons/line/temperature-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'temperature-quarter-line';
+  src: url('../../assets/icons/line/temperature-quarter.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'temperature-three-quarter-line';
+  src: url('../../assets/icons/line/temperature-three-quarter.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'temperature-line';
+  src: url('../../assets/icons/line/temperature.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tennis-ball-line';
+  src: url('../../assets/icons/line/tennis-ball.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'text-fields-line';
+  src: url('../../assets/icons/line/text-fields.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'text-size-line';
+  src: url('../../assets/icons/line/text-size.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'text-strike-through-line';
+  src: url('../../assets/icons/line/text-strike-through.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'text-line';
+  src: url('../../assets/icons/line/text.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'th-large-line';
+  src: url('../../assets/icons/line/th-large.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'th-slash-line';
+  src: url('../../assets/icons/line/th-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'th-line';
+  src: url('../../assets/icons/line/th.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'thermometer-line';
+  src: url('../../assets/icons/line/thermometer.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'thumbs-down-line';
+  src: url('../../assets/icons/line/thumbs-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'thumbs-up-line';
+  src: url('../../assets/icons/line/thumbs-up.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'thunderstorm-moon-line';
+  src: url('../../assets/icons/line/thunderstorm-moon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'thunderstorm-sun-line';
+  src: url('../../assets/icons/line/thunderstorm-sun.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'thunderstorm-line';
+  src: url('../../assets/icons/line/thunderstorm.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ticket-line';
+  src: url('../../assets/icons/line/ticket.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'toggle-off-line';
+  src: url('../../assets/icons/line/toggle-off.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'toggle-on-line';
+  src: url('../../assets/icons/line/toggle-on.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'toilet-paper-line';
+  src: url('../../assets/icons/line/toilet-paper.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'top-arrow-from-top-line';
+  src: url('../../assets/icons/line/top-arrow-from-top.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'top-arrow-to-top-line';
+  src: url('../../assets/icons/line/top-arrow-to-top.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tornado-line';
+  src: url('../../assets/icons/line/tornado.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'trademark-circle-line';
+  src: url('../../assets/icons/line/trademark-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'trademark-line';
+  src: url('../../assets/icons/line/trademark.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'traffic-barrier-line';
+  src: url('../../assets/icons/line/traffic-barrier.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'traffic-light-line';
+  src: url('../../assets/icons/line/traffic-light.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'transaction-line';
+  src: url('../../assets/icons/line/transaction.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'trash-alt-line';
+  src: url('../../assets/icons/line/trash-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'trash-line';
+  src: url('../../assets/icons/line/trash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'trees-line';
+  src: url('../../assets/icons/line/trees.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'triangle-line';
+  src: url('../../assets/icons/line/triangle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'trophy-line';
+  src: url('../../assets/icons/line/trophy.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'trowel-line';
+  src: url('../../assets/icons/line/trowel.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'truck-loading-line';
+  src: url('../../assets/icons/line/truck-loading.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'truck-line';
+  src: url('../../assets/icons/line/truck.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tumblr-alt-line';
+  src: url('../../assets/icons/line/tumblr-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tumblr-square-line';
+  src: url('../../assets/icons/line/tumblr-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tumblr-line';
+  src: url('../../assets/icons/line/tumblr.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tv-retro-slash-line';
+  src: url('../../assets/icons/line/tv-retro-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'tv-retro-line';
+  src: url('../../assets/icons/line/tv-retro.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'twitter-alt-line';
+  src: url('../../assets/icons/line/twitter-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'twitter-line';
+  src: url('../../assets/icons/line/twitter.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'umbrella-line';
+  src: url('../../assets/icons/line/umbrella.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'unamused-line';
+  src: url('../../assets/icons/line/unamused.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'underline-line';
+  src: url('../../assets/icons/line/underline.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'university-line';
+  src: url('../../assets/icons/line/university.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'unlock-alt-line';
+  src: url('../../assets/icons/line/unlock-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'unlock-line';
+  src: url('../../assets/icons/line/unlock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'upload-alt-line';
+  src: url('../../assets/icons/line/upload-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'upload-line';
+  src: url('../../assets/icons/line/upload.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'usd-circle-line';
+  src: url('../../assets/icons/line/usd-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'usd-square-line';
+  src: url('../../assets/icons/line/usd-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-arrows-line';
+  src: url('../../assets/icons/line/user-arrows.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-check-line';
+  src: url('../../assets/icons/line/user-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-circle-line';
+  src: url('../../assets/icons/line/user-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-exclamation-line';
+  src: url('../../assets/icons/line/user-exclamation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-location-line';
+  src: url('../../assets/icons/line/user-location.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-md-line';
+  src: url('../../assets/icons/line/user-md.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-minus-line';
+  src: url('../../assets/icons/line/user-minus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-nurse-line';
+  src: url('../../assets/icons/line/user-nurse.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-plus-line';
+  src: url('../../assets/icons/line/user-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-square-line';
+  src: url('../../assets/icons/line/user-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-times-line';
+  src: url('../../assets/icons/line/user-times.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-line';
+  src: url('../../assets/icons/line/user.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'users-alt-line';
+  src: url('../../assets/icons/line/users-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'utensils-alt-line';
+  src: url('../../assets/icons/line/utensils-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'utensils-line';
+  src: url('../../assets/icons/line/utensils.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vector-square-alt-line';
+  src: url('../../assets/icons/line/vector-square-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vector-square-line';
+  src: url('../../assets/icons/line/vector-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'venus-line';
+  src: url('../../assets/icons/line/venus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vertical-align-bottom-line';
+  src: url('../../assets/icons/line/vertical-align-bottom.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vertical-align-center-line';
+  src: url('../../assets/icons/line/vertical-align-center.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vertical-align-top-line';
+  src: url('../../assets/icons/line/vertical-align-top.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vertical-distribute-bottom-line';
+  src: url('../../assets/icons/line/vertical-distribute-bottom.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vertical-distribution-center-line';
+  src: url('../../assets/icons/line/vertical-distribution-center.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vertical-distribution-top-line';
+  src: url('../../assets/icons/line/vertical-distribution-top.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'video-question-line';
+  src: url('../../assets/icons/line/video-question.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'video-slash-line';
+  src: url('../../assets/icons/line/video-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'video-line';
+  src: url('../../assets/icons/line/video.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'virus-slash-line';
+  src: url('../../assets/icons/line/virus-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'visual-studio-line';
+  src: url('../../assets/icons/line/visual-studio.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vk-alt-line';
+  src: url('../../assets/icons/line/vk-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vk-line';
+  src: url('../../assets/icons/line/vk.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'voicemail-rectangle-line';
+  src: url('../../assets/icons/line/voicemail-rectangle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'voicemail-line';
+  src: url('../../assets/icons/line/voicemail.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'volume-down-line';
+  src: url('../../assets/icons/line/volume-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'volume-mute-line';
+  src: url('../../assets/icons/line/volume-mute.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'volume-off-line';
+  src: url('../../assets/icons/line/volume-off.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'volume-up-line';
+  src: url('../../assets/icons/line/volume-up.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'volume-line';
+  src: url('../../assets/icons/line/volume.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vuejs-alt-line';
+  src: url('../../assets/icons/line/vuejs-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vuejs-line';
+  src: url('../../assets/icons/line/vuejs.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wall-line';
+  src: url('../../assets/icons/line/wall.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wallet-line';
+  src: url('../../assets/icons/line/wallet.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'watch-alt-line';
+  src: url('../../assets/icons/line/watch-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'watch-line';
+  src: url('../../assets/icons/line/watch.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'water-drop-slash-line';
+  src: url('../../assets/icons/line/water-drop-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'water-glass-line';
+  src: url('../../assets/icons/line/water-glass.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'water-line';
+  src: url('../../assets/icons/line/water.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'web-grid-alt-line';
+  src: url('../../assets/icons/line/web-grid-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'web-grid-line';
+  src: url('../../assets/icons/line/web-grid.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'web-section-alt-line';
+  src: url('../../assets/icons/line/web-section-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'web-section-line';
+  src: url('../../assets/icons/line/web-section.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'webcam-line';
+  src: url('../../assets/icons/line/webcam.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'weight-line';
+  src: url('../../assets/icons/line/weight.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'whatsapp-alt-line';
+  src: url('../../assets/icons/line/whatsapp-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'whatsapp-line';
+  src: url('../../assets/icons/line/whatsapp.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wheel-barrow-line';
+  src: url('../../assets/icons/line/wheel-barrow.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wheelchair-alt-line';
+  src: url('../../assets/icons/line/wheelchair-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wheelchair-line';
+  src: url('../../assets/icons/line/wheelchair.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wifi-router-line';
+  src: url('../../assets/icons/line/wifi-router.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wifi-slash-line';
+  src: url('../../assets/icons/line/wifi-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wifi-line';
+  src: url('../../assets/icons/line/wifi.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wind-moon-line';
+  src: url('../../assets/icons/line/wind-moon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wind-sun-line';
+  src: url('../../assets/icons/line/wind-sun.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wind-line';
+  src: url('../../assets/icons/line/wind.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'window-grid-line';
+  src: url('../../assets/icons/line/window-grid.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'window-maximize-line';
+  src: url('../../assets/icons/line/window-maximize.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'window-section-line';
+  src: url('../../assets/icons/line/window-section.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'window-line';
+  src: url('../../assets/icons/line/window.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'windows-line';
+  src: url('../../assets/icons/line/windows.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'windsock-line';
+  src: url('../../assets/icons/line/windsock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'windy-line';
+  src: url('../../assets/icons/line/windy.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wordpress-simple-line';
+  src: url('../../assets/icons/line/wordpress-simple.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wordpress-line';
+  src: url('../../assets/icons/line/wordpress.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wrap-text-line';
+  src: url('../../assets/icons/line/wrap-text.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wrench-line';
+  src: url('../../assets/icons/line/wrench.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'x-add-line';
+  src: url('../../assets/icons/line/x-add.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'x-line';
+  src: url('../../assets/icons/line/x.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'yen-circle-line';
+  src: url('../../assets/icons/line/yen-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'yen-line';
+  src: url('../../assets/icons/line/yen.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'yin-yang-line';
+  src: url('../../assets/icons/line/yin-yang.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'youtube-line';
+  src: url('../../assets/icons/line/youtube.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'airplay-solid';
+  src: url('../../assets/icons/solid/airplay.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-alt-solid';
+  src: url('../../assets/icons/solid/align-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-center-justify-solid';
+  src: url('../../assets/icons/solid/align-center-justify.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-center-solid';
+  src: url('../../assets/icons/solid/align-center.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-justify-solid';
+  src: url('../../assets/icons/solid/align-justify.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-left-justify-solid';
+  src: url('../../assets/icons/solid/align-left-justify.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-left-solid';
+  src: url('../../assets/icons/solid/align-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-letter-right-solid';
+  src: url('../../assets/icons/solid/align-letter-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-right-justify-solid';
+  src: url('../../assets/icons/solid/align-right-justify.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'align-right-solid';
+  src: url('../../assets/icons/solid/align-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'analysis-solid';
+  src: url('../../assets/icons/solid/analysis.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'analytics-solid';
+  src: url('../../assets/icons/solid/analytics.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'anchor-solid';
+  src: url('../../assets/icons/solid/anchor.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-double-down-solid';
+  src: url('../../assets/icons/solid/angle-double-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-double-left-solid';
+  src: url('../../assets/icons/solid/angle-double-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-double-right-solid';
+  src: url('../../assets/icons/solid/angle-double-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-double-up-solid';
+  src: url('../../assets/icons/solid/angle-double-up.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-down-solid';
+  src: url('../../assets/icons/solid/angle-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-left-solid';
+  src: url('../../assets/icons/solid/angle-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-right-b-solid';
+  src: url('../../assets/icons/solid/angle-right-b.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-right-solid';
+  src: url('../../assets/icons/solid/angle-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'angle-up-solid';
+  src: url('../../assets/icons/solid/angle-up.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'apps-solid';
+  src: url('../../assets/icons/solid/apps.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-circle-down-solid';
+  src: url('../../assets/icons/solid/arrow-circle-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-circle-left-solid';
+  src: url('../../assets/icons/solid/arrow-circle-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-circle-right-solid';
+  src: url('../../assets/icons/solid/arrow-circle-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-circle-up-solid';
+  src: url('../../assets/icons/solid/arrow-circle-up.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-down-left-solid';
+  src: url('../../assets/icons/solid/arrow-down-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-down-right-solid';
+  src: url('../../assets/icons/solid/arrow-down-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-up-left-solid';
+  src: url('../../assets/icons/solid/arrow-up-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'arrow-up-right-solid';
+  src: url('../../assets/icons/solid/arrow-up-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'at-solid';
+  src: url('../../assets/icons/solid/at.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bag-solid';
+  src: url('../../assets/icons/solid/bag.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bars-solid';
+  src: url('../../assets/icons/solid/bars.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'battery-bolt-solid';
+  src: url('../../assets/icons/solid/battery-bolt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'battery-empty-solid';
+  src: url('../../assets/icons/solid/battery-empty.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'bookmark-solid';
+  src: url('../../assets/icons/solid/bookmark.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-alt-solid';
+  src: url('../../assets/icons/solid/border-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-bottom-solid';
+  src: url('../../assets/icons/solid/border-bottom.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-clear-solid';
+  src: url('../../assets/icons/solid/border-clear.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-horizontal-solid';
+  src: url('../../assets/icons/solid/border-horizontal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-inner-solid';
+  src: url('../../assets/icons/solid/border-inner.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-left-solid';
+  src: url('../../assets/icons/solid/border-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-out-solid';
+  src: url('../../assets/icons/solid/border-out.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-right-solid';
+  src: url('../../assets/icons/solid/border-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-top-solid';
+  src: url('../../assets/icons/solid/border-top.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'border-vertical-solid';
+  src: url('../../assets/icons/solid/border-vertical.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'briefcase-solid';
+  src: url('../../assets/icons/solid/briefcase.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'calender-solid';
+  src: url('../../assets/icons/solid/calender.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chart-pie-solid';
+  src: url('../../assets/icons/solid/chart-pie.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'chart-solid';
+  src: url('../../assets/icons/solid/chart.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'check-circle-solid';
+  src: url('../../assets/icons/solid/check-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'check-square-solid';
+  src: url('../../assets/icons/solid/check-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'check-solid';
+  src: url('../../assets/icons/solid/check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'circle-layer-solid';
+  src: url('../../assets/icons/solid/circle-layer.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clinic-medical-solid';
+  src: url('../../assets/icons/solid/clinic-medical.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-eight-solid';
+  src: url('../../assets/icons/solid/clock-eight.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-five-solid';
+  src: url('../../assets/icons/solid/clock-five.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-nine-solid';
+  src: url('../../assets/icons/solid/clock-nine.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-seven-solid';
+  src: url('../../assets/icons/solid/clock-seven.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-ten-solid';
+  src: url('../../assets/icons/solid/clock-ten.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-three-solid';
+  src: url('../../assets/icons/solid/clock-three.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-two-solid';
+  src: url('../../assets/icons/solid/clock-two.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'clock-solid';
+  src: url('../../assets/icons/solid/clock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'close-circle-solid';
+  src: url('../../assets/icons/solid/close-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'close-solid';
+  src: url('../../assets/icons/solid/close.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'columns-solid';
+  src: url('../../assets/icons/solid/columns.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'comment-dots-solid';
+  src: url('../../assets/icons/solid/comment-dots.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'compress-solid';
+  src: url('../../assets/icons/solid/compress.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-down-left-solid';
+  src: url('../../assets/icons/solid/corner-down-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-down-right-solid';
+  src: url('../../assets/icons/solid/corner-down-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-left-down-solid';
+  src: url('../../assets/icons/solid/corner-left-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-right-down-solid';
+  src: url('../../assets/icons/solid/corner-right-down.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-up-left-solid';
+  src: url('../../assets/icons/solid/corner-up-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'corner-up-right-solid';
+  src: url('../../assets/icons/solid/corner-up-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'coronavirus-solid';
+  src: url('../../assets/icons/solid/coronavirus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'dialpad-solid';
+  src: url('../../assets/icons/solid/dialpad.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'direction-solid';
+  src: url('../../assets/icons/solid/direction.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'document-layout-center-solid';
+  src: url('../../assets/icons/solid/document-layout-center.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'document-layout-left-solid';
+  src: url('../../assets/icons/solid/document-layout-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'document-layout-right-solid';
+  src: url('../../assets/icons/solid/document-layout-right.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'download-alt-solid';
+  src: url('../../assets/icons/solid/download-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ellipsis-h-solid';
+  src: url('../../assets/icons/solid/ellipsis-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ellipsis-v-solid';
+  src: url('../../assets/icons/solid/ellipsis-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exclamation-circle-solid';
+  src: url('../../assets/icons/solid/exclamation-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exclamation-octagon-solid';
+  src: url('../../assets/icons/solid/exclamation-octagon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exclamation-triangle-solid';
+  src: url('../../assets/icons/solid/exclamation-triangle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'favorite-solid';
+  src: url('../../assets/icons/solid/favorite.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'flip-h-alt-solid';
+  src: url('../../assets/icons/solid/flip-h-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'flip-h-solid';
+  src: url('../../assets/icons/solid/flip-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'flip-v-alt-solid';
+  src: url('../../assets/icons/solid/flip-v-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'flip-v-solid';
+  src: url('../../assets/icons/solid/flip-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'graph-bar-solid';
+  src: url('../../assets/icons/solid/graph-bar.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'grid-solid';
+  src: url('../../assets/icons/solid/grid.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'grids-solid';
+  src: url('../../assets/icons/solid/grids.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'grip-horizontal-line-solid';
+  src: url('../../assets/icons/solid/grip-horizontal-line.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'head-side-cough-solid';
+  src: url('../../assets/icons/solid/head-side-cough.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'head-side-mask-solid';
+  src: url('../../assets/icons/solid/head-side-mask.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'head-side-solid';
+  src: url('../../assets/icons/solid/head-side.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'history-alt-solid';
+  src: url('../../assets/icons/solid/history-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'history-solid';
+  src: url('../../assets/icons/solid/history.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'horizontal-align-left-solid';
+  src: url('../../assets/icons/solid/horizontal-align-left.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hospital-square-sign-solid';
+  src: url('../../assets/icons/solid/hospital-square-sign.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hospital-symbol-solid';
+  src: url('../../assets/icons/solid/hospital-symbol.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'hospital-solid';
+  src: url('../../assets/icons/solid/hospital.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'house-user-solid';
+  src: url('../../assets/icons/solid/house-user.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'image-v-solid';
+  src: url('../../assets/icons/solid/image-v.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'key-skeleton-alt-solid';
+  src: url('../../assets/icons/solid/key-skeleton-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'key-skeleton-solid';
+  src: url('../../assets/icons/solid/key-skeleton.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'keyhole-circle-solid';
+  src: url('../../assets/icons/solid/keyhole-circle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'keyhole-square-full-solid';
+  src: url('../../assets/icons/solid/keyhole-square-full.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'keyhole-square-solid';
+  src: url('../../assets/icons/solid/keyhole-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'layer-group-solid';
+  src: url('../../assets/icons/solid/layer-group.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'layers-alt-solid';
+  src: url('../../assets/icons/solid/layers-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'left-indent-alt-solid';
+  src: url('../../assets/icons/solid/left-indent-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'left-indent-solid';
+  src: url('../../assets/icons/solid/left-indent.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'line-spacing-solid';
+  src: url('../../assets/icons/solid/line-spacing.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'link-h-solid';
+  src: url('../../assets/icons/solid/link-h.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'list-ui-alt-solid';
+  src: url('../../assets/icons/solid/list-ui-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'list-ul-solid';
+  src: url('../../assets/icons/solid/list-ul.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lock-access-solid';
+  src: url('../../assets/icons/solid/lock-access.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lock-alt-solid';
+  src: url('../../assets/icons/solid/lock-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lock-open-alt-solid';
+  src: url('../../assets/icons/solid/lock-open-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'lock-solid';
+  src: url('../../assets/icons/solid/lock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'microscope-solid';
+  src: url('../../assets/icons/solid/microscope.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'minus-square-full-solid';
+  src: url('../../assets/icons/solid/minus-square-full.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'object-group-solid';
+  src: url('../../assets/icons/solid/object-group.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'object-ungroup-solid';
+  src: url('../../assets/icons/solid/object-ungroup.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'padlock-solid';
+  src: url('../../assets/icons/solid/padlock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'paperclip-solid';
+  src: url('../../assets/icons/solid/paperclip.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'paragraph-solid';
+  src: url('../../assets/icons/solid/paragraph.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'pentagon-solid';
+  src: url('../../assets/icons/solid/pentagon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'polygon-solid';
+  src: url('../../assets/icons/solid/polygon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'previous-solid';
+  src: url('../../assets/icons/solid/previous.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'process-solid';
+  src: url('../../assets/icons/solid/process.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'record-audio-solid';
+  src: url('../../assets/icons/solid/record-audio.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'redo-solid';
+  src: url('../../assets/icons/solid/redo.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'refresh-solid';
+  src: url('../../assets/icons/solid/refresh.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'repeat-solid';
+  src: url('../../assets/icons/solid/repeat.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'right-indent-alt-solid';
+  src: url('../../assets/icons/solid/right-indent-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'right-indent-solid';
+  src: url('../../assets/icons/solid/right-indent.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'rocket-solid';
+  src: url('../../assets/icons/solid/rocket.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ruler-combined-solid';
+  src: url('../../assets/icons/solid/ruler-combined.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'ruler-solid';
+  src: url('../../assets/icons/solid/ruler.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sanitizer-alt-solid';
+  src: url('../../assets/icons/solid/sanitizer-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sanitizer-solid';
+  src: url('../../assets/icons/solid/sanitizer.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'scenery-solid';
+  src: url('../../assets/icons/solid/scenery.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'schedule-solid';
+  src: url('../../assets/icons/solid/schedule.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'shield-plus-solid';
+  src: url('../../assets/icons/solid/shield-plus.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'signal-alt-3-solid';
+  src: url('../../assets/icons/solid/signal-alt-3.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'signal-alt-solid';
+  src: url('../../assets/icons/solid/signal-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'signout-solid';
+  src: url('../../assets/icons/solid/signout.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'social-distancing-solid';
+  src: url('../../assets/icons/solid/social-distancing.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sorting-solid';
+  src: url('../../assets/icons/solid/sorting.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'space-key-solid';
+  src: url('../../assets/icons/solid/space-key.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'square-full-solid';
+  src: url('../../assets/icons/solid/square-full.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'star-half-alt-solid';
+  src: url('../../assets/icons/solid/star-half-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'star-solid';
+  src: url('../../assets/icons/solid/star.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'step-forward-solid';
+  src: url('../../assets/icons/solid/step-forward.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'stethoscope-alt-solid';
+  src: url('../../assets/icons/solid/stethoscope-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'stethoscope-solid';
+  src: url('../../assets/icons/solid/stethoscope.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'stopwatch-solid';
+  src: url('../../assets/icons/solid/stopwatch.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'store-slash-solid';
+  src: url('../../assets/icons/solid/store-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'subject-solid';
+  src: url('../../assets/icons/solid/subject.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sync-exclamation-solid';
+  src: url('../../assets/icons/solid/sync-exclamation.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sync-slash-solid';
+  src: url('../../assets/icons/solid/sync-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'table-solid';
+  src: url('../../assets/icons/solid/table.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'th-large-solid';
+  src: url('../../assets/icons/solid/th-large.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'toggle-off-solid';
+  src: url('../../assets/icons/solid/toggle-off.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'toggle-on-solid';
+  src: url('../../assets/icons/solid/toggle-on.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'toilet-paper-solid';
+  src: url('../../assets/icons/solid/toilet-paper.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'triangle-solid';
+  src: url('../../assets/icons/solid/triangle.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'unlock-alt-solid';
+  src: url('../../assets/icons/solid/unlock-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'unlock-solid';
+  src: url('../../assets/icons/solid/unlock.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'upload-alt-solid';
+  src: url('../../assets/icons/solid/upload-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-arrows-solid';
+  src: url('../../assets/icons/solid/user-arrows.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-md-solid';
+  src: url('../../assets/icons/solid/user-md.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'user-nurse-solid';
+  src: url('../../assets/icons/solid/user-nurse.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vector-square-alt-solid';
+  src: url('../../assets/icons/solid/vector-square-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vector-square-solid';
+  src: url('../../assets/icons/solid/vector-square.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'virus-slash-solid';
+  src: url('../../assets/icons/solid/virus-slash.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'web-grid-alt-solid';
+  src: url('../../assets/icons/solid/web-grid-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'web-grid-solid';
+  src: url('../../assets/icons/solid/web-grid.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'web-section-alt-solid';
+  src: url('../../assets/icons/solid/web-section-alt.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'web-section-solid';
+  src: url('../../assets/icons/solid/web-section.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'window-grid-solid';
+  src: url('../../assets/icons/solid/window-grid.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'window-maximize-solid';
+  src: url('../../assets/icons/solid/window-maximize.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'window-section-solid';
+  src: url('../../assets/icons/solid/window-section.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'wrap-text-solid';
+  src: url('../../assets/icons/solid/wrap-text.woff2') format('woff2');
 }

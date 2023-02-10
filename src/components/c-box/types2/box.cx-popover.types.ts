@@ -3,3 +3,4 @@ export type CxPopoverAbility = {
 };
 
 export type CxPopoverAbilityAttrKey = keyof CxPopoverAbility;
+export type CxPopoverAbilityAttrArray = Array<CxPopoverAbilityAttrKey>;

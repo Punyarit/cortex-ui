@@ -2,7 +2,7 @@ import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { IconDirector } from './builder/icon.builder';
-import { CxIconName } from './types/icon.name'
+import { CxIconName } from './types/icon.name';
 import { IconSizeTypes, IconSrcTypes } from './types/icon.types';
 
 // export const onPressed = 'pressed';
@@ -10,7 +10,7 @@ import { IconSizeTypes, IconSrcTypes } from './types/icon.types';
 @customElement(CxIconName)
 export class Icon extends ComponentBase<CXIcon.Props> {
   config: CXIcon.Props['set'] = {
-    src: 'favorite',
+    src: 'favorite-line',
     color: 'primary',
     size: 'medium',
   };
