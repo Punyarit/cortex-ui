@@ -29,7 +29,6 @@
     "cx/**/*.js",
     "cx/*.js",
     "cx/**/*.d.ts",
-    "assets/fonts/*",
     "styles/css/index.css"
   ],
   "dependencies": {

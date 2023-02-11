@@ -1,7 +1,7 @@
 import { componentNames, ComponentNameTypes } from '../../types/component.names';
 import { REQUIRED_CXPOPOVER_PARENT } from './errors/required-cx-popover-parent';
 import { CBoxName } from './types/c-box.name';
-import { DxDivTypes } from './types/c-box.types';
+import { CBoxTypes } from './types/c-box.types';
 import { CxPopoverAbilityAttrKey } from './types2/box.cx-popover.types';
 
 export class Box extends HTMLElement {
@@ -43,7 +43,7 @@ declare global {
     interface IntrinsicElements {
       [CBoxName]:
         | React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-        | DxDivTypes;
+        | CBoxTypes;
     }
   }
 

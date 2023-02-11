@@ -1,8 +1,9 @@
 import { BoxBaseAttr } from './box-base.type';
-import { UtilAttrs } from './utils.types';
+import { IngredientAttr } from './c-box.ingredient.type';
+import { UtilAttr } from './utils.types';
 
 type UITypes = {
   ui?: string[] | string[][];
 };
 
-export type DxDivTypes = UITypes | BoxBaseAttr | UtilAttrs;
+export type CBoxTypes = UITypes | BoxBaseAttr | UtilAttr | IngredientAttr;
