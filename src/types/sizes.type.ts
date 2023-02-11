@@ -1,4 +1,6 @@
 export const SIZE_NUMBERS = [
+  'full',
+  'half',
   '0',
   '1',
   '2',
@@ -551,7 +553,7 @@ export const SIZE_NUMBERS = [
   '1000',
 ] as const;
 
-export const SIZES_VALUES = SIZE_NUMBERS.map(size => `size-${size}`) as SizeTypes[];
+export const SIZES_VALUES = SIZE_NUMBERS.map((size) => `size-${size}`) as SizeTypes[];
 
 export type SizeAttr = Partial<Record<`size-${typeof SIZE_NUMBERS[number]}`, boolean>>;
 export type BaseSizeAttr = Partial<Record<`base-size-${typeof SIZE_NUMBERS[number]}`, boolean>>;

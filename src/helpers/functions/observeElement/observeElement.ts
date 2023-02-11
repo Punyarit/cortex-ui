@@ -32,7 +32,7 @@ export function mutableElement<T extends HTMLElement>(
   observer.observe(target, config);
 }
 
-export const IntersectElement = (
+export const visibleElement = (
   target: HTMLElement,
   callback: (
     entry: IntersectionObserverEntry,
