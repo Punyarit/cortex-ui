@@ -1,5 +1,5 @@
 import { Ref } from 'lit/directives/ref';
-import { observeElementManyTypes } from '../../../helpers/functions/observeElement/observeElement';
+import { mutableElementManyTypes } from '../../../helpers/functions/observe-element/mutable-element';
 import { Modal } from '../modal';
 import { ModalSingleton } from '../singleton/modal.singleton';
 
@@ -148,7 +148,7 @@ export class DialogState {
   };
 
   private createSlotRef(target: HTMLSlotElement, callback?: () => void): void {
-    observeElementManyTypes({
+    mutableElementManyTypes({
       target,
       attributes: (mutation, observer) => {
         this.setComponentRef(mutation.target);
