@@ -66,7 +66,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     }
   `;
 
-  private currentCalendar!: CalendarDetail;
+  private currentCalendar!: CalendarDetail | CalendarDetail[];
   private previousCalendar!: CalendarDetail;
   private nextCalendar!: CalendarDetail;
 
@@ -144,10 +144,19 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     const previousMonth = getPreviousMonth(this.set.date);
     const nextMonth = getNextMonth(this.set.date);
     this.previousCalendar = getCalendarDetail(previousMonth);
-    this.nextCalendar = getCalendarDetail(nextMonth);
-    this.currentCalendar = getCalendarDetail(this.set.date);
 
-    this.calendarGroup = [this.previousCalendar, this.currentCalendar, this.nextCalendar];
+    if (this.set.display === '1-calendar') {
+      this.currentCalendar = getCalendarDetail(this.set.date);
+      this.nextCalendar = getCalendarDetail(nextMonth);
+      this.calendarGroup = [this.previousCalendar, this.currentCalendar, this.nextCalendar];
+    } else if (this.set.display === '2-calendars') {
+      const currebtMonthLeft = getCalendarDetail(this.set.date);
+      const currentMonthRight = getCalendarDetail(nextMonth);
+      this.currentCalendar = [currebtMonthLeft, currentMonthRight];
+      this.nextCalendar = getCalendarDetail(currentMonthRight.firstDateOfMonth);
+      this.calendarGroup = [this.previousCalendar, ...this.currentCalendar, this.nextCalendar];
+    }
+
     // console.log('calendar |this.calendarGroup|', this.calendarGroup);
   }
 
