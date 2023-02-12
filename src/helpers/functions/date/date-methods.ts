@@ -1,4 +1,4 @@
-export type CalendarDetail = {
+export type CalendarResult = {
   year: number;
   month: number;
   calendar: CalendarValue[][];
@@ -9,6 +9,7 @@ export type CalendarDetail = {
 export type CalendarValue = {
   value: number;
   type: calendarType;
+  period: string;
 };
 
 export type calendarType = 'current-month' | 'previous-month' | 'next-month';
@@ -47,7 +48,7 @@ export const yearDayOption: Intl.DateTimeFormatOptions = {
   year: 'numeric',
 };
 
-export function getCalendarDetail(date: Date): CalendarDetail {
+export function getCalendarDetail(date: Date, today = new Date()): CalendarResult {
   const firstDateOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
   const lastDateOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
   const calendar = [];
@@ -62,7 +63,7 @@ export function getCalendarDetail(date: Date): CalendarDetail {
   // 📌use while (currentDate.getMonth() <= firstDateOfMonth.getMonth()) { ... }
   // 📌for flexible row of month's week but it's not good for ux and developing
   for (let weekRow = 0; weekRow < 6; weekRow++) {
-    const week = [];
+    const week = [] as CalendarValue[];
     for (let i = 0; i < 7; i++) {
       const value = currentDate.getDate();
       const type =
@@ -71,7 +72,21 @@ export function getCalendarDetail(date: Date): CalendarDetail {
           : currentDate.getMonth() < date.getMonth()
           ? 'previous-month'
           : 'next-month';
-      week.push({ value, type: type as calendarType });
+
+      let period = '';
+      let diff = today.getTime() - currentDate.getTime();
+      let daysAgo = Math.floor(diff / (1000 * 3600 * 24));
+      // console.log('date-methods |daysAgo|', daysAgo);
+      // console.log('date-methods |value |', value);
+      if (daysAgo === 0) {
+        period = 'today';
+      } else if (daysAgo > 0) {
+        period = daysAgo === 1 ? `1 day ago` : `${daysAgo} days ago`;
+      } else {
+        let nextDays = Math.abs(daysAgo);
+        period = nextDays === 1 ? `1 day later` : `in ${nextDays} days later`;
+      }
+      week.push({ value, type, period });
       currentDate.setDate(currentDate.getDate() + 1);
     }
     calendar.push(week);

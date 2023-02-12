@@ -2,7 +2,7 @@ import { css, html, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ComponentBase } from '../../../base/component-base/component.base';
 import {
-  CalendarDetail,
+  CalendarResult,
   calendarType,
   CalendarValue,
   convertToDate,
@@ -34,11 +34,27 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     .date {
       width: var(--size-40);
       height: var(--size-40);
+      color: var(--gray-700);
       font-size: var(--size-14);
       background-color: var(--white);
       display: inline-flex;
       justify-content: center;
       align-items: center;
+      border-radius: var(--base-size-half);
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .date:hover {
+      background-color: var(--primary-100);
+    }
+    .date.selected {
+      background-color: var(--primary-500) !important;
+      color: var(--white) !important;
+    }
+    .date.selected:hover {
+      background-color: var(--primary-600);
+      color: var(--white);
     }
 
     .day {
@@ -64,6 +80,16 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       display: flex;
     }
 
+    .date[data-period='today'] {
+      color: var(--primary-600);
+      font-family: var(--bold);
+      background-color: var(--primary-50);
+    }
+
+    .date[data-period='today']:hover {
+      background-color: var(--primary-100);
+    }
+
     .month,
     .year {
       display: inline-block;
@@ -85,6 +111,8 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     if (this.config) this.exec();
   }
   private day = [0, 1, 2, 3, 4, 5, 6];
+
+  private calendarSelected?: HTMLElement;
 
   private dateConverted(day?: number) {
     if (!this.set.calendar) return;
@@ -113,7 +141,10 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
           (week: CalendarValue[]) =>
             html`<div class="week">
               ${week.map(
-                (date: CalendarValue) => html`<div class="date ${date.type}">${date.value}</div> `
+                (date: CalendarValue) =>
+                  html`<div class="date ${date.type}" data-period="${date.period}">
+                    ${date.value}
+                  </div> `
               )}
             </div>`
         )}
@@ -123,17 +154,22 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
 
   private clickDateEvent(e: PointerEvent) {
     if (!this.set.calendar) return;
-    const dateElement = (e.target as HTMLElement).closest('.date');
+    if (this.calendarSelected) {
+      this.calendarSelected.classList.remove('selected');
+    }
+    const dateElement = (e.target as HTMLElement).closest('.date') as HTMLElement;
+    dateElement?.classList.add('selected');
+
+    const date = convertToDate(
+      this.set.calendar.year,
+      this.set.calendar.month,
+      +dateElement?.textContent!
+    );
     this.setCustomEvent('click-date', {
       event: 'click-date',
-      vlaue: {
-        date: convertToDate(
-          this.set.calendar.year,
-          this.set.calendar.month,
-          +dateElement?.textContent!
-        ),
-      },
+      date,
     });
+    this.calendarSelected = dateElement;
   }
 }
 
@@ -145,7 +181,7 @@ declare global {
     type Var<T extends ThemeVersion = 2> = unknown;
 
     type Set<T extends ThemeVersion = 2> = {
-      calendar?: CalendarDetail;
+      calendar?: CalendarResult;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };

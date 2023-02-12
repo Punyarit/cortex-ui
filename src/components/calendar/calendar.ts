@@ -6,7 +6,7 @@ import '../button/button';
 import { createRef, ref } from 'lit/directives/ref.js';
 import './single-calendar/single-calendar';
 import {
-  CalendarDetail,
+  CalendarResult,
   getCalendarDetail,
   getNextMonth,
   getPreviousMonth,
@@ -27,7 +27,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   // 📌 -608 = next month
   private currentTranslateValue: 0 | -304 | -608 = -304;
 
-  private calendarGroup!: CalendarDetail[];
+  private calendarGroup!: CalendarResult[];
 
   static styles = css`
     :host {
@@ -65,10 +65,6 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       box-sizing: border-box;
     }
   `;
-
-  private currentCalendar!: CalendarDetail | CalendarDetail[];
-  private previousCalendar!: CalendarDetail;
-  private nextCalendar!: CalendarDetail;
 
   private buttonLeftSet: CXButton.Set = {
     iconOnly: true,
@@ -143,21 +139,19 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   private generateCalendar() {
     const previousMonth = getPreviousMonth(this.set.date);
     const nextMonth = getNextMonth(this.set.date);
-    this.previousCalendar = getCalendarDetail(previousMonth);
+    const previousCalendar = getCalendarDetail(previousMonth);
 
     if (this.set.display === '1-calendar') {
-      this.currentCalendar = getCalendarDetail(this.set.date);
-      this.nextCalendar = getCalendarDetail(nextMonth);
-      this.calendarGroup = [this.previousCalendar, this.currentCalendar, this.nextCalendar];
+      const currentCalendar = getCalendarDetail(this.set.date);
+      const nextCalendar = getCalendarDetail(nextMonth);
+      this.calendarGroup = [previousCalendar, currentCalendar, nextCalendar];
     } else if (this.set.display === '2-calendars') {
       const currebtMonthLeft = getCalendarDetail(this.set.date);
+      console.log('calendar |currebtMonthLeft|', currebtMonthLeft);
       const currentMonthRight = getCalendarDetail(nextMonth);
-      this.currentCalendar = [currebtMonthLeft, currentMonthRight];
-      this.nextCalendar = getCalendarDetail(currentMonthRight.firstDateOfMonth);
-      this.calendarGroup = [this.previousCalendar, ...this.currentCalendar, this.nextCalendar];
+      const nextCalendar = getCalendarDetail(getNextMonth(currentMonthRight.firstDateOfMonth));
+      this.calendarGroup = [previousCalendar, currebtMonthLeft, currentMonthRight, nextCalendar];
     }
-
-    // console.log('calendar |this.calendarGroup|', this.calendarGroup);
   }
 
   private translateMonth(type: 'prevoius' | 'next') {
@@ -263,6 +257,7 @@ declare global {
     type Set<T extends ThemeVersion = 2> = {
       date: Date;
       display?: '1-calendar' | '2-calendars';
+      selectType?: 'single' | 'multiple';
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
