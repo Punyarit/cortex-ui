@@ -20,6 +20,7 @@ export const tagName = 'cx-single-calendar';
 export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
   config: CXSingleCalendar.Set = {
     calendar: undefined,
+    selected: undefined,
   };
 
   // 0 | 304 | 608
@@ -120,7 +121,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
   }
 
   render(): TemplateResult {
-    return html` <div class="calendar" @click="${this.clickDateEvent}">
+    return html` <div class="calendar" @click="${this.selectDate}">
       <!-- title (month) -->
       <div class="title">
         <div class="month">${dateFormat(this.dateConverted(), longMonthOption)}</div>
@@ -152,7 +153,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     </div>`;
   }
 
-  private clickDateEvent(e: PointerEvent) {
+  private selectDate(e: PointerEvent) {
     if (!this.set.calendar) return;
     if (this.calendarSelected) {
       this.calendarSelected.classList.remove('selected');
@@ -165,8 +166,8 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       this.set.calendar.month,
       +dateElement?.textContent!
     );
-    this.setCustomEvent('click-date', {
-      event: 'click-date',
+    this.setCustomEvent('select-date', {
+      event: 'select-date',
       date,
     });
     this.calendarSelected = dateElement;
@@ -182,6 +183,7 @@ declare global {
 
     type Set<T extends ThemeVersion = 2> = {
       calendar?: CalendarResult;
+      selected?: Date;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
@@ -193,15 +195,15 @@ declare global {
       make: Var;
     };
 
-    // type Details = {
-    //   [onPressed]: { event: string };
-    // };
+    type Details = {
+      ['select-date']: { event: string; dateL: Date };
+    };
 
-    // type Events = {
-    //   [onPressed]: (detail: Pressed) => void;
-    // };
+    type Events = {
+      ['select-date']: (detail: SelectDate) => void;
+    };
 
-    // type Pressed = CustomEvent<Details[typeof onPressed]>;
+    type SelectDate = CustomEvent<Details['select-date']>;
   }
 
   interface HTMLElementTagNameMap {

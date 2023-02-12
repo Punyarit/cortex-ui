@@ -20,6 +20,10 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   config: CXCalendar.Set = {
     date: new Date(),
     display: '1-calendar',
+    selection: {
+      type: 'single',
+      ragne: false,
+    },
   };
 
   // 📌 0 = previous month
@@ -108,7 +112,9 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
         </div>
         <div class="calendar-monitor" ${ref(this.calendarMonitorRef)}>
           ${this.calendarGroup.map(
-            (calendar) => html` <cx-single-calendar .set="${{ calendar }}"> </cx-single-calendar>`
+            (calendar) =>
+              html` <cx-single-calendar @select-date="${this.selectDate}" .set="${{ calendar }}">
+              </cx-single-calendar>`
           )}
         </div>
       </div>`;
@@ -123,6 +129,11 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       case '2-calendars':
         return 608;
     }
+  }
+
+  selectDate(e: Event) {
+    const event = e as CXSingleCalendar.SelectDate;
+    console.log('calendar |e|', event);
   }
 
   connectedCallback() {
@@ -147,7 +158,6 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       this.calendarGroup = [previousCalendar, currentCalendar, nextCalendar];
     } else if (this.set.display === '2-calendars') {
       const currebtMonthLeft = getCalendarDetail(this.set.date);
-      console.log('calendar |currebtMonthLeft|', currebtMonthLeft);
       const currentMonthRight = getCalendarDetail(nextMonth);
       const nextCalendar = getCalendarDetail(getNextMonth(currentMonthRight.firstDateOfMonth));
       this.calendarGroup = [previousCalendar, currebtMonthLeft, currentMonthRight, nextCalendar];
@@ -178,6 +188,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     const generatedMonth = getCalendarDetail(previousMonthFromMonthVisibled);
     const singleCalendar = document.createElement('cx-single-calendar') as CXSingleCalendar.Ref;
     singleCalendar.fix().calendar(generatedMonth).exec();
+    singleCalendar.addEventListener('select-date', (e) => this.selectDate(e));
 
     return singleCalendar;
   }
@@ -237,6 +248,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
         'next',
         this.calendarMonitorRef.value!.lastElementChild as CXSingleCalendar.Ref
       );
+
       this.removeUnusedCalendar(
         this.calendarMonitorRef.value?.firstElementChild as CXSingleCalendar.Ref
       );
@@ -257,7 +269,10 @@ declare global {
     type Set<T extends ThemeVersion = 2> = {
       date: Date;
       display?: '1-calendar' | '2-calendars';
-      selectType?: 'single' | 'multiple';
+      selection?: {
+        ragne: boolean;
+        type: 'single' | 'multiple'; //<-- waiting
+      };
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
