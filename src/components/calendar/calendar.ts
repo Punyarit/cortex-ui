@@ -23,9 +23,9 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   };
 
   // 📌 0 = previous month
-  // 📌 -350 = current month
-  // 📌 -700 = next month
-  private currentTranslateValue: 0 | -350 | -700 = -350;
+  // 📌 -304 = current month
+  // 📌 -608 = next month
+  private currentTranslateValue: 0 | -304 | -608 = -304;
 
   private calendarGroup!: CalendarDetail[];
 
@@ -37,15 +37,15 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       max-width: var(--display-calendar);
       overflow: hidden;
       background-color: var(--white);
-      padding: var(--base-size-12);
+      padding: 28px 12px 20px;
       border-radius: var(--base-size-16);
       position: relative;
     }
 
     .calendar-monitor {
       /* 0 is previous month */
-      /* -350 is current month */
-      /* -700 is next month */
+      /* -304 is current month */
+      /* -608 is next month */
       display: flex;
       translate: var(--translate);
       transition: translate 0.25s ease-out;
@@ -55,7 +55,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
     .handler-month {
       position: absolute;
-      top: 0px;
+      top: 8px;
       left: 0px;
       width: 100%;
       z-index: 1;
@@ -74,6 +74,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     iconOnly: true,
     iconSrc: 'arrow-left-line',
     type: 'secondary',
+    size: 'small',
   };
 
   private buttonVar: CXButton.Var = {
@@ -84,6 +85,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     iconOnly: true,
     iconSrc: 'arrow-right-line',
     type: 'secondary',
+    size: 'small',
   };
 
   private calendarMonitorRef = createRef<HTMLDivElement>();
@@ -93,7 +95,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
         :host {
           /* 📌default = current month */
           --translate: ${this.currentTranslateValue}px;
-          --display-calendar: ${this.set.display === '1-calendar' ? 350 : 700}px;
+          --display-calendar: ${this.setDisplayCalendar()}px;
         }
       </style>
 
@@ -116,15 +118,14 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       </div>`;
   }
 
-  private setDisplayCalendar(): 350 | 700 {
+  private setDisplayCalendar(): 304 | 608 {
     switch (this.set.display) {
       default:
       case '1-calendar':
-        return 350;
+        return 304;
 
       case '2-calendars':
-        console.log('calendar |123|', 123);
-        return 700;
+        return 608;
     }
   }
 
@@ -153,9 +154,9 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   private translateMonth(type: 'prevoius' | 'next') {
     this.calendarMonitorRef.value!.style.transition = 'translate 0.25s ease-out';
     if (type === 'prevoius') {
-      this.currentTranslateValue += 350;
+      this.currentTranslateValue += 304;
     } else {
-      this.currentTranslateValue -= 350;
+      this.currentTranslateValue -= 304;
     }
     this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
   }
@@ -198,11 +199,11 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   private setTransitionCalendar(type: 'previous' | 'next') {
     if (type === 'previous') {
       this.calendarMonitorRef.value!.style.transition = 'none';
-      this.currentTranslateValue -= 350;
+      this.currentTranslateValue -= 304;
       this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
     } else if (type === 'next') {
       this.calendarMonitorRef.value!.style.transition = 'none';
-      this.currentTranslateValue += 350;
+      this.currentTranslateValue += 304;
       this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
     }
   }

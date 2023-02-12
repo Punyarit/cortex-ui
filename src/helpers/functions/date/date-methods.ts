@@ -1,10 +1,17 @@
 export type CalendarDetail = {
   year: number;
   month: number;
-  calendar: number[][];
+  calendar: CalendarValue[][];
   firstDateOfMonth: Date;
   lastDateOfMonth: Date;
 };
+
+export type CalendarValue = {
+  value: number;
+  type: calendarType;
+};
+
+export type calendarType = 'current-month' | 'previous-month' | 'next-month';
 
 export function dateFormat(date: Date | number | undefined, options?: Intl.DateTimeFormatOptions) {
   if (!date) return;
@@ -40,7 +47,7 @@ export const yearDayOption: Intl.DateTimeFormatOptions = {
   year: 'numeric',
 };
 
-export function getCalendarDetail(date: Date) {
+export function getCalendarDetail(date: Date): CalendarDetail {
   const firstDateOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
   const lastDateOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
   const calendar = [];
@@ -57,7 +64,14 @@ export function getCalendarDetail(date: Date) {
   for (let weekRow = 0; weekRow < 6; weekRow++) {
     const week = [];
     for (let i = 0; i < 7; i++) {
-      week.push(currentDate.getDate());
+      const value = currentDate.getDate();
+      const type =
+        currentDate.getMonth() === date.getMonth()
+          ? 'current-month'
+          : currentDate.getMonth() < date.getMonth()
+          ? 'previous-month'
+          : 'next-month';
+      week.push({ value, type: type as calendarType });
       currentDate.setDate(currentDate.getDate() + 1);
     }
     calendar.push(week);

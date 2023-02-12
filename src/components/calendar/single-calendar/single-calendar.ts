@@ -3,6 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { ComponentBase } from '../../../base/component-base/component.base';
 import {
   CalendarDetail,
+  calendarType,
+  CalendarValue,
   convertToDate,
   dateFormat,
   longMonthOption,
@@ -20,15 +22,19 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     calendar: undefined,
   };
 
+  // 0 | 304 | 608
   static styles = css`
     .calendar {
-      width: 350px;
+      width: 304px;
       background-color: var(--white);
+      display: flex;
+      flex-flow: column;
+      align-items: center;
     }
     .date {
-      width: var(--size-50);
-      height: var(--size-50);
-      font-size: var(--size-16);
+      width: var(--size-40);
+      height: var(--size-40);
+      font-size: var(--size-14);
       background-color: var(--white);
       display: inline-flex;
       justify-content: center;
@@ -36,9 +42,9 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     }
 
     .day {
-      width: var(--size-50);
-      height: var(--size-50);
-      font-size: var(--size-18);
+      width: var(--size-40);
+      height: var(--size-40);
+      font-size: var(--size-14);
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -48,7 +54,10 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     .title {
       display: flex;
       justify-content: center;
-      column-gap: 12px;
+      column-gap: var(--base-size-12);
+      font-size: var(--size-16);
+      position: relative;
+      bottom: var(--size-6);
     }
 
     .week {
@@ -58,6 +67,15 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     .month,
     .year {
       display: inline-block;
+    }
+
+    .next-month,
+    .previous-month {
+      color: var(--gray-300);
+    }
+
+    .current-month {
+      color: var(--gray-700);
     }
   `;
 
@@ -73,10 +91,6 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     return convertToDate(this.set.calendar.year, this.set.calendar.month, day);
   }
 
-  updated() {
-    console.log('single-calendar |123|', 123);
-  }
-
   render(): TemplateResult {
     return html` <div class="calendar" @click="${this.clickDateEvent}">
       <!-- title (month) -->
@@ -87,16 +101,23 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
         </div>
       </div>
       <!-- day -->
-      ${this.day.map(
-        (day) => html`<div class="day">${dateFormat(this.dateConverted(day), shortDayOption)}</div>`
-      )}
+      <div>
+        ${this.day.map(
+          (day) =>
+            html`<div class="day">${dateFormat(this.dateConverted(day), shortDayOption)}</div>`
+        )}
+      </div>
       <!-- week -->
-      ${this.set?.calendar?.calendar.map(
-        (week: number[]) =>
-          html`<div class="week">
-            ${week.map((date: number) => html`<div class="date">${date}</div> `)}
-          </div>`
-      )}
+      <div>
+        ${this.set?.calendar?.calendar.map(
+          (week: CalendarValue[]) =>
+            html`<div class="week">
+              ${week.map(
+                (date: CalendarValue) => html`<div class="date ${date.type}">${date.value}</div> `
+              )}
+            </div>`
+        )}
+      </div>
     </div>`;
   }
 
