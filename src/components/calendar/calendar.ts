@@ -1,33 +1,34 @@
 import { css, html, TemplateResult } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { ThemeVersion } from '../theme/types/theme.types';
 import '../button/button';
 import { createRef, ref } from 'lit/directives/ref.js';
+import './single-calendar/single-calendar';
+import {
+  CalendarDetail,
+  convertToDate,
+  getCalendarDetail,
+  getNextMonth,
+  getPreviousMonth,
+} from '../../helpers/functions/date/date-methods';
 
 export const tagName = 'cx-calendar';
 // export const onPressed = 'pressed';
-
-type CalendarResult = {
-  year: number;
-  month: number;
-  dates: TemplateResult<1>[][];
-};
 
 @customElement(tagName)
 export class Calendar extends ComponentBase<CXCalendar.Props> {
   config: CXCalendar.Set = {
     date: new Date(),
-    display: 'single',
+    display: '1-calendar',
   };
 
-  // 📌 index 0 = previous month
-  // 📌 index 1 = current month
-  // 📌 index 2 = next month
-  private currentTranslateValue: number = -350;
+  // 📌 0 = previous month
+  // 📌 -350 = current month
+  // 📌 -700 = next month
+  private currentTranslateValue: 0 | -350 | -700 = -350;
 
-  @property({ type: Array })
-  calendarGroup!: CalendarResult[];
+  private calendarGroup!: CalendarDetail[];
 
   static styles = css`
     :host {
@@ -39,60 +40,36 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       background-color: var(--white);
       padding: var(--base-size-12);
       border-radius: var(--base-size-16);
+      position: relative;
     }
 
     .calendar-monitor {
-      display: flex;
       /* 0 is previous month */
       /* -350 is current month */
       /* -700 is next month */
+      display: flex;
       translate: var(--translate);
       transition: translate 0.25s ease-out;
-      /* 📌improve ux speed */
       transition-timing-function: cubic-bezier(0.1, 0.2, 0.2, 1);
-    }
-    .calendar {
-      min-width: 350px;
-    }
-    .date {
-      width: var(--size-50);
-      height: var(--size-50);
-      font-size: var(--size-16);
-      background-color: var(--white);
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
+      /* 📌improve ux speed */
     }
 
-    .day {
-      width: var(--size-50);
-      height: var(--size-50);
-      font-size: var(--size-18);
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .title {
+    .handler-month {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      z-index: 1;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      padding: 6px 12px 0;
+      box-sizing: border-box;
     }
   `;
 
-  private day = [0, 1, 2, 3, 4, 5, 6];
-
-  private currentCalendar!: CalendarResult;
-  private previousCalendar!: CalendarResult;
-  private nextCalendar!: CalendarResult;
-
-  private longMonthOption: Intl.DateTimeFormatOptions = {
-    month: 'long',
-  };
-
-  private shortDayOption: Intl.DateTimeFormatOptions = {
-    weekday: 'short',
-  };
+  private currentCalendar!: CalendarDetail;
+  private previousCalendar!: CalendarDetail;
+  private nextCalendar!: CalendarDetail;
 
   private buttonLeftSet: CXButton.Set = {
     iconOnly: true,
@@ -121,46 +98,20 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       </style>
 
       <div class="calendar-group">
+        <div class="handler-month">
+          <cx-button
+            @click="${this.goPreviousMonth}"
+            .var="${this.buttonVar}"
+            .set="${this.buttonLeftSet}"></cx-button>
+          <cx-button
+            @click="${this.goNextMonth}"
+            .var="${this.buttonVar}"
+            .set="${this.buttonRightSet}"></cx-button>
+        </div>
         <div class="calendar-monitor" ${ref(this.calendarMonitorRef)}>
-          ${this.calendarGroup.map((calendar) => {
-            return html` <!-- append this -->
-              <div
-                class="calendar"
-                @click="${(e: PointerEvent) => this.clickDateEvent(e, calendar)}">
-                <div class="title">
-                  <cx-button
-                    @click="${this.goPreviousMonth}"
-                    .var="${this.buttonVar}"
-                    .set="${this.buttonLeftSet}"></cx-button>
-                  <div class="month">
-                    ${this.format(
-                      this.convertToDate(calendar?.year, calendar?.month),
-                      this.longMonthOption
-                    )}
-                  </div>
-                  <cx-button
-                    @click="${this.goNextMonth}"
-                    .var="${this.buttonVar}"
-                    .set="${this.buttonRightSet}"></cx-button>
-                </div>
-                <div>
-                  <div>
-                    ${this.day.map(
-                      (day) =>
-                        html`<div class="day">
-                          ${this.format(
-                            this.convertToDate(calendar?.year, calendar?.month, day),
-                            this.shortDayOption
-                          )}
-                        </div>`
-                    )}
-                  </div>
-                </div>
-                <div>
-                  ${calendar?.dates?.map((week) => html`<div>${week.map((date) => date)}</div>`)}
-                </div>
-              </div>`;
-          })}
+          ${this.calendarGroup.map(
+            (calendar) => html` <cx-single-calendar .set="${{ calendar }}"> </cx-single-calendar>`
+          )}
         </div>
       </div>`;
   }
@@ -177,88 +128,106 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   private generateCalendar() {
-    const previousMonth = this.getPreviousMonth(this.set.date);
-    const nextMonth = this.getNextMonth(this.set.date);
-    this.previousCalendar = this.getCalendarArray(previousMonth);
-    this.currentCalendar = this.getCalendarArray(this.set.date);
-    this.nextCalendar = this.getCalendarArray(nextMonth);
+    const previousMonth = getPreviousMonth(this.set.date);
+    const nextMonth = getNextMonth(this.set.date);
+    this.previousCalendar = getCalendarDetail(previousMonth);
+    this.nextCalendar = getCalendarDetail(nextMonth);
+    this.currentCalendar = getCalendarDetail(this.set.date);
 
     this.calendarGroup = [this.previousCalendar, this.currentCalendar, this.nextCalendar];
+    // console.log('calendar |this.calendarGroup|', this.calendarGroup);
   }
 
-  private format(date: Date | number, options?: Intl.DateTimeFormatOptions) {
-    const f = new Intl.DateTimeFormat('th-TH', options);
-    return f.format(date);
+  private translateMonth(type: 'prevoius' | 'next') {
+    this.calendarMonitorRef.value!.style.transition = 'translate 0.25s ease-out';
+    if (type === 'prevoius') {
+      this.currentTranslateValue += 350;
+    } else {
+      this.currentTranslateValue -= 350;
+    }
+    this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
+  }
+
+  private createCalendar(type: 'previous' | 'next', focusedCalendar: CXSingleCalendar.Ref) {
+    let previousMonthFromMonthVisibled: any;
+    if (type === 'previous') {
+      previousMonthFromMonthVisibled = getPreviousMonth(
+        focusedCalendar.set.calendar?.firstDateOfMonth!
+      );
+    } else if (type === 'next') {
+      previousMonthFromMonthVisibled = getNextMonth(
+        focusedCalendar.set.calendar?.firstDateOfMonth!
+      );
+    }
+    const generatedMonth = getCalendarDetail(previousMonthFromMonthVisibled);
+    const singleCalendar = document.createElement('cx-single-calendar') as CXSingleCalendar.Ref;
+    singleCalendar.fix().calendar(generatedMonth).exec();
+
+    return singleCalendar;
+  }
+
+  private removeUnusedCalendar(focussedCalendar: CXSingleCalendar.Ref) {
+    if (focussedCalendar) {
+      this.calendarMonitorRef.value?.removeChild(focussedCalendar);
+    }
+  }
+
+  private appendNewCalendar(type: 'previous' | 'next', singleCalendar: CXSingleCalendar.Ref) {
+    if (type === 'previous') {
+      this.calendarMonitorRef.value?.insertBefore(
+        singleCalendar,
+        this.calendarMonitorRef.value?.firstElementChild
+      );
+    } else if (type === 'next') {
+      this.calendarMonitorRef.value?.append(singleCalendar);
+    }
+  }
+
+  private setTransitionCalendar(type: 'previous' | 'next') {
+    if (type === 'previous') {
+      this.calendarMonitorRef.value!.style.transition = 'none';
+      this.currentTranslateValue -= 350;
+      this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
+    } else if (type === 'next') {
+      this.calendarMonitorRef.value!.style.transition = 'none';
+      this.currentTranslateValue += 350;
+      this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
+    }
   }
 
   private goPreviousMonth() {
-    this.currentTranslateValue += 350;
-    this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
+    this.translateMonth('prevoius');
+
+    const timer = setTimeout(() => {
+      const singleCalendar = this.createCalendar(
+        'previous',
+        this.calendarMonitorRef.value?.firstElementChild as CXSingleCalendar.Ref
+      );
+      this.removeUnusedCalendar(
+        this.calendarMonitorRef.value?.lastElementChild as CXSingleCalendar.Ref
+      );
+      this.appendNewCalendar('previous', singleCalendar);
+
+      this.setTransitionCalendar('previous');
+
+      clearTimeout(timer);
+    }, 250);
   }
 
   private goNextMonth() {
-    this.currentTranslateValue -= 350;
-    this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
-
-    const displayCurrentMonth = this.calendarGroup[this.calendarGroup.length - 1];
-    const convertedDate = this.convertToDate(displayCurrentMonth.year, displayCurrentMonth.month);
-    const nextMonth = this.getNextMonth(convertedDate);
-    const generatedNExtMonth = this.getCalendarArray(nextMonth);
-    this.calendarGroup.push(generatedNExtMonth);
-    // TODO append this
-    // this.calendarMonitorRef.value!.append();
-  }
-
-  private getPreviousMonth(date: Date) {
-    const d = new Date(date);
-    d.setMonth(d.getMonth() - 1);
-    return d;
-  }
-
-  private getNextMonth(date: Date) {
-    const d = new Date(date);
-    d.setMonth(d.getMonth() + 1);
-    return d;
-  }
-
-  // 📌 0 = jan
-  private getCalendarArray(dateParam: Date) {
-    const date = new Date(dateParam.getFullYear(), dateParam.getMonth(), 1);
-    const dates = [];
-
-    const firstDayOfMonth = date.getDay();
-    let currentDate = new Date(date.getFullYear(), date.getMonth(), -firstDayOfMonth + 1);
-
-    while (currentDate.getMonth() <= date.getMonth()) {
-      const week = [];
-
-      for (let i = 0; i < 7; i++) {
-        week.push(html`<div class="date">${currentDate.getDate()}</div>`);
-        currentDate.setDate(currentDate.getDate() + 1);
-      }
-
-      dates.push(week);
-    }
-
-    return {
-      year: date.getFullYear(),
-      month: date.getMonth(),
-      dates,
-    };
-  }
-
-  private convertToDate(year: number, month: number, date = 1): Date {
-    return new Date(year, month, date);
-  }
-
-  private clickDateEvent(e: PointerEvent, result: CalendarResult) {
-    const dateElement = (e.target as HTMLElement).closest('.date');
-    this.setCustomEvent('click-date', {
-      event: 'click-date',
-      vlaue: {
-        date: this.convertToDate(result.year, result.month, +dateElement?.textContent!),
-      },
-    });
+    this.translateMonth('next');
+    const timer = setTimeout(() => {
+      const singleCalendar = this.createCalendar(
+        'next',
+        this.calendarMonitorRef.value!.lastElementChild as CXSingleCalendar.Ref
+      );
+      this.removeUnusedCalendar(
+        this.calendarMonitorRef.value?.firstElementChild as CXSingleCalendar.Ref
+      );
+      this.appendNewCalendar('next', singleCalendar);
+      this.setTransitionCalendar('next');
+      clearTimeout(timer);
+    }, 250);
   }
 }
 
@@ -271,7 +240,7 @@ declare global {
 
     type Set<T extends ThemeVersion = 2> = {
       date: Date;
-      display?: 'single' | 'double' | 'triple';
+      display?: '1-calendar' | '2-calendars';
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
