@@ -7,7 +7,6 @@ import { createRef, ref } from 'lit/directives/ref.js';
 import './single-calendar/single-calendar';
 import {
   CalendarDetail,
-  convertToDate,
   getCalendarDetail,
   getNextMonth,
   getPreviousMonth,
@@ -35,7 +34,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       display: inline-block;
     }
     .calendar-group {
-      max-width: 350px;
+      max-width: var(--display-calendar);
       overflow: hidden;
       background-color: var(--white);
       padding: var(--base-size-12);
@@ -94,6 +93,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
         :host {
           /* 📌default = current month */
           --translate: ${this.currentTranslateValue}px;
+          --display-calendar: ${this.set.display === '1-calendar' ? 350 : 700}px;
         }
       </style>
 
@@ -114,6 +114,18 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
           )}
         </div>
       </div>`;
+  }
+
+  private setDisplayCalendar(): 350 | 700 {
+    switch (this.set.display) {
+      default:
+      case '1-calendar':
+        return 350;
+
+      case '2-calendars':
+        console.log('calendar |123|', 123);
+        return 700;
+    }
   }
 
   connectedCallback() {
