@@ -100,3 +100,5 @@ export function getCalendarDetail(date: Date, today = new Date()): CalendarResul
     lastDateOfMonth,
   };
 }
+
+export const isValid = (date: Date): boolean => !isNaN(date.getDate());

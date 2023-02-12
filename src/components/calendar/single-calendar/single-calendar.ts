@@ -7,6 +7,7 @@ import {
   CalendarValue,
   convertToDate,
   dateFormat,
+  isValid,
   longMonthOption,
   shortDayOption,
   yearDayOption,
@@ -113,7 +114,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
   }
   private day = [0, 1, 2, 3, 4, 5, 6];
 
-  private calendarSelected?: HTMLElement;
+  private dateDOMSelected?: HTMLElement;
 
   private dateConverted(day?: number) {
     if (!this.set.calendar) return;
@@ -153,24 +154,46 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     </div>`;
   }
 
+  // updated(changedProps: Map<string, unknown>) {
+  //   console.log('single-calendar |this.set.selected|', this.set.selected);
+  //   super.update(changedProps);
+  // }
+
+  // private toggleSelected() {
+  //   // bug selected multiple
+  //   console.log('single-calendar |this.set|', this.set);
+  //   console.log(
+  //     'single-calendar |this.CalendarCached.selectedDate|',
+  //     this.CalendarCached.selectedDate
+  //   );
+  //   if (this.set.selected === this.CalendarCached.selectedDate) {
+  //     this.dateSelected?.classList.add('selected');
+  //   } else {
+  //     this.dateSelected?.classList.remove('selected');
+  //   }
+  // }
+
   private selectDate(e: PointerEvent) {
     if (!this.set.calendar) return;
-    if (this.calendarSelected) {
-      this.calendarSelected.classList.remove('selected');
+    if (this.dateDOMSelected) {
+      this.dateDOMSelected.classList.remove('selected');
     }
-    const dateElement = (e.target as HTMLElement).closest('.date') as HTMLElement;
-    dateElement?.classList.add('selected');
+    this.dateDOMSelected = (e.target as HTMLElement).closest('.date') as HTMLElement;
 
-    const date = convertToDate(
+    const dateConverted = convertToDate(
       this.set.calendar.year,
       this.set.calendar.month,
-      +dateElement?.textContent!
-    );
-    this.setCustomEvent('select-date', {
-      event: 'select-date',
-      date,
-    });
-    this.calendarSelected = dateElement;
+      +this.dateDOMSelected?.textContent!
+    ) as Date;
+
+    this.dateDOMSelected.classList.add('selected');
+
+    if (isValid(dateConverted)) {
+      this.setCustomEvent('select-date', {
+        event: 'select-date',
+        date: dateConverted,
+      });
+    }
   }
 }
 
@@ -196,7 +219,7 @@ declare global {
     };
 
     type Details = {
-      ['select-date']: { event: string; dateL: Date };
+      ['select-date']: { event: string; date: Date };
     };
 
     type Events = {

@@ -24,6 +24,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       type: 'single',
       ragne: false,
     },
+    selected: undefined,
   };
 
   // 📌 0 = previous month
@@ -113,7 +114,9 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
         <div class="calendar-monitor" ${ref(this.calendarMonitorRef)}>
           ${this.calendarGroup.map(
             (calendar) =>
-              html` <cx-single-calendar @select-date="${this.selectDate}" .set="${{ calendar }}">
+              html` <cx-single-calendar
+                @select-date="${this.selectDate}"
+                .set="${{ calendar, selected: this.set.selected }}">
               </cx-single-calendar>`
           )}
         </div>
@@ -131,9 +134,38 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     }
   }
 
-  selectDate(e: Event) {
+  private selectDate(e: Event) {
     const event = e as CXSingleCalendar.SelectDate;
-    console.log('calendar |e|', event);
+    if (this.set.selection?.type === 'single') {
+      this.setSelectedValue(event.detail.date);
+      this.selectSingle();
+    } else if (this.set.selection?.type === 'multiple') {
+      // waiting
+      let selectedValue: Date[];
+      if (this.set.selected) {
+        selectedValue = this.set.selected as Date[];
+      } else {
+        selectedValue = [];
+      }
+
+      selectedValue!.push(event.detail.date);
+      this.setSelectedValue(selectedValue!);
+      this.selectMultiple();
+    }
+  }
+
+  private setSelectedValue(
+    selecteValue:
+      | CXSingleCalendar.Details['select-date']['date']
+      | Array<CXSingleCalendar.Details['select-date']['date']>
+  ) {
+    this.fix().selected(selecteValue).exec();
+  }
+
+  private selectMultiple() {}
+
+  private selectSingle() {
+    console.log('calendar |selectSingle|');
   }
 
   connectedCallback() {
@@ -273,6 +305,7 @@ declare global {
         ragne: boolean;
         type: 'single' | 'multiple'; //<-- waiting
       };
+      selected?: Date | Date[];
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
