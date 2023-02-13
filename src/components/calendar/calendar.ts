@@ -12,7 +12,6 @@ import {
   getPreviousMonth,
 } from '../../helpers/functions/date/date-methods';
 import { mutableElement } from '../../helpers/functions/observe-element/mutable-element';
-import { debounce } from '../../helpers/debounceTimer';
 
 export const tagName = 'cx-calendar';
 // export const onPressed = 'pressed';
