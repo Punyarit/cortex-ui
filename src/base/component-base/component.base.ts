@@ -6,6 +6,12 @@ export abstract class ComponentBase<Props extends Properties>
   extends LitElement
   implements OnVariable<Props['var']>, OnConfig<Props['set'], Props['fix']>
 {
+  /**
+   * FAQ
+   *  Caution!!
+   *  should not updated state outside component then pass that state to inside component
+   *  example: single calendar has wrong value
+   */
   @property({ type: Object }) public var!: Props['var'];
   @property({ type: Object }) public set!: Props['set'];
 

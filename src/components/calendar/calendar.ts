@@ -11,6 +11,8 @@ import {
   getNextMonth,
   getPreviousMonth,
 } from '../../helpers/functions/date/date-methods';
+import { mutableElement } from '../../helpers/functions/observe-element/mutable-element';
+import { debounce } from '../../helpers/debounceTimer';
 
 export const tagName = 'cx-calendar';
 // export const onPressed = 'pressed';
@@ -24,8 +26,9 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       type: 'single',
       ragne: false,
     },
-    selected: undefined,
   };
+
+  #firstUpdatedCalendar = false;
 
   // 📌 0 = previous month
   // 📌 -304 = current month
@@ -114,13 +117,25 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
         <div class="calendar-monitor" ${ref(this.calendarMonitorRef)}>
           ${this.calendarGroup.map(
             (calendar) =>
-              html` <cx-single-calendar
-                @select-date="${this.selectDate}"
-                .set="${{ calendar, selected: this.set.selected }}">
+              html` <cx-single-calendar @select-date="${this.selectDate}" .set="${{ calendar }}">
               </cx-single-calendar>`
           )}
         </div>
       </div>`;
+  }
+
+  firstUpdated() {
+    this.observeCalendarMonitor();
+  }
+
+  private observeCalendarMonitor() {
+    mutableElement(this.calendarMonitorRef.value!, 'attributes', (m) => {
+      const singleCalendars = (m.target as HTMLElement)
+        .children as HTMLCollectionOf<CXSingleCalendar.Ref>;
+      for (const singleCalendar of singleCalendars) {
+        singleCalendar.updateSelected();
+      }
+    });
   }
 
   private setDisplayCalendar(): 304 | 608 {
@@ -134,17 +149,13 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     }
   }
 
-  private selectDate(e: Event) {
+  private selectDate = (e: Event) => {
     const event = e as CXSingleCalendar.SelectDate;
     if (this.set.selection?.type === 'single') {
-      this.fixSelectedValue(event.detail);
+      console.log('calendar |selectedDate|');
     }
     // this.dateDOMSelected = event.detail.dateDOM;
-  }
-
-  private fixSelectedValue(selecteValue: CXSingleCalendar.Details['select-date']) {
-    this.fix().selected(selecteValue.date).exec();
-  }
+  };
 
   connectedCallback() {
     super.connectedCallback();
@@ -158,6 +169,8 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   private generateCalendar() {
+    if (this.#firstUpdatedCalendar) return;
+
     const previousMonth = getPreviousMonth(this.set.date);
     const nextMonth = getNextMonth(this.set.date);
     const previousCalendar = getCalendarDetail(previousMonth);
@@ -172,6 +185,8 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       const nextCalendar = getCalendarDetail(getNextMonth(currentMonthRight.firstDateOfMonth));
       this.calendarGroup = [previousCalendar, currebtMonthLeft, currentMonthRight, nextCalendar];
     }
+
+    this.#firstUpdatedCalendar = true;
   }
 
   private translateMonth(type: 'prevoius' | 'next') {
@@ -184,8 +199,8 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
   }
 
-  private createCalendar(type: 'previous' | 'next', focusedCalendar: CXSingleCalendar.Ref) {
-    let previousMonthFromMonthVisibled: any;
+  private createSingleCalendar(type: 'previous' | 'next', focusedCalendar: CXSingleCalendar.Ref) {
+    let previousMonthFromMonthVisibled: Date;
     if (type === 'previous') {
       previousMonthFromMonthVisibled = getPreviousMonth(
         focusedCalendar.set.calendar?.firstDateOfMonth!
@@ -195,10 +210,11 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
         focusedCalendar.set.calendar?.firstDateOfMonth!
       );
     }
-    const generatedMonth = getCalendarDetail(previousMonthFromMonthVisibled);
+    const generatedMonth = getCalendarDetail(previousMonthFromMonthVisibled!);
     const singleCalendar = document.createElement('cx-single-calendar') as CXSingleCalendar.Ref;
-    singleCalendar.fix().calendar(generatedMonth).selected(this.set.selected).exec();
-    singleCalendar.addEventListener('select-date', (e) => this.selectDate(e));
+    singleCalendar.fix().calendar(generatedMonth).exec();
+
+    singleCalendar.addEventListener('select-date', this.selectDate);
 
     return singleCalendar;
   }
@@ -236,7 +252,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     this.translateMonth('prevoius');
 
     const timer = setTimeout(() => {
-      const singleCalendar = this.createCalendar(
+      const singleCalendar = this.createSingleCalendar(
         'previous',
         this.calendarMonitorRef.value?.firstElementChild as CXSingleCalendar.Ref
       );
@@ -254,7 +270,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   private goNextMonth() {
     this.translateMonth('next');
     const timer = setTimeout(() => {
-      const singleCalendar = this.createCalendar(
+      const singleCalendar = this.createSingleCalendar(
         'next',
         this.calendarMonitorRef.value!.lastElementChild as CXSingleCalendar.Ref
       );
@@ -283,7 +299,6 @@ declare global {
         ragne: boolean;
         type: 'single' | 'multiple'; //<-- waiting
       };
-      selected?: Date;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };

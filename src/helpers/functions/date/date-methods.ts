@@ -10,7 +10,7 @@ export type CalendarValue = {
   value: number;
   type: calendarType;
   period: string;
-  date: Date;
+  date: number[];
 };
 
 export type calendarType = 'current-month' | 'previous-month' | 'next-month';
@@ -88,7 +88,13 @@ export function getCalendarDetail(date: Date, today = new Date()): CalendarResul
         period = nextDays === 1 ? `1 day later` : `in ${nextDays} days later`;
       }
 
-      week.push({ value, type, period, date: currentDate });
+      // 📌 cant add date: currentDate to week.push becuse currentDate referrence cached
+      week.push({
+        value,
+        type,
+        period,
+        date: [currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()],
+      });
       currentDate.setDate(currentDate.getDate() + 1);
     }
     calendar.push(week);

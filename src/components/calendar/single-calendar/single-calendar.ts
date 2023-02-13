@@ -1,6 +1,7 @@
 import { css, html, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ComponentBase } from '../../../base/component-base/component.base';
+import { debounce } from '../../../helpers/debounceTimer';
 import {
   CalendarResult,
   calendarType,
@@ -12,7 +13,9 @@ import {
   shortDayOption,
   yearDayOption,
 } from '../../../helpers/functions/date/date-methods';
+import { mutableElement } from '../../../helpers/functions/observe-element/mutable-element';
 import { ThemeVersion } from '../../theme/types/theme.types';
+import { SingleCalendarSingleton } from '../singleton/calendar.singleton';
 
 export const tagName = 'cx-single-calendar';
 // export const onPressed = 'pressed';
@@ -50,11 +53,11 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     .date:hover {
       background-color: var(--primary-100);
     }
-    .date.selected {
+    .selected {
       background-color: var(--primary-500) !important;
       color: var(--white) !important;
     }
-    .date.selected:hover {
+    .selected:hover {
       background-color: var(--primary-600);
       color: var(--white);
     }
@@ -100,6 +103,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     .next-month,
     .previous-month {
       color: var(--gray-300);
+      pointer-events: none;
     }
 
     .current-month {
@@ -114,15 +118,14 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
   }
   private day = [0, 1, 2, 3, 4, 5, 6];
 
-  private dateDOMSelected?: HTMLElement;
-
+  private findDateSelectedDOM?: HTMLElement;
   private dateConverted(day?: number) {
     if (!this.set.calendar) return;
     return convertToDate(this.set.calendar.year, this.set.calendar.month, day);
   }
 
   render(): TemplateResult {
-    return html` <div class="calendar" @click="${this.selectDate}">
+    return html` <div class="calendar">
       <!-- title (month) -->
       <div class="title">
         <div class="month">${dateFormat(this.dateConverted(), longMonthOption)}</div>
@@ -138,46 +141,66 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
         )}
       </div>
       <!-- week -->
-      <div>
+      <div @click="${this.selectDate}">
         ${this.set?.calendar?.calendar.map(
           (week: CalendarValue[]) =>
             html`<div class="week">
-              ${week.map(
-                (date: CalendarValue) =>
-                  html`<div class="date ${date.type}" data-period="${date.period}">
-                    ${date.value}
-                  </div> `
-              )}
+              ${week.map((date: CalendarValue) => {
+                const { date: dateValue, period, type, value } = date;
+                return html`<div
+                  title="${dateValue.join('-')}"
+                  class="date ${type}"
+                  data-period="${period}">
+                  ${value}
+                </div> `;
+              })}
             </div>`
         )}
       </div>
     </div>`;
   }
 
-  updated() {
-    console.log('single-calendar |this.set.selected|', this.set.selected);
-    // if (this.set?.selected !== this.selectedValue) {
-    //   this.dateDOMSelected?.classList.remove('selected');
-    // }
+  // 📌this methods only call from calendar monitor
+  public updateSelected() {
+    if (SingleCalendarSingleton.selectedCached) {
+      const { selectedCached } = SingleCalendarSingleton;
+      const selectedMonth = selectedCached.getMonth();
+      const selectedYear = selectedCached.getFullYear();
+      const selectedDate = selectedCached.getDate();
+      const { month: calendarMonth, year: calendarYear } = this.set.calendar!;
+
+      if (selectedMonth === calendarMonth && selectedYear === calendarYear) {
+        if (this.findDateSelectedDOM) {
+          this.findDateSelectedDOM?.classList.remove('selected');
+        }
+        this.findDateSelectedDOM = this.shadowRoot?.querySelector(
+          `div[title='${selectedYear}-${calendarMonth}-${selectedDate}']`
+        )!;
+
+        this.findDateSelectedDOM?.classList.add('selected');
+      } else {
+        if (this.findDateSelectedDOM) {
+          this.findDateSelectedDOM?.classList.remove('selected');
+        }
+      }
+    }
   }
 
   private selectDate(e: PointerEvent) {
     if (!this.set.calendar) return;
-    if (this.dateDOMSelected) {
-      this.dateDOMSelected.classList.remove('selected');
-    }
-    this.dateDOMSelected = (e.target as HTMLElement).closest('.date') as HTMLElement;
+    const dateDOMSelected = (e.target as HTMLElement).closest('.date') as HTMLElement;
 
-    const dateObj = {
-      year: this.set.calendar.year,
-      month: this.set.calendar.month,
-      date: +this.dateDOMSelected?.textContent!,
-    };
+    const dateArray = [
+      this.set.calendar.year,
+      this.set.calendar.month,
+      +dateDOMSelected?.textContent!,
+    ];
 
-    const selectedDate = convertToDate(dateObj.year, dateObj.month, dateObj.date) as Date;
+    const selectedDate = convertToDate(dateArray[0], dateArray[1], dateArray[2]) as Date;
 
-    this.dateDOMSelected.classList.add('selected');
-
+    this.fix().selected(selectedDate).exec();
+    this.parentElement?.setAttribute('current-selected', `${dateArray.join('-')}`);
+    SingleCalendarSingleton.selectedCached = selectedDate;
     if (isValid(selectedDate)) {
       this.setCustomEvent('select-date', {
         event: 'select-date',
