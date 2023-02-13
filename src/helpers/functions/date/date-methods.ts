@@ -61,16 +61,57 @@ export const yearDayOption: Intl.DateTimeFormatOptions = {
   year: 'numeric',
 };
 
-export function getCalendarDetail(config: {
+type CalendarType = 'current-month' | 'previous-month' | 'next-month';
+
+const getCalendarType = (date: Date, targetMonth: number): CalendarType =>
+  date.getMonth() === targetMonth
+    ? 'current-month'
+    : date.getMonth() < targetMonth
+    ? 'previous-month'
+    : 'next-month';
+
+const getPeriod = (today: Date, date: Date): string => {
+  const diff = today.getTime() - date.getTime();
+  const daysAgo = Math.floor(diff / (1000 * 3600 * 24));
+
+  if (daysAgo === 0) {
+    return 'today';
+  } else if (daysAgo > 0) {
+    return daysAgo === 1 ? `1 day ago` : `${daysAgo} days ago`;
+  } else {
+    const nextDays = Math.abs(daysAgo);
+    return nextDays === 1 ? `1 day later` : `in ${nextDays} days later`;
+  }
+};
+
+const getMinMax = (
+  configMin: Date | undefined,
+  configMax: Date | undefined,
+  date: Date
+): MinMaxType | undefined => {
+  if (configMin && date < configMin) {
+    return 'min';
+  } else if (configMax && date > configMax) {
+    return 'max';
+  } else {
+    return undefined;
+  }
+};
+
+export const getCalendarDetail = ({
+  date,
+  today = new Date(),
+  min,
+  max,
+}: {
   date: Date;
   today?: Date;
   min?: Date;
   max?: Date;
-}): CalendarResult {
-  const { date, today = new Date() } = config;
+}): CalendarResult => {
   const firstDateOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
   const lastDateOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-  const calendar = [];
+  const calendar: CalendarValue[][] = [];
 
   const firstDayOfMonth = firstDateOfMonth.getDay();
   let currentDate = new Date(
@@ -79,48 +120,15 @@ export function getCalendarDetail(config: {
     -firstDayOfMonth + 1
   );
 
-  // 📌use while (currentDate.getMonth() <= firstDateOfMonth.getMonth()) { ... }
-  // 📌for flexible row of month's week but it's not good for ux and developing
   for (let weekRow = 0; weekRow < 6; weekRow++) {
-    const week = [] as CalendarValue[];
+    const week: CalendarValue[] = [];
     for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
       const value = currentDate.getDate();
-      const type =
-        currentDate.getMonth() === date.getMonth()
-          ? 'current-month'
-          : currentDate.getMonth() < date.getMonth()
-          ? 'previous-month'
-          : 'next-month';
+      const type = getCalendarType(currentDate, date.getMonth());
+      const period = getPeriod(today, currentDate);
+      const minmax = getMinMax(min, max, currentDate);
 
-      let period = '';
-      let diff = today.getTime() - currentDate.getTime();
-      let daysAgo = Math.floor(diff / (1000 * 3600 * 24));
-      // console.log('date-methods |daysAgo|', daysAgo);
-      // console.log('date-methods |value |', value);
-      if (daysAgo === 0) {
-        period = 'today';
-      } else if (daysAgo > 0) {
-        period = daysAgo === 1 ? `1 day ago` : `${daysAgo} days ago`;
-      } else {
-        let nextDays = Math.abs(daysAgo);
-        period = nextDays === 1 ? `1 day later` : `in ${nextDays} days later`;
-      }
-
-      let minmax = undefined as MinMaxType;
-      if (config.min && currentDate < config.min) {
-        minmax = 'min';
-      } else if (config.max && currentDate > config.max) {
-        minmax = 'max';
-      }
-
-      // 📌 cant add date: currentDate to week.push becuse currentDate referrence cached
-      week.push({
-        value,
-        type,
-        period,
-        date: convertDateToArray(currentDate)!,
-        minmax,
-      });
+      week.push({ value, type, period, date: convertDateToArray(currentDate)!, minmax });
       currentDate.setDate(currentDate.getDate() + 1);
     }
     calendar.push(week);
@@ -133,6 +141,6 @@ export function getCalendarDetail(config: {
     firstDateOfMonth,
     lastDateOfMonth,
   };
-}
+};
 
 export const isValid = (date: Date): boolean => !isNaN(date.getDate());

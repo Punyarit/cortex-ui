@@ -185,75 +185,53 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   private generateCalendar() {
     if (this.#firstUpdatedCalendar) return;
 
-    const previousMonth = getPreviousMonth(this.set.date);
-    const nextMonth = getNextMonth(this.set.date);
-    const previousCalendar = getCalendarDetail({
-      date: previousMonth,
-      min: this.set.min,
-      max: this.set.max,
-    });
+    const currentMonth = this.set.date;
+    const previousMonth = getPreviousMonth(currentMonth);
+    const nextMonth = getNextMonth(currentMonth);
 
-    if (this.set.display === '1-calendar') {
-      const currentCalendar = getCalendarDetail({
-        date: this.set.date,
-        min: this.set.min,
-        max: this.set.max,
-      });
-      const nextCalendar = getCalendarDetail({
-        date: nextMonth,
-        min: this.set.min,
-        max: this.set.max,
-      });
-      this.calendarGroup = [previousCalendar, currentCalendar, nextCalendar];
-    } else if (this.set.display === '2-calendars') {
-      const currebtMonthLeft = getCalendarDetail({
-        date: this.set.date,
-        min: this.set.min,
-        max: this.set.max,
-      });
-      console.log('calendar |currebtMonthLeft|', currebtMonthLeft);
-      const currentMonthRight = getCalendarDetail({
-        date: nextMonth,
-        min: this.set.min,
-        max: this.set.max,
-      });
-      const nextCalendar = getCalendarDetail({
-        date: getNextMonth(currentMonthRight.firstDateOfMonth),
-        min: this.set.min,
-        max: this.set.max,
-      });
-      this.calendarGroup = [previousCalendar, currebtMonthLeft, currentMonthRight, nextCalendar];
+    switch (this.set.display) {
+      case '1-calendar':
+        this.calendarGroup = [
+          getCalendarDetail({ date: previousMonth, min: this.set.min, max: this.set.max }),
+          getCalendarDetail({ date: currentMonth, min: this.set.min, max: this.set.max }),
+          getCalendarDetail({ date: nextMonth, min: this.set.min, max: this.set.max }),
+        ];
+        break;
+      case '2-calendars':
+        this.calendarGroup = [
+          getCalendarDetail({ date: previousMonth, min: this.set.min, max: this.set.max }),
+          getCalendarDetail({ date: currentMonth, min: this.set.min, max: this.set.max }),
+          getCalendarDetail({ date: nextMonth, min: this.set.min, max: this.set.max }),
+          getCalendarDetail({
+            date: getNextMonth(nextMonth),
+            min: this.set.min,
+            max: this.set.max,
+          }),
+        ];
+        break;
     }
 
     this.#firstUpdatedCalendar = true;
   }
 
-  private translateMonth(type: 'prevoius' | 'next') {
-    this.calendarMonitorRef.value!.style.transition = 'translate 0.25s ease-out';
-    if (type === 'prevoius') {
-      this.currentTranslateValue += 304;
-    } else {
-      this.currentTranslateValue -= 304;
-    }
+  private translateMonth(direction: 'previous' | 'next') {
+    this.calendarMonitorRef.value!.style.transition = '0.25s ease-out';
+    this.currentTranslateValue += direction === 'previous' ? 304 : -304;
     this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
   }
 
   private createSingleCalendar(type: 'previous' | 'next', focusedCalendar: CXSingleCalendar.Ref) {
-    let previousMonthFromMonthVisibled: Date;
-    if (type === 'previous') {
-      previousMonthFromMonthVisibled = getPreviousMonth(
-        focusedCalendar.set.calendar?.firstDateOfMonth!
-      );
-    } else if (type === 'next') {
-      previousMonthFromMonthVisibled = getNextMonth(
-        focusedCalendar.set.calendar?.firstDateOfMonth!
-      );
-    }
+    const previousMonthFromMonthVisibled =
+      type === 'previous'
+        ? getPreviousMonth(focusedCalendar.set.calendar?.firstDateOfMonth!)
+        : getNextMonth(focusedCalendar.set.calendar?.firstDateOfMonth!);
+
     const generatedMonth = getCalendarDetail({
-      date: previousMonthFromMonthVisibled!,
+      date: previousMonthFromMonthVisibled,
       min: this.set.min,
       max: this.set.max,
     });
+
     const singleCalendar = document.createElement('cx-single-calendar') as CXSingleCalendar.Ref;
     singleCalendar.fix().calendar(generatedMonth).exec();
 
@@ -261,7 +239,6 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
     return singleCalendar;
   }
-
   private removeUnusedCalendar(focussedCalendar: CXSingleCalendar.Ref) {
     if (focussedCalendar) {
       this.calendarMonitorRef.value?.removeChild(focussedCalendar);
@@ -269,30 +246,30 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   private appendNewCalendar(type: 'previous' | 'next', singleCalendar: CXSingleCalendar.Ref) {
+    const calendarMonitor = this.calendarMonitorRef.value;
+    if (!calendarMonitor) return;
+
     if (type === 'previous') {
-      this.calendarMonitorRef.value?.insertBefore(
-        singleCalendar,
-        this.calendarMonitorRef.value?.firstElementChild
-      );
-    } else if (type === 'next') {
-      this.calendarMonitorRef.value?.append(singleCalendar);
+      calendarMonitor.insertBefore(singleCalendar, calendarMonitor.firstElementChild);
+    } else {
+      calendarMonitor.appendChild(singleCalendar);
     }
   }
-
   private setTransitionCalendar(type: 'previous' | 'next') {
+    const calendarMonitor = this.calendarMonitorRef.value;
+    if (!calendarMonitor) return;
+
+    calendarMonitor.style.transition = 'none';
     if (type === 'previous') {
-      this.calendarMonitorRef.value!.style.transition = 'none';
       this.currentTranslateValue -= 304;
-      this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
     } else if (type === 'next') {
-      this.calendarMonitorRef.value!.style.transition = 'none';
       this.currentTranslateValue += 304;
-      this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
     }
+    this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
   }
 
   private goPreviousMonth() {
-    this.translateMonth('prevoius');
+    this.translateMonth('previous');
 
     const timer = setTimeout(() => {
       const singleCalendar = this.createSingleCalendar(
