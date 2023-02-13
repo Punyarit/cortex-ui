@@ -11,7 +11,10 @@ export type CalendarValue = {
   type: calendarType;
   period: string;
   date: number[];
+  minmax?: MinMaxType;
 };
+
+export type MinMaxType = 'min' | 'max' | undefined;
 
 export type calendarType = 'current-month' | 'previous-month' | 'next-month';
 
@@ -58,7 +61,13 @@ export const yearDayOption: Intl.DateTimeFormatOptions = {
   year: 'numeric',
 };
 
-export function getCalendarDetail(date: Date, today = new Date()): CalendarResult {
+export function getCalendarDetail(config: {
+  date: Date;
+  today?: Date;
+  min?: Date;
+  max?: Date;
+}): CalendarResult {
+  const { date, today = new Date() } = config;
   const firstDateOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
   const lastDateOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
   const calendar = [];
@@ -97,12 +106,20 @@ export function getCalendarDetail(date: Date, today = new Date()): CalendarResul
         period = nextDays === 1 ? `1 day later` : `in ${nextDays} days later`;
       }
 
+      let minmax = undefined as MinMaxType;
+      if (config.min && currentDate < config.min) {
+        minmax = 'min';
+      } else if (config.max && currentDate > config.max) {
+        minmax = 'max';
+      }
+
       // 📌 cant add date: currentDate to week.push becuse currentDate referrence cached
       week.push({
         value,
         type,
         period,
         date: convertDateToArray(currentDate)!,
+        minmax,
       });
       currentDate.setDate(currentDate.getDate() + 1);
     }

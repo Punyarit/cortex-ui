@@ -91,6 +91,12 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       background-color: var(--primary-100);
     }
 
+    .min,
+    .max {
+      pointer-events: none;
+      color: var(--gray-300) !important;
+    }
+
     .month,
     .year {
       display: inline-block;
@@ -142,10 +148,10 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
           (week: CalendarValue[]) =>
             html`<div class="week">
               ${week.map((date: CalendarValue) => {
-                const { date: dateValue, period, type, value } = date;
+                const { date: dateValue, period, type, value, minmax } = date;
                 return html`<div
                   title="${dateValue.join('-')}"
-                  class="date ${type}"
+                  class="date ${type} ${minmax}"
                   data-period="${period}">
                   ${value}
                 </div> `;

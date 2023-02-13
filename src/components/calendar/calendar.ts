@@ -22,6 +22,8 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   config: CXCalendar.Set = {
     date: new Date(),
     display: '1-calendar',
+    min: undefined,
+    max: undefined,
     selection: {
       type: 'single',
       ragne: false,
@@ -185,16 +187,41 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
     const previousMonth = getPreviousMonth(this.set.date);
     const nextMonth = getNextMonth(this.set.date);
-    const previousCalendar = getCalendarDetail(previousMonth);
+    const previousCalendar = getCalendarDetail({
+      date: previousMonth,
+      min: this.set.min,
+      max: this.set.max,
+    });
 
     if (this.set.display === '1-calendar') {
-      const currentCalendar = getCalendarDetail(this.set.date);
-      const nextCalendar = getCalendarDetail(nextMonth);
+      const currentCalendar = getCalendarDetail({
+        date: this.set.date,
+        min: this.set.min,
+        max: this.set.max,
+      });
+      const nextCalendar = getCalendarDetail({
+        date: nextMonth,
+        min: this.set.min,
+        max: this.set.max,
+      });
       this.calendarGroup = [previousCalendar, currentCalendar, nextCalendar];
     } else if (this.set.display === '2-calendars') {
-      const currebtMonthLeft = getCalendarDetail(this.set.date);
-      const currentMonthRight = getCalendarDetail(nextMonth);
-      const nextCalendar = getCalendarDetail(getNextMonth(currentMonthRight.firstDateOfMonth));
+      const currebtMonthLeft = getCalendarDetail({
+        date: this.set.date,
+        min: this.set.min,
+        max: this.set.max,
+      });
+      console.log('calendar |currebtMonthLeft|', currebtMonthLeft);
+      const currentMonthRight = getCalendarDetail({
+        date: nextMonth,
+        min: this.set.min,
+        max: this.set.max,
+      });
+      const nextCalendar = getCalendarDetail({
+        date: getNextMonth(currentMonthRight.firstDateOfMonth),
+        min: this.set.min,
+        max: this.set.max,
+      });
       this.calendarGroup = [previousCalendar, currebtMonthLeft, currentMonthRight, nextCalendar];
     }
 
@@ -222,7 +249,11 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
         focusedCalendar.set.calendar?.firstDateOfMonth!
       );
     }
-    const generatedMonth = getCalendarDetail(previousMonthFromMonthVisibled!);
+    const generatedMonth = getCalendarDetail({
+      date: previousMonthFromMonthVisibled!,
+      min: this.set.min,
+      max: this.set.max,
+    });
     const singleCalendar = document.createElement('cx-single-calendar') as CXSingleCalendar.Ref;
     singleCalendar.fix().calendar(generatedMonth).exec();
 
@@ -307,6 +338,8 @@ declare global {
     type Set<T extends ThemeVersion = 2> = {
       date: Date;
       display?: '1-calendar' | '2-calendars';
+      min?: Date;
+      max?: Date;
       selection?: {
         ragne: boolean;
         type: 'single' | 'multiple'; //<-- waiting
