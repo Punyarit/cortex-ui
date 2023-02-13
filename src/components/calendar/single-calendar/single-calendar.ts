@@ -154,24 +154,12 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     </div>`;
   }
 
-  // updated(changedProps: Map<string, unknown>) {
-  //   console.log('single-calendar |this.set.selected|', this.set.selected);
-  //   super.update(changedProps);
-  // }
-
-  // private toggleSelected() {
-  //   // bug selected multiple
-  //   console.log('single-calendar |this.set|', this.set);
-  //   console.log(
-  //     'single-calendar |this.CalendarCached.selectedDate|',
-  //     this.CalendarCached.selectedDate
-  //   );
-  //   if (this.set.selected === this.CalendarCached.selectedDate) {
-  //     this.dateSelected?.classList.add('selected');
-  //   } else {
-  //     this.dateSelected?.classList.remove('selected');
-  //   }
-  // }
+  updated() {
+    console.log('single-calendar |this.set.selected|', this.set.selected);
+    // if (this.set?.selected !== this.selectedValue) {
+    //   this.dateDOMSelected?.classList.remove('selected');
+    // }
+  }
 
   private selectDate(e: PointerEvent) {
     if (!this.set.calendar) return;
@@ -180,18 +168,20 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     }
     this.dateDOMSelected = (e.target as HTMLElement).closest('.date') as HTMLElement;
 
-    const dateConverted = convertToDate(
-      this.set.calendar.year,
-      this.set.calendar.month,
-      +this.dateDOMSelected?.textContent!
-    ) as Date;
+    const dateObj = {
+      year: this.set.calendar.year,
+      month: this.set.calendar.month,
+      date: +this.dateDOMSelected?.textContent!,
+    };
+
+    const selectedDate = convertToDate(dateObj.year, dateObj.month, dateObj.date) as Date;
 
     this.dateDOMSelected.classList.add('selected');
 
-    if (isValid(dateConverted)) {
+    if (isValid(selectedDate)) {
       this.setCustomEvent('select-date', {
         event: 'select-date',
-        date: dateConverted,
+        date: selectedDate,
       });
     }
   }

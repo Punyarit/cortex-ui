@@ -137,35 +137,13 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   private selectDate(e: Event) {
     const event = e as CXSingleCalendar.SelectDate;
     if (this.set.selection?.type === 'single') {
-      this.setSelectedValue(event.detail.date);
-      this.selectSingle();
-    } else if (this.set.selection?.type === 'multiple') {
-      // waiting
-      let selectedValue: Date[];
-      if (this.set.selected) {
-        selectedValue = this.set.selected as Date[];
-      } else {
-        selectedValue = [];
-      }
-
-      selectedValue!.push(event.detail.date);
-      this.setSelectedValue(selectedValue!);
-      this.selectMultiple();
+      this.fixSelectedValue(event.detail);
     }
+    // this.dateDOMSelected = event.detail.dateDOM;
   }
 
-  private setSelectedValue(
-    selecteValue:
-      | CXSingleCalendar.Details['select-date']['date']
-      | Array<CXSingleCalendar.Details['select-date']['date']>
-  ) {
-    this.fix().selected(selecteValue).exec();
-  }
-
-  private selectMultiple() {}
-
-  private selectSingle() {
-    console.log('calendar |selectSingle|');
+  private fixSelectedValue(selecteValue: CXSingleCalendar.Details['select-date']) {
+    this.fix().selected(selecteValue.date).exec();
   }
 
   connectedCallback() {
@@ -219,7 +197,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     }
     const generatedMonth = getCalendarDetail(previousMonthFromMonthVisibled);
     const singleCalendar = document.createElement('cx-single-calendar') as CXSingleCalendar.Ref;
-    singleCalendar.fix().calendar(generatedMonth).exec();
+    singleCalendar.fix().calendar(generatedMonth).selected(this.set.selected).exec();
     singleCalendar.addEventListener('select-date', (e) => this.selectDate(e));
 
     return singleCalendar;
@@ -305,7 +283,7 @@ declare global {
         ragne: boolean;
         type: 'single' | 'multiple'; //<-- waiting
       };
-      selected?: Date | Date[];
+      selected?: Date;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };

@@ -10,6 +10,7 @@ export type CalendarValue = {
   value: number;
   type: calendarType;
   period: string;
+  date: Date;
 };
 
 export type calendarType = 'current-month' | 'previous-month' | 'next-month';
@@ -64,7 +65,7 @@ export function getCalendarDetail(date: Date, today = new Date()): CalendarResul
   // 📌for flexible row of month's week but it's not good for ux and developing
   for (let weekRow = 0; weekRow < 6; weekRow++) {
     const week = [] as CalendarValue[];
-    for (let i = 0; i < 7; i++) {
+    for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
       const value = currentDate.getDate();
       const type =
         currentDate.getMonth() === date.getMonth()
@@ -86,7 +87,8 @@ export function getCalendarDetail(date: Date, today = new Date()): CalendarResul
         let nextDays = Math.abs(daysAgo);
         period = nextDays === 1 ? `1 day later` : `in ${nextDays} days later`;
       }
-      week.push({ value, type, period });
+
+      week.push({ value, type, period, date: currentDate });
       currentDate.setDate(currentDate.getDate() + 1);
     }
     calendar.push(week);
