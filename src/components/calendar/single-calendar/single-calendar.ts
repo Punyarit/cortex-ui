@@ -185,6 +185,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
   }
 
   private selectDate(e: PointerEvent) {
+    e.stopPropagation();
     if (!this.set.calendar) return;
     const dateDOMSelected = (e.target as HTMLElement).closest('.date') as HTMLElement;
 

@@ -157,9 +157,14 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   private selectDate = (e: Event) => {
+    console.log('calendar |123|', 123);
     const event = e as CXSingleCalendar.SelectDate;
     if (this.set.selection?.type === 'single') {
-      console.log('calendar |selectedDate|');
+      console.log('calendar |456|', 456);
+      this.setCustomEvent('selected-date', {
+        event: 'selected-date',
+        date: event.detail.date,
+      });
     }
     // this.dateDOMSelected = event.detail.dateDOM;
   };
