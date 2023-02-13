@@ -7,6 +7,7 @@ import { createRef, ref } from 'lit/directives/ref.js';
 import './single-calendar/single-calendar';
 import {
   CalendarResult,
+  convertDateToArray,
   getCalendarDetail,
   getNextMonth,
   getPreviousMonth,
@@ -24,6 +25,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     selection: {
       type: 'single',
       ragne: false,
+      select: 'later',
     },
   };
 
@@ -125,6 +127,12 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
   firstUpdated() {
     this.observeCalendarMonitor();
+    if (this.set.selection?.select === 'immediately') {
+      this.calendarMonitorRef.value?.setAttribute(
+        'current-selected',
+        convertDateToArray(this.set.date)?.join('-')!
+      );
+    }
   }
 
   private observeCalendarMonitor() {
@@ -297,6 +305,7 @@ declare global {
       selection?: {
         ragne: boolean;
         type: 'single' | 'multiple'; //<-- waiting
+        select: 'immediately' | 'later';
       };
     };
 

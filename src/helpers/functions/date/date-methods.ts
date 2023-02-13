@@ -33,8 +33,17 @@ export function getNextMonth(date: Date) {
   return d;
 }
 
-export function convertToDate(year: number, month: number, date = 1): Date {
-  return new Date(year, month, date);
+export function convertToDate(
+  year: number | string,
+  month: number | string,
+  date: number | string = 1
+): Date {
+  return new Date(+year, +month, +date);
+}
+
+export function convertDateToArray(date: Date) {
+  if (!date) return;
+  return [date.getFullYear(), date.getMonth(), date.getDate()];
 }
 
 export const longMonthOption: Intl.DateTimeFormatOptions = {
@@ -93,7 +102,7 @@ export function getCalendarDetail(date: Date, today = new Date()): CalendarResul
         value,
         type,
         period,
-        date: [currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()],
+        date: convertDateToArray(currentDate)!,
       });
       currentDate.setDate(currentDate.getDate() + 1);
     }

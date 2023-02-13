@@ -1,5 +1,5 @@
 import { css, html, TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../../base/component-base/component.base';
 import {
   CalendarResult,
@@ -12,7 +12,6 @@ import {
   yearDayOption,
 } from '../../../helpers/functions/date/date-methods';
 import { ThemeVersion } from '../../theme/types/theme.types';
-import { SingleCalendarSingleton } from '../singleton/calendar.singleton';
 
 export const tagName = 'cx-single-calendar';
 // export const onPressed = 'pressed';
@@ -159,11 +158,13 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
 
   // 📌this methods only call from calendar monitor
   public updateSelected() {
-    if (SingleCalendarSingleton.selectedCached) {
-      const { selectedCached } = SingleCalendarSingleton;
-      const selectedMonth = selectedCached.getMonth();
-      const selectedYear = selectedCached.getFullYear();
-      const selectedDate = selectedCached.getDate();
+    const currentSelected = this.parentElement?.getAttribute('current-selected');
+    if (currentSelected) {
+      const [year, month, date] = currentSelected!.split('-')!;
+      const converted = convertToDate(year, month, date);
+      const selectedMonth = converted.getMonth();
+      const selectedYear = converted.getFullYear();
+      const selectedDate = converted.getDate();
       const { month: calendarMonth, year: calendarYear } = this.set.calendar!;
 
       if (selectedMonth === calendarMonth && selectedYear === calendarYear) {
@@ -197,7 +198,6 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
 
     this.fix().selected(selectedDate).exec();
     this.parentElement?.setAttribute('current-selected', `${dateArray.join('-')}`);
-    SingleCalendarSingleton.selectedCached = selectedDate;
     if (isValid(selectedDate)) {
       this.setCustomEvent('select-date', {
         event: 'select-date',
