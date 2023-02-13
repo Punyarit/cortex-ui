@@ -75,6 +75,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       font-size: var(--size-16);
       position: relative;
       bottom: var(--size-6);
+      font-family: var(--semiBold);
     }
 
     .week {
@@ -194,7 +195,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     e.stopPropagation();
     if (!this.set.calendar) return;
     const dateDOMSelected = (e.target as HTMLElement).closest('.date') as HTMLElement;
-
+    if (!dateDOMSelected) return;
     const dateArray = [
       this.set.calendar.year,
       this.set.calendar.month,
