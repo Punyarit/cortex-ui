@@ -133,7 +133,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     this.observeCalendarMonitor();
     if (this.set.selection?.select === 'immediately') {
       this.calendarMonitorRef.value?.setAttribute(
-        'current-selected',
+        'single-selected',
         convertDateToArray(this.set.date)?.join('-')!
       );
     }

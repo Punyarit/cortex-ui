@@ -37,12 +37,14 @@ export function getNextMonth(date: Date) {
 }
 
 export function convertToDate(
-  year: number | string,
-  month: number | string,
-  date: number | string = 1
+  year: DateParameter,
+  month: DateParameter,
+  date: DateParameter = 1
 ): Date {
   return new Date(+year, +month, +date);
 }
+
+export type DateParameter = string | number;
 
 export function convertDateToArray(date: Date) {
   if (!date) return;
@@ -144,3 +146,10 @@ export const getCalendarDetail = ({
 };
 
 export const isValid = (date: Date): boolean => !isNaN(date.getDate());
+export const isAfter = (date: { starter: Date; comparator: Date }) => {
+  return date.starter > date.comparator ? true : false;
+};
+
+export const isBefore = (date: { starter: Date; comparator: Date }) => {
+  return date.starter < date.comparator ? true : false;
+};

@@ -4,8 +4,11 @@ import { ComponentBase } from '../../../base/component-base/component.base';
 import {
   CalendarResult,
   CalendarValue,
+  convertDateToArray,
   convertToDate,
   dateFormat,
+  DateParameter,
+  isAfter,
   isValid,
   longMonthOption,
   shortDayOption,
@@ -55,7 +58,9 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     .date:active {
       scale: 1;
     }
-    .selected {
+    .selected,
+    .startdate,
+    .enddate {
       background-color: var(--primary-500) !important;
       color: var(--white) !important;
     }
@@ -111,8 +116,9 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
 
     .next-month,
     .previous-month {
-      color: var(--gray-300);
+      color: var(--gray-300) !important;
       pointer-events: none;
+      background-color: var(--white) !important;
     }
 
     .current-month {
@@ -124,13 +130,6 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     super.connectedCallback();
     if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
-  }
-  private day = [0, 1, 2, 3, 4, 5, 6];
-
-  private findDateSelectedDOM?: HTMLElement;
-  private dateConverted(day?: number) {
-    if (!this.set.calendar) return;
-    return convertToDate(this.set.calendar.year, this.set.calendar.month, day);
   }
 
   render(): TemplateResult {
@@ -150,7 +149,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
         )}
       </div>
       <!-- week -->
-      <div @click="${this.selectDate}">
+      <div @click="${this.set.daterange ? this.selectRangeDate : this.selectSingleDate}">
         ${this.set?.calendar?.calendar.map(
           (week: CalendarValue[]) =>
             html`<div class="week">
@@ -169,9 +168,69 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     </div>`;
   }
 
+  private day = [0, 1, 2, 3, 4, 5, 6];
+  private dateSelectedDOM?: HTMLElement;
+  private startDateSelectedDOM?: HTMLElement;
+  private endDateSelectedDOM?: HTMLElement;
+
+  private dateConverted(day?: number) {
+    if (!this.set.calendar) return;
+    return convertToDate(this.set.calendar.year, this.set.calendar.month, day);
+  }
+
   // 📌this methods only call from calendar monitor
   public updateSelected() {
-    const currentSelected = this.parentElement?.getAttribute('current-selected');
+    this.set.daterange ? this.updateRangeSelected() : this.updateSingleSelected();
+  }
+
+  private getCalendarMonitorAttr(attributeName: string) {
+    return this.parentElement?.getAttribute(attributeName);
+  }
+
+  private updateRangeSelected() {
+    const startdate = this.getCalendarMonitorAttr('startdate-selected');
+    const enddate = this.getCalendarMonitorAttr('enddate-selected');
+    const oldStartDate = this.getCalendarMonitorAttr('old-startdate');
+    const oldEndDate = this.getCalendarMonitorAttr('old-enddate');
+
+    const cachedStartDOM = oldStartDate
+      ? this.shadowRoot?.querySelector(`div[data-date='${oldStartDate}']`)
+      : undefined;
+    const cachedEndDOM = oldEndDate
+      ? this.shadowRoot?.querySelector(`div[data-date='${oldEndDate}']`)
+      : undefined;
+
+    if (startdate) {
+      if (cachedStartDOM) {
+        cachedStartDOM.classList.remove('startdate');
+      }
+
+      this.startDateSelectedDOM = this.shadowRoot?.querySelector(`div[data-date='${startdate}']`)!;
+
+      if (this.startDateSelectedDOM && !this.startDateSelectedDOM.classList.contains('startdate')) {
+        this.startDateSelectedDOM.classList.add('startdate');
+      }
+    } else if (cachedStartDOM) {
+      cachedStartDOM.classList.remove('startdate');
+    }
+
+    if (enddate) {
+      if (cachedEndDOM) {
+        cachedEndDOM.classList.remove('enddate');
+      }
+
+      this.endDateSelectedDOM = this.shadowRoot?.querySelector(`div[data-date='${enddate}']`)!;
+
+      if (this.endDateSelectedDOM && !this.endDateSelectedDOM.classList.contains('enddate')) {
+        this.endDateSelectedDOM.classList.add('enddate');
+      }
+    } else if (cachedEndDOM) {
+      cachedEndDOM.classList.remove('enddate');
+    }
+  }
+
+  private updateSingleSelected() {
+    const currentSelected = this.getCalendarMonitorAttr('single-selected');
     if (!currentSelected) return;
 
     const [year, month, date] = currentSelected!.split('-')!;
@@ -180,44 +239,117 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
 
     if (selectedDate.getMonth() === calendarMonth && selectedDate.getFullYear() === calendarYear) {
       this.removeSelection();
-      this.findDateSelectedDOM = this.shadowRoot?.querySelector(
+      this.dateSelectedDOM = this.shadowRoot?.querySelector(
         `div[data-date='${selectedDate.getFullYear()}-${calendarMonth}-${selectedDate.getDate()}']`
       )!;
 
-      this.findDateSelectedDOM?.classList.add('selected');
+      this.dateSelectedDOM?.classList.add('selected');
     } else {
       this.removeSelection();
     }
   }
 
   private removeSelection() {
-    if (this.findDateSelectedDOM) {
-      this.findDateSelectedDOM.classList.remove('selected');
+    if (this.dateSelectedDOM) {
+      this.dateSelectedDOM.classList.remove('selected');
     }
   }
 
-  private selectDate(e: PointerEvent) {
-    e.stopPropagation();
-    const calendar = this.set.calendar;
-    if (!calendar) return;
+  private selectSingleDate(e: PointerEvent) {
+    const [year, month, date] = this.getDateSelected(e)!;
 
-    const dateDOMSelected = (e.target as HTMLElement).closest('.date') as HTMLElement;
-    if (!dateDOMSelected) return;
-
-    const [year, month, date] = [calendar.year, calendar.month, +dateDOMSelected?.textContent!];
     const selectedDate = convertToDate(year, month, date) as Date;
+
     if (!isValid(selectedDate)) return;
 
+    this.setSingleSelectAttribute(year, month, date);
     this.fix().selected(selectedDate).exec();
-    this.parentElement?.setAttribute('current-selected', `${year}-${month}-${date}`);
     this.setCustomEvent('select-date', {
       event: 'select-date',
       date: selectedDate,
     });
   }
 
-  private selectSingleDate() {}
-  private selectRangeDate() {}
+  private removeStartEndDateAttribute(type: 'startdate' | 'enddate') {
+    this.parentElement?.removeAttribute(`${type}-selected`);
+  }
+
+  private setSingleSelectAttribute(year: DateParameter, month: DateParameter, date: DateParameter) {
+    this.parentElement?.setAttribute('single-selected', `${year}-${month}-${date}`);
+  }
+
+  private setStartEndDateAttribute(
+    type: 'startdate' | 'enddate',
+    year: DateParameter,
+    month: DateParameter,
+    date: DateParameter
+  ) {
+    this.parentElement?.setAttribute(`${type}-selected`, `${year}-${month}-${date}`);
+  }
+
+  private setDateRangeStarted(e: PointerEvent) {
+    const [yearSelected, monthSelected, dateSelected] = this.getDateSelected(e)!;
+    const [startDateAttr, endDateAttr] = this.getUpdatedStartEndAttributes();
+    if (!startDateAttr) {
+      this.setStartEndDateAttribute('startdate', yearSelected, monthSelected, dateSelected);
+      this.removeStartEndDateAttribute('enddate');
+    } else if (!endDateAttr) {
+      this.setStartEndDateAttribute('enddate', yearSelected, monthSelected, dateSelected);
+    } else {
+      this.setStartEndDateAttribute('startdate', yearSelected, monthSelected, dateSelected);
+      this.removeStartEndDateAttribute('enddate');
+    }
+  }
+
+  private setDateRangeFullValue() {
+    const [startDateAttr, endDateAttr] = this.getUpdatedStartEndAttributes();
+    const [yearStart, monthStart, dateStart] = startDateAttr?.split('-')!;
+    const startDate = convertToDate(yearStart, monthStart, dateStart);
+    if (endDateAttr) {
+      const [yearEnd, monthEnd, dateEnd] = endDateAttr?.split('-')!;
+      const endDate = convertToDate(yearEnd, monthEnd, dateEnd);
+      if (isAfter({ starter: startDate, comparator: endDate })) {
+        this.setStartEndDateAttribute('startdate', yearEnd, monthEnd, dateEnd);
+        this.setStartEndDateAttribute('enddate', yearStart, monthStart, dateStart);
+      }
+    }
+  }
+
+  private getUpdatedStartEndAttributes() {
+    return [
+      this.getCalendarMonitorAttr('startdate-selected'),
+      this.getCalendarMonitorAttr('enddate-selected'),
+    ];
+  }
+
+  private setOldDateRange() {
+    const [startdate, enddate] = this.getUpdatedStartEndAttributes();
+    this.parentElement?.setAttribute('old-startdate', startdate!);
+    this.parentElement?.setAttribute('old-enddate', enddate!);
+  }
+  private selectRangeDate(e: PointerEvent) {
+    this.setOldDateRange();
+    this.setDateRangeStarted(e);
+    this.setDateRangeFullValue();
+
+    const [startDate, endDate] = this.getUpdatedStartEndAttributes();
+
+    const dateRange = {
+      startDate: startDate,
+      endDate: endDate,
+    };
+
+    this.setCustomEvent('select-date', {
+      event: 'select-date',
+      date: dateRange,
+    });
+  }
+
+  private getDateSelected(e: PointerEvent) {
+    const dateDOMSelected = (e.target as HTMLElement).closest('.date') as HTMLElement;
+    if (!dateDOMSelected) throw '';
+    return (dateDOMSelected.dataset.date as string).split('-');
+  }
 }
 
 declare global {
