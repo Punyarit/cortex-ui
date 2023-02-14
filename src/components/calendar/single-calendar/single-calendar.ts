@@ -166,52 +166,48 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
   // 📌this methods only call from calendar monitor
   public updateSelected() {
     const currentSelected = this.parentElement?.getAttribute('current-selected');
-    if (currentSelected) {
-      const [year, month, date] = currentSelected!.split('-')!;
-      const converted = convertToDate(year, month, date);
-      const selectedMonth = converted.getMonth();
-      const selectedYear = converted.getFullYear();
-      const selectedDate = converted.getDate();
-      const { month: calendarMonth, year: calendarYear } = this.set.calendar!;
+    if (!currentSelected) return;
 
-      if (selectedMonth === calendarMonth && selectedYear === calendarYear) {
-        if (this.findDateSelectedDOM) {
-          this.findDateSelectedDOM?.classList.remove('selected');
-        }
-        this.findDateSelectedDOM = this.shadowRoot?.querySelector(
-          `div[title='${selectedYear}-${calendarMonth}-${selectedDate}']`
-        )!;
+    const [year, month, date] = currentSelected!.split('-')!;
+    const selectedDate = convertToDate(year, month, date);
+    const { month: calendarMonth, year: calendarYear } = this.set.calendar!;
 
-        this.findDateSelectedDOM?.classList.add('selected');
-      } else {
-        if (this.findDateSelectedDOM) {
-          this.findDateSelectedDOM?.classList.remove('selected');
-        }
-      }
+    if (selectedDate.getMonth() === calendarMonth && selectedDate.getFullYear() === calendarYear) {
+      this.removeSelection();
+      this.findDateSelectedDOM = this.shadowRoot?.querySelector(
+        `div[title='${selectedDate.getFullYear()}-${calendarMonth}-${selectedDate.getDate()}']`
+      )!;
+
+      this.findDateSelectedDOM?.classList.add('selected');
+    } else {
+      this.removeSelection();
+    }
+  }
+
+  private removeSelection() {
+    if (this.findDateSelectedDOM) {
+      this.findDateSelectedDOM.classList.remove('selected');
     }
   }
 
   private selectDate(e: PointerEvent) {
     e.stopPropagation();
-    if (!this.set.calendar) return;
+    const calendar = this.set.calendar;
+    if (!calendar) return;
+
     const dateDOMSelected = (e.target as HTMLElement).closest('.date') as HTMLElement;
     if (!dateDOMSelected) return;
-    const dateArray = [
-      this.set.calendar.year,
-      this.set.calendar.month,
-      +dateDOMSelected?.textContent!,
-    ];
 
-    const selectedDate = convertToDate(dateArray[0], dateArray[1], dateArray[2]) as Date;
+    const [year, month, date] = [calendar.year, calendar.month, +dateDOMSelected?.textContent!];
+    const selectedDate = convertToDate(year, month, date) as Date;
+    if (!isValid(selectedDate)) return;
 
     this.fix().selected(selectedDate).exec();
-    this.parentElement?.setAttribute('current-selected', `${dateArray.join('-')}`);
-    if (isValid(selectedDate)) {
-      this.setCustomEvent('select-date', {
-        event: 'select-date',
-        date: selectedDate,
-      });
-    }
+    this.parentElement?.setAttribute('current-selected', `${year}-${month}-${date}`);
+    this.setCustomEvent('select-date', {
+      event: 'select-date',
+      date: selectedDate,
+    });
   }
 }
 
