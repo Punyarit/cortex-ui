@@ -131,10 +131,16 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
   firstUpdated() {
     this.observeCalendarMonitor();
+    this.setSelectedImmediately();
+  }
+
+  private setSelectedImmediately() {
     if (this.set.selection?.select === 'immediately') {
+      const { daterange, date } = this.set;
+      const attrName = daterange ? 'startdate' : 'single';
       this.calendarMonitorRef.value?.setAttribute(
-        'single-selected',
-        convertDateToArray(this.set.date)?.join('-')!
+        `${attrName}-selected`,
+        convertDateToArray(date)?.join('-')!
       );
     }
   }

@@ -231,24 +231,24 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
 
   private updateSingleSelected() {
     const currentSelected = this.getCalendarMonitorAttr('single-selected');
-    if (!currentSelected) return;
+    if (!currentSelected) {
+      return;
+    }
 
-    const [year, month, date] = currentSelected!.split('-')!;
+    const [year, month, date] = currentSelected.split('-').map(Number);
     const selectedDate = convertToDate(year, month, date);
     const { month: calendarMonth, year: calendarYear } = this.set.calendar!;
 
-    if (selectedDate.getMonth() === calendarMonth && selectedDate.getFullYear() === calendarYear) {
+    const isSameMonth =
+      selectedDate.getMonth() === calendarMonth && selectedDate.getFullYear() === calendarYear;
+    if (isSameMonth) {
       this.removeSelection();
-      this.dateSelectedDOM = this.shadowRoot?.querySelector(
-        `div[data-date='${selectedDate.getFullYear()}-${calendarMonth}-${selectedDate.getDate()}']`
-      )!;
-
+      this.dateSelectedDOM = this.shadowRoot?.querySelector(`div[data-date='${currentSelected}']`)!;
       this.dateSelectedDOM?.classList.add('selected');
     } else {
       this.removeSelection();
     }
   }
-
   private removeSelection() {
     if (this.dateSelectedDOM) {
       this.dateSelectedDOM.classList.remove('selected');
@@ -331,17 +331,13 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     this.setOldDateRange();
     this.setDateRangeStarted(e);
     this.setDateRangeFullValue();
-
     const [startDate, endDate] = this.getUpdatedStartEndAttributes();
-
-    const dateRange = {
-      startDate: startDate,
-      endDate: endDate,
-    };
-
     this.setCustomEvent('select-date', {
       event: 'select-date',
-      date: dateRange,
+      date: {
+        startDate: startDate,
+        endDate: endDate,
+      },
     });
   }
 
