@@ -26,9 +26,9 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     max: undefined,
     selection: {
       type: 'single',
-      ragne: false,
       select: 'later',
     },
+    daterange: false,
   };
 
   #firstUpdatedCalendar = false;
@@ -120,7 +120,9 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
         <div class="calendar-monitor" ${ref(this.calendarMonitorRef)}>
           ${this.calendarGroup.map(
             (calendar) =>
-              html` <cx-single-calendar @select-date="${this.selectDate}" .set="${{ calendar }}">
+              html` <cx-single-calendar
+                @select-date="${this.selectDate}"
+                .set="${{ calendar, daterange: this.set.daterange }}">
               </cx-single-calendar>`
           )}
         </div>
@@ -231,8 +233,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     });
 
     const singleCalendar = document.createElement('cx-single-calendar') as CXSingleCalendar.Ref;
-    singleCalendar.fix().calendar(generatedMonth).exec();
-
+    singleCalendar.fix().calendar(generatedMonth).daterange(this.set.daterange).exec();
     singleCalendar.addEventListener('select-date', this.selectDate);
 
     return singleCalendar;
@@ -316,10 +317,10 @@ declare global {
       min?: Date;
       max?: Date;
       selection?: {
-        ragne: boolean;
         type: 'single' | 'multiple'; //<-- waiting
         select: 'immediately' | 'later';
       };
+      daterange?: boolean;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };

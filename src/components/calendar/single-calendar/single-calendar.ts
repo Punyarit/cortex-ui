@@ -21,6 +21,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
   config: CXSingleCalendar.Set = {
     calendar: undefined,
     selected: undefined,
+    daterange: false,
   };
 
   // 0 | 304 | 608
@@ -42,12 +43,17 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       justify-content: center;
       align-items: center;
       border-radius: var(--base-size-half);
-      transition: background-color 0.2s ease;
+      transition: background-color 0.2s ease, scale 0.075s ease;
       cursor: pointer;
     }
 
     .date:hover {
       background-color: var(--primary-100);
+      scale: 1.22;
+    }
+
+    .date:active {
+      scale: 1;
     }
     .selected {
       background-color: var(--primary-500) !important;
@@ -151,7 +157,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
               ${week.map((date: CalendarValue) => {
                 const { date: dateValue, period, type, value, minmax } = date;
                 return html`<div
-                  title="${dateValue.join('-')}"
+                  data-date="${dateValue.join('-')}"
                   class="date ${type} ${minmax}"
                   data-period="${period}">
                   ${value}
@@ -175,7 +181,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     if (selectedDate.getMonth() === calendarMonth && selectedDate.getFullYear() === calendarYear) {
       this.removeSelection();
       this.findDateSelectedDOM = this.shadowRoot?.querySelector(
-        `div[title='${selectedDate.getFullYear()}-${calendarMonth}-${selectedDate.getDate()}']`
+        `div[data-date='${selectedDate.getFullYear()}-${calendarMonth}-${selectedDate.getDate()}']`
       )!;
 
       this.findDateSelectedDOM?.classList.add('selected');
@@ -209,6 +215,9 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       date: selectedDate,
     });
   }
+
+  private selectSingleDate() {}
+  private selectRangeDate() {}
 }
 
 declare global {
@@ -221,6 +230,7 @@ declare global {
     type Set<T extends ThemeVersion = 2> = {
       calendar?: CalendarResult;
       selected?: Date;
+      daterange?: boolean;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
