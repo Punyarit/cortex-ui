@@ -68,6 +68,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       background-color: var(--primary-500) !important;
       color: var(--white) !important;
       border-radius: var(--base-size-half) !important;
+      position: relative;
     }
 
     .selected:hover {
@@ -135,6 +136,36 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     .current-month {
       color: var(--gray-700);
     }
+
+    .startdate:not(.previous-month, .next-month)::before,
+    .enddate:not(.previous-month, .next-month)::before {
+      content: '';
+      background-color: var(--primary-100);
+      width: 20px;
+      height: 40px;
+      position: absolute;
+      z-index: 0;
+    }
+    .startdate::before {
+      right: 0;
+    }
+    .enddate::before {
+      left: 0;
+    }
+
+    .enddate:not(.previous-month, .next-month)::after,
+    .startdate:not(.previous-month, .next-month)::after {
+      content: attr(data-value);
+      background-color: var(--primary-500);
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: var(--base-size-half);
+    }
   `;
 
   private day = [0, 1, 2, 3, 4, 5, 6];
@@ -175,6 +206,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
                   const { dateArray: dateValue, period, type, value, minmax } = date;
                   return html`<div
                     data-date="${dateValue.join('-')}"
+                    data-value="${value}"
                     @mouseover="${this.set.daterange
                       ? () => this.setBetweenStartEndDate(date.date!)
                       : null}"
