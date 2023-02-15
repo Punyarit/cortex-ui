@@ -10,8 +10,9 @@ export type CalendarValue = {
   value: number;
   type: calendarType;
   period: string;
-  date: number[];
+  dateArray: number[];
   minmax?: MinMaxType;
+  date?: Date;
 };
 
 export type MinMaxType = 'min' | 'max' | undefined;
@@ -46,7 +47,7 @@ export function convertToDate(
 
 export type DateParameter = string | number;
 
-export function convertDateToArray(date: Date) {
+export function convertDateToArrayNumber(date: Date) {
   if (!date) return;
   return [date.getFullYear(), date.getMonth(), date.getDate()];
 }
@@ -130,7 +131,14 @@ export const getCalendarDetail = ({
       const period = getPeriod(today, currentDate);
       const minmax = getMinMax(min, max, currentDate);
 
-      week.push({ value, type, period, date: convertDateToArray(currentDate)!, minmax });
+      week.push({
+        value,
+        type,
+        period,
+        dateArray: convertDateToArrayNumber(currentDate)!,
+        minmax,
+        date: new Date(currentDate),
+      });
       currentDate.setDate(currentDate.getDate() + 1);
     }
     calendar.push(week);
@@ -153,3 +161,110 @@ export const isAfter = (date: { starter: Date; comparator: Date }) => {
 export const isBefore = (date: { starter: Date; comparator: Date }) => {
   return date.starter < date.comparator ? true : false;
 };
+
+export function getDateBetweenArrayDate(date1: string, date2: string) {
+  let startDate = new Date(date1);
+  let endDate = new Date(date2);
+
+  if (startDate > endDate) {
+    // Swap start and end dates
+    [startDate, endDate] = [endDate, startDate];
+  }
+
+  const dateArray = [];
+  const currentDate = new Date(startDate);
+
+  while (currentDate <= endDate) {
+    dateArray.push(new Date(currentDate));
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return dateArray;
+}
+
+// 📌 result [[2023,1,15], [2023,1,15]]
+export function getDateBetweenArrayNumber(date1: Date, date2: Date) {
+  let startDate = new Date(date1);
+  let endDate = new Date(date2);
+
+  if (startDate > endDate) {
+    // Swap start and end dates
+    [startDate, endDate] = [endDate, startDate];
+  }
+
+  const dateArray = [];
+  const currentDate = new Date(startDate);
+
+  while (currentDate <= endDate) {
+    dateArray.push(convertDateToArrayNumber(new Date(currentDate)));
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return dateArray;
+}
+
+// 📌 result [{2023-1: 4}, {2023-1: 5}]
+export function getDateBetweenObject(
+  date1: Date,
+  date2: Date
+): {
+  [x: string]: number;
+}[] {
+  let startDate = new Date(date1);
+  let endDate = new Date(date2);
+
+  if (startDate > endDate) {
+    // Swap start and end dates
+    [startDate, endDate] = [endDate, startDate];
+  }
+
+  const dateArray = [];
+  const currentDate = new Date(startDate);
+
+  while (currentDate <= endDate) {
+    const [year, month, date] = convertDateToArrayNumber(new Date(currentDate))!;
+    const key = `${year}-${month}`;
+    dateArray.push({ [key]: date });
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return dateArray;
+}
+
+// 📌 result [{2023-1: [4,5,6]}, {2023-1: [5,6,7]}]
+export function getDateBetweenObjectArray(date1: Date, date2: Date) {
+  let startDate = new Date(date1);
+  let endDate = new Date(date2);
+
+  if (startDate > endDate) {
+    // Swap start and end dates
+    [startDate, endDate] = [endDate, startDate];
+  }
+
+  const dateObject = {} as any;
+  const currentDate = new Date(startDate);
+  currentDate.setDate(currentDate.getDate() + 1); // move to first date after startDate
+
+  while (currentDate < endDate) {
+    const [year, month, date] = convertDateToArrayNumber(new Date(currentDate))!;
+    const key = `${year}-${month}`;
+    if (key in dateObject) {
+      dateObject[key].push(date);
+    } else {
+      dateObject[key] = [date];
+    }
+    currentDate.setDate(currentDate.getDate() + 1);
+    if (currentDate.getTime() === endDate.getTime()) {
+      break; // end on last date before endDate
+    }
+  }
+
+  return dateObject;
+}
+
+export function isDateBetween(startDate: Date, endDate: Date, checkDate: Date) {
+  return (
+    (checkDate >= startDate && checkDate <= endDate) ||
+    (checkDate >= endDate && checkDate <= startDate)
+  );
+}

@@ -7,7 +7,7 @@ import { createRef, ref } from 'lit/directives/ref.js';
 import './single-calendar/single-calendar';
 import {
   CalendarResult,
-  convertDateToArray,
+  convertDateToArrayNumber,
   getCalendarDetail,
   getNextMonth,
   getPreviousMonth,
@@ -140,7 +140,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       const attrName = daterange ? 'startdate' : 'single';
       this.calendarMonitorRef.value?.setAttribute(
         `${attrName}-selected`,
-        convertDateToArray(date)?.join('-')!
+        convertDateToArrayNumber(date)?.join('-')!
       );
     }
   }
