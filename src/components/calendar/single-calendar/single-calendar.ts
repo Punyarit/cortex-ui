@@ -69,6 +69,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       color: var(--white) !important;
       border-radius: var(--base-size-half) !important;
     }
+
     .selected:hover {
       background-color: var(--primary-600);
       color: var(--white);
@@ -101,9 +102,8 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     .date[data-period='today'] {
       position: relative;
       z-index: 2;
-      color: var(--primary-600);
-      font-family: var(--bold);
-      background-color: var(--primary-50);
+      color: var(--primary-700);
+      font-family: var(--extraBold);
     }
 
     .date[data-period='today']:hover {
@@ -119,6 +119,10 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     .month,
     .year {
       display: inline-block;
+    }
+
+    .date[data-datebetween] {
+      border-radius: var(--size-0);
     }
 
     .next-month,
@@ -241,7 +245,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
         this.removeDateBetweenClass(shadowRootSheet);
         shadowRootSheet?.insertRule(
           `.date[data-datebetween='${dateHoverAttr}'] {  background-color: var(--primary-100);
-        border-radius: 0;}`,
+        border-radius: var(--size-0);}`,
           0
         );
 
@@ -262,7 +266,8 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       const [yearData, monthData, dateData] = dateEle.dataset.date?.split('-')!;
       const dataDate = convertToDate(yearData, monthData, dateData);
       if (!isDateBetween(startdate, enddate ?? hoverDate, dataDate)) {
-        dateEle.removeAttribute('data-datebetween');
+        // dateEle.removeAttribute('data-datebetween');
+        dateEle.dataset.datebetween = '';
       }
     }
   }
