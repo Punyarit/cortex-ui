@@ -7,6 +7,8 @@ import { PopoverPosition, PositionResult } from './PopoverPosition';
 import { PositionType } from './positionReverseOverScreen';
 import { SidePopoverType } from './sidePopoverAppear';
 import '../../../transition/transition';
+import { delay } from '../../../../helpers/delay';
+import { throttle } from '../../../../helpers/throttleTimer';
 
 export const debouceTimerPopoverResize = 200;
 export class PopoverState {
@@ -22,6 +24,36 @@ export class PopoverState {
   private content!: HTMLElement;
   private separatedPositionType!: [PositionType, SidePopoverType];
   #firstUpdated = true;
+  #closedDone = false;
+
+  private async deleyWhenOldPopoverExist() {
+    if (ModalSingleton.modalRef.querySelector('c-box')) await delay(110);
+  }
+
+  private setALertOldPopover(oldPopover: CBox.Ref) {
+    oldPopover.firstElementChild?.classList.add('shake-efx');
+    const timer = setTimeout(() => {
+      oldPopover.firstElementChild?.classList.remove('shake-efx');
+      clearTimeout(timer);
+    }, 600);
+  }
+
+  private setFocusOldPopoverExistThenDone(): boolean {
+    const oldPopover = ModalSingleton.modalRef.querySelector('c-box');
+    if (oldPopover) {
+      if (this.popoverSet.focusout === 'close' && this.popoverSet.mouseleave === 'close')
+        return true;
+
+      this.setALertOldPopover(oldPopover);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private setPopoverClosedDone(done: boolean) {
+    this.#closedDone = done;
+  }
 
   async open(
     popoverContent: HTMLElement,
@@ -29,6 +61,9 @@ export class PopoverState {
     popoverSet: CXPopover.Set,
     popoverHost: HTMLElement
   ): Promise<void> {
+    await this.deleyWhenOldPopoverExist();
+    if (this.setFocusOldPopoverExistThenDone()) return;
+    this.setPopoverClosedDone(false);
     this.setProperties(popoverContent, hostRect, popoverSet, popoverHost);
     this.setPopoverContentAnimation('in');
     this.setPopoverContentOpacity('0');
@@ -66,8 +101,14 @@ export class PopoverState {
 
   private setMouseleaveEvent() {
     if (this.popoverSet.mouseleave === 'none') return;
-    this.popoverContent.onmouseleave = this.closePopover;
-    this.popoverHost.onmouseleave = this.closePopover;
+    const timer = setTimeout(() => {
+      // this.popoverContent.onmouseover = () => {
+      this.popoverContent.onmouseover = () => {
+        this.popoverContent.onmouseleave = this.closePopover;
+      };
+      this.popoverHost.onmouseleave = this.closePopover;
+      clearTimeout(timer);
+    }, 100);
   }
 
   private setProperties(
@@ -202,19 +243,29 @@ export class PopoverState {
     this.#firstUpdated = update;
   }
 
-  public closePopover = (e: MouseEvent | FocusEvent | null) => {
+  private removeMouseEvent() {
+    if (this.popoverSet.mouseleave === 'none') return;
+
+    this.popoverContent.onmouseover = null;
+    this.popoverContent.onmouseleave = null;
+    this.popoverHost.onmouseleave = null;
+  }
+
+  public closePopover = async (e: MouseEvent | FocusEvent | null) => {
+    if (this.#closedDone) return;
     if ((e?.relatedTarget as HTMLElement)?.closest('c-box[slot="popover"]')) return;
     this.setPopoverContentAnimation('out');
-    setTimeout(() => {
-      this.setFirstUpdatd(true);
-      this.unObserveResizeEvent();
-      this.appendBackToParentRoot();
-    }, 300);
+    await delay(100);
+    this.setFirstUpdatd(true);
+    this.unObserveResizeEvent();
+    this.appendBackToParentRoot();
+    this.removeMouseEvent();
+    this.setPopoverClosedDone(true);
   };
 
   private setPopoverContentAnimation(status: 'in' | 'out') {
     const [positionType] = this.separatedPositionType;
-    this.popoverContent.style.animation = `popover-${positionType}-${status} 0.3s ease forwards`;
+    this.popoverContent.style.animation = `popover-${positionType}-${status} 0.15s ease forwards`;
   }
 
   private appendBackToParentRoot() {

@@ -87,8 +87,8 @@ $in-out: in, out;
 
 c-box[slot='popover'] {
   outline: none;
-  transition: opacity 0.5s ease;
-  animation: popover-in 0.3s ease forwards;
+  transition: opacity 0.1s ease;
+  animation: popover-in 0.1s ease forwards;
 }
 
 c-box[slot='popover'] {

@@ -7,6 +7,9 @@ import { createRef, ref } from 'lit/directives/ref.js';
 import { PopoverPositionType } from './types/popover.types';
 import { REQUIRED_CBOX_CHILD_POPOVER_ERROR } from './errors/popover.errors';
 import { CxPopoverName } from './types/popover.name';
+import { delay } from '../../helpers/delay';
+import { debounce } from '../../helpers/debounceTimer';
+import { throttle } from '../../helpers/throttleTimer';
 
 @customElement(CxPopoverName)
 export class Popover extends ComponentBase<CXPopover.Props> {
@@ -27,7 +30,6 @@ export class Popover extends ComponentBase<CXPopover.Props> {
   private hostSlotRef = createRef<HTMLSlotElement>();
   private popoverSlotRef = createRef<HTMLSlotElement>();
   private hostElement?: HTMLElement;
-  private popoverContentElement?: HTMLElement;
 
   render(): TemplateResult {
     return html`
@@ -57,31 +59,32 @@ export class Popover extends ComponentBase<CXPopover.Props> {
   }
 
   private setOpenPopover = async () => {
-    await this.setPopoverContentElement();
-    if (!this.popoverContentElement) return;
+    const popoverContentElement = await this.getPopoverContentElement();
+    if (!popoverContentElement) return;
     ModalSingleton.modalRef.openPopovre(
-      this.popoverContentElement!,
+      popoverContentElement,
       this.hostElement!.getBoundingClientRect(),
       this.set,
       this.shadowRoot!.host as HTMLElement
     );
   };
 
-  private async setPopoverContentElement() {
-    this.popoverContentElement = await this.getPopoverContent();
+  private async getPopoverContentElement() {
+    return await this.getPopoverContent();
   }
 
   public close() {
     ModalSingleton.modalRef.closePopover();
   }
 
-  private getPopoverContent(): Promise<HTMLElement> {
+  private getPopoverContent(): Promise<HTMLElement | null> {
     return new Promise((resolve, reject) => {
       requestAnimationFrame(() => {
         const cBox = this.popoverSlotRef.value?.assignedElements()[0] as HTMLElement;
         if (cBox) {
           cBox.tagName === 'C-BOX' ? resolve(cBox) : reject(REQUIRED_CBOX_CHILD_POPOVER_ERROR);
         } else {
+          resolve(null);
           console.warn('You must close popover by close button');
         }
       });
