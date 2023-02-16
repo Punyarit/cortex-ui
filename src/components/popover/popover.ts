@@ -7,9 +7,6 @@ import { createRef, ref } from 'lit/directives/ref.js';
 import { PopoverPositionType } from './types/popover.types';
 import { REQUIRED_CBOX_CHILD_POPOVER_ERROR } from './errors/popover.errors';
 import { CxPopoverName } from './types/popover.name';
-import { delay } from '../../helpers/delay';
-import { debounce } from '../../helpers/debounceTimer';
-import { throttle } from '../../helpers/throttleTimer';
 
 @customElement(CxPopoverName)
 export class Popover extends ComponentBase<CXPopover.Props> {
