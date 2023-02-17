@@ -64,16 +64,17 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       /* 📌improve ux speed */
     }
 
-    .handler-month {
+    .handle-month-previous,
+    .handle-month-next {
       position: absolute;
-      top: 8px;
-      left: 0px;
-      width: 100%;
+      top: var(--size-14);
       z-index: 1;
-      display: flex;
-      justify-content: space-between;
-      padding: 6px 12px 0;
-      box-sizing: border-box;
+    }
+    .handle-month-previous {
+      left: var(--size-14);
+    }
+    .handle-month-next {
+      right: var(--size-14);
     }
   `;
 
@@ -107,16 +108,16 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       </style>
 
       <div class="calendar-group">
-        <div class="handler-month">
-          <cx-button
-            @click="${this.goPreviousMonth}"
-            .var="${this.buttonVar}"
-            .set="${this.buttonLeftSet}"></cx-button>
-          <cx-button
-            @click="${this.goNextMonth}"
-            .var="${this.buttonVar}"
-            .set="${this.buttonRightSet}"></cx-button>
-        </div>
+        <cx-button
+          class="handle-month-previous"
+          @click="${this.goPreviousMonth}"
+          .var="${this.buttonVar}"
+          .set="${this.buttonLeftSet}"></cx-button>
+        <cx-button
+          class="handle-month-next"
+          @click="${this.goNextMonth}"
+          .var="${this.buttonVar}"
+          .set="${this.buttonRightSet}"></cx-button>
         <div class="calendar-monitor" ${ref(this.calendarMonitorRef)}>
           ${this.calendarGroup.map(
             (calendar) =>
