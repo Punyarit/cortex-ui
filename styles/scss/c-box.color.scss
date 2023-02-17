@@ -1,5 +1,6 @@
-$colors: gray, primary, error, warning, success, modern-green, surgeon-green, wellness-green, safe-blue, blueprint,
-  violet-alert, purple, pinky, red-flag, alarm-orange, warning-yellow, bluestate, shadow;
+$colors: gray, primary, error, warning, success, modern-green, surgeon-green, wellness-green,
+  safe-blue, blueprint, violet-alert, purple, pinky, red-flag, alarm-orange, warning-yellow,
+  bluestate, shadow;
 $shades: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
 
 c-box[ui~='bg-white'],
@@ -32,6 +33,11 @@ c-box[tx-black] {
     c-box[ui~=tx-#{'' + $color}-#{$shade}],
     c-box[tx-#{"" + $color}-#{$shade}] {
       color: var(--#{$color}-#{$shade});
+    }
+
+    c-box[ui~=border-#{'' + $color}-#{$shade}],
+    c-box[border-#{'' + $color}-#{$shade}] {
+      border-color: var(--#{$color}-#{$shade});
     }
   }
 }

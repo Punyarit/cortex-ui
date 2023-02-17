@@ -1,5 +1,4 @@
 import { componentNames, ComponentNameTypes } from '../../types/component.names';
-import { REQUIRED_CXPOPOVER_PARENT } from './errors/required-cx-popover-parent';
 import { CBoxName } from './types/c-box.name';
 import { CBoxTypes } from './types/c-box.types';
 import { CxPopoverAbilityAttrKey } from './types2/box.cx-popover.types';

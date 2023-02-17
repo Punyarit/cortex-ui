@@ -122,7 +122,7 @@ export class PopoverState {
     this.positionType = popoverSet.position!;
     this.popoverSet = popoverSet;
     this.popoverHost = popoverHost;
-    this.content = popoverContent.childNodes[0] as HTMLElement;
+    this.content = popoverContent.firstElementChild as HTMLElement;
     this.separatedPositionType = this.positionType.split('-') as [PositionType, SidePopoverType];
   }
 

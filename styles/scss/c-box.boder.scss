@@ -1,0 +1,12 @@
+// border
+c-box {
+  // border style
+  &[border-solid] {
+    border-style: solid;
+  }
+
+  // border radius
+  &[round-full] {
+    border-radius: 50%;
+  }
+}

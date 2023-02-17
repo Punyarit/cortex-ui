@@ -3,6 +3,8 @@ import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { ThemeVersion } from '../theme/types/theme.types';
 import '../c-box/c-box';
+import '../popover/popover';
+import '../calendar/calendar';
 
 export const tagName = 'cx-datepicker';
 // export const onPressed = 'pressed';
@@ -20,22 +22,6 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     daterange: false,
   };
 
-  static styles = css`
-    .box {
-      display: flex;
-      column-gap: var(--size-12);
-      align-items: center;
-    }
-    .input-box {
-      border-radius: var(--base-size-8);
-      border: 2px solid var(--gray-400);
-      background-color: var(--white);
-      padding: var(--base-size-6) var(--base-size-8);
-      width: 300px;
-      box-sizing: border-box;
-    }
-  `;
-
   connectedCallback() {
     super.connectedCallback();
     if (this.set) this.cacheConfig(this.set);
@@ -43,17 +29,17 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private renderInputBox(text: string) {
-    return html` <div class="input-box">${text}</div> `;
+    return html` <c-box class="input-box">${text}</c-box> `;
   }
 
   private inputBoxFactory() {
     if (this.set.daterange) {
       return html`
-        <div class="box">
+        <c-box>
           ${this.renderInputBox('วันเริ่มต้น')}
-          <div>-</div>
+          <c-box>-</c-box>
           ${this.renderInputBox('วันสิ้นสุด')}
-        </div>
+        </c-box>
       `;
     } else {
       return html` ${this.renderInputBox('เลือกวันที่')} `;
@@ -61,20 +47,28 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   render(): TemplateResult {
-    return html`${this.inputBoxFactory()} `;
+    return html`
+      <cx-popover
+        .set="${{
+          position: 'top-center',
+          openby: 'click',
+          mouseleave: 'none',
+          focusout: 'close',
+          arrowpoint: true,
+        }}">
+        <c-box slot="host" inline> ${this.inputBoxFactory()}</c-box>
+        <c-box slot="popover">
+          <c-box>
+            <cx-calendar></cx-calendar>
+          </c-box>
+        </c-box>
+      </cx-popover>
+    `;
   }
 
-  // Method
-  // public log(config: { text: string }): void {
-  //   console.log('log: ', config.text);
-  // }
-
-  // Event
-  // private pressed(): void {
-  //   this.setCustomEvent<CXDatePicker.Details[typeof onPressed]>(onPressed, {
-  //     event: onPressed,
-  //   });
-  // }
+  createRenderRoot() {
+    return this;
+  }
 }
 
 declare global {
