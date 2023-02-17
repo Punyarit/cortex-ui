@@ -6,7 +6,7 @@ import {
   isDateBetween,
 } from '../../../../helpers/functions/date/date-methods';
 import { CalendarBaseMethod } from './calendar-base';
-
+// FIXME: it still has a litle bug. when choose startdate and enddate done. then choose startdate agian. seem calendar still cached highlight
 export class CalendarDateRangeSelectState {
   private calendarMethod!: CalendarBaseMethod;
   constructor(private signleCalendar: CXSingleCalendar.Ref) {
