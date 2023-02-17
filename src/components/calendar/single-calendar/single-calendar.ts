@@ -4,21 +4,15 @@ import { ComponentBase } from '../../../base/component-base/component.base';
 import {
   CalendarResult,
   CalendarValue,
-  isDateBetween,
-  convertDateToArrayNumber,
-  convertToDate,
   dateFormat,
-  DateParameter,
-  getDateBetweenArrayNumber,
-  isAfter,
-  isValid,
   longMonthOption,
   shortDayOption,
   yearDayOption,
-  getDateBetweenObject,
-  getDateBetweenObjectArray,
 } from '../../../helpers/functions/date/date-methods';
 import { ThemeVersion } from '../../theme/types/theme.types';
+import { CalendarBaseMethod } from './calendar-states/calendar-base';
+import { CalendarDateRangeSelectState } from './calendar-states/daterange-select';
+import { CalendarSingleSelectState } from './calendar-states/single-select';
 
 export const tagName = 'cx-single-calendar';
 // export const onPressed = 'pressed';
@@ -168,15 +162,23 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     }
   `;
 
-  private day = [0, 1, 2, 3, 4, 5, 6];
-  private dateSelectedDOM?: HTMLElement;
-  private startDateSelectedDOM?: HTMLElement;
-  private endDateSelectedDOM?: HTMLElement;
+  public day = [0, 1, 2, 3, 4, 5, 6];
+  public dateSelectedDOM?: HTMLElement;
+  public startDateSelectedDOM?: HTMLElement;
+  public endDateSelectedDOM?: HTMLElement;
+
+  public dateRangeSelectState!: CalendarDateRangeSelectState;
+  public singleSelectState!: CalendarSingleSelectState;
+  public calendarMethod!: CalendarBaseMethod;
 
   connectedCallback() {
     super.connectedCallback();
     if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
+
+    this.calendarMethod = new CalendarBaseMethod(this);
+    this.dateRangeSelectState = new CalendarDateRangeSelectState(this);
+    this.singleSelectState = new CalendarSingleSelectState(this);
   }
 
   render(): TemplateResult {
@@ -185,20 +187,27 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       <div class="calendar">
         <!-- title (month) -->
         <div class="title">
-          <div class="month">${dateFormat(this.dateConverted(), longMonthOption)}</div>
+          <div class="month">
+            ${dateFormat(this.calendarMethod.dateConverted(), longMonthOption)}
+          </div>
           <div class="year">
-            ${dateFormat(this.dateConverted(), yearDayOption)?.replace(/\W+/g, '')}
+            ${dateFormat(this.calendarMethod.dateConverted(), yearDayOption)?.replace(/\W+/g, '')}
           </div>
         </div>
         <!-- day -->
         <div>
           ${this.day.map(
             (day) =>
-              html`<div class="day">${dateFormat(this.dateConverted(day), shortDayOption)}</div>`
+              html`<div class="day">
+                ${dateFormat(this.calendarMethod.dateConverted(day), shortDayOption)}
+              </div>`
           )}
         </div>
         <!-- week -->
-        <div @click="${this.set.daterange ? this.selectRangeDate : this.selectSingleDate}">
+        <div
+          @click="${this.set.daterange
+            ? (e: PointerEvent) => this.dateRangeSelectState.selectRangeDate(e)
+            : (e: PointerEvent) => this.singleSelectState.selectSingleDate(e)}">
           ${this.set?.calendar?.calendar.map(
             (week: CalendarValue[]) =>
               html`<div class="week">
@@ -208,7 +217,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
                     data-date="${dateValue.join('-')}"
                     data-value="${value}"
                     @mouseover="${this.set.daterange
-                      ? () => this.setBetweenStartEndDate(date.date!)
+                      ? () => this.dateRangeSelectState.setBetweenStartEndDate(date.date!)
                       : null}"
                     class="date ${type} ${minmax}"
                     data-period="${period}">
@@ -223,282 +232,9 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
 
   // 📌this methods only call from calendar monitor **observer trigger
   public updateSelected() {
-    this.set.daterange ? this.updateRangeSelected() : this.updateSingleSelected();
-  }
-
-  // date range
-  private updateRangeSelected() {
-    const dateHoverAttr = this.getCalendarMonitorAttr('latest-date-hover');
-    const startdateAttr = this.getCalendarMonitorAttr('startdate-selected');
-    const enddateAttr = this.getCalendarMonitorAttr('enddate-selected');
-
-    // 📌 has dateHoverAttr mean have date hover cached
-    if (dateHoverAttr) {
-      const [startdate, enddate, hoverDate] = this.setDateBetweenHighLight(
-        startdateAttr!,
-        enddateAttr!,
-        dateHoverAttr!
-      );
-      this.removeDateBetweenHighLight(startdate!, enddate, hoverDate!);
-      // date range cached
-    }
-    // select
-    this.setSelectedDateRangeHighLight(startdateAttr, enddateAttr);
-  }
-
-  private setDateBetweenHighLight(
-    startdateAttr: string,
-    enddateAttr: string,
-    dateHoverAttr: string
-  ) {
-    // 📌if enddate ? enddate : hoverDate mean if select date range done(has startdate and enddate) lasted-date-hover = enddate
-    const enddate = enddateAttr ? this.getDateFromString(enddateAttr) : undefined;
-
-    const startdate = this.getDateFromString(startdateAttr);
-    const hoverDate = this.getDateFromString(dateHoverAttr);
-
-    const dateBetweenData = getDateBetweenObjectArray(startdate, enddate ?? hoverDate);
-    const { year: currentYear, month: curentMonth } = this.set.calendar!;
-    const yearMonthKey = `${currentYear}-${curentMonth}`;
-    const dateBetweens = dateBetweenData[yearMonthKey] as Array<any>;
-
-    if (dateBetweens) {
-      const dateBetweenDataSets = dateBetweens
-        .map((date) => `.date[data-date='${currentYear}-${curentMonth}-${date}']`)
-        .join(',');
-
-      const shadowRootSheet = this.shadowRoot?.styleSheets?.[0];
-
-      const dateBetweenELements = this.shadowRoot?.querySelectorAll(
-        dateBetweenDataSets
-      ) as NodeListOf<HTMLElement>;
-
-      for (const date of dateBetweenELements) {
-        this.removeDateBetweenClass(shadowRootSheet);
-        shadowRootSheet?.insertRule(
-          `.date[data-datebetween='${dateHoverAttr}'] {  background-color: var(--primary-100);
-        border-radius: var(--size-0);}`,
-          0
-        );
-
-        date.dataset.datebetween = `${dateHoverAttr}`;
-      }
-    }
-
-    return [startdate, enddate, hoverDate];
-  }
-
-  private removeDateBetweenHighLight(startdate: Date, enddate: Date | undefined, hoverDate: Date) {
-    // remove
-    const dateBetweenDOMs = this.shadowRoot?.querySelectorAll(
-      `.date[data-datebetween]`
-    ) as NodeListOf<HTMLElement>;
-
-    for (const dateEle of dateBetweenDOMs) {
-      const [yearData, monthData, dateData] = dateEle.dataset.date?.split('-')!;
-      const dataDate = convertToDate(yearData, monthData, dateData);
-      if (!isDateBetween(startdate, enddate ?? hoverDate, dataDate)) {
-        // dateEle.removeAttribute('data-datebetween');
-        dateEle.dataset.datebetween = '';
-      }
-    }
-  }
-
-  private setSelectedDateRangeHighLight(
-    startdateAttr: string | null | undefined,
-    enddateAttr: string | null | undefined
-  ) {
-    const oldStartDate = this.getCalendarMonitorAttr('old-startdate');
-    const oldEndDate = this.getCalendarMonitorAttr('old-enddate');
-
-    const cachedStartDOM = oldStartDate
-      ? this.shadowRoot?.querySelector(`div[data-date='${oldStartDate}']`)
-      : undefined;
-    const cachedEndDOM = oldEndDate
-      ? this.shadowRoot?.querySelector(`div[data-date='${oldEndDate}']`)
-      : undefined;
-
-    if (startdateAttr) {
-      if (cachedStartDOM) {
-        cachedStartDOM.classList.remove('startdate');
-      }
-
-      this.startDateSelectedDOM = this.shadowRoot?.querySelector(
-        `div[data-date='${startdateAttr}']`
-      )!;
-
-      if (this.startDateSelectedDOM && !this.startDateSelectedDOM.classList.contains('startdate')) {
-        this.startDateSelectedDOM.classList.add('startdate');
-      }
-    } else if (cachedStartDOM) {
-      cachedStartDOM.classList.remove('startdate');
-    }
-
-    if (enddateAttr) {
-      if (cachedEndDOM) {
-        cachedEndDOM.classList.remove('enddate');
-      }
-
-      this.endDateSelectedDOM = this.shadowRoot?.querySelector(`div[data-date='${enddateAttr}']`)!;
-
-      if (this.endDateSelectedDOM && !this.endDateSelectedDOM.classList.contains('enddate')) {
-        this.endDateSelectedDOM.classList.add('enddate');
-      }
-    } else if (cachedEndDOM) {
-      cachedEndDOM.classList.remove('enddate');
-    }
-  }
-
-  private setDateRangeStarted(e: PointerEvent) {
-    const [yearSelected, monthSelected, dateSelected] = this.getDateSelected(e)!;
-    const [startDateAttr, endDateAttr] = this.getUpdatedStartEndAttributes();
-    if (!startDateAttr) {
-      this.setStartEndDateAttribute('startdate', yearSelected, monthSelected, dateSelected);
-      this.removeStartEndDateAttribute('enddate');
-    } else if (!endDateAttr) {
-      this.setStartEndDateAttribute('enddate', yearSelected, monthSelected, dateSelected);
-    } else {
-      this.setStartEndDateAttribute('startdate', yearSelected, monthSelected, dateSelected);
-      this.removeStartEndDateAttribute('enddate');
-    }
-  }
-
-  private setDateRangeWhenDone() {
-    const [startDateAttr, endDateAttr] = this.getUpdatedStartEndAttributes();
-    const [yearStart, monthStart, dateStart] = startDateAttr?.split('-')!;
-    const startDate = convertToDate(yearStart, monthStart, dateStart);
-    if (endDateAttr) {
-      const [yearEnd, monthEnd, dateEnd] = endDateAttr?.split('-')!;
-      const endDate = convertToDate(yearEnd, monthEnd, dateEnd);
-      if (isAfter({ starter: startDate, comparator: endDate })) {
-        this.setStartEndDateAttribute('startdate', yearEnd, monthEnd, dateEnd);
-        this.setStartEndDateAttribute('enddate', yearStart, monthStart, dateStart);
-      }
-    }
-  }
-
-  private selectRangeDate(e: PointerEvent) {
-    this.setOldDateRange();
-    this.setDateRangeStarted(e);
-    this.setDateRangeWhenDone();
-    const [startDate, endDate] = this.getUpdatedStartEndAttributes();
-    this.setCustomEvent('select-date', {
-      event: 'select-date',
-      date: {
-        startDate: startDate,
-        endDate: endDate,
-      },
-    });
-  }
-
-  // 📌mouseover event
-  private setBetweenStartEndDate(dateHover: Date) {
-    if (
-      this.getCalendarMonitorAttr('startdate-selected') &&
-      !this.getCalendarMonitorAttr('enddate-selected')
-    ) {
-      const dateArray = convertDateToArrayNumber(dateHover);
-      this.parentElement?.setAttribute('latest-date-hover', `${dateArray?.join('-')}`);
-    }
-  }
-
-  // single
-
-  private updateSingleSelected() {
-    const currentSelected = this.getCalendarMonitorAttr('single-selected');
-    if (!currentSelected) {
-      return;
-    }
-
-    const [year, month, date] = currentSelected.split('-').map(Number);
-    const selectedDate = convertToDate(year, month, date);
-    const { month: calendarMonth, year: calendarYear } = this.set.calendar!;
-
-    const isSameMonth =
-      selectedDate.getMonth() === calendarMonth && selectedDate.getFullYear() === calendarYear;
-    if (isSameMonth) {
-      this.removeSelection();
-      this.dateSelectedDOM = this.shadowRoot?.querySelector(`div[data-date='${currentSelected}']`)!;
-      this.dateSelectedDOM?.classList.add('selected');
-    } else {
-      this.removeSelection();
-    }
-  }
-  private removeSelection() {
-    if (this.dateSelectedDOM) {
-      this.dateSelectedDOM.classList.remove('selected');
-    }
-  }
-
-  private selectSingleDate(e: PointerEvent) {
-    const [year, month, date] = this.getDateSelected(e)!;
-
-    const selectedDate = convertToDate(year, month, date) as Date;
-
-    if (!isValid(selectedDate)) return;
-
-    this.setSingleSelectAttribute(year, month, date);
-    this.fix().selected(selectedDate).exec();
-    this.setCustomEvent('select-date', {
-      event: 'select-date',
-      date: selectedDate,
-    });
-  }
-
-  // utilities
-
-  private getDateFromString(dateStr: string) {
-    const [year, month, date] = dateStr.split('-').map(Number);
-    return convertToDate(year, month, date);
-  }
-
-  private getUpdatedStartEndAttributes() {
-    return [
-      this.getCalendarMonitorAttr('startdate-selected'),
-      this.getCalendarMonitorAttr('enddate-selected'),
-    ];
-  }
-
-  private setOldDateRange() {
-    const [startdate, enddate] = this.getUpdatedStartEndAttributes();
-    this.parentElement?.setAttribute('old-startdate', startdate!);
-    this.parentElement?.setAttribute('old-enddate', enddate!);
-  }
-
-  private removeStartEndDateAttribute(type: 'startdate' | 'enddate') {
-    this.parentElement?.removeAttribute(`${type}-selected`);
-  }
-
-  private setSingleSelectAttribute(year: DateParameter, month: DateParameter, date: DateParameter) {
-    this.parentElement?.setAttribute('single-selected', `${year}-${month}-${date}`);
-  }
-
-  private setStartEndDateAttribute(
-    type: 'startdate' | 'enddate',
-    year: DateParameter,
-    month: DateParameter,
-    date: DateParameter
-  ) {
-    this.parentElement?.setAttribute(`${type}-selected`, `${year}-${month}-${date}`);
-  }
-
-  private getDateSelected(e: PointerEvent) {
-    const dateDOMSelected = (e.target as HTMLElement).closest('.date') as HTMLElement;
-    if (!dateDOMSelected) throw '';
-    return (dateDOMSelected.dataset.date as string).split('-');
-  }
-
-  private removeDateBetweenClass(shadowRootSheet: CSSStyleSheet | undefined) {
-    if (shadowRootSheet?.cssRules.length !== 0) shadowRootSheet?.deleteRule(0);
-  }
-
-  private dateConverted(day?: number) {
-    if (!this.set.calendar) return;
-    return convertToDate(this.set.calendar.year, this.set.calendar.month, day);
-  }
-
-  private getCalendarMonitorAttr(attributeName: string) {
-    return this.parentElement?.getAttribute(attributeName);
+    this.set.daterange
+      ? this.dateRangeSelectState.updateRangeSelected()
+      : this.singleSelectState.updateSingleSelected();
   }
 }
 
@@ -538,10 +274,4 @@ declare global {
   interface HTMLElementTagNameMap {
     [tagName]: CXSingleCalendar.Ref;
   }
-
-  // namespace JSX {
-  //  interface IntrinsicElements {
-  //   [tagName]: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> | CXSingleCalendar.Ref;
-  //  }
-  // }
 }

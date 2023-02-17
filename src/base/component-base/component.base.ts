@@ -85,7 +85,7 @@ export abstract class ComponentBase<Props extends Properties>
     return cssText;
   }
 
-  protected setCustomEvent<T>(event: string, data: T): void {
+  setCustomEvent<T>(event: string, data: T): void {
     this.dispatchEvent(
       new CustomEvent(event, {
         detail: {
