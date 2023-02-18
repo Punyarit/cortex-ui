@@ -59,7 +59,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
         <c-box slot="host" inline> ${this.inputBoxFactory()}</c-box>
         <c-box slot="popover">
           <c-box>
-            <cx-calendar></cx-calendar>
+            <cx-calendar opacity-0></cx-calendar>
           </c-box>
         </c-box>
       </cx-popover>

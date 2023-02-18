@@ -144,3 +144,25 @@ c-box[slot='popover'] {
     }
   }
 }
+
+c-box[popover-close-button] {
+  border-radius: var(--base-size-half);
+  background-color: var(--primary-100);
+  width: var(--size-32);
+  height: var(--size-32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: var(--primary-200);
+  }
+  &:active {
+    background-color: var(--primary-300);
+  }
+  &::after {
+    content: '\e800';
+    font-family: close-solid;
+  }
+}

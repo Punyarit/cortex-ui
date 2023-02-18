@@ -1,4 +1,4 @@
-import { BoxBaseAttr } from './box-base.type';
+import { BoxBaseAttr } from './c-box-base.type';
 import { IngredientAttr } from './c-box.ingredient.type';
 import { UtilAttr } from './utils.types';
 

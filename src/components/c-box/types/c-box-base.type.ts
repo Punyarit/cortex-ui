@@ -52,8 +52,6 @@ export interface BoxBaseAttr
     TxColorAttr,
     TxSizeAttr,
     BgColorAttrs,
-    HoverColorAttr,
-    ActiveColorAttr,
     FontTypeAttr {}
 
 export type BoxBaseKey = keyof BoxBaseAttr;

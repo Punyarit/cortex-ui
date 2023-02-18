@@ -1,0 +1,14 @@
+$shadows: (
+  xs: 4,
+  sm: 6,
+  md: 8,
+  lg: 10,
+  xl: 12,
+);
+
+@each $size, $value in $shadows {
+  c-box[ui*='shadow-#{$size}'],
+  c-box[shadow-#{$size}] {
+    box-shadow: 0 0 var(--size-#{$value}) 0 var(--shadow-600);
+  }
+}

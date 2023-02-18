@@ -3,10 +3,24 @@ c-box {
 }
 
 c-box {
+  &[ui*='content'],
   &[content] {
     display: block;
     padding: var(--size-12);
     border-radius: var(--size-8);
     background-color: var(--white);
+  }
+
+  &[ui*='input-primary'],
+  &[input-primary] {
+    border: 2px solid var(--primary-400);
+    width: var(--size-300);
+    border-radius: var(--base-size-8);
+    background-color: var(--white);
+    padding: var(--size-8) var(--size-12);
+    &::before {
+      font-family: 'calendar-alt-line';
+      content: '\e800';
+    }
   }
 }

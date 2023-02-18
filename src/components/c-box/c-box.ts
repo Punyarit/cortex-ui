@@ -1,32 +1,15 @@
-import { componentNames, ComponentNameTypes } from '../../types/component.names';
+import { attributeChnged, AttributeChngedType } from './types/attribute-changed.types';
 import { CBoxName } from './types/c-box.name';
 import { CBoxTypes } from './types/c-box.types';
-import { CxPopoverAbilityAttrKey } from './types2/box.cx-popover.types';
 
 export class Box extends HTMLElement {
-  #firstUpdated = false;
-  public attr?: ComponentNameTypes;
-  public value?: string;
-
   static get observedAttributes() {
-    return componentNames;
+    return attributeChnged;
   }
 
-  async attributeChangedCallback(attr: ComponentNameTypes, oldValue: unknown, newValue: string) {
-    if (!attr) return;
-    this.attr = attr;
-    this.value = newValue;
-  }
-
-  async connectedCallback() {
-    if (this.#firstUpdated) return;
-    requestAnimationFrame(async () => {
-      if (this.attr && this.value) {
-        new (await import('./attributes.factory')).AbilityFactory(this, this.attr, this.value);
-      }
-    });
-
-    this.#firstUpdated = true;
+  async attributeChangedCallback(attr: AttributeChngedType) {
+    if (attr === 'popover-close-button')
+      return new (await import('./attributes/PopoverCloseButton')).POpoverCloseButton(this);
   }
 }
 customElements.define(CBoxName, Box);
@@ -35,7 +18,6 @@ declare global {
   namespace CBox {
     type Ref = Box;
 
-    type CXPopover = CxPopoverAbilityAttrKey;
   }
 
   namespace JSX {
