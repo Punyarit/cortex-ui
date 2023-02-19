@@ -1,4 +1,5 @@
 import {
+  convertDateStringToDate,
   convertDateToArrayNumber,
   convertToDate,
   getDateBetweenObjectArray,
@@ -144,7 +145,6 @@ export class CalendarDateRangeSelectState {
   }
 
   public setDateRangeStarted(e: PointerEvent) {
-    console.log('daterange-select |123|', 123);
     const [yearSelected, monthSelected, dateSelected] = this.calendarMethod.getDateSelected(e)!;
     const [startDateAttr, endDateAttr] = this.calendarMethod.getUpdatedStartEndAttributes();
     if (!startDateAttr) {
@@ -195,8 +195,8 @@ export class CalendarDateRangeSelectState {
     this.signleCalendar.setCustomEvent('select-date', {
       event: 'select-date',
       date: {
-        startDate: startDate,
-        endDate: endDate,
+        startDate: convertDateStringToDate(startDate),
+        endDate: convertDateStringToDate(endDate),
       },
     });
   }

@@ -13,6 +13,7 @@ import {
   getPreviousMonth,
 } from '../../helpers/functions/date/date-methods';
 import { mutableElement } from '../../helpers/functions/observe-element/mutable-element';
+import { DateRangeSelected } from './types/calendar.types';
 
 export const tagName = 'cx-calendar';
 // export const onPressed = 'pressed';
@@ -170,8 +171,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   private selectDate = (e: Event) => {
     const event = e as CXSingleCalendar.SelectDate;
     if (this.set.selection?.type === 'single') {
-      this.setCustomEvent('selected-date', {
-        event: 'selected-date',
+      this.setCustomEvent('select-date', {
         date: event.detail.date,
       });
     }
@@ -339,13 +339,15 @@ declare global {
       make: Var;
     };
 
-    // type Details = {
-    //   [onPressed]: { event: string };
-    // };
+    type Details = {
+      ['select-date']: { date: Date | DateRangeSelected };
+    };
 
-    // type Events = {
-    //   [onPressed]: (detail: Pressed) => void;
-    // };
+    type Events = {
+      ['select-date']: (detail: SelectDate) => void;
+    };
+
+    type SelectDate = CustomEvent<Details['select-date']>;
 
     // type Pressed = CustomEvent<Details[typeof onPressed]>;
   }

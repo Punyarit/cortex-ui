@@ -1,10 +1,11 @@
 import { css, html, TemplateResult } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { ThemeVersion } from '../theme/types/theme.types';
 import '../c-box/c-box';
 import '../popover/popover';
 import '../calendar/calendar';
+import { DateRangeSelected } from '../calendar/types/calendar.types';
 
 export const tagName = 'cx-datepicker';
 // export const onPressed = 'pressed';
@@ -22,6 +23,9 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     daterange: false,
   };
 
+  @state()
+  private selectedDate?: Date | DateRangeSelected;
+
   connectedCallback() {
     super.connectedCallback();
     if (this.set) this.cacheConfig(this.set);
@@ -29,19 +33,20 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private renderInputBox(text: string) {
-    return html` <c-box class="input-box">${text}</c-box> `;
+    return html` <c-box input-box="default" w-280>${text}</c-box> `;
   }
 
   private inputBoxFactory() {
     if (this.set.daterange) {
       return html`
-        <c-box>
+        <c-box inline-flex items-center col-gap-6>
           ${this.renderInputBox('วันเริ่มต้น')}
           <c-box>-</c-box>
           ${this.renderInputBox('วันสิ้นสุด')}
         </c-box>
       `;
     } else {
+      const date = this.selectedDate as Date;
       return html` ${this.renderInputBox('เลือกวันที่')} `;
     }
   }
@@ -50,24 +55,38 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     return html`
       <cx-popover
         .set="${{
-          position: 'top-center',
+          position: 'bottom-left',
           openby: 'click',
           mouseleave: 'none',
-          focusout: 'close',
-          arrowpoint: true,
-        }}">
-        <c-box slot="host" inline> ${this.inputBoxFactory()}</c-box>
+          focusout: 'none',
+        } as CXPopover.Set}">
+        <c-box slot="host"> ${this.inputBoxFactory()}</c-box>
         <c-box slot="popover">
-          <c-box>
-            <cx-calendar opacity-0></cx-calendar>
+          <c-box content p-0>
+            <cx-calendar
+              @select-date="${this.selectDate}"
+              .set="${{
+                date: this.set.date,
+                daterange: this.set.daterange,
+                max: this.set.max,
+                min: this.set.min,
+                selection: this.set.selection,
+                display: this.set.daterange ? '2-calendars' : '1-calendar',
+              } as CXCalendar.Set}"></cx-calendar>
           </c-box>
         </c-box>
       </cx-popover>
     `;
   }
 
-  createRenderRoot() {
+  createRenderRoot(): this {
     return this;
+  }
+
+  private selectDate(e: CXCalendar.SelectDate) {
+    const { date } = e.detail;
+    this.selectedDate = date;
+    this.setCustomEvent('select-date', { date });
   }
 }
 

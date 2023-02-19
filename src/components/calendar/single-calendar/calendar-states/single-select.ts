@@ -31,7 +31,6 @@ export class CalendarSingleSelectState {
   }
 
   public selectSingleDate(e: PointerEvent) {
-    console.log('single-select |123|', 123);
     const [year, month, date] = this.calendarMethod.getDateSelected(e)!;
 
     const selectedDate = convertToDate(year, month, date) as Date;

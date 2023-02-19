@@ -9,7 +9,9 @@ import {
   shortDayOption,
   yearDayOption,
 } from '../../../helpers/functions/date/date-methods';
+import { visibleElement } from '../../../helpers/functions/observe-element/visible-element';
 import { ThemeVersion } from '../../theme/types/theme.types';
+import { DateRangeSelected } from '../types/calendar.types';
 import { CalendarBaseMethod } from './calendar-states/calendar-base';
 import { CalendarDateRangeSelectState } from './calendar-states/daterange-select';
 import { CalendarSingleSelectState } from './calendar-states/single-select';
@@ -230,6 +232,12 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       </div>`;
   }
 
+  willUpdate(changedProps: Map<string, unknown>) {
+    // ⚠ FIXME: willUpdate will execute everytimes when change month
+    this.updateSelected();
+    super.willUpdate(changedProps);
+  }
+
   // 📌this methods only call from calendar monitor **observer trigger
   public updateSelected() {
     this.set.daterange
@@ -261,7 +269,7 @@ declare global {
     };
 
     type Details = {
-      ['select-date']: { event: string; date: Date };
+      ['select-date']: { event: string; date: Date | DateRangeSelected };
     };
 
     type Events = {

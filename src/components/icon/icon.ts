@@ -78,6 +78,10 @@ declare global {
     // type Pressed = CustomEvent<Details[typeof onPressed]>;
   }
 
+  namespace CBox {
+    type Icon = CXIcon.Set['src'];
+  }
+
   interface HTMLElementTagNameMap {
     [CxIconName]: CXIcon.Ref;
   }

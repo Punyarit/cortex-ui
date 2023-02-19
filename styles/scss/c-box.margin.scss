@@ -1,0 +1,27 @@
+c-box[m] {
+  margin: var(--p);
+}
+
+c-box[mx] {
+  margin-left: var(--mx);
+  margin-right: var(--mx);
+}
+
+c-box[my] {
+  margin-top: var(--my);
+  margin-bottom: var(--my);
+}
+c-box[ml] {
+  margin-left: var(--ml);
+}
+
+c-box[mt] {
+  margin-top: var(--mt);
+}
+c-box[mr] {
+  margin-right: var(--mr);
+}
+
+c-box[mb] {
+  margin-top: var(--mb);
+}

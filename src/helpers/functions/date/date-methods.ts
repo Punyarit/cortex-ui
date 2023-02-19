@@ -37,6 +37,12 @@ export function getNextMonth(date: Date) {
   return d;
 }
 
+export function convertDateStringToDate(dateString: string | null | undefined) {
+  if (!dateString) return undefined;
+  const [year, month, date] = dateString.split('-').map(Number);
+  return new Date(year, month, date);
+}
+
 export function convertToDate(
   year: DateParameter,
   month: DateParameter,
@@ -268,7 +274,3 @@ export function isDateBetween(startDate: Date, endDate: Date, checkDate: Date) {
     (checkDate >= endDate && checkDate <= startDate)
   );
 }
-
-
-
-

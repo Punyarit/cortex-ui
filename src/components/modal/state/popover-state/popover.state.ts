@@ -153,7 +153,6 @@ export class PopoverState {
     const { positionChecked, sideChecked } = positionResult;
     const hostCenterWidth = hostWidth / 2;
     const hostCenterHeight = hostHeight / 2;
-
     this.setArrowPositionTypeAttr(positionChecked);
     const arrowPosition = this.calcArrowPosition(
       positionChecked,
@@ -168,18 +167,16 @@ export class PopoverState {
   }
 
   private setArrowTranslate(arrowPosition: number, positionChecked: PositionType) {
-    const arrowSize = 8;
-    const actualPosition = arrowPosition - arrowSize;
     const popoverStyles = this.popoverContent.style;
     const arrowPointProperty = '--popover-arrowpoint-position';
-
     switch (positionChecked) {
       case 'top':
       case 'bottom':
-        return popoverStyles.setProperty(arrowPointProperty, `${actualPosition}px 0`);
+        // 📌8 is size of arrow
+        return popoverStyles.setProperty(arrowPointProperty, `${arrowPosition - 8}px 0`);
       case 'left':
       case 'right':
-        return popoverStyles.setProperty(arrowPointProperty, `0 ${actualPosition}px`);
+        return popoverStyles.setProperty(arrowPointProperty, `0 ${arrowPosition}px`);
       default:
         throw Error('positionChecked value is not "top" | "bottom" | "left" | "right"');
     }

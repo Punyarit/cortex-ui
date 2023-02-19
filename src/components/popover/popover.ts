@@ -54,6 +54,7 @@ export class Popover extends ComponentBase<CXPopover.Props> {
 
   private setHostEvent() {
     this.hostElement?.addEventListener(this.set.openby!, this.setOpenPopover);
+    this.hostElement?.setAttribute('inline-block', '');
   }
 
   private setOpenPopover = async () => {

@@ -1,0 +1,27 @@
+c-box[p] {
+  padding: var(--p);
+}
+
+c-box[px] {
+  padding-left: var(--px);
+  padding-right: var(--px);
+}
+
+c-box[py] {
+  padding-top: var(--py);
+  padding-bottom: var(--py);
+}
+c-box[pl] {
+  padding-left: var(--pl);
+}
+
+c-box[pt] {
+  padding-top: var(--pt);
+}
+c-box[pr] {
+  padding-right: var(--pr);
+}
+
+c-box[pb] {
+  padding-top: var(--pb);
+}

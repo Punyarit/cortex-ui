@@ -143,5 +143,15 @@ $end: 800;
     c-box[border-bottom-#{$i}] {
       border-bottom-width: var(--size-#{$i});
     }
+
+    c-box[ui*='col-gap-#{$i}'],
+    c-box[col-gap-#{$i}] {
+      column-gap: var(--size-#{$i});
+    }
+
+    c-box[ui*='row-gap-#{$i}'],
+    c-box[row-gap-#{$i}] {
+      row-gap: var(--size-#{$i});
+    }
   }
 }

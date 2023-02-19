@@ -1,0 +1,17 @@
+c-box[icon-prefix] {
+  &::before {
+    font-family: var(--icon-src);
+    content: '\e800';
+    font-size: var(--icon-size);
+    color: var(--icon-color);
+  }
+}
+
+c-box[icon-suffix] {
+  &::after {
+    font-family: var(--icon-src);
+    content: '\e800';
+    font-size: var(--icon-size);
+    color: var(--icon-color);
+  }
+}

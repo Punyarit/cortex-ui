@@ -11,16 +11,23 @@ c-box {
     background-color: var(--white);
   }
 
-  &[ui*='input-primary'],
-  &[input-primary] {
-    border: 2px solid var(--primary-400);
+  &[ui*='input-box'],
+  &[input-box] {
+    display: inline-block;
+    // border: 2px solid var(--primary-400);
     width: var(--size-300);
     border-radius: var(--base-size-8);
     background-color: var(--white);
     padding: var(--size-8) var(--size-12);
-    &::before {
-      font-family: 'calendar-alt-line';
-      content: '\e800';
-    }
+  }
+
+  &[input-box='focus'] {
+    border: 2px solid var(--primary-500);
+    color: var(--primary-500);
+  }
+
+  &[input-box='default'] {
+    border: 2px solid var(--gray-400);
+    color: var(--gray-600);
   }
 }

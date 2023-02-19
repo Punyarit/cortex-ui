@@ -41,7 +41,7 @@ export class CalendarBaseMethod {
 
   public getDateSelected(e: PointerEvent) {
     const dateDOMSelected = (e.target as HTMLElement).closest('.date') as HTMLElement;
-    if (!dateDOMSelected) throw '';
+    if (!dateDOMSelected) throw 'Wrong date selection';
     return (dateDOMSelected.dataset.date as string).split('-');
   }
 
