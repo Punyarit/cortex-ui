@@ -2,7 +2,7 @@ $start: 0;
 $end: 100;
 
 @for $i from $start through $end {
-  @if $i == 0 or $i > 50 and $i % 2 == 0 or $i < 50 {
+  @if $i == 0 or $i >= 50 and $i % 2 == 0 or $i <= 50 {
     c-box[ui~='round-#{$i}'],
     c-box[round-#{$i}] {
       border-radius: var(--size-#{$i});
