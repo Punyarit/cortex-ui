@@ -1,0 +1,9 @@
+c-box[grow],
+c-box[ui~='grow'] {
+  flex-grow: 1;
+}
+
+c-box[grow-0],
+c-box[ui~='grow-0'] {
+  flex-grow: 0;
+}

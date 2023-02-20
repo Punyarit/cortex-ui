@@ -1,0 +1,13 @@
+c-box[flex-wrap],
+c-box[ui~='flex-wrap'] {
+  flex-wrap: wrap;
+}
+
+c-box[flex-wrap-reverse],
+c-box[ui~='flex-wrap-reverse'] {
+  flex-wrap: wrap-reverse;
+}
+c-box[flex-nowrap],
+c-box[ui~='flex-nowrap'] {
+  flex-wrap: nowrap;
+}

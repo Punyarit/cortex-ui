@@ -1,8 +1,13 @@
 @import './body';
+@import './print';
 @import './c-box.utils';
 @import './c-box.popover';
+@import './c-box.flex-direction';
+@import './c-box.flex-grow';
+@import './c-box.flex-shrink';
+@import './c-box.flex-wrap';
+@import './c-box.order';
 @import './c-box.icon';
-@import './print';
 @import './c-box.visibility';
 @import './c-box.cursor';
 @import './c-box.box-sizing';

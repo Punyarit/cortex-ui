@@ -130,6 +130,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
 
   private popoverOpened(e: CXPopover.OnOpened) {
     const inputDateBoxRef = e.detail.event.target as HTMLElement;
+    if (!inputDateBoxRef.hasAttribute('input-box')) return;
+
     const inputDateType = inputDateBoxRef.getAttribute('input-date-type') as InputDateType;
 
     if (inputDateType === 'enddate') {
@@ -187,7 +189,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   ) {
     return html`
       ${this.renderInputBox(startdateFormatted || 'วันเริ่มต้น', 'startdate')}
-      <c-box>-</c-box>
+      <c-box ?hidden="${this.set.inputStyle === 'short'}">-</c-box>
       ${this.renderInputBox(enddateFormatted || 'วันสิ้นสุด', 'enddate')}
     `;
   }
