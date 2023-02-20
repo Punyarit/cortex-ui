@@ -22,8 +22,8 @@ export const tagName = 'cx-datepicker';
 
 @customElement(tagName)
 export class DatePicker extends ComponentBase<CXDatePicker.Props> {
-  #inputLongUI = 'inline-flex items-center col-gap-6';
-  #inputShortUI = 'inline-block';
+  #inputLongUI = 'inline-flex items-center col-gap-6 w-632';
+  #inputShortUI = 'inline-flex flex-col w-328 row-gap-4';
 
   config: CXDatePicker.Set = {
     date: new Date(),
@@ -89,7 +89,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   private renderInputBox(text: string, type: InputDateType) {
     return html`
       <c-box
-        w-280
+        w-full
         icon-prefix
         input-date-type="${type}"
         input-box="default"
@@ -189,7 +189,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   ) {
     return html`
       ${this.renderInputBox(startdateFormatted || 'วันเริ่มต้น', 'startdate')}
-      <c-box ?hidden="${this.set.inputStyle === 'short'}">-</c-box>
+      ${this.set.inputStyle === 'long' ? html`<c-box>-</c-box>` : undefined}
       ${this.renderInputBox(enddateFormatted || 'วันสิ้นสุด', 'enddate')}
     `;
   }
