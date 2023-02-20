@@ -195,8 +195,8 @@ export class CalendarDateRangeSelectState {
     this.signleCalendar.setCustomEvent('select-date', {
       event: 'select-date',
       date: {
-        startDate: convertDateStringToDate(startDate),
-        endDate: convertDateStringToDate(endDate),
+        startdate: convertDateStringToDate(startDate),
+        enddate: convertDateStringToDate(endDate),
       },
     });
   }

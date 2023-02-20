@@ -3,7 +3,7 @@ c-box {
 }
 
 c-box {
-  &[ui*='content'],
+  &[ui~='content'],
   &[content] {
     display: block;
     padding: var(--size-12);
@@ -11,10 +11,9 @@ c-box {
     background-color: var(--white);
   }
 
-  &[ui*='input-box'],
   &[input-box] {
     display: inline-block;
-    // border: 2px solid var(--primary-400);
+    border: 2px solid var(--primary-400);
     width: var(--size-300);
     border-radius: var(--base-size-8);
     background-color: var(--white);

@@ -58,6 +58,10 @@ export function convertDateToArrayNumber(date: Date) {
   return [date.getFullYear(), date.getMonth(), date.getDate()];
 }
 
+export const dateShortOption: Intl.DateTimeFormatOptions = {
+  dateStyle: 'short',
+};
+
 export const longMonthOption: Intl.DateTimeFormatOptions = {
   month: 'long',
 };

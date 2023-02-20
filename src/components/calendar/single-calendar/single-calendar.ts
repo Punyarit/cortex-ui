@@ -9,7 +9,6 @@ import {
   shortDayOption,
   yearDayOption,
 } from '../../../helpers/functions/date/date-methods';
-import { visibleElement } from '../../../helpers/functions/observe-element/visible-element';
 import { ThemeVersion } from '../../theme/types/theme.types';
 import { DateRangeSelected } from '../types/calendar.types';
 import { CalendarBaseMethod } from './calendar-states/calendar-base';

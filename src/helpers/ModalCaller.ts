@@ -3,6 +3,7 @@ import { DecideDialogCaller } from './functions/modal-callers/decide-dialog.call
 import { SnackbarCaller } from './functions/modal-callers/snackbar.caller';
 import '../components/snackbar/snackbar';
 import '../components/dialog/templates/decide-dialog/decide-dialog';
+import { PopoverCaller } from './functions/modal-callers/popover.caller';
 export class ModalCaller {
   static snackbar(config: CXSnackbar.Set) {
     return new SnackbarCaller(config);
@@ -14,5 +15,9 @@ export class ModalCaller {
 
   static chooseLangDialog() {
     return new ChooseLangDialogCaller();
+  }
+
+  static popover() {
+    return new PopoverCaller();
   }
 }
