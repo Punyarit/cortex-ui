@@ -50,12 +50,12 @@ export class DialogState {
     });
   }
 
-  public close = (shouldTriggerAfterClosed = true): void => {
+  public close = (shouldTriggerOnClosed = true): void => {
     this.removeEscapeKeyupEvent();
     this.SetOpacity('0');
     this.endTransition();
     this.closeDialogWhenEnd();
-    this.triggerAfterClosedWhenTimeup(shouldTriggerAfterClosed);
+    this.triggerOnClosedWhenTimeup(shouldTriggerOnClosed);
   };
 
   private endTransition() {
@@ -68,10 +68,10 @@ export class DialogState {
     this.close();
   };
 
-  private triggerAfterClosedWhenTimeup(shouldTriggerAfterClosed?: boolean) {
-    if (!shouldTriggerAfterClosed) return;
+  private triggerOnClosedWhenTimeup(shouldTriggerOnClosed?: boolean) {
+    if (!shouldTriggerOnClosed) return;
     setTimeout(() => {
-      this.triggerAfterClosed();
+      this.triggerOnClosed();
     }, 250);
   }
 
@@ -163,8 +163,8 @@ export class DialogState {
     this.dialogRef = <CXDialog.Ref>(slot as HTMLSlotElement).assignedElements()[0];
   }
 
-  private triggerAfterClosed(): void {
-    if (this.dialogRef) this.dialogRef.afterClosed();
+  private triggerOnClosed(): void {
+    if (this.dialogRef) this.dialogRef.onClosed();
   }
 
   private removeEscapeKeyupEvent(): void {

@@ -6,8 +6,8 @@ import { ModalSingleton } from '../modal/singleton/modal.singleton';
 import { DialogState } from '../modal/state/dialog.state';
 import '../transition/transition';
 import { TransitionDefaultFadeTypes, WhenTypes } from '../transition/types/transition.types';
-import { CxDialogName } from './types/dialog.name'
-import { CxDialogAfterClosed } from './types/dialog.types'
+import { CxDialogName } from './types/dialog.name';
+import { CxDialogOnClosed } from './types/dialog.types';
 
 @customElement(CxDialogName)
 export class Dialog extends ComponentBase<CXDialog.Props> {
@@ -87,9 +87,9 @@ export class Dialog extends ComponentBase<CXDialog.Props> {
     ModalSingleton.modalRef?.closeDialog();
   }
 
-  public afterClosed(): void {
-    this.setCustomEvent<CXDialog.Details[typeof CxDialogAfterClosed]>(CxDialogAfterClosed, {
-      event: CxDialogAfterClosed,
+  public onClosed(): void {
+    this.setCustomEvent<CXDialog.Details[typeof CxDialogOnClosed]>(CxDialogOnClosed, {
+      event: CxDialogOnClosed,
     });
   }
 }
@@ -106,10 +106,6 @@ declare global {
       transition?: TransitionDefaultFadeTypes;
     };
 
-    type Details = {
-      [CxDialogAfterClosed]: { event: string };
-    };
-
     type Fix = {
       [K in keyof Set]: (value: Set[K]) => Fix;
     } & { exec: () => Ref };
@@ -120,11 +116,15 @@ declare global {
       fix: Fix;
     };
 
-    type Events = {
-      [CxDialogAfterClosed]: (detail: AfterClosed) => void;
+    type Details = {
+      [CxDialogOnClosed]: { event: string };
     };
 
-    type AfterClosed = CustomEvent<Details[typeof CxDialogAfterClosed]>;
+    type Events = {
+      [CxDialogOnClosed]: (detail: OnClosed) => void;
+    };
+
+    type OnClosed = CustomEvent<Details[typeof CxDialogOnClosed]>;
   }
 
   namespace JSX {

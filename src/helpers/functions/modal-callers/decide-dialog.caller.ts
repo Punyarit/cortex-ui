@@ -12,7 +12,7 @@ export class DecideDialogCaller {
     GlobalDialogSingleton.ref.setSlotName('global-dialog');
     ModalSingleton.modalRef.openDialog('global-dialog');
     GlobalDialogSingleton.ref.append(this.decideDialogRef!);
-    GlobalDialogSingleton.ref.addEventListener('afterClosed', this.removeFirstElement);
+    GlobalDialogSingleton.ref.addEventListener('on-closed', this.removeFirstElement);
   }
 
   public close() {
@@ -35,7 +35,7 @@ export class DecideDialogCaller {
   // 📌need to use arrow function because scope of addEventListener that recognized firstELementChild = undefiend
   private removeFirstElement = () => {
     if (!GlobalDialogSingleton.ref?.firstElementChild) return;
-    GlobalDialogSingleton.ref?.removeEventListener('afterClosed', this.removeFirstElement);
+    GlobalDialogSingleton.ref?.removeEventListener('on-closed', this.removeFirstElement);
     GlobalDialogSingleton.ref.firstElementChild.remove();
   };
 }
