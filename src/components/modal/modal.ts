@@ -152,9 +152,10 @@ export class Modal extends ComponentBase<CXModal.Props> {
     popoverContent: HTMLElement,
     hostRect: DOMRect,
     popoverSet: CXPopover.Set,
-    popoverRoot: HTMLElement
+    popoverRoot: HTMLElement,
+    triggerEvent: Event
   ) => {
-    this.popoverState.open(popoverContent, hostRect, popoverSet, popoverRoot);
+    this.popoverState.open(popoverContent, hostRect, popoverSet, popoverRoot, triggerEvent);
   };
 
   public closePopover = () => {

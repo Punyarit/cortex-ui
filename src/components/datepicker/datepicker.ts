@@ -7,11 +7,17 @@ import '../c-box/c-box';
 import '../popover/popover';
 import '../calendar/calendar';
 import { DateRangeSelected } from '../calendar/types/calendar.types';
-import { dateFormat, dateShortOption } from '../../helpers/functions/date/date-methods';
+import {
+  convertDateToArrayNumber,
+  dateFormat,
+  dateShortOption,
+} from '../../helpers/functions/date/date-methods';
 import { ModalCaller } from '../../helpers/ModalCaller';
 import { delay } from '../../helpers/delay';
+import { InputDateType } from './types/datepicker.types';
 
 export const tagName = 'cx-datepicker';
+
 // export const onPressed = 'pressed';
 
 @customElement(tagName)
@@ -32,7 +38,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   @state()
   private selectedDate?: Date | DateRangeSelected;
 
-  private inputBoxWrapper = createRef<HTMLSlotElement>();
+  private inputBoxWrapperRef = createRef<HTMLSlotElement>();
+  private cxCalendarRef = createRef<CXCalendar.Ref>();
 
   connectedCallback() {
     super.connectedCallback();
@@ -49,16 +56,17 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
           position: 'bottom-left',
           openby: 'click',
           mouseleave: 'none',
-          focusout: 'close',
+          focusout: 'none',
         } as CXPopover.Set}">
         <c-box slot="host">
-          <c-box ui="${this.#inputWrapperUI}" ${ref(this.inputBoxWrapper)}>
+          <c-box ui="${this.#inputWrapperUI}" ${ref(this.inputBoxWrapperRef)}>
             ${this.renderDateInput()}
           </c-box>
         </c-box>
         <c-box slot="popover">
           <c-box content p-0>
             <cx-calendar
+              ${ref(this.cxCalendarRef)}
               @select-date="${this.selectDate}"
               .set="${{
                 date: this.set.date,
@@ -78,9 +86,16 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     return this;
   }
 
-  private renderInputBox(text: string) {
+  private renderInputBox(text: string, type: InputDateType) {
     return html`
-      <c-box input-box="default" w-280 icon-src="calendar-alt-line" icon-prefix>${text}</c-box>
+      <c-box
+        w-280
+        icon-prefix
+        input-date-type="${type}"
+        input-box="default"
+        icon-src="calendar-alt-line"
+        >${text}</c-box
+      >
     `;
   }
 
@@ -90,21 +105,6 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     const startdateFormatted = dateFormat(startdate, dateShortOption);
     const enddateFormatted = dateFormat(enddate, dateShortOption);
     return { startdate: startdateFormatted, enddate: enddateFormatted };
-  }
-
-  private getInputBoxForDateRange(
-    startdateFormatted: string | undefined,
-    enddateFormatted: string | undefined
-  ) {
-    return html`
-      ${this.renderInputBox(startdateFormatted || 'วันเริ่มต้น')}
-      <c-box>-</c-box>
-      ${this.renderInputBox(enddateFormatted || 'วันสิ้นสุด')}
-    `;
-  }
-
-  private getInputBoxForSingleDate(dateFormatted: string | undefined) {
-    return html` ${this.renderInputBox(dateFormatted || 'เลือกวันที่')} `;
   }
 
   private renderDateInput() {
@@ -117,17 +117,9 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     }
   }
 
-  private setFocusOnInputBox(inputBox: HTMLElement | null) {
-    inputBox?.setAttribute('input-box', 'focus');
-  }
-
-  private setDefaultOnInputBox(inputBox: HTMLElement | null) {
-    inputBox?.setAttribute('input-box', 'default');
-  }
-
   private setDefaultOnInputBoxesForDateRange() {
-    const startdateInput = this.inputBoxWrapper.value!.firstElementChild as HTMLElement;
-    const enddateInput = this.inputBoxWrapper.value!.lastElementChild as HTMLElement;
+    const startdateInput = this.inputBoxWrapperRef.value!.firstElementChild as HTMLElement;
+    const enddateInput = this.inputBoxWrapperRef.value!.lastElementChild as HTMLElement;
     this.setDefaultOnInputBox(startdateInput);
     this.setDefaultOnInputBox(enddateInput);
   }
@@ -136,22 +128,36 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     if (this.set.daterange) {
       this.setDefaultOnInputBoxesForDateRange();
     } else {
-      const inputBox = this.inputBoxWrapper.value!.firstElementChild as HTMLElement;
+      const inputBox = this.inputBoxWrapperRef.value!.firstElementChild as HTMLElement;
       this.setDefaultOnInputBox(inputBox);
     }
   }
 
-  private popoverOpened() {
-    const inputBox = this.inputBoxWrapper.value!.firstElementChild as HTMLElement;
-    this.setFocusOnInputBox(inputBox);
+  private popoverOpened(e: CXPopover.OnOpened) {
+    const inputDateBoxRef = e.detail.event.target as HTMLElement;
+    const inputDateType = inputDateBoxRef.getAttribute('input-date-type') as InputDateType;
+
+    if (inputDateType === 'enddate') {
+      inputDateBoxRef.setAttribute('input-box', 'focus');
+      this.resetEndDateSelected();
+    }
+    this.setFocusOnInputBox(inputDateBoxRef);
+  }
+
+  private resetEndDateSelected() {
+    this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute('enddate-selected', '');
+    this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute(
+      'old-enddate',
+      convertDateToArrayNumber((this.selectedDate as DateRangeSelected).enddate)?.join('-')!
+    );
   }
 
   private async selectDate(e: CXCalendar.SelectDate) {
     const { date } = e.detail;
     //set focus
     if (this.set.daterange) {
-      const startdateInput = this.inputBoxWrapper.value!.firstElementChild as HTMLElement;
-      const enddateInput = this.inputBoxWrapper.value!.lastElementChild as HTMLElement;
+      const startdateInput = this.inputBoxWrapperRef.value!.firstElementChild as HTMLElement;
+      const enddateInput = this.inputBoxWrapperRef.value!.lastElementChild as HTMLElement;
 
       if (!(date as DateRangeSelected).startdate) {
         this.setFocusOnInputBox(startdateInput);
@@ -168,6 +174,29 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     }
     this.selectedDate = date;
     this.setCustomEvent('select-date', { date });
+  }
+
+  private getInputBoxForDateRange(
+    startdateFormatted: string | undefined,
+    enddateFormatted: string | undefined
+  ) {
+    return html`
+      ${this.renderInputBox(startdateFormatted || 'วันเริ่มต้น', 'startdate')}
+      <c-box>-</c-box>
+      ${this.renderInputBox(enddateFormatted || 'วันสิ้นสุด', 'enddate')}
+    `;
+  }
+
+  private getInputBoxForSingleDate(dateFormatted: string | undefined) {
+    return html` ${this.renderInputBox(dateFormatted || 'เลือกวันที่', 'singledate')} `;
+  }
+
+  private setFocusOnInputBox(inputBox: HTMLElement | null) {
+    inputBox?.setAttribute('input-box', 'focus');
+  }
+
+  private setDefaultOnInputBox(inputBox: HTMLElement | null) {
+    inputBox?.setAttribute('input-box', 'default');
   }
 }
 

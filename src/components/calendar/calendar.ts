@@ -97,7 +97,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     size: 'small',
   };
 
-  private calendarMonitorRef = createRef<HTMLDivElement>();
+  public calendarMonitorRef = createRef<HTMLDivElement>();
 
   render(): TemplateResult {
     return html` <style>

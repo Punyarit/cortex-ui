@@ -57,14 +57,15 @@ export class Popover extends ComponentBase<CXPopover.Props> {
     this.hostElement?.setAttribute('inline-block', '');
   }
 
-  private setOpenPopover = async () => {
+  private setOpenPopover = async (triggerEvent: Event) => {
     const popoverContentElement = await this.getPopoverContentElement();
     if (!popoverContentElement) return;
     ModalSingleton.modalRef.openPopovre(
       popoverContentElement,
       this.hostElement!.getBoundingClientRect(),
       this.set,
-      this.shadowRoot!.host as HTMLElement
+      this.shadowRoot!.host as HTMLElement,
+      triggerEvent
     );
   };
 
@@ -116,15 +117,15 @@ declare global {
       fix: Fix;
     };
 
-    // type Details = {
-    //   [onPressed]: { event: string };
-    // };
+    type Details = {
+      ['on-opened']: { event: Event };
+    };
 
-    // type Events = {
-    //   [onPressed]: (detail: Pressed) => void;
-    // };
+    type Events = {
+      ['on-opened']: (detail: OnOpened) => void;
+    };
 
-    // type Pressed = CustomEvent<Details[typeof onPressed]>;
+    type OnOpened = CustomEvent<Details['on-opened']>;
   }
 
   interface HTMLElementTagNameMap {

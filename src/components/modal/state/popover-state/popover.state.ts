@@ -59,7 +59,8 @@ export class PopoverState {
     popoverContent: HTMLElement,
     hostRect: DOMRect,
     popoverSet: CXPopover.Set,
-    popoverHost: HTMLElement
+    popoverHost: HTMLElement,
+    triggerEvent: Event
   ): Promise<void> {
     await this.deleyWhenOldPopoverExist();
     if (this.setFocusOldPopoverExistThenDone()) return;
@@ -75,15 +76,15 @@ export class PopoverState {
     this.setMouseleaveEvent();
     requestAnimationFrame(() => {
       this.setPopoverContentOpacity('1');
-      this.triggerEvent('on-opened');
+      this.onEvent('on-opened', triggerEvent);
     });
   }
 
-  private triggerEvent(event: 'on-opened' | 'on-closed') {
+  private onEvent(event: 'on-opened' | 'on-closed', triggerEvent?: Event) {
     this.popoverHost.dispatchEvent(
       new CustomEvent(event, {
         detail: {
-          event: event,
+          event: triggerEvent,
         },
       })
     );
@@ -269,7 +270,7 @@ export class PopoverState {
     this.appendBackToParentRoot();
     this.removeMouseEvent();
     this.setPopoverClosedDone(true);
-    this.triggerEvent('on-closed');
+    this.onEvent('on-closed');
   };
 
   private setPopoverContentAnimation(status: 'in' | 'out') {
