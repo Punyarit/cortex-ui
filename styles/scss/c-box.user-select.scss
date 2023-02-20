@@ -1,0 +1,19 @@
+c-box[select-none],
+c-box[ui~='select-none'] {
+  user-select: none;
+}
+
+c-box[select-text],
+c-box[ui~='select-text'] {
+  user-select: text;
+}
+
+c-box[select-all],
+c-box[ui~='select-all'] {
+  user-select: all;
+}
+
+c-box[select-auto],
+c-box[ui~='select-auto'] {
+  user-select: auto;
+}

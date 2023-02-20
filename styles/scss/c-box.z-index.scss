@@ -1,0 +1,6 @@
+@for $i from 0 through 10 {
+  c-nox[ui~='z-#{$i}'],
+  c-box[z-#{$i}] {
+    z-index: #{$i};
+  }
+}
