@@ -7,7 +7,12 @@ export const utilsAttributes = [...padding, ...margin, ...widthHeight, ...color,
 export type UtilsAttributeType = typeof utilsAttributes[number];
 
 export const CBoxPopoverAttributes = ['popover-close-button'] as const;
-export const CBoxIconAttributes = ['icon-src', 'icon-color', 'icon-size'] as const;
+export const CBoxIconAttributes = [
+  'icon-prefix',
+  'icon-suffix',
+  'icon-color',
+  'icon-size',
+] as const;
 
 export type CBoxPopoverType = typeof CBoxPopoverAttributes[number];
 export type PopoverAbilitiesType = Record<typeof attributeChnged[number], () => void>;

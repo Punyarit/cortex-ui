@@ -1,0 +1,24 @@
+c-box[static],
+c-box[ui~='static'] {
+  position: static;
+}
+
+c-box[fixed],
+c-box[ui~='fixed'] {
+  position: fixed;
+}
+
+c-box[absolute],
+c-box[ui~='absolute'] {
+  position: absolute;
+}
+
+c-box[relative],
+c-box[ui~='relative'] {
+  position: relative;
+}
+
+c-box[sticky],
+c-box[ui~='sticky'] {
+  position: sticky;
+}

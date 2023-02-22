@@ -9,16 +9,20 @@ export class AttributeFactory {
         checkCBoxclosest(box, `cx-popover`, PopoverCloseButtonErrorText);
         return (await import('./popover/PopoverCloseButton')).POpoverCloseButton.init(box);
 
-      case 'icon-src':
-        (await import('./icon/IconSrc')).IconSrc.init(box, value as CBox.Icon);
+      case 'icon-prefix':
+        (await import('./icon/IconPrefix')).IconPrefix.init(box, value as CXIcon.Set['src']);
+        break;
+
+      case 'icon-suffix':
+        (await import('./icon/iconSuffix')).IconSuffix.init(box, value as CXIcon.Set['src']);
         break;
 
       case 'icon-color':
-        (await import('./icon/IconColor')).IconColor.init(box, value as CBox.Icon);
+        (await import('./icon/IconColor')).IconColor.init(box, value as CXIcon.Set['src']);
         break;
 
       case 'icon-size':
-        (await import('./icon/iconSize')).IconSize.init(box, value as CBox.Icon);
+        (await import('./icon/iconSize')).IconSize.init(box, value as CXIcon.Set['src']);
         break;
 
       case 'bgColor':
