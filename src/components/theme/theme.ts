@@ -1,19 +1,25 @@
 import { TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { createRef, ref } from 'lit/directives/ref.js';
-import { html, StaticValue, unsafeStatic } from 'lit/static-html.js';
+import { html } from 'lit/static-html.js';
 import { ComponentBase } from '../../base/component-base/component.base';
+import { colors } from './constants/version-2/color.base.theme';
+import { dark } from './constants/version-2/color.dark.theme';
+import { light } from './constants/version-2/color.light.theme';
+import { fontWeights } from './constants/version-2/font-weight.theme';
+import { numbers } from './constants/version-2/number.theme';
+import { sizes } from './constants/version-2/size.theme';
 import { ThemeSingleton } from './singleton/theme.singleton';
-import { CxThemeName } from './types/theme.name'
-import { ThemeColorTypes, ThemeSizeTypes, ThemeVersion } from './types/theme.types';
+import { CxThemeName } from './types/theme.name';
+import { ThemeColorTypes, ThemeSizeTypes } from './types/theme.types';
 
 @customElement(CxThemeName)
 export class Theme extends ComponentBase<CXTheme.Props> {
   config: CXTheme.Set = {
     color: 'light',
     size: 'small',
-    version: 2,
   };
+
+  static styles = [colors, light, dark, fontWeights, sizes, numbers];
 
   connectedCallback() {
     super.connectedCallback();
@@ -23,12 +29,8 @@ export class Theme extends ComponentBase<CXTheme.Props> {
     this.createSharedCxThemeRef();
   }
 
-  private themeRef = createRef<HTMLSlotElement>();
-  private themeHTML?: StaticValue;
-  private themeImporter?: Promise<unknown>;
-
   render(): TemplateResult {
-    return html`<${this.themeHTML} ${ref(this.themeRef)}><slot></slot></${this.themeHTML}>`;
+    return html`<slot> </slot> `;
   }
 
   createSharedCxThemeRef() {
@@ -36,8 +38,6 @@ export class Theme extends ComponentBase<CXTheme.Props> {
   }
 
   willUpdate(changedProperties: Map<PropertyKey, unknown>): void {
-    this.importThemeVersion();
-    this.setThemeHTML();
     this.setThemeProps(changedProperties);
     super.willUpdate(changedProperties);
   }
@@ -47,16 +47,6 @@ export class Theme extends ComponentBase<CXTheme.Props> {
     this.update(changedProperties);
   }
 
-  private setThemeHTML() {
-    if (this.themeHTML) return;
-    this.themeHTML = unsafeStatic(`cx-theme-v${this.set?.version}`);
-  }
-
-  private importThemeVersion(): void {
-    if (this.themeImporter) return;
-    this.themeImporter = import(`./versions/theme.v${this.set?.version}.js`);
-  }
-
   private setThemeProps(changedProperties: Map<PropertyKey, unknown>): void {
     if (changedProperties.has('set')) {
       this.setTheme(this.set?.color || this.config.color, this.set?.size || this.config.size);
@@ -64,8 +54,7 @@ export class Theme extends ComponentBase<CXTheme.Props> {
   }
 
   private setTheme(color?: CXTheme.Set['color'], size?: CXTheme.Set['size']): void {
-    if (!this.themeRef.value) return;
-    this.themeRef.value.className = `${color || this.config.color} ${size || this.config.size}`;
+    this.className = `${color || this.config.color} ${size || this.config.size}`;
   }
 }
 
@@ -79,7 +68,6 @@ declare global {
     type Set = {
       color?: ThemeColorTypes;
       size?: ThemeSizeTypes;
-      version: ThemeVersion;
     };
 
     type Fix = {
