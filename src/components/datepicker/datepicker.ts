@@ -88,7 +88,13 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
 
   private renderInputBox(text: string, type: InputDateType) {
     return html`
-      <c-box w-full icon-prefix="calendar-alt-line" input-date-type="${type}" input-box="default"
+      <c-box
+        w-full
+        flex
+        col-gap-6
+        icon-prefix="calendar-alt-line"
+        input-date-type="${type}"
+        input-box="default"
         >${text}</c-box
       >
     `;
