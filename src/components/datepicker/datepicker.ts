@@ -148,7 +148,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute('enddate-selected', '');
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute(
       'old-enddate',
-      convertDateToArrayNumber((this.selectedDate as DateRangeSelected).enddate)?.join('-')!
+      convertDateToArrayNumber((this.selectedDate as DateRangeSelected)?.enddate)?.join('-')!
     );
   }
 
