@@ -1,6 +1,6 @@
 export const padding = ['p', 'px', 'py', 'pt', 'pb', 'pl', 'pr'] as const;
 export const margin = ['m', 'mx', 'my', 'mt', 'mb', 'ml', 'mr'] as const;
-export const widthHeight = ['w', 'h'] as const;
+export const widthHeight = ['w', 'min-w', 'max-w', 'h', 'min-h', 'max-h'] as const;
 export const gap = ['row-gap', 'col-gap'] as const;
 export const color = ['bgColor', 'color'] as const;
 export const utilsAttributes = [...padding, ...margin, ...widthHeight, ...color, ...gap] as const;

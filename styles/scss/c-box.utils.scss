@@ -30,3 +30,10 @@ c-box {
     color: var(--gray-600);
   }
 }
+
+c-box[slot='popover'] {
+  c-box[content] {
+    box-shadow: 0 var(--base-size-6) var(--base-size-20) -0.188rem var(--base-shadow-400),
+      0 var(--base-size-4) var(--base-size-6) -0.25rem var(--base-shadow-400);
+  }
+}

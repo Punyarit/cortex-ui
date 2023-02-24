@@ -3,57 +3,56 @@ c-box[ui~='shadow-none'] {
   box-shadow: none;
 }
 
-c-box[shadow-0],
-c-box[ui~='shadow-0'] {
-  box-shadow: 0 0 var(--size-18) 0 var(--shadow-25);
-}
-
 c-box[shadow-1],
 c-box[ui~='shadow-1'] {
-  box-shadow: 0 0 var(--size-20) 0 var(--shadow-50);
+  box-shadow: 0 var(--base-size-1) var(--base-size-2) 0 var(--base-shadow-400);
 }
 
 c-box[shadow-2],
 c-box[ui~='shadow-2'] {
-  box-shadow: 0 0 var(--size-24) 0 var(--shadow-100);
+  box-shadow: 0 var(--base-size-1) var(--base-size-3) 0 var(--base-shadow-400),
+    0 1px 2px -1px var(--base-shadow-400);
 }
 
 c-box[shadow-3],
 c-box[ui~='shadow-3'] {
-  box-shadow: 0 0 var(--size-28) 0 var(--shadow-200);
+  box-shadow: 0 var(--base-size-1) var(--base-size-6) -0.063rem var(--base-shadow-400),
+    0 var(--base-size-2) var(--base-size-4) -0.125rem var(--base-shadow-400);
 }
 
 c-box[shadow-4],
 c-box[ui~='shadow-4'] {
-  box-shadow: 0 0 var(--size-32) 0 var(--shadow-300);
+  box-shadow: 0 var(--base-size-6) var(--base-size-20) -0.188rem var(--base-shadow-400),
+    0 var(--base-size-4) var(--base-size-6) -0.25rem var(--base-shadow-400);
 }
 
 c-box[shadow-5],
 c-box[ui~='shadow-5'] {
-  box-shadow: 0 0 var(--size-36) 0 var(--shadow-400);
+  box-shadow: 0 var(--base-size-8) var(--base-size-32) -0.313rem var(--base-shadow-400),
+    0 var(--base-size-8) var(--base-size-10) -0.375rem var(--base-shadow-400);
 }
 
 c-box[shadow-6],
 c-box[ui~='shadow-6'] {
-  box-shadow: 0 0 var(--size-40) 0 var(--shadow-500);
+  box-shadow: 0 var(--base-size-18) var(--base-size-50) -0.75rem var(--base-shadow-500);
 }
 
 c-box[shadow-7],
 c-box[ui~='shadow-7'] {
-  box-shadow: 0 0 var(--size-44) 0 var(--shadow-600);
+  box-shadow: 0 var(--base-size-22) var(--base-size-75) -1rem var(--base-shadow-600);
 }
 
 c-box[shadow-8],
 c-box[ui~='shadow-8'] {
-  box-shadow: 0 0 var(--size-48) 0 var(--shadow-700);
+  box-shadow: 0 var(--base-size-26) var(--base-size-100) -1rem var(--base-shadow-700);
 }
 
 c-box[shadow-9],
 c-box[ui~='shadow-9'] {
-  box-shadow: 0 0 var(--size-52) 0 var(--shadow-800);
+  box-shadow: 0 var(--base-size-48) var(--base-size-126) -1rem var(--base-shadow-800);
 }
 
 c-box[shadow-10],
 c-box[ui~='shadow-10'] {
-  box-shadow: 0 0 var(--size-56) 0 var(--shadow-900);
+  box-shadow: 0 var(--base-size-62) var(--base-size-164) -1rem var(--base-shadow-900);
 }

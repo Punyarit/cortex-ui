@@ -2,6 +2,80 @@ c-box[w] {
   width: var(--w);
 }
 
+c-box[min-w] {
+  min-width: var(--min-w);
+}
+
+c-box[max-w] {
+  max-width: var(--max-w);
+}
+
+c-box[w-full],
+c-box[ui~='w-full'] {
+  width: 100%;
+}
+
+c-box[min-w-full],
+c-box[ui~='min-w-full'] {
+  min-width: 100%;
+}
+
+c-box[max-w-full],
+c-box[ui~='max-w-full'] {
+  max-width: 100%;
+}
+
 c-box[h] {
   height: var(--h);
+}
+
+c-box[min-h] {
+  min-height: var(--min-h);
+}
+
+c-box[max-h] {
+  max-height: var(--max-h);
+}
+
+c-box[h-full],
+c-box[ui~='h-full'] {
+  height: 100%;
+}
+
+c-box[min-h-full],
+c-box[ui~='min-h-full'] {
+  min-height: 100%;
+}
+
+c-box[max-h-full],
+c-box[ui~='max-h-full'] {
+  max-height: 100%;
+}
+
+c-box[w-fit],
+c-box[ui~='w-fit'] {
+  width: fit-content;
+}
+c-box[w-max],
+c-box[ui~='w-max'] {
+  width: max-content;
+}
+
+c-box[w-min],
+c-box[ui~='w-min'] {
+  width: min-content;
+}
+
+c-box[h-fit],
+c-box[ui~='h-fit'] {
+  height: fit-content;
+}
+c-box[h-max],
+c-box[ui~='h-max'] {
+  height: max-content;
+}
+
+c-box[h-min],
+c-box[ui~='h-min'] {
+  height: min-content;
 }

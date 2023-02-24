@@ -30,7 +30,11 @@ export class AttributeFactory {
       case 'col-gap':
       case 'row-gap':
       case 'h':
+      case 'min-h':
+      case 'max-h':
       case 'w':
+      case 'min-w':
+      case 'max-w':
       case 'm':
       case 'ml':
       case 'mt':
