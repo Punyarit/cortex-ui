@@ -91,8 +91,10 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
       <c-box
         w-full
         flex
-        col-gap-6
+        col-gap-8
+        border-box
         icon-prefix="calendar-alt-line"
+        items-center
         input-date-type="${type}"
         input-box="default"
         >${text}</c-box
