@@ -179,11 +179,13 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   private async setCLosePopover(date: Date | DateRangeSelected) {
     if (this.set.daterange) {
       if (!((date as DateRangeSelected).startdate && (date as DateRangeSelected).enddate)) return;
-      await delay(125);
+      // 📌 delay for animation selected enddate scale
+      await delay(250);
       ModalCaller.popover().close();
     } else {
       if (!(date as Date)) return;
-      await delay(125);
+      // 📌 delay for animation selected enddate scale
+      await delay(250);
       ModalCaller.popover().close();
     }
   }

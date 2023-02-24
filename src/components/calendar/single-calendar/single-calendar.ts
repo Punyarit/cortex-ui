@@ -64,6 +64,19 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       color: var(--white) !important;
       border-radius: var(--base-size-half) !important;
       position: relative;
+      animation: selected 0.25s ease;
+    }
+
+    @keyframes selected {
+      0% {
+        scale: 1;
+      }
+      50% {
+        scale: 1.2;
+      }
+      100% {
+        scale: 1;
+      }
     }
 
     .selected:hover {
