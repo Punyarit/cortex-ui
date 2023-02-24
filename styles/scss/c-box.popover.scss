@@ -102,6 +102,7 @@ c-box[slot='popover'] {
       border-left: 8px solid transparent;
       border-right: 8px solid transparent;
       border-bottom: 8px solid var(--white);
+      filter: drop-shadow(0px -3px 6px rgba(0, 0, 0, 0.2));
     }
   }
 
@@ -128,6 +129,7 @@ c-box[slot='popover'] {
       border-top: 8px solid transparent;
       border-bottom: 8px solid transparent;
       border-right: 8px solid var(--white);
+      filter: drop-shadow(-4px 0 4px rgba(0, 0, 0, 0.2));
     }
   }
 
@@ -141,6 +143,7 @@ c-box[slot='popover'] {
       border-top: 8px solid transparent;
       border-bottom: 8px solid transparent;
       border-left: 8px solid var(--white);
+      filter: drop-shadow(4px 0 4px rgba(0, 0, 0, 0.2));
     }
   }
 }
@@ -164,5 +167,12 @@ c-box[popover-close-button] {
   &::after {
     content: '\e800';
     font-family: close-solid;
+  }
+}
+
+c-box[slot='popover'] {
+  c-box[content] {
+    box-shadow: 0 var(--base-size-2) var(--base-size-20) -0.188rem var(--base-shadow-400),
+      0 var(--base-size-4) var(--base-size-6) -0.25rem var(--base-shadow-400);
   }
 }

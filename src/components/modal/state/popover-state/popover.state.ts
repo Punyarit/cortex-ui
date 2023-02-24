@@ -159,7 +159,7 @@ export class PopoverState {
   // 📌set attribute for benefit to c-box
   private setArrowpoint(positionResult: PositionResult) {
     if (!this.popoverSet.arrowpoint) return;
-    const { width: hostWidth, height: hostHeight } = this.popoverHost.getBoundingClientRect();
+    const { width: hostWidth, height: hostHeight } = this.hostRect;
     const { width: contentWidth, height: contentHeight } =
       this.popoverContent.getBoundingClientRect();
     const { positionChecked, sideChecked } = positionResult;
@@ -188,7 +188,7 @@ export class PopoverState {
         return popoverStyles.setProperty(arrowPointProperty, `${arrowPosition - 8}px 0`);
       case 'left':
       case 'right':
-        return popoverStyles.setProperty(arrowPointProperty, `0 ${arrowPosition}px`);
+        return popoverStyles.setProperty(arrowPointProperty, `0 ${arrowPosition - 8}px`);
       default:
         throw Error('positionChecked value is not "top" | "bottom" | "left" | "right"');
     }
@@ -227,7 +227,7 @@ export class PopoverState {
             return Math.abs(Math.floor(contentHeight / 2));
 
           case 'top':
-            return hostCenterHeight;
+            return Math.floor(hostCenterHeight);
 
           case 'bottom':
             return Math.abs(Math.floor(hostCenterHeight - contentHeight));
