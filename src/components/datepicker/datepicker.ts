@@ -59,7 +59,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
           position: 'bottom-left',
           openby: 'click',
           mouseleave: 'none',
-          focusout: 'none',
+          focusout: 'close',
         } as CXPopover.Set}">
         <c-box slot="host">
           <c-box ui="${this.setInputStyle()}" ${ref(this.inputBoxWrapperRef)}>
@@ -148,8 +148,10 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute('enddate-selected', '');
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute(
       'old-enddate',
-      convertDateToArrayNumber((this.selectedDate as DateRangeSelected)?.enddate)?.join('-')!
+      convertDateToArrayNumber((this.selectedDate as DateRangeSelected)?.enddate!)?.join('-')!
     );
+    (this.selectedDate as DateRangeSelected).enddate = undefined;
+    this.requestUpdate();
   }
 
   private async selectDate(e: CXCalendar.SelectDate) {

@@ -1,4 +1,4 @@
 export type DateRangeSelected = {
-  startdate: Date;
-  enddate: Date;
+  startdate: Date | undefined;
+  enddate: Date | undefined;
 };
