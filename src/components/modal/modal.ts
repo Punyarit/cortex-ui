@@ -62,8 +62,32 @@ export class Modal extends ComponentBase<CXModal.Props> {
 
     .snackbar__enabled {
       display: flex;
+      padding: var(--base-size-24);
+      box-sizing: border-box;
+    }
+
+    .snackbar[data-snackbar-position='top-left'] {
+      justify-content: flex-start;
+    }
+    .snackbar[data-snackbar-position='top-center'] {
       justify-content: center;
-      padding-top: var(--base-size-24);
+    }
+    .snackbar[data-snackbar-position='top-right'] {
+      justify-content: flex-end;
+    }
+
+    .snackbar[data-snackbar-position='bottom-left'] {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+    }
+    .snackbar[data-snackbar-position='bottom-center'] {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+
+    .snackbar[data-snackbar-position='bottom-right'] {
+      flex-direction: column-reverse;
+      align-items: flex-end;
     }
 
     .snackbar > slot {
@@ -100,7 +124,7 @@ export class Modal extends ComponentBase<CXModal.Props> {
       </div>
 
       <!-- 📌snackbar area -->
-      <div class="snackbar area disabled">
+      <div data-snackbar-position="top-center" class="snackbar area disabled">
         <slot name="${SnackbarState.SNACKBAR_SLOT_DISABLED}" ${ref(this.snackbarSlotRef)}></slot>
       </div>
 

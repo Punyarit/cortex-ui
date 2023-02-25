@@ -1,5 +1,4 @@
 import { Ref } from 'lit/directives/ref';
-import { mutableElementManyTypes } from '../../../helpers/functions/observe-element/mutable-element';
 import { SnackbarSingleton } from '../../snackbar/singleton/snackbar.singleton';
 import { SnackbarModalSlot } from '../../snackbar/types/snackbar.types';
 import { Modal } from '../modal';
@@ -8,7 +7,6 @@ export class SnackbarState {
   public static readonly SNACKBAR_SLOT_DISABLED = 'snackbar-disabled';
   private readonly SNACKBAR_ENABLED = 'snackbar__enabled';
 
-  private snackbarRef?: CXSnackbar.Ref;
   private snackbarSlot?: Ref<HTMLSlotElement>;
 
   private snackbarTimeStart?: unknown;
@@ -23,27 +21,13 @@ export class SnackbarState {
   };
 
   private startTransition(): void {
-    if (!this.snackbarSlot?.value) return;
-    this.createSlotRef(this.snackbarSlot.value, () => {
-      this.snackbarRef?.executeTransition('start');
+    requestAnimationFrame(() => {
+      SnackbarSingleton.ref.executeTransition('start');
     });
   }
 
-  private createSlotRef(target: HTMLSlotElement, callback?: () => void): void {
-    mutableElementManyTypes({
-      target,
-      attributes: (mutation, observer) => {
-        this.setComponentRef(mutation.target);
-        observer.disconnect();
-
-        if (callback) callback();
-      },
-    });
-  }
-
-  private setComponentRef(slot: Node): void {
-    const componentRef = (slot as HTMLSlotElement).assignedElements()[0];
-    this.snackbarRef = componentRef as CXSnackbar.Ref;
+  private setSnackbarPosition(snackbarParent: HTMLDivElement) {
+    snackbarParent.dataset.snackbarPosition = SnackbarSingleton.ref.set.position;
   }
 
   private setSnackbarSlotName(slot: SnackbarModalSlot): void {
@@ -54,18 +38,19 @@ export class SnackbarState {
   private toggleSnackbarClasses(): void {
     if (!this.snackbarSlot?.value?.parentElement) return;
     this.clearSnackbarTimeout();
-    const snackbarParent = this.snackbarSlot.value.parentElement as CXSnackbar.Ref;
+    const snackbarParent = this.snackbarSlot.value.parentElement as HTMLDivElement;
+    this.setSnackbarPosition(snackbarParent);
     this.enabledSnackbarClass(snackbarParent);
     this.transitionEndSnackbar();
     this.disabledSnackbarClass(snackbarParent);
   }
 
-  private enabledSnackbarClass(snackbarParent: CXSnackbar.Ref): void {
+  private enabledSnackbarClass(snackbarParent: HTMLDivElement): void {
     snackbarParent.classList.add(this.SNACKBAR_ENABLED);
     snackbarParent.classList.remove(Modal.MODAL_DISABLED);
   }
 
-  private disabledSnackbarClass(snackbarParent: CXSnackbar.Ref): void {
+  private disabledSnackbarClass(snackbarParent: HTMLDivElement): void {
     this.snackbarTimeStart = setTimeout(() => {
       if (!this.snackbarSlot?.value) return;
       this.snackbarSlot.value.name = SnackbarState.SNACKBAR_SLOT_DISABLED;
@@ -76,7 +61,7 @@ export class SnackbarState {
 
   private transitionEndSnackbar(): void {
     this.snackbarTimeEnd = setTimeout(() => {
-      this.snackbarRef?.executeTransition('end');
+      SnackbarSingleton.ref.executeTransition('end');
     }, SnackbarSingleton.ref.set.duration! - 250);
   }
 

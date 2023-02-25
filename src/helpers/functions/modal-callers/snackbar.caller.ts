@@ -8,6 +8,7 @@ export class SnackbarCaller {
     SnackbarSingleton.ref.setSnackbarAppear();
     SnackbarSingleton.ref
       .fix()
+      .position(this.config.position)
       .text(this.config.text)
       .duration(this.config?.duration || SnackbarSingleton.ref.set.duration)
       .color(this.config?.color || SnackbarSingleton.ref.set.color)

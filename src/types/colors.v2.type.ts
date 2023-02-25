@@ -16,7 +16,9 @@ export type ModermGreenAttr = Partial<Record<`modern-green-${typeof shadeV2[numb
 
 export type SurgeonGreenAttr = Partial<Record<`surgeon-green-${typeof shadeV2[number]}`, boolean>>;
 
-export type WellnessGreenAttr = Partial<Record<`wellness-green-${typeof shadeV2[number]}`, boolean>>;
+export type WellnessGreenAttr = Partial<
+  Record<`wellness-green-${typeof shadeV2[number]}`, boolean>
+>;
 
 export type SafeBlueAttr = Partial<Record<`safe-blue-${typeof shadeV2[number]}`, boolean>>;
 
@@ -32,7 +34,9 @@ export type RedFlagAttr = Partial<Record<`red-flag-${typeof shadeV2[number]}`, b
 
 export type AlarmOrangeAttr = Partial<Record<`alarm-orange-${typeof shadeV2[number]}`, boolean>>;
 
-export type WarningYellowAttr = Partial<Record<`warning-yellow-${typeof shadeV2[number]}`, boolean>>;
+export type WarningYellowAttr = Partial<
+  Record<`warning-yellow-${typeof shadeV2[number]}`, boolean>
+>;
 
 export type BlueStateAttr = Partial<Record<`bluestate-${typeof shadeV2[number]}`, boolean>>;
 

@@ -2,19 +2,25 @@ import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { ComponentBase } from '../../base/component-base/component.base';
+import { ColorTypesV2 } from '../../types/colors.v2.type';
 import '../icon/icon';
 import { IconSrcTypes } from '../icon/types/icon.types';
 import '../transition/transition';
 import { WhenTypes } from '../transition/types/transition.types';
 import { SnackbarSingleton } from './singleton/snackbar.singleton';
 import { CxSnackbarName } from './types/snackbar.name';
-import { snackbarDurationDefault, snackbarModalSlot } from './types/snackbar.types';
+import {
+  snackbarDurationDefault,
+  snackbarModalSlot,
+  SnackbarPositionType,
+} from './types/snackbar.types';
 
 // export const onPressed = 'pressed';
 
 @customElement(CxSnackbarName)
 export class Snackbar extends ComponentBase<CXSnackbar.Props> {
   config: CXSnackbar.Set = {
+    position: 'top-center',
     text: 'The snackbar has been opened.',
     iconSrc: 'favorite-line',
     duration: snackbarDurationDefault,
@@ -44,6 +50,8 @@ export class Snackbar extends ComponentBase<CXSnackbar.Props> {
       background-color: var(--white);
       padding: var(--base-size-12);
       border-radius: var(--base-size-12);
+      box-shadow: 0 var(--base-size-6) var(--base-size-20) -0.188rem var(--base-shadow-400),
+        0 var(--base-size-4) var(--base-size-6) -0.25rem var(--base-shadow-400);
     }
   `;
 
@@ -108,7 +116,10 @@ declare global {
   namespace CXSnackbar {
     type Ref = Snackbar;
 
-    type Var = unknown;
+    type Var = {
+      backgroundColor: ColorTypesV2;
+      textColor: ColorTypesV2;
+    };
 
     type Set = {
       text: string;
@@ -117,10 +128,11 @@ declare global {
       duration?: number;
       color?: 'primary' | 'secondary';
       transition?: CXTransition.Set;
+      position?: SnackbarPositionType;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & {
-      exec: () => Ref;
+      exec: () => void;
     };
 
     type Props = {
