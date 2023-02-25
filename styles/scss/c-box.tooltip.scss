@@ -1,0 +1,25 @@
+c-box[slot='popover'][tooltip] {
+  &[popover-arrowpoint-position-type='bottom'] {
+    &::before {
+      border-bottom: 8px solid var(--bluestate-700);
+    }
+  }
+
+  &[popover-arrowpoint-position-type='top'] {
+    &::after {
+      border-top: 8px solid var(--bluestate-700);
+    }
+  }
+
+  &[popover-arrowpoint-position-type='right'] {
+    &::before {
+      border-right-color: var(--bluestate-700);
+    }
+  }
+
+  &[popover-arrowpoint-position-type='left'] {
+    &::after {
+      border-left-color: var(--bluestate-700);
+    }
+  }
+}

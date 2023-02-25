@@ -1,38 +1,51 @@
-import {css, html, TemplateResult} from 'lit';
-import {customElement} from 'lit/decorators.js';
-import {ComponentBase} from '../../base/component-base/component.base';
-import {ThemeVersion} from '../theme/types/theme.types';
+import { css, html, PropertyValueMap, TemplateResult } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { ComponentBase } from '../../base/component-base/component.base';
+import { ThemeVersion } from '../theme/types/theme.types';
+import '../popover/popover';
+import '../c-box/c-box';
 
 export const tagName = 'cx-tooltip';
-// export const onPressed = 'pressed';
 
 @customElement(tagName)
 export class Tooltip extends ComponentBase<CXTooltip.Props> {
-  // config: CXTooltip.Set = {};
+  config: CXTooltip.Set = {
+    text: 'Tooltip was created!',
+    openby: 'mouseover',
+    position: 'bottom-center',
+  };
 
-  static styles = css``;
-
-    connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
     if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
   }
 
   render(): TemplateResult {
-    return html`<div>cx-tooltip Component was created!</div>`;
+    return html`<cx-popover
+      .set="${{
+        focusout: 'close',
+        mouseleave: 'close',
+        arrowpoint: true,
+        openby: this.set.openby,
+        position: this.set.position,
+      } as CXPopover.Set}">
+      <c-box slot="host"> </c-box>
+      <c-box slot="popover" tooltip>
+        <c-box content bg-bluestate-700 tx-white>${this.set.text}</c-box>
+      </c-box>
+    </cx-popover>`;
   }
 
-  // Method
-  // public log(config: { text: string }): void {
-  //   console.log('log: ', config.text);
-  // }
+  protected firstUpdated(): void {
+    const content = this.firstElementChild;
+    const host = this.querySelector("c-box[slot='host']");
+    host?.appendChild(content!);
+  }
 
-  // Event
-  // private pressed(): void {
-  //   this.setCustomEvent<CXTooltip.Details[typeof onPressed]>(onPressed, {
-  //     event: onPressed,
-  //   });
-  // }
+  protected createRenderRoot(): Element | ShadowRoot {
+    return this;
+  }
 }
 
 declare global {
@@ -42,14 +55,19 @@ declare global {
 
     type Var<T extends ThemeVersion = 2> = unknown;
 
-    type Set<T extends ThemeVersion = 2> = unknown;
+    type Set<T extends ThemeVersion = 2> = {
+      text: string;
+      position?: CXPopover.Set['position'];
+      openby: CXPopover.Set['openby'];
+    };
 
-    type Fix = Required<{[K in keyof Set]: (value: Set[K]) => Fix}> & {exec: () => void};
+    type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
 
     type Props = {
       var: Pick<Var, never>;
       set: Set;
       fix: Fix;
+      make: Var;
     };
 
     // type Details = {
@@ -71,9 +89,5 @@ declare global {
   //  interface IntrinsicElements {
   //   [tagName]: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> | CXTooltip.Ref;
   //  }
-  // }
-
-  // interface GlobalEventHandlersEventMap {
-  //   [onPressed]: CXTooltip.Pressed;
   // }
 }
