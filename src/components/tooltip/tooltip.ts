@@ -4,10 +4,9 @@ import { ComponentBase } from '../../base/component-base/component.base';
 import { ThemeVersion } from '../theme/types/theme.types';
 import '../popover/popover';
 import '../c-box/c-box';
+import { CxTooltipName } from './types/tooltip.types';
 
-export const tagName = 'cx-tooltip';
-
-@customElement(tagName)
+@customElement(CxTooltipName)
 export class Tooltip extends ComponentBase<CXTooltip.Props> {
   config: CXTooltip.Set = {
     text: 'Tooltip was created!',
@@ -82,7 +81,7 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXTooltip.Ref;
+    [CxTooltipName]: CXTooltip.Ref;
   }
 
   // namespace JSX {

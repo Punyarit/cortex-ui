@@ -3,10 +3,8 @@ import { customElement, state } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { TransitionBuilder } from './builder/transition.builder';
-import { CxTransitionName } from './types/transition.name'
+import { CxTransitionName } from './types/transition.name';
 import { TransitionAttributes, WhenTypes } from './types/transition.types';
-
-// export const onPressed = 'pressed';
 
 @customElement(CxTransitionName)
 export class Transition extends ComponentBase<CXTransition.Props> {
@@ -37,7 +35,7 @@ export class Transition extends ComponentBase<CXTransition.Props> {
     }
   `;
 
-    connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
     if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();

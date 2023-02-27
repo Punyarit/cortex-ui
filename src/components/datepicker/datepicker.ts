@@ -15,12 +15,11 @@ import {
 import { ModalCaller } from '../../helpers/ModalCaller';
 import { delay } from '../../helpers/delay';
 import { InputDateType } from './types/datepicker.types';
-
-export const tagName = 'cx-datepicker';
+import { CxDatepickerName } from './types/datepicker.name';
 
 // export const onPressed = 'pressed';
 
-@customElement(tagName)
+@customElement(CxDatepickerName)
 export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   #inputLongUI = 'inline-flex items-center col-gap-6 w-632';
   #inputShortUI = 'inline-flex flex-col w-328 row-gap-4';
@@ -246,7 +245,7 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXDatePicker.Ref;
+    [CxDatepickerName]: CXDatePicker.Ref;
   }
 
   // namespace JSX {

@@ -1,1 +1,1 @@
-export const CxbuttonName = 'cx-button';
+export const CxButtonName = 'cx-button';

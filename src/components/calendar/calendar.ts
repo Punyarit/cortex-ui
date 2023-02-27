@@ -14,11 +14,11 @@ import {
 } from '../../helpers/functions/date/date-methods';
 import { mutableElement } from '../../helpers/functions/observe-element/mutable-element';
 import { DateRangeSelected } from './types/calendar.types';
+import { CxCalendarName } from './types/calendar.name';
 
-export const tagName = 'cx-calendar';
 // export const onPressed = 'pressed';
 
-@customElement(tagName)
+@customElement(CxCalendarName)
 export class Calendar extends ComponentBase<CXCalendar.Props> {
   config: CXCalendar.Set = {
     date: new Date(),
@@ -353,7 +353,7 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [tagName]: CXCalendar.Ref;
+    [CxCalendarName]: CXCalendar.Ref;
   }
 
   // namespace JSX {

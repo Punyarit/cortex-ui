@@ -16,9 +16,9 @@ import '../spinner/spinner';
 import { ThemeVersion } from '../theme/types/theme.types';
 import ButtonFactory from './factory/factories/button.factory';
 import { CxButtonPressed } from './types/button.types';
-import { CxbuttonName } from './types/button.name';
+import { CxButtonName } from './types/button.name';
 
-@customElement(CxbuttonName)
+@customElement(CxButtonName)
 export class Button extends ComponentBase<CXButton.Props> {
   config: CXButton.Props['set'] = {
     disabled: false,
@@ -294,6 +294,6 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [CxbuttonName]: CXButton.Ref;
+    [CxButtonName]: CXButton.Ref;
   }
 }

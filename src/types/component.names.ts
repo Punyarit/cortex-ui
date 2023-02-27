@@ -1,4 +1,4 @@
-import { CxbuttonName } from '../components/button/types/button.name';
+import { CxButtonName } from '../components/button/types/button.name';
 import { CBoxName } from '../components/c-box/types/c-box.name';
 import { CxDialogName } from '../components/dialog/types/dialog.name';
 import { CxIconName } from '../components/icon/types/icon.name';
@@ -11,7 +11,7 @@ import { CxThemeName } from '../components/theme/types/theme.name';
 import { CxTransitionName } from '../components/transition/types/transition.name';
 
 export const componentNames = [
-  CxbuttonName,
+  CxButtonName,
   CBoxName,
   CxDialogName,
   CxIconName,
