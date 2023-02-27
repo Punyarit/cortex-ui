@@ -2,7 +2,16 @@ export const padding = ['p', 'px', 'py', 'pt', 'pb', 'pl', 'pr'] as const;
 export const margin = ['m', 'mx', 'my', 'mt', 'mb', 'ml', 'mr'] as const;
 export const widthHeight = ['w', 'min-w', 'max-w', 'h', 'min-h', 'max-h'] as const;
 export const gap = ['row-gap', 'col-gap'] as const;
-export const color = ['bgColor', 'color'] as const;
+export const color = [
+  'bg-color',
+  'tx-color',
+  'tx-hover',
+  'bg-hover',
+  'tx-active',
+  'bg-active',
+  'bg-focus',
+  'tx-focus',
+] as const;
 export const utilsAttributes = [...padding, ...margin, ...widthHeight, ...color, ...gap] as const;
 export type UtilsAttributeType = typeof utilsAttributes[number];
 
@@ -22,4 +31,4 @@ export const attributeChnged = [
   ...CBoxIconAttributes,
   ...utilsAttributes,
 ] as const;
-export type AttributeChngedType = typeof attributeChnged[number];
+export type AttributeChangedType = typeof attributeChnged[number];

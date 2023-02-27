@@ -1,9 +1,9 @@
 import { checkCBoxclosest } from '../../../helpers/check-component-closest';
 import { PopoverCloseButtonErrorText } from '../errors/popover-close-button-error-text';
-import { AttributeChngedType, UtilsAttributeType } from '../types/attribute-changed.types';
+import { AttributeChangedType, UtilsAttributeType } from '../types/attribute-changed.types';
 
 export class AttributeFactory {
-  static async construct(box: CBox.Ref, attr: AttributeChngedType, value: unknown) {
+  static async construct(box: CBox.Ref, attr: AttributeChangedType, value: unknown) {
     switch (attr) {
       case 'popover-close-button':
         checkCBoxclosest(box, `cx-popover`, PopoverCloseButtonErrorText);
@@ -25,8 +25,21 @@ export class AttributeFactory {
         (await import('./icon/iconSize')).IconSize.init(box, value as CXIcon.Set['src']);
         break;
 
-      case 'bgColor':
-      case 'color':
+      case 'bg-color':
+      case 'tx-color':
+      case 'bg-active':
+      case 'tx-active':
+      case 'bg-hover':
+      case 'tx-hover':
+      case 'bg-focus':
+      case 'tx-focus':
+        (await import('./utils/ColorUtilAttribute')).ColorUtilAttributes.init(
+          box,
+          attr as UtilsAttributeType,
+          value as string
+        );
+        break;
+
       case 'col-gap':
       case 'row-gap':
       case 'h':
@@ -49,7 +62,7 @@ export class AttributeFactory {
       case 'pb':
       case 'px':
       case 'py':
-        (await import('./utils/UtilAttribute')).UtilAttributes.init(
+        (await import('./utils/SizeUtilAttribute')).SizeUtilAttributes.init(
           box,
           attr as UtilsAttributeType,
           value as string
