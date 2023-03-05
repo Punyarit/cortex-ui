@@ -21,8 +21,8 @@ import { CxDatepickerName } from './types/datepicker.name';
 
 @customElement(CxDatepickerName)
 export class DatePicker extends ComponentBase<CXDatePicker.Props> {
-  #inputLongUI = 'inline-flex items-center col-gap-6 w-632';
-  #inputShortUI = 'inline-flex flex-col w-328 row-gap-4';
+  #inputLongUI = 'inline-flex items-center col-gap-6';
+  #inputShortUI = 'inline-flex flex-col row-gap-4';
 
   config: CXDatePicker.Set = {
     date: new Date(),
@@ -61,7 +61,10 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
           focusout: 'close',
         } as CXPopover.Set}">
         <c-box slot="host">
-          <c-box ui="${this.setInputStyle()}" ${ref(this.inputBoxWrapperRef)}>
+          <c-box
+            w="${this.setWidthStyle()}"
+            ui="${this.setInputStyle()}"
+            ${ref(this.inputBoxWrapperRef)}>
             ${this.renderDateInput()}
           </c-box>
         </c-box>
@@ -75,6 +78,10 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
         </c-box>
       </cx-popover>
     `;
+  }
+
+  private setWidthStyle() {
+    return this.set.inputStyle === 'long' ? '632' : '328';
   }
 
   private setInputStyle() {
@@ -232,6 +239,16 @@ declare global {
       fix: Fix;
       make: Var;
     };
+
+    type Details = {
+      ['select-date']: { date: Date | DateRangeSelected };
+    };
+
+    type Events = {
+      ['select-date']: (detail: SelectDate) => void;
+    };
+
+    type SelectDate = CustomEvent<Details['select-date']>;
 
     // type Details = {
     //   [onPressed]: { event: string };

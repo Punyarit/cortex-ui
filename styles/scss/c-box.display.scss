@@ -1,5 +1,9 @@
 $displays: block, inline, inline-block, flex, inline-flex, grid, inline, grid, hidden;
 
+c-box[display] {
+  display: var(--display);
+}
+
 @each $display in $displays {
   c-box[ui~='#{$display}'],
   c-box[#{$display}] {

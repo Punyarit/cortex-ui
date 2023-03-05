@@ -8,7 +8,6 @@ import { PositionType } from './positionReverseOverScreen';
 import { SidePopoverType } from './sidePopoverAppear';
 import '../../../transition/transition';
 import { delay } from '../../../../helpers/delay';
-import { throttle } from '../../../../helpers/throttleTimer';
 
 export const debouceTimerPopoverResize = 200;
 export class PopoverState {
@@ -62,8 +61,11 @@ export class PopoverState {
     popoverHost: HTMLElement,
     triggerEvent: Event
   ): Promise<void> {
-    await this.deleyWhenOldPopoverExist();
-    if (this.setFocusOldPopoverExistThenDone()) return;
+    if (ModalSingleton.modalRef.set.multiplePopover) {
+    } else {
+      await this.deleyWhenOldPopoverExist();
+      if (this.setFocusOldPopoverExistThenDone()) return;
+    }
     this.setPopoverClosedDone(false);
     this.setProperties(popoverContent, hostRect, popoverSet, popoverHost);
     this.setPopoverContentAnimation('in');
@@ -285,6 +287,9 @@ export class PopoverState {
   }
 
   private setContentInlineBlock() {
+    if (ModalSingleton.modalRef.set.multiplePopover) {
+      this.popoverContent.style.position = 'fixed';
+    }
     const [position] = this.popoverSet.position!.split('-');
     if (position === 'top' || position === 'bottom') {
       this.popoverContent.style.display = 'inline-block';

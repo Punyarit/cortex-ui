@@ -15,6 +15,7 @@ import { CxModalName } from './types/modal.name';
 export class Modal extends ComponentBase<CXModal.Props> {
   config: CXModal.Set = {
     disabledBackdrop: false,
+    multiplePopover: false,
   };
 
   public static readonly MODAL_DISABLED = 'disabled';
@@ -90,6 +91,7 @@ export class Modal extends ComponentBase<CXModal.Props> {
       align-items: flex-end;
     }
 
+    
     .snackbar > slot {
       pointer-events: auto;
     }
@@ -196,6 +198,7 @@ declare global {
 
     type Set = {
       disabledBackdrop?: boolean;
+      multiplePopover?: boolean;
     };
 
     type Fix = Required<{

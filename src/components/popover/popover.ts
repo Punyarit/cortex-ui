@@ -1,5 +1,5 @@
 import { css, html, TemplateResult } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { ModalSingleton } from '../modal/singleton/modal.singleton';
 import { ThemeVersion } from '../theme/types/theme.types';

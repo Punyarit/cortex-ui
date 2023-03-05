@@ -1,28 +1,48 @@
 import { checkCBoxclosest } from '../../../helpers/check-component-closest';
 import { PopoverCloseButtonErrorText } from '../errors/popover-close-button-error-text';
-import { AttributeChangedType, UtilsAttributeType } from '../types/attribute-changed.types';
+import { AttributeChangedType } from '../types/attribute-changed.types';
 
 export class AttributeFactory {
-  static async construct(box: CBox.Ref, attr: AttributeChangedType, value: unknown) {
+  static async construct(box: CBox.Ref, attr: AttributeChangedType, value: string) {
     switch (attr) {
       case 'popover-close-button':
         checkCBoxclosest(box, `cx-popover`, PopoverCloseButtonErrorText);
         return (await import('./popover/PopoverCloseButton')).POpoverCloseButton.init(box);
 
-      case 'icon-prefix':
-        (await import('./icon/IconPrefix')).IconPrefix.init(box, value as CXIcon.Set['src']);
+      case 'left':
+      case 'top':
+      case 'right':
+      case 'bottom':
+        (await import('./CSSProperty/SizeVariableAttribute')).SizeVariableAttribute.init(
+          box,
+          attr,
+          value as string
+        );
         break;
 
+      case 'display':
+      case 'icon-suffix-hover':
+      case 'icon-prefix-hover':
       case 'icon-suffix':
-        (await import('./icon/iconSuffix')).IconSuffix.init(box, value as CXIcon.Set['src']);
+      case 'icon-prefix':
+        if (value === 'none') break;
+        (await import('./CSSProperty/ValueAttribute')).ValueAttribute.init(box, attr, value);
         break;
 
-      case 'icon-color':
-        (await import('./icon/IconColor')).IconColor.init(box, value as CXIcon.Set['src']);
-        break;
-
-      case 'icon-size':
-        (await import('./icon/iconSize')).IconSize.init(box, value as CXIcon.Set['src']);
+      case 'icon-prefix-color-hover':
+      case 'icon-prefix-color':
+      case 'icon-suffix-color':
+      case 'icon-suffix-color-hover':
+      case 'icon-prefix-size':
+      case 'icon-suffix-size':
+      case 'icon-prefix-size-hover':
+      case 'icon-suffix-size-hover':
+        if (value === 'none') break;
+        (await import('./CSSProperty/SizeVariableAttribute')).SizeVariableAttribute.init(
+          box,
+          attr,
+          value as CXIcon.Set['src']
+        );
         break;
 
       case 'bg-color':
@@ -33,11 +53,7 @@ export class AttributeFactory {
       case 'tx-hover':
       case 'bg-focus':
       case 'tx-focus':
-        (await import('./utils/ColorUtilAttribute')).ColorUtilAttributes.init(
-          box,
-          attr as UtilsAttributeType,
-          value as string
-        );
+        (await import('./CSSProperty/VariableAttribute')).VariableAttribute.init(box, attr, value);
         break;
 
       case 'col-gap':
@@ -62,10 +78,10 @@ export class AttributeFactory {
       case 'pb':
       case 'px':
       case 'py':
-        (await import('./utils/SizeUtilAttribute')).SizeUtilAttributes.init(
+        (await import('./CSSProperty/SizeVariableAttribute')).SizeVariableAttribute.init(
           box,
-          attr as UtilsAttributeType,
-          value as string
+          attr,
+          value
         );
         break;
 

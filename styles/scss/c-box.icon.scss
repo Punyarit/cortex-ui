@@ -2,8 +2,12 @@ c-box[icon-prefix] {
   &::before {
     font-family: var(--icon-prefix);
     content: '\e800';
-    font-size: var(--icon-size);
-    color: var(--icon-color);
+    font-size: var(--icon-prefix-size);
+    color: var(--icon-prefix-color);
+  }
+
+  &[icon-prefix='none']::before {
+    content: none;
   }
 }
 
@@ -11,7 +15,37 @@ c-box[icon-suffix] {
   &::after {
     font-family: var(--icon-suffix);
     content: '\e800';
-    font-size: var(--icon-size);
-    color: var(--icon-color);
+    font-size: var(--icon-suffix-size);
+    color: var(--icon-suffix-color);
+  }
+
+  &[icon-suffix='none']::after {
+    content: none;
+  }
+}
+
+c-box[icon-prefix-hover]:hover {
+  &::before {
+    font-family: var(--icon-prefix-hover);
+    content: '\e800';
+    font-size: var(--icon-prefix-size-hover);
+    color: var(--icon-prefix-color-hover);
+  }
+
+  &[icon-prefix-hover='none']::before {
+    content: none;
+  }
+}
+
+c-box[icon-suffix-hover]:hover {
+  &::after {
+    font-family: var(--icon-suffix-hover);
+    content: '\e800';
+    font-size: var(--icon-suffix-size-hover);
+    color: var(--icon-suffix-color-hover);
+  }
+
+  &[icon-suffix-hover='none']::after {
+    content: none;
   }
 }
