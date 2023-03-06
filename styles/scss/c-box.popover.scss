@@ -1,9 +1,13 @@
+c-box[slot='popover'] {
+  position: fixed;
+}
+
 c-box[slot='popover'] [tabindex='0']:focus {
   outline-style: solid;
   outline-width: var(--size-3);
   outline-color: var(--primary-100);
   border-radius: var(--base-size-12);
-  transition: outline-width 0.125s ease;
+  transition: outline-width 0.25s ease;
 }
 
 c-box[cx-popover='close'] {
@@ -87,8 +91,8 @@ $in-out: in, out;
 
 c-box[slot='popover'] {
   outline: none;
-  transition: opacity 0.1s ease;
-  animation: popover-in 0.1s ease forwards;
+  transition: opacity 0.25s ease;
+  animation: popover-in 0.25s ease forwards;
 }
 
 c-box[slot='popover'] {

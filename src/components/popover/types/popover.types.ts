@@ -1,3 +1,5 @@
+import { PopoverState } from '../../modal/state/popover-state/popover.state';
+
 export const PopoverModalSlotPrefix = 'cx-popover-modal';
 
 export const popoverPositions = [
@@ -16,3 +18,5 @@ export const popoverPositions = [
 ] as const;
 
 export type PopoverPositionType = typeof popoverPositions[number];
+
+export type PopoverContent = HTMLElement & { popoverState?: PopoverState };

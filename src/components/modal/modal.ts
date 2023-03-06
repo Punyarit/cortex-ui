@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { GlobalDialogSingleton } from '../dialog/singleton/global-dialog.singleton';
+import { PopoverContent } from '../popover/types/popover.types';
 import { SnackbarModalSlot } from '../snackbar/types/snackbar.types';
 import { ModalSingleton } from './singleton/modal.singleton';
 import { DialogState } from './state/dialog.state';
@@ -15,7 +16,6 @@ import { CxModalName } from './types/modal.name';
 export class Modal extends ComponentBase<CXModal.Props> {
   config: CXModal.Set = {
     disabledBackdrop: false,
-    multiplePopover: false,
   };
 
   public static readonly MODAL_DISABLED = 'disabled';
@@ -91,7 +91,6 @@ export class Modal extends ComponentBase<CXModal.Props> {
       align-items: flex-end;
     }
 
-    
     .snackbar > slot {
       pointer-events: auto;
     }
@@ -144,7 +143,7 @@ export class Modal extends ComponentBase<CXModal.Props> {
   private createModalState(): void {
     this.dialogState = new DialogState();
     this.snackbarState = new SnackbarState();
-    this.popoverState = new PopoverState();
+    // this.popoverState = new PopoverState();
   }
 
   private createSharedCXModalRef(): void {
@@ -174,18 +173,21 @@ export class Modal extends ComponentBase<CXModal.Props> {
     });
   };
 
-  public openPopovre = (
-    popoverContent: HTMLElement,
+  public openPopover = (
+    popoverContent: PopoverContent,
     hostRect: DOMRect,
     popoverSet: CXPopover.Set,
     popoverRoot: HTMLElement,
     triggerEvent: Event
   ) => {
-    this.popoverState.open(popoverContent, hostRect, popoverSet, popoverRoot, triggerEvent);
-  };
-
-  public closePopover = () => {
-    this.popoverState.closePopover(null);
+    popoverContent.popoverState = new PopoverState().open(
+      popoverContent,
+      hostRect,
+      popoverSet,
+      popoverRoot,
+      triggerEvent
+    );
+    console.log('modal.js |popoverContent| = ', popoverContent);
   };
 }
 
@@ -198,7 +200,6 @@ declare global {
 
     type Set = {
       disabledBackdrop?: boolean;
-      multiplePopover?: boolean;
     };
 
     type Fix = Required<{

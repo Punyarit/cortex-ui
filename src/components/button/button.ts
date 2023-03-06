@@ -205,11 +205,12 @@ export class Button extends ComponentBase<CXButton.Props> {
 
   // life cycle
   updated(changedPros: Map<PropertyKey, unknown>): void {
-    console.log('button.js |updated| = ');
+    // 📌changedPros.has('set') will execute for init variables for 1st time and when "set" change
     if (changedPros.has('set')) {
       this.cacheVariables({ ...ButtonFactory.getCSSVariables(this.set)!, ...this.var });
       this.setHostVariables();
     }
+
     super.update(changedPros);
   }
 

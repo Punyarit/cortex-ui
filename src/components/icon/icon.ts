@@ -38,8 +38,7 @@ export class Icon extends ComponentBase<CXIcon.Props> {
 
   updated(changedProperties: Map<PropertyKey, unknown>): void {
     if (changedProperties.has('set')) {
-      const iconBuilder = IconDirector.construct(this.set);
-      this.cacheVariables(iconBuilder);
+      this.cacheVariables(IconDirector.construct(this.set));
       this.setHostVariables(`--src: ${this.set?.src};`);
     }
     super.update(changedProperties);

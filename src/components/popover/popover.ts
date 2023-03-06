@@ -59,7 +59,7 @@ export class Popover extends ComponentBase<CXPopover.Props> {
   private setOpenPopover = async (triggerEvent: Event) => {
     const popoverContentElement = await this.getPopoverContentElement();
     if (!popoverContentElement) return;
-    ModalSingleton.modalRef.openPopovre(
+    ModalSingleton.modalRef.openPopover(
       popoverContentElement,
       this.hostElement!.getBoundingClientRect(),
       this.set,
@@ -70,10 +70,6 @@ export class Popover extends ComponentBase<CXPopover.Props> {
 
   private async getPopoverContentElement() {
     return await this.getPopoverContent();
-  }
-
-  public close() {
-    ModalSingleton.modalRef.closePopover();
   }
 
   private getPopoverContent(): Promise<HTMLElement | null> {

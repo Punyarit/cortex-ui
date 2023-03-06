@@ -25,47 +25,31 @@ export class PopoverState {
   #firstUpdated = true;
   #closedDone = false;
 
-  private async deleyWhenOldPopoverExist() {
+  private async delayWhenOldPopoverExist() {
     if (ModalSingleton.modalRef.querySelector('c-box')) await delay(110);
   }
 
-  private setALertOldPopover(oldPopover: CBox.Ref) {
-    oldPopover.firstElementChild?.classList.add('shake-efx');
-    const timer = setTimeout(() => {
-      oldPopover.firstElementChild?.classList.remove('shake-efx');
-      clearTimeout(timer);
-    }, 600);
-  }
-
-  private setFocusOldPopoverExistThenDone(): boolean {
-    const oldPopover = ModalSingleton.modalRef.querySelector('c-box');
-    if (oldPopover) {
-      if (this.popoverSet.focusout === 'close' && this.popoverSet.mouseleave === 'close')
-        return true;
-
-      this.setALertOldPopover(oldPopover);
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // 📌w8 for fix. this is utils method can use for improve UX in future
+  // public setAlertOldPopover(popover: CBox.Ref) {
+  //   popover.firstElementChild?.classList.add('shake-efx');
+  //   const timer = setTimeout(() => {
+  //     popover.firstElementChild?.classList.remove('shake-efx');
+  //     clearTimeout(timer);
+  //   }, 600);
+  // }
 
   private setPopoverClosedDone(done: boolean) {
     this.#closedDone = done;
   }
 
-  async open(
+  open(
     popoverContent: HTMLElement,
     hostRect: DOMRect,
     popoverSet: CXPopover.Set,
     popoverHost: HTMLElement,
     triggerEvent: Event
-  ): Promise<void> {
-    if (ModalSingleton.modalRef.set.multiplePopover) {
-    } else {
-      await this.deleyWhenOldPopoverExist();
-      if (this.setFocusOldPopoverExistThenDone()) return;
-    }
+  ) {
+    // await this.delayWhenOldPopoverExist();
     this.setPopoverClosedDone(false);
     this.setProperties(popoverContent, hostRect, popoverSet, popoverHost);
     this.setPopoverContentAnimation('in');
@@ -80,6 +64,7 @@ export class PopoverState {
       this.setPopoverContentOpacity('1');
       this.onEvent('on-opened', triggerEvent);
     });
+    return this;
   }
 
   private onEvent(event: 'on-opened' | 'on-closed', triggerEvent?: Event) {
@@ -96,7 +81,7 @@ export class PopoverState {
     this.resizeObserver = resizeObserver(document.body, (resizeEntry: ResizeObserverEntry) => {
       if (this.#firstUpdated) {
         this.setPosition(resizeEntry);
-        this.setFirstUpdatd(false);
+        this.setIsFirstUpdate(false);
       } else {
         debounce(() => this.setPosition(resizeEntry), debouceTimerPopoverResize);
       }
@@ -250,7 +235,7 @@ export class PopoverState {
     });
   }
 
-  private setFirstUpdatd(update: boolean) {
+  private setIsFirstUpdate(update: boolean) {
     this.#firstUpdated = update;
   }
 
@@ -266,10 +251,10 @@ export class PopoverState {
     if (this.#closedDone) return;
     if ((e?.relatedTarget as HTMLElement)?.closest('c-box[slot="popover"]')) return;
     this.setPopoverContentAnimation('out');
-    await delay(100);
-    this.setFirstUpdatd(true);
+    await delay(250);
+    this.setIsFirstUpdate(true);
     this.unObserveResizeEvent();
-    this.appendBackToParentRoot();
+    this.appendContentBackToRoot();
     this.removeMouseEvent();
     this.setPopoverClosedDone(true);
     this.onEvent('on-closed');
@@ -277,19 +262,16 @@ export class PopoverState {
 
   private setPopoverContentAnimation(status: 'in' | 'out') {
     const [positionType] = this.separatedPositionType;
-    this.popoverContent.style.animation = `popover-${positionType}-${status} 0.15s ease forwards`;
+    this.popoverContent.style.animation = `popover-${positionType}-${status} 0.3s ease forwards`;
   }
 
-  private appendBackToParentRoot() {
+  private appendContentBackToRoot() {
     requestAnimationFrame(() => {
       this.popoverHost.append(this.popoverContent);
     });
   }
 
   private setContentInlineBlock() {
-    if (ModalSingleton.modalRef.set.multiplePopover) {
-      this.popoverContent.style.position = 'fixed';
-    }
     const [position] = this.popoverSet.position!.split('-');
     if (position === 'top' || position === 'bottom') {
       this.popoverContent.style.display = 'inline-block';

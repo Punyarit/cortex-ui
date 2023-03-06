@@ -11,10 +11,10 @@ import {
   dateFormat,
   dateShortOption,
 } from '../../helpers/functions/date/date-methods';
-import { ModalCaller } from '../../helpers/ModalCaller';
 import { delay } from '../../helpers/delay';
 import { InputDateType } from './types/datepicker.types';
 import { CxDatepickerName } from './types/datepicker.name';
+import { PopoverContent } from '../popover/types/popover.types';
 
 // export const onPressed = 'pressed';
 
@@ -41,6 +41,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
 
   private inputBoxWrapperRef = createRef<HTMLSlotElement>();
   private cxCalendarRef = createRef<CXCalendar.Ref>();
+  private popoverContentRef = createRef<PopoverContent>();
 
   connectedCallback() {
     super.connectedCallback();
@@ -57,7 +58,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
           position: 'bottom-left',
           openby: 'click',
           mouseleave: 'none',
-          focusout: 'close',
+          focusout: 'none',
         } as CXPopover.Set}">
         <c-box slot="host">
           <c-box
@@ -67,7 +68,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
             ${this.renderDateInput()}
           </c-box>
         </c-box>
-        <c-box slot="popover">
+        <c-box slot="popover" ${ref(this.popoverContentRef)}>
           <c-box content p-0>
             <cx-calendar
               ${ref(this.cxCalendarRef)}
@@ -186,12 +187,12 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
       if (!((date as DateRangeSelected).startdate && (date as DateRangeSelected).enddate)) return;
       // 📌 delay for animation selected enddate scale
       await delay(250);
-      ModalCaller.popover().close();
+      this.popoverContentRef.value?.popoverState?.closePopover(null);
     } else {
       if (!(date as Date)) return;
       // 📌 delay for animation selected enddate scale
       await delay(250);
-      ModalCaller.popover().close();
+      this.popoverContentRef.value?.popoverState?.closePopover(null);
     }
   }
 
