@@ -1,16 +1,17 @@
 {
   "name": "@cortex-ui/core",
-  "version": "0.0.151",
+  "version": "0.0.154",
   "description": "Cortex-UI is Web Component develop from Cortex Design System from Hlab Designer Team.",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w",
-    "prod": "yarn build & yarn convert-scss & yarn compress-js & yarn export-components & yarn public",
+    "prod": "yarn run clear-cache & yarn build & yarn convert-scss & yarn compress-js & yarn export-components & yarn public",
     "compress-js": "yarn gulp compress",
     "convert-scss": "yarn sass styles/scss/main.scss styles/css/index.css --style compressed",
     "export-components": "node script/export.script.js",
-    "public": "node script/publish.script.js"
+    "public": "node script/publish.script.js",
+    "clear-cache": "rm -rf cx"
   },
   "repository": {
     "type": "git",
