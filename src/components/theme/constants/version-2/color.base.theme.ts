@@ -71,70 +71,70 @@ export const colors = css`
     --base-success-800: #05603a;
     --base-success-900: #054f31;
 
-    /* Moderm Green */
-    --base-modern-green-25: #fcfcfd;
-    --base-modern-green-50: #f9fafb;
-    --base-modern-green-100: #f2f4f7;
-    --base-modern-green-200: #eaecf0;
-    --base-modern-green-300: #d0d5dd;
-    --base-modern-green-400: #98a2b3;
-    --base-modern-green-500: #667085;
-    --base-modern-green-600: #475467;
-    --base-modern-green-700: #344054;
-    --base-modern-green-800: #1d2939;
-    --base-modern-green-900: #101828;
+    /* Modern Green */
+    --base-modern-green-25: #effffc;
+    --base-modern-green-50: #e0fffa;
+    --base-modern-green-100: #c7fff5;
+    --base-modern-green-200: #92feeb;
+    --base-modern-green-300: #5cf7da;
+    --base-modern-green-400: #24e6c2;
+    --base-modern-green-500: #05cba7;
+    --base-modern-green-600: #04a286;
+    --base-modern-green-700: #037a64;
+    --base-modern-green-800: #025143;
+    --base-modern-green-900: #00392f;
 
     /* Surgeon Green */
-    --base-surgeon-green-25: #fcfcfd;
-    --base-surgeon-green-50: #f9fafb;
-    --base-surgeon-green-100: #f2f4f7;
-    --base-surgeon-green-200: #eaecf0;
-    --base-surgeon-green-300: #d0d5dd;
-    --base-surgeon-green-400: #98a2b3;
-    --base-surgeon-green-500: #667085;
-    --base-surgeon-green-600: #475467;
-    --base-surgeon-green-700: #344054;
-    --base-surgeon-green-800: #1d2939;
-    --base-surgeon-green-900: #101828;
+    --base-surgeon-green-25: #edfdfd;
+    --base-surgeon-green-50: #dffefe;
+    --base-surgeon-green-100: #c8ffff;
+    --base-surgeon-green-200: #92f8fa;
+    --base-surgeon-green-300: #4ef1f4;
+    --base-surgeon-green-400: #22d9dd;
+    --base-surgeon-green-500: #03baba;
+    --base-surgeon-green-600: #019797;
+    --base-surgeon-green-700: #056d72;
+    --base-surgeon-green-800: #02484c;
+    --base-surgeon-green-900: #012426;
 
     /* Wellness Green */
-    --base-wellness-green-25: #fcfcfd;
-    --base-wellness-green-50: #f9fafb;
-    --base-wellness-green-100: #f2f4f7;
-    --base-wellness-green-200: #eaecf0;
-    --base-wellness-green-300: #d0d5dd;
-    --base-wellness-green-400: #98a2b3;
-    --base-wellness-green-500: #667085;
-    --base-wellness-green-600: #475467;
-    --base-wellness-green-700: #344054;
-    --base-wellness-green-800: #1d2939;
-    --base-wellness-green-900: #101828;
+    --base-wellness-green-25: #ecfcfc;
+    --base-wellness-green-50: #dcfbfc;
+    --base-wellness-green-100: #c2ffff;
+    --base-wellness-green-200: #92f8f8;
+    --base-wellness-green-300: #5df1e8;
+    --base-wellness-green-400: #53e2e5;
+    --base-wellness-green-500: #09c5c9;
+    --base-wellness-green-600: #21d5d9;
+    --base-wellness-green-700: #19a0a3;
+    --base-wellness-green-800: #106b6c;
+    --base-wellness-green-900: #083536;
 
     /* Safe blue */
-    --base-safe-blue-25: #fcfcfd;
-    --base-safe-blue-50: #f9fafb;
-    --base-safe-blue-100: #f2f4f7;
-    --base-safe-blue-200: #eaecf0;
-    --base-safe-blue-300: #d0d5dd;
-    --base-safe-blue-400: #98a2b3;
-    --base-safe-blue-500: #667085;
-    --base-safe-blue-600: #475467;
-    --base-safe-blue-700: #344054;
-    --base-safe-blue-800: #1d2939;
-    --base-safe-blue-900: #101828;
+    --base-safe-blue-25: #eefaff;
+    --base-safe-blue-50: #e0f6ff;
+    --base-safe-blue-100: #c7eeff;
+    --base-safe-blue-200: #8cd9ff;
+    --base-safe-blue-300: #54cbff;
+    --base-safe-blue-400: #20b9fb;
+    --base-safe-blue-500: #0090ce;
+    --base-safe-blue-600: #0074a6;
+    --base-safe-blue-700: #025b82;
+    --base-safe-blue-800: #005174;
+    --base-safe-blue-900: #00293a;
 
     /* Blueprint */
-    --base-blueprint-25: #fcfcfd;
-    --base-blueprint-50: #f9fafb;
-    --base-blueprint-100: #f2f4f7;
-    --base-blueprint-200: #eaecf0;
-    --base-blueprint-300: #d0d5dd;
-    --base-blueprint-400: #98a2b3;
-    --base-blueprint-500: #667085;
-    --base-blueprint-600: #475467;
-    --base-blueprint-700: #344054;
-    --base-blueprint-800: #1d2939;
-    --base-blueprint-900: #101828;
+    --base-blueprint-25: #eff2ff;
+    --base-blueprint-50: #dee3ff;
+    --base-blueprint-100: #c7d0ff;
+    --base-blueprint-200: #92a3ff;
+    --base-blueprint-300: #5c76ff;
+    --base-blueprint-400: #2b49e9;
+    --base-blueprint-500: #1c33ac;
+    --base-blueprint-600: #051a89;
+    --base-blueprint-700: #051465;
+    --base-blueprint-800: #0b1445;
+    --base-blueprint-900: #060a22;
 
     /* Violet Alert */
     --base-violet-alert-25: #fcfcfd;
@@ -150,69 +150,69 @@ export const colors = css`
     --base-violet-alert-900: #101828;
 
     /* Purple */
-    --base-purple-25: #fcfcfd;
-    --base-purple-50: #f9fafb;
-    --base-purple-100: #f2f4f7;
-    --base-purple-200: #eaecf0;
-    --base-purple-300: #d0d5dd;
-    --base-purple-400: #98a2b3;
-    --base-purple-500: #667085;
-    --base-purple-600: #475467;
-    --base-purple-700: #344054;
-    --base-purple-800: #1d2939;
-    --base-purple-900: #101828;
+    --base-purple-25: #fbefff;
+    --base-purple-50: #f7e2ff;
+    --base-purple-100: #ebc2fa;
+    --base-purple-200: #db90f4;
+    --base-purple-300: #d162f7;
+    --base-purple-400: #ba46e3;
+    --base-purple-500: #8a06b8;
+    --base-purple-600: #6a068e;
+    --base-purple-700: #4c0565;
+    --base-purple-800: #501067;
+    --base-purple-900: #280834;
 
     /* Pinky */
-    --base-pinky-25: #fcfcfd;
-    --base-pinky-50: #f9fafb;
-    --base-pinky-100: #f2f4f7;
-    --base-pinky-200: #eaecf0;
-    --base-pinky-300: #d0d5dd;
-    --base-pinky-400: #98a2b3;
-    --base-pinky-500: #667085;
-    --base-pinky-600: #475467;
-    --base-pinky-700: #344054;
-    --base-pinky-800: #1d2939;
-    --base-pinky-900: #101828;
+    --base-pinky-25: #ffeef8;
+    --base-pinky-50: #ffe0f1;
+    --base-pinky-100: #fac0e0;
+    --base-pinky-200: #f491c9;
+    --base-pinky-300: #f551ae;
+    --base-pinky-400: #e33396;
+    --base-pinky-500: #ca1079;
+    --base-pinky-600: #a4085f;
+    --base-pinky-700: #760544;
+    --base-pinky-800: #620d3d;
+    --base-pinky-900: #31071e;
 
     /* Red Flag */
-    --base-red-flag-25: #fcfcfd;
-    --base-red-flag-50: #f9fafb;
-    --base-red-flag-100: #f2f4f7;
-    --base-red-flag-200: #eaecf0;
-    --base-red-flag-300: #d0d5dd;
-    --base-red-flag-400: #98a2b3;
-    --base-red-flag-500: #667085;
-    --base-red-flag-600: #475467;
-    --base-red-flag-700: #344054;
-    --base-red-flag-800: #1d2939;
-    --base-red-flag-900: #101828;
+    --base-red-flag-25: #fff1f2;
+    --base-red-flag-50: #ffe1e3;
+    --base-red-flag-100: #fcc1c6;
+    --base-red-flag-200: #fc949d;
+    --base-red-flag-300: #ff626f;
+    --base-red-flag-400: #f33c4b;
+    --base-red-flag-500: #d71525;
+    --base-red-flag-600: #b10b18;
+    --base-red-flag-700: #8a0812;
+    --base-red-flag-800: #7c030d;
+    --base-red-flag-900: #3e0207;
 
     /* Alarm Orange */
-    --base-alarm-orange-25: #fcfcfd;
-    --base-alarm-orange-50: #f9fafb;
-    --base-alarm-orange-100: #f2f4f7;
-    --base-alarm-orange-200: #eaecf0;
-    --base-alarm-orange-300: #d0d5dd;
-    --base-alarm-orange-400: #98a2b3;
-    --base-alarm-orange-500: #667085;
-    --base-alarm-orange-600: #475467;
-    --base-alarm-orange-700: #344054;
-    --base-alarm-orange-800: #1d2939;
-    --base-alarm-orange-900: #101828;
+    --base-alarm-orange-25: #fff4ef;
+    --base-alarm-orange-50: #ffeae1;
+    --base-alarm-orange-100: #fecfba;
+    --base-alarm-orange-200: #ffb594;
+    --base-alarm-orange-300: #fd8752;
+    --base-alarm-orange-400: #f7773e;
+    --base-alarm-orange-500: #ed500a;
+    --base-alarm-orange-600: #bc3f07;
+    --base-alarm-orange-700: #8e3006;
+    --base-alarm-orange-800: #772805;
+    --base-alarm-orange-900: #3b1402;
 
     /* Warning Yellow */
-    --base-warning-yellow-25: #fcfcfd;
-    --base-warning-yellow-50: #f9fafb;
-    --base-warning-yellow-100: #f2f4f7;
-    --base-warning-yellow-200: #eaecf0;
-    --base-warning-yellow-300: #d0d5dd;
-    --base-warning-yellow-400: #98a2b3;
-    --base-warning-yellow-500: #667085;
-    --base-warning-yellow-600: #475467;
-    --base-warning-yellow-700: #344054;
-    --base-warning-yellow-800: #1d2939;
-    --base-warning-yellow-900: #101828;
+    --base-warning-yellow-25: #fffbef;
+    --base-warning-yellow-50: #fff6df;
+    --base-warning-yellow-100: #ffebb9;
+    --base-warning-yellow-200: #fcdd8a;
+    --base-warning-yellow-300: #ffce4e;
+    --base-warning-yellow-400: #feba0c;
+    --base-warning-yellow-500: #e8a702;
+    --base-warning-yellow-600: #c58f05;
+    --base-warning-yellow-700: #9d7204;
+    --base-warning-yellow-800: #6a4c00;
+    --base-warning-yellow-900: #352600;
 
     /* bluestate */
     --base-bluestate-25: #fdfeff;
