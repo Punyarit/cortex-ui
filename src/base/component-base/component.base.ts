@@ -39,6 +39,9 @@ export abstract class ComponentBase<Props extends Properties>
   };
 
   willUpdate(changedProperties: Map<PropertyKey, unknown>): void {
+    // 📌 offsetParent === null mean element is not visible from dom
+    if (this.offsetParent === null) return;
+
     if (changedProperties.has(set)) {
       this.cacheConfig(this.set);
       this.exec();
@@ -47,7 +50,7 @@ export abstract class ComponentBase<Props extends Properties>
     if (changedProperties.has(vars)) {
       requestAnimationFrame(() => {
         this.cacheVariables(this.var);
-        this.setHostVatiables();
+        this.setHostVariables();
       });
     }
 
@@ -63,8 +66,9 @@ export abstract class ComponentBase<Props extends Properties>
   exec(): void {
     this.set = { ...(this.config as Record<keyof Props['set'], unknown>) };
   }
-
-  setHostVatiables(initialVar?: string): void {
+  // 📌icon use this below
+  // this.setHostVariables(`--src: ${this.set?.src};`);
+  setHostVariables(initialVar?: string): void {
     const shadowRootSheet = this.shadowRoot?.styleSheets[0];
     if (!shadowRootSheet) return;
     if (shadowRootSheet.cssRules.length !== 0) shadowRootSheet.deleteRule(0);

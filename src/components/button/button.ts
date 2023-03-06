@@ -205,11 +205,11 @@ export class Button extends ComponentBase<CXButton.Props> {
 
   // life cycle
   updated(changedPros: Map<PropertyKey, unknown>): void {
+    console.log('button.js |updated| = ');
     if (changedPros.has('set')) {
-      this.cacheVariables(ButtonFactory.getCSSVariables(this.set)!);
-      this.setHostVatiables();
+      this.cacheVariables({ ...ButtonFactory.getCSSVariables(this.set)!, ...this.var });
+      this.setHostVariables();
     }
-
     super.update(changedPros);
   }
 
