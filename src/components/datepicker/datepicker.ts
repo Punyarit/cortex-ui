@@ -165,7 +165,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     if (this.set.daterange) {
       this.setSelectDateRangeFocus(date as DateRangeSelected);
     }
-    await this.setCLosePopover(date);
+    await this.setClosePopover(date);
     this.selectedDate = date;
     this.setCustomEvent('select-date', { date });
   }
@@ -182,7 +182,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     }
   }
 
-  private async setCLosePopover(date: Date | DateRangeSelected) {
+  private async setClosePopover(date: Date | DateRangeSelected) {
     if (this.set.daterange) {
       if (!((date as DateRangeSelected).startdate && (date as DateRangeSelected).enddate)) return;
       // 📌 delay for animation selected enddate scale

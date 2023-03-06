@@ -187,7 +187,6 @@ export class Modal extends ComponentBase<CXModal.Props> {
       popoverRoot,
       triggerEvent
     );
-    console.log('modal.js |popoverContent| = ', popoverContent);
   };
 }
 
