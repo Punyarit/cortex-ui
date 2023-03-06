@@ -1,7 +1,6 @@
 import { css, html, PropertyValueMap, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
-import { ThemeVersion } from '../theme/types/theme.types';
 import '../popover/popover';
 import '../c-box/c-box';
 import { CxTooltipName } from './types/tooltip.types';
@@ -52,9 +51,9 @@ declare global {
   namespace CXTooltip {
     type Ref = Tooltip;
 
-    type Var<T extends ThemeVersion = 2> = unknown;
+    type Var = unknown;
 
-    type Set<T extends ThemeVersion = 2> = {
+    type Set = {
       text: string;
       position?: CXPopover.Set['position'];
       openby: CXPopover.Set['openby'];

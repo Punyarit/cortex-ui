@@ -1,4 +1,4 @@
-import { ColorAttr } from '../../../types/colors.v2.type';
+import { ColorAttr } from '../../../types/colors.type';
 
 export type TxColorKey = `tx-${keyof ColorAttr}`;
 

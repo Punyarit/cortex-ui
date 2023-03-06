@@ -2,7 +2,6 @@ import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { ModalSingleton } from '../modal/singleton/modal.singleton';
-import { ThemeVersion } from '../theme/types/theme.types';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { PopoverPositionType } from './types/popover.types';
 import { REQUIRED_CBOX_CHILD_POPOVER_ERROR } from './errors/popover.errors';
@@ -97,9 +96,9 @@ declare global {
   namespace CXPopover {
     type Ref = Popover;
 
-    type Var<T extends ThemeVersion = 2> = unknown;
+    type Var = unknown;
 
-    type Set<T extends ThemeVersion = 2> = {
+    type Set = {
       openby?: 'click' | 'mouseover';
       position?: PopoverPositionType;
       mouseleave?: 'none' | 'close';

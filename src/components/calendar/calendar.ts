@@ -1,7 +1,6 @@
 import { css, html, TemplateResult } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
-import { ThemeVersion } from '../theme/types/theme.types';
 import '../button/button';
 import { createRef, ref } from 'lit/directives/ref.js';
 import './single-calendar/single-calendar';
@@ -316,9 +315,9 @@ declare global {
   namespace CXCalendar {
     type Ref = Calendar;
 
-    type Var<T extends ThemeVersion = 2> = unknown;
+    type Var = unknown;
 
-    type Set<T extends ThemeVersion = 2> = {
+    type Set = {
       date: Date;
       display?: '1-calendar' | '2-calendars';
       min?: Date;

@@ -1,19 +1,19 @@
-import {ColorTypesV2} from '../../../../types/colors.v2.type';
+import {ColorTypes} from '../../../../types/colors.type';
 import {SizeTypes} from '../../../../types/sizes.type';
 import {ButtonFactoryColors} from '../../types/button.factory.types';
 
 export default class ConcreteButtonColors implements ButtonFactoryColors {
-  textColor!: ColorTypesV2;
-  textHoverColor!: ColorTypesV2;
-  textActiveColor!: ColorTypesV2;
-  textDisabledColor!: ColorTypesV2;
-  backgroundColor!: ColorTypesV2;
-  disabledColor!: ColorTypesV2;
-  hoverColor!: ColorTypesV2;
-  activeColor!: ColorTypesV2;
-  outlineColor!: ColorTypesV2;
-  borderColor!: ColorTypesV2;
-  borderDisabledColor!: ColorTypesV2;
+  textColor!: ColorTypes;
+  textHoverColor!: ColorTypes;
+  textActiveColor!: ColorTypes;
+  textDisabledColor!: ColorTypes;
+  backgroundColor!: ColorTypes;
+  disabledColor!: ColorTypes;
+  hoverColor!: ColorTypes;
+  activeColor!: ColorTypes;
+  outlineColor!: ColorTypes;
+  borderColor!: ColorTypes;
+  borderDisabledColor!: ColorTypes;
   borderWidth!: SizeTypes;
-  boxShadow!: ColorTypesV2;
+  boxShadow!: ColorTypes;
 }

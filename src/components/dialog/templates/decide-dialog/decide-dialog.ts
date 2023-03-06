@@ -1,11 +1,10 @@
 import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../../../base/component-base/component.base';
-import { ThemeVersion } from '../../../theme/types/theme.types';
 import '../../../button/button';
 import '../../../theme/theme';
 import { SizeTypes } from '../../../../types/sizes.type';
-import { ColorTypes } from '../../../../types/colors.version-control';
+import { ColorTypes } from '../../../../types/colors.type';
 
 export const tagName = 'cx-decide-dialog';
 // export const onPressed = 'pressed';
@@ -57,7 +56,7 @@ export class DecideDialog extends ComponentBase<CXDecideDialog.Props> {
     }
   `;
 
-    connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
     if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
@@ -96,14 +95,14 @@ declare global {
   namespace CXDecideDialog {
     type Ref = DecideDialog;
 
-    type Var<T extends ThemeVersion = 2> = {
+    type Var = {
       titleSize?: SizeTypes;
-      titleColor?: ColorTypes<T>;
+      titleColor?: ColorTypes;
       descriptionSize: SizeTypes;
-      descriptionColor: ColorTypes<T>;
+      descriptionColor: ColorTypes;
     };
 
-    type Set<T extends ThemeVersion = 2> = {
+    type Set = {
       title: string;
       description: string;
       actionLeft: {

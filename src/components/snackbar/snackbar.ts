@@ -2,7 +2,7 @@ import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { ComponentBase } from '../../base/component-base/component.base';
-import { ColorTypesV2 } from '../../types/colors.v2.type';
+import { ColorTypes } from '../../types/colors.type';
 import '../icon/icon';
 import { IconSrcTypes } from '../icon/types/icon.types';
 import '../transition/transition';
@@ -117,8 +117,8 @@ declare global {
     type Ref = Snackbar;
 
     type Var = {
-      backgroundColor: ColorTypesV2;
-      textColor: ColorTypesV2;
+      backgroundColor: ColorTypes;
+      textColor: ColorTypes;
     };
 
     type Set = {

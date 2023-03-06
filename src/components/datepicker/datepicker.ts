@@ -1,7 +1,6 @@
 import { css, html, TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
-import { ThemeVersion } from '../theme/types/theme.types';
 import { createRef, ref } from 'lit/directives/ref.js';
 import '../c-box/c-box';
 import '../popover/popover';
@@ -225,9 +224,9 @@ declare global {
   namespace CXDatePicker {
     type Ref = DatePicker;
 
-    type Var<T extends ThemeVersion = 2> = unknown;
+    type Var = unknown;
 
-    type Set<T extends ThemeVersion = 2> = CXCalendar.Set & {
+    type Set = CXCalendar.Set & {
       inputStyle?: 'short' | 'long';
     };
 

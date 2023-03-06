@@ -1,7 +1,6 @@
 import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
-import { ColorTypes } from '../../types/colors.version-control';
 import { BaseSizeTypes, SizeTypes } from '../../types/sizes.type';
 import {
   ButtonColors,
@@ -13,10 +12,10 @@ import {
 import '../icon/icon';
 import { IconSrcTypes } from '../icon/types/icon.types';
 import '../spinner/spinner';
-import { ThemeVersion } from '../theme/types/theme.types';
 import ButtonFactory from './factory/factories/button.factory';
 import { CxButtonPressed } from './types/button.types';
 import { CxButtonName } from './types/button.name';
+import { ColorTypes } from '../../types/colors.type';
 
 @customElement(CxButtonName)
 export class Button extends ComponentBase<CXButton.Props> {
@@ -234,35 +233,35 @@ declare global {
   namespace CXButton {
     type Ref = Button;
 
-    type Var<T extends ThemeVersion = 2> = {
+    type Var = {
       width?: SizeTypes;
       height?: SizeTypes;
-      textColor?: ColorTypes<T>;
-      textActiveColor?: ColorTypes<T>;
-      textDisabledColor?: ColorTypes<T>;
-      backgroundColor?: ColorTypes<T>;
-      disabledColor?: ColorTypes<T>;
-      hoverColor?: ColorTypes<T>;
-      textHoverColor?: ColorTypes<T>;
-      activeColor?: ColorTypes<T>;
-      borderColor?: ColorTypes<T>;
-      borderDisabledColor?: ColorTypes<T>;
+      textColor?: ColorTypes;
+      textActiveColor?: ColorTypes;
+      textDisabledColor?: ColorTypes;
+      backgroundColor?: ColorTypes;
+      disabledColor?: ColorTypes;
+      hoverColor?: ColorTypes;
+      textHoverColor?: ColorTypes;
+      activeColor?: ColorTypes;
+      borderColor?: ColorTypes;
+      borderDisabledColor?: ColorTypes;
       borderRadius?: BaseSizeTypes;
       borderWidth?: SizeTypes;
-      outlineColor?: ColorTypes<T>;
+      outlineColor?: ColorTypes;
       outlineWidth?: SizeTypes;
       paddingLeft?: SizeTypes;
       paddingRight?: SizeTypes;
       paddingTop?: SizeTypes;
       paddingBottom?: SizeTypes;
-      boxShadow?: ColorTypes<T>;
+      boxShadow?: ColorTypes;
       fontSize?: SizeTypes;
     };
 
-    type Set<T extends ThemeVersion = 2> = {
+    type Set = {
       disabled?: boolean;
-      type?: ButtonTypes<T>;
-      color?: ButtonColors<T>;
+      type?: ButtonTypes;
+      color?: ButtonColors;
       size?: ButtonSizes;
       iconSide?: ButtonIconSides;
       iconOnly?: boolean;

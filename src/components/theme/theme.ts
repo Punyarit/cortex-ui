@@ -2,12 +2,11 @@ import { TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { html } from 'lit/static-html.js';
 import { ComponentBase } from '../../base/component-base/component.base';
-import { colors } from './constants/version-2/color.base.theme';
-import { dark } from './constants/version-2/color.dark.theme';
-import { light } from './constants/version-2/color.light.theme';
-import { fontWeights } from './constants/version-2/font-weight.theme';
-import { numbers } from './constants/version-2/number.theme';
-import { sizes } from './constants/version-2/size.theme';
+import { colors } from './constants/color.base.theme';
+import { dark } from './constants/color.dark.theme';
+import { light } from './constants/color.light.theme';
+import { fontWeights } from './constants/font-weight.theme';
+import { sizes } from './constants/size.theme';
 import { ThemeSingleton } from './singleton/theme.singleton';
 import { CxThemeName } from './types/theme.name';
 import { ThemeColorTypes, ThemeSizeTypes } from './types/theme.types';
@@ -19,7 +18,7 @@ export class Theme extends ComponentBase<CXTheme.Props> {
     size: 'small',
   };
 
-  static styles = [colors, light, dark, fontWeights, sizes, numbers];
+  static styles = [colors, light, dark, fontWeights, sizes];
 
   connectedCallback() {
     super.connectedCallback();

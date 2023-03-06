@@ -9,7 +9,6 @@ import {
   shortDayOption,
   yearDayOption,
 } from '../../../helpers/functions/date/date-methods';
-import { ThemeVersion } from '../../theme/types/theme.types';
 import { DateRangeSelected } from '../types/calendar.types';
 import { CalendarBaseMethod } from './calendar-states/calendar-base';
 import { CalendarDateRangeSelectState } from './calendar-states/daterange-select';
@@ -263,9 +262,9 @@ declare global {
   namespace CXSingleCalendar {
     type Ref = SingleCalendar;
 
-    type Var<T extends ThemeVersion = 2> = unknown;
+    type Var = unknown;
 
-    type Set<T extends ThemeVersion = 2> = {
+    type Set = {
       calendar?: CalendarResult;
       selected?: Date;
       daterange?: boolean;

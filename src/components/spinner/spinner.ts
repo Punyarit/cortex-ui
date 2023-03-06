@@ -1,9 +1,8 @@
 import { css, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
-import { ColorTypes } from '../../types/colors.version-control';
+import { ColorTypes } from '../../types/colors.type'
 import { SizeTypes } from '../../types/sizes.type';
-import { ThemeVersion } from '../theme/types/theme.types';
 import { SpinnerDirector } from './builder/spinner.builder';
 import { CxSpinnerName } from './types/spinner.name'
 import { ColorKeyTypes, SizeKeyTypes } from './types/spinner.types';
@@ -97,10 +96,10 @@ declare global {
   namespace CXSpinner {
     type Ref = Spinner;
 
-    type Var<T extends ThemeVersion = 2> = {
+    type Var = {
       width?: SizeTypes;
       height?: SizeTypes;
-      color?: ColorTypes<T>;
+      color?: ColorTypes;
     };
 
     type Set = {
