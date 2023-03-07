@@ -205,6 +205,8 @@ export class Button extends ComponentBase<CXButton.Props> {
 
   // life cycle
   updated(changedPros: Map<PropertyKey, unknown>): void {
+    // 📌 offsetParent === null mean element is not visible from dom
+    if (this.offsetParent === null) return;
     // 📌changedPros.has('set') will execute for init variables for 1st time and when "set" change
     if (changedPros.has('set')) {
       this.cacheVariables({ ...ButtonFactory.getCSSVariables(this.set)!, ...this.var });

@@ -15,6 +15,7 @@ import { delay } from '../../helpers/delay';
 import { InputDateType } from './types/datepicker.types';
 import { CxDatepickerName } from './types/datepicker.name';
 import { PopoverContent } from '../popover/types/popover.types';
+import { SizeTypes } from '../../types/sizes.type';
 
 // export const onPressed = 'pressed';
 
@@ -51,6 +52,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
 
   render(): TemplateResult {
     return html`
+      <style></style>
       <cx-popover
         @on-opened="${this.popoverOpened}"
         @on-closed="${this.popoverClosed}"
@@ -225,7 +227,9 @@ declare global {
   namespace CXDatePicker {
     type Ref = DatePicker;
 
-    type Var = unknown;
+    type Var = {
+      width?: SizeTypes;
+    };
 
     type Set = CXCalendar.Set & {
       inputStyle?: 'short' | 'long';

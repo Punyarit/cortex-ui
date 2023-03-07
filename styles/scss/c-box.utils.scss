@@ -12,6 +12,12 @@ c-box {
   }
 
   &[input-box] {
+    input {
+      &::placeholder {
+        font-family: Sarabun-Regular;
+      }
+    }
+
     display: inline-block;
     border: 2px solid var(--primary-400);
     width: var(--size-300);
