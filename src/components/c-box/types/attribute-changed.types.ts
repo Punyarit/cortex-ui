@@ -12,6 +12,8 @@ export const color = [
   'bg-active',
   'bg-focus',
   'tx-focus',
+  'bg-toggle',
+  'tx-toggle',
 ] as const;
 
 export const utilsAttributes = [
@@ -50,3 +52,8 @@ export const attributeChnged = [
   ...utilsAttributes,
 ] as const;
 export type AttributeChangedType = typeof attributeChnged[number];
+
+export type OnToggleStatus = Record<'setToggleStatus', (status: ToggleStatus) => void>;
+export type ToggleStatus = 'default' | 'toggled';
+export type ToggleAttrStatus = Record<'bg-toggle' | 'tx-toggle', ToggleStatus>;
+export type CBoxWithToggle = CBox.Ref & ToggleAttrStatus & OnToggleStatus;

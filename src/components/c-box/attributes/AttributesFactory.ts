@@ -1,6 +1,10 @@
 import { checkCBoxclosest } from '../../../helpers/check-component-closest';
 import { PopoverCloseButtonErrorText } from '../errors/popover-close-button-error-text';
-import { AttributeChangedType } from '../types/attribute-changed.types';
+import {
+  AttributeChangedType,
+  CBoxWithToggle,
+  ToggleAttrStatus,
+} from '../types/attribute-changed.types';
 
 export class AttributeFactory {
   static async construct(box: CBox.Ref, attr: AttributeChangedType, value: string) {
@@ -42,6 +46,15 @@ export class AttributeFactory {
           box,
           attr,
           value as CXIcon.Set['src']
+        );
+        break;
+
+      case 'bg-toggle':
+      case 'tx-toggle':
+        (await import('./toggle/toggle.attribute')).ToggleAttribute.init(
+          box as CBoxWithToggle,
+          attr,
+          value
         );
         break;
 

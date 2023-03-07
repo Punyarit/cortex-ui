@@ -63,53 +63,67 @@ c-box[tx-black] {
 }
 
 c-box[bg-color] {
-  transition: background-color 0.125s ease;
+  transition: background-color 0.2s ease;
   background-color: var(--bg-color) !important;
 }
 
 c-box[tx-color] {
-  transition: color 0.125s ease;
+  transition: color 0.2s ease;
   color: var(--tx-color) !important;
 }
 
 c-box[bg-active] {
-  transition: background-color 0.125s ease;
+  transition: background-color 0.2s ease;
   &:active {
     background-color: var(--bg-active) !important;
   }
 }
 
 c-box[tx-active] {
-  transition: color 0.125s ease;
+  transition: color 0.2s ease;
   &:active {
     color: var(--tx-active) !important;
   }
 }
 
 c-box[bg-hover] {
-  transition: background-color 0.125s ease;
+  transition: background-color 0.2s ease;
   &:hover {
     background-color: var(--bg-hover) !important;
   }
 }
 
 c-box[tx-hover] {
-  transition: color 0.125s ease;
+  transition: color 0.2s ease;
   &:hover {
     color: var(--tx-hover) !important;
   }
 }
 
 c-box[bg-focus] {
-  transition: background-color 0.125s ease;
+  transition: background-color 0.2s ease;
   &:focus {
     background-color: var(--bg-focus) !important;
   }
 }
 
 c-box[tx-focus] {
-  transition: color 0.125s ease;
+  transition: color 0.2s ease;
   &:focus {
     color: var(--tx-focus) !important;
+  }
+}
+
+c-box[bg-toggle] {
+  transition: background-color 0.2s ease;
+  &[bg-toggle-status='toggled'] {
+    background-color: var(--bg-toggle) !important;
+  }
+}
+
+c-box[tx-toggle] {
+  transition: background-color 0.2s ease;
+  &[tx-toggle-status='toggled'] {
+    background-color: var(--tx-toggle) !important;
   }
 }
