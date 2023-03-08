@@ -188,12 +188,12 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     if (this.set.daterange) {
       if (!((date as DateRangeSelected).startdate && (date as DateRangeSelected).enddate)) return;
       // 📌 delay for animation selected enddate scale
-      await delay(250);
+      await delay(180);
       this.popoverContentRef.value?.popoverState?.closePopover(null);
     } else {
       if (!(date as Date)) return;
       // 📌 delay for animation selected enddate scale
-      await delay(250);
+      await delay(180);
       this.popoverContentRef.value?.popoverState?.closePopover(null);
     }
   }
