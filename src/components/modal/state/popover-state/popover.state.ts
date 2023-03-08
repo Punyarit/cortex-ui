@@ -135,7 +135,8 @@ export class PopoverState {
       this.hostRect,
       this.popoverContent,
       resizeEntry,
-      this.separatedPositionType
+      this.separatedPositionType,
+      this.popoverSet
     ).getResult();
 
     this.setArrowpoint(positionResult);

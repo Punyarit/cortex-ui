@@ -4,6 +4,13 @@ c-box[display] {
   display: var(--display);
 }
 
+c-box[flex-center],
+c-box[ui~='flex-center'] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @each $display in $displays {
   c-box[ui~='#{$display}'],
   c-box[#{$display}] {

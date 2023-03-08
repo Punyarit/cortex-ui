@@ -172,7 +172,7 @@ export const isBefore = (date: { starter: Date; comparator: Date }) => {
   return date.starter < date.comparator ? true : false;
 };
 
-export function getDateBetweenArrayDate(date1: string, date2: string) {
+export function getDateBetweenArrayDate(date1: string | Date, date2: string | Date) {
   let startDate = new Date(date1);
   let endDate = new Date(date2);
 

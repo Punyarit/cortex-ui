@@ -15,6 +15,7 @@ export class Popover extends ComponentBase<CXPopover.Props> {
     mouseleave: 'none',
     focusout: 'close',
     arrowpoint: false,
+    transform: 'origin',
   };
 
   static styles = css`
@@ -100,6 +101,7 @@ declare global {
       mouseleave?: 'none' | 'close';
       focusout: 'none' | 'close';
       arrowpoint?: boolean;
+      transform?: 'center' | 'origin';
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & {

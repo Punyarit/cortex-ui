@@ -16,7 +16,8 @@ export class PopoverPosition {
     private hostRect: DOMRect,
     private popoverContent: HTMLElement,
     private resizeEntry: ResizeObserverEntry,
-    private separatedPositionType: [PositionType, SidePopoverType]
+    private separatedPositionType: [PositionType, SidePopoverType],
+    private popoverSet: CXPopover.Set
   ) {}
 
   private getPopoverRect(): Promise<DOMRect> {
@@ -210,6 +211,54 @@ export class PopoverPosition {
         break;
     }
 
-    return format({ x, y });
+    const transformValue = this.checkTransform(
+      positionType,
+      { x, y },
+      { width: hostWidth, height: hostHeight },
+      this.popoverSet.transform
+    );
+
+    return format(transformValue);
+  }
+
+  private checkTransform(
+    position: PopoverPositionType,
+    value: { x: number; y: number },
+    host: { width: number; height: number },
+    transform: CXPopover.Set['transform']
+  ) {
+    switch (position) {
+      case 'bottom-center':
+      case 'bottom-left':
+      case 'bottom-right':
+        return {
+          x: value.x,
+          y: transform === 'center' ? value.y - host.height / 2 : value.y,
+        };
+
+      case 'top-center':
+      case 'top-left':
+      case 'top-right':
+        return {
+          x: value.x,
+          y: transform === 'center' ? value.y + host.height / 2 : value.y,
+        };
+
+      case 'left-top':
+      case 'left-center':
+      case 'left-bottom':
+        return {
+          y: value.y,
+          x: transform === 'center' ? value.x + host.width / 2 : value.x,
+        };
+
+      case 'right-top':
+      case 'right-center':
+      case 'right-bottom':
+        return {
+          y: value.y,
+          x: transform === 'center' ? value.x - host.width / 2 : value.x,
+        };
+    }
   }
 }
