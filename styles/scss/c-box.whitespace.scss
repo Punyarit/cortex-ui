@@ -1,0 +1,24 @@
+c-box[whitespace-normal],
+c-box[ui~='whitespace-normal'] {
+  white-space: normal;
+}
+
+c-box[whitespace-nowrap],
+c-box[ui~='whitespace-nowrap'] {
+  white-space: nowrap;
+}
+
+c-box[whitespace-pre],
+c-box[ui~='whitespace-pre'] {
+  white-space: pre;
+}
+
+c-box[whitespace-pre-line],
+c-box[ui~='whitespace-pre-line'] {
+  white-space: pre-line;
+}
+
+c-box[whitespace-pre-wrap],
+c-box[ui~='whitespace-pre-wrap'] {
+  white-space: pre-wrap;
+}
