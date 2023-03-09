@@ -1,6 +1,5 @@
 // border
 c-box {
-  &[ui~='round-full'],
   &[round-full] {
     border-radius: 50%;
   }

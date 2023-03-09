@@ -21,8 +21,8 @@ import { SizeTypes } from '../../types/sizes.type';
 
 @customElement(CxDatepickerName)
 export class DatePicker extends ComponentBase<CXDatePicker.Props> {
-  #inputLongUI = 'inline-flex items-center col-gap-6';
-  #inputShortUI = 'inline-flex flex-col row-gap-4';
+  #inputLongUI = 'inputLongUI: inline-flex items-center col-gap-6';
+  #inputShortUI = 'inputShortUI: inline-flex flex-col row-gap-4';
 
   config: CXDatePicker.Set = {
     date: new Date(),

@@ -19,6 +19,40 @@ c-box[tx-black] {
   color: var(--black);
 }
 
+// left
+c-box[border-left-black] {
+  border-left-color: var(--black);
+}
+
+c-box[border-left-white] {
+  border-left-color: var(--white);
+}
+// top
+c-box[border-top-black] {
+  border-top-color: var(--black);
+}
+
+c-box[border-top-white] {
+  border-top-color: var(--white);
+}
+// right
+c-box[border-right-black] {
+  border-right-color: var(--black);
+}
+
+c-box[border-right-white] {
+  border-right-color: var(--white);
+}
+
+// bottom
+c-box[border-bottom-black] {
+  border-bottom-color: var(--black);
+}
+
+c-box[border-bottom-white] {
+  border-bottom-color: var(--white);
+}
+
 @each $color in $colors {
   @each $shade in $shades {
     c-box[bg-#{"" + $color}-#{$shade}] {
