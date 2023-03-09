@@ -1,8 +1,4 @@
 c-box {
-  display: block;
-}
-
-c-box {
   &[ui~='content'],
   &[content] {
     display: block;
