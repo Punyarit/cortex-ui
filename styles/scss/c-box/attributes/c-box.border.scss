@@ -1,0 +1,31 @@
+// border
+c-box {
+  &[ui~='round-full'],
+  &[round-full] {
+    border-radius: 50%;
+  }
+}
+
+$border-styles: solid, none, dashed, dotted, groove, ridge, inset, outset, hidden;
+
+@each $border-style in $border-styles {
+  c-box[border-#{$border-style}] {
+    border-style: #{$border-style};
+  }
+
+  c-box[border-left-#{$border-style}] {
+    border-left-style: #{$border-style};
+  }
+
+  c-box[border-top-#{$border-style}] {
+    border-top-style: #{$border-style};
+  }
+
+  c-box[border-right-#{$border-style}] {
+    border-right-style: #{$border-style};
+  }
+
+  c-box[border-bottom-#{$border-style}] {
+    border-bottom-style: #{$border-style};
+  }
+}

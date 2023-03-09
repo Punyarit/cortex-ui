@@ -1,9 +1,12 @@
-import { attributeChnged, AttributeChangedType } from './types/attribute-changed.types';
+import {
+  attributeChnged as attributeChanged,
+  AttributeChangedType,
+} from './types/attribute-changed.types';
 import { CBoxName } from './types/c-box.name';
 import { CBoxTypes } from './types/c-box.types';
 export class Box extends HTMLElement {
   static get observedAttributes() {
-    return attributeChnged;
+    return attributeChanged;
   }
 
   async attributeChangedCallback(attr: AttributeChangedType, oldValue: string, newValue: string) {

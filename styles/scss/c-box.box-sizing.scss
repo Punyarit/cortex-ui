@@ -1,8 +1,0 @@
-$box-sizings: border-box, content-box;
-
-@each $box in $box-sizings {
-  c-box[ui~='#{$box}'],
-  c-box[#{$box}] {
-    box-sizing: #{$box};
-  }
-}

@@ -1,0 +1,63 @@
+$displays: block, inline, inline-block, flex, inline-flex, grid, inline, grid, hidden;
+
+c-box[display] {
+  display: var(--display);
+}
+
+c-box[flex-center] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@each $display in $displays {
+  c-box[#{$display}] {
+    display: #{$display};
+  }
+}
+
+c-box[justify-start] {
+  justify-content: flex-start;
+}
+
+c-box[justify-center] {
+  justify-content: center;
+}
+
+c-box[justify-end] {
+  justify-content: flex-end;
+}
+
+c-box[justify-between] {
+  justify-content: space-between;
+}
+
+c-box[justify-around] {
+  justify-content: space-around;
+}
+
+c-box[justify-evenly] {
+  justify-content: space-evenly;
+}
+
+// align itemes
+
+c-box[items-start] {
+  align-items: flex-start;
+}
+
+c-box[items-end] {
+  align-items: flex-end;
+}
+
+c-box[items-center] {
+  align-items: center;
+}
+
+c-box[items-baseline] {
+  align-items: baseline;
+}
+
+c-box[items-stretch] {
+  align-items: stretch;
+}

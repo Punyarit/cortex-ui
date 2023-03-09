@@ -1,17 +1,19 @@
 import { checkCBoxclosest } from '../../../helpers/check-component-closest';
 import { PopoverCloseButtonErrorText } from '../errors/popover-close-button-error-text';
-import {
-  AttributeChangedType,
-  CBoxWithToggle,
-  ToggleAttrStatus,
-} from '../types/attribute-changed.types';
+import { stylesMapper } from '../styles-mapper/styles-mapper';
+import { AttributeChangedType, CBoxWithToggle } from '../types/attribute-changed.types';
 
 export class AttributeFactory {
   static async construct(box: CBox.Ref, attr: AttributeChangedType, value: string) {
     switch (attr) {
+      case 'ui':
+        (await import('./ui/Ui.attribute')).UI.init(box, value);
+        break;
+
       case 'popover-close-button':
         checkCBoxclosest(box, `cx-popover`, PopoverCloseButtonErrorText);
-        return (await import('./popover/PopoverCloseButton')).POpoverCloseButton.init(box);
+        (await import('./popover/PopoverCloseButton')).POpoverCloseButton.init(box);
+        break;
 
       case 'left':
       case 'top':

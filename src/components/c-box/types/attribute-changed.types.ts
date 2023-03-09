@@ -43,6 +43,7 @@ export const CBoxIconAttributes = [
   'icon-suffix-size-hover',
 ] as const;
 
+export const uiStyles = ['ui'] as const;
 export type CBoxPopoverType = typeof CBoxPopoverAttributes[number];
 export type PopoverAbilitiesType = Record<typeof attributeChnged[number], () => void>;
 
@@ -50,6 +51,7 @@ export const attributeChnged = [
   ...CBoxPopoverAttributes,
   ...CBoxIconAttributes,
   ...utilsAttributes,
+  ...uiStyles,
 ] as const;
 export type AttributeChangedType = typeof attributeChnged[number];
 

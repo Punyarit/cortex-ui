@@ -1,0 +1,27 @@
+@for $i from 0 through 10 {
+  c-box[z-#{$i}] {
+    z-index: #{$i};
+  }
+}
+
+@for $i from 1 through 10 {
+  $z-index: $i * 10;
+  c-box[z-#{$z-index}] {
+    z-index: #{$z-index};
+  }
+}
+
+@for $i from 1 through 10 {
+  $z-index: $i * 100;
+  c-box[z-#{$z-index}] {
+    z-index: #{$z-index};
+  }
+}
+
+c-box[z-auto] {
+  z-index: auto;
+}
+
+c-box[z-none] {
+  z-index: none;
+}

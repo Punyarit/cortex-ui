@@ -1,0 +1,65 @@
+c-box[tx-focus] {
+  transition: color 0.2s ease;
+  &:focus {
+    color: var(--tx-focus);
+  }
+}
+
+c-box[bg-focus] {
+  transition: background-color 0.2s ease;
+  &:focus {
+    background-color: var(--bg-focus);
+  }
+}
+
+c-box[tx-color] {
+  transition: color 0.2s ease;
+  color: var(--tx-color);
+}
+
+c-box[bg-color] {
+  transition: background-color 0.2s ease;
+  background-color: var(--bg-color);
+}
+
+c-box[bg-toggle] {
+  transition: background-color 0.2s ease;
+  &[bg-toggle-status='toggled'] {
+    background-color: var(--bg-toggle);
+  }
+}
+
+c-box[tx-toggle] {
+  transition: background-color 0.2s ease;
+  &[tx-toggle-status='toggled'] {
+    background-color: var(--tx-toggle);
+  }
+}
+
+c-box[bg-hover] {
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: var(--bg-hover);
+  }
+}
+
+c-box[tx-hover] {
+  transition: color 0.2s ease;
+  &:hover {
+    color: var(--tx-hover);
+  }
+}
+
+c-box[bg-active] {
+  transition: background-color 0.2s ease;
+  &:active {
+    background-color: var(--bg-active);
+  }
+}
+
+c-box[tx-active] {
+  transition: color 0.2s ease;
+  &:active {
+    color: var(--tx-active);
+  }
+}
