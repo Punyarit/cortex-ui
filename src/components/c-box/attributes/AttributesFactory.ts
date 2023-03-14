@@ -65,9 +65,17 @@ export class AttributeFactory {
         ).init();
         break;
 
+      case 'transition':
+        if (value === 'none') return;
+        new (await import('./CSSProperty/SplitterEach.attribute')).SplitterEachAttribute(
+          box,
+          attr,
+          value
+        ).init();
+        break;
+
       case 'tx':
       case 'border':
-      case 'transition':
       case 'icon-prefix':
       case 'icon-suffix':
       case 'icon-prefix-active':
