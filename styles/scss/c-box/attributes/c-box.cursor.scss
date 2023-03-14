@@ -9,6 +9,10 @@ c-box[cursor-default] {
 c-box[cursor-pointer] {
   cursor: pointer;
 }
+c-box[cursor-select] {
+  cursor: pointer;
+  user-select: none;
+}
 
 c-box[cursor-wait] {
   cursor: wait;
