@@ -4,6 +4,10 @@ import { AttributeChangedType, CBoxUiToggle } from '../types/attribute-changed.t
 
 export class AttributeFactory {
   static async construct(box: CBox.Ref, attr: AttributeChangedType, value: string) {
+    if (value === 'value') {
+      throw `The attribute "${attr}" should not be valued as "value".`;
+    }
+
     if (!box.shadowRoot) {
       const shadowRoot = box.attachShadow({ mode: 'open' });
       const slot = document.createElement('slot');
