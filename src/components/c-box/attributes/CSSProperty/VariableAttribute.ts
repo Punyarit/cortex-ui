@@ -1,5 +1,7 @@
 export class VariableAttribute {
-  static init(box: CBox.Ref, attr: string, value: string) {
-    box.style.setProperty(`--${attr}`, `var(--${value})`);
+  constructor(private box: CBox.Ref, private attr: string, private value: string) {}
+  init() {
+    const stylesheet = this.box.shadowRoot?.styleSheets[0];
+    stylesheet?.insertRule(`:host{--${this.attr}:var(--${this.value})}`);
   }
 }

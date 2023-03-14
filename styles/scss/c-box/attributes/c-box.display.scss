@@ -9,7 +9,7 @@ c-box[display] {
 }
 
 c-box[flex-center] {
-  display: flex;
+  display: flex !important;
   justify-content: center;
   align-items: center;
 }

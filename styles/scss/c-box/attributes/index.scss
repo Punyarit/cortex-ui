@@ -1,3 +1,4 @@
+@import './c-box.all';
 @import './c-box.flex-direction';
 @import './c-box.flex-grow';
 @import './c-box.flex-shrink';
@@ -14,13 +15,13 @@
 @import './c-box.z-index';
 @import './c-box.opacity';
 @import './c-box.outline';
+@import './c-box.transition';
 @import './c-box.border';
 @import './c-box.user-select';
-@import './c-box.font';
+@import './c-box.font-weight.scss';
 @import './c-box.color';
 @import './c-box.display';
 @import './c-box.shadow';
 @import './c-box.sizes';
 @import './c-box.percent';
 @import './c-box.width-height';
-@import './c-box.gap';

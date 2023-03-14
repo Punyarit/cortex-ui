@@ -1,0 +1,4 @@
+c-box[transition] {
+  // 📌this is wired but i will fix it later
+  transition: var(--transition) var(--transition-size) var(--transition-color);
+}

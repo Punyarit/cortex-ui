@@ -1,76 +1,147 @@
-import { checkCBoxclosest } from '../../../helpers/check-component-closest';
+import { checkCBoxclosest as checkCBoxClosest } from '../../../helpers/check-component-closest';
 import { PopoverCloseButtonErrorText } from '../errors/popover-close-button-error-text';
-import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { AttributeChangedType, CBoxWithToggle } from '../types/attribute-changed.types';
+import { AttributeChangedType, CBoxUiToggle } from '../types/attribute-changed.types';
 
 export class AttributeFactory {
   static async construct(box: CBox.Ref, attr: AttributeChangedType, value: string) {
+    if (!box.shadowRoot) {
+      const shadowRoot = box.attachShadow({ mode: 'open' });
+      const slot = document.createElement('slot');
+      const uiStyle = document.createElement('style');
+      shadowRoot.appendChild(uiStyle);
+      shadowRoot.appendChild(slot);
+    }
+
     switch (attr) {
-      case 'ui':
-        (await import('./ui/Ui.attribute')).UI.init(box, value);
-        break;
-
+      // 📌Component ingredient
       case 'popover-close-button':
-        checkCBoxclosest(box, `cx-popover`, PopoverCloseButtonErrorText);
-        (await import('./popover/PopoverCloseButton')).POpoverCloseButton.init(box);
+        checkCBoxClosest(box, `cx-popover`, PopoverCloseButtonErrorText);
+        new (await import('./popover/PopoverCloseButton')).POpoverCloseButton(box).init();
         break;
 
+      // 📌 UI Attributes
+      case 'ui':
+        new (await import('./ui/Ui.attribute')).UIAttribute(box, value).init();
+        break;
+
+      // 📌 Apply styles when element is focused
+      case 'ui-active':
+        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'active').init();
+        break;
+
+      // 📌 Apply styles when element is focused
+      case 'ui-focus':
+        box.tabIndex = 0;
+        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'focus').init();
+        break;
+
+      // 📌 Apply style when element is focused via keyboard or non-mouse interaction
+      case 'ui-focus-visible':
+        box.tabIndex = 0;
+        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'focus-visible').init();
+        break;
+
+      //📌 Apply styles to the outer element (parent element) when the focus-element (child element) is focused
+      case 'ui-focus-within':
+        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'focus-within').init();
+        break;
+
+      case 'ui-hover':
+        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'hover').init();
+        break;
+
+      case 'ui-target':
+        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'target').init();
+        break;
+
+      case 'ui-toggle':
+        new (await import('./ui/UI-Toggle.attribute')).UIToggleAttribute(
+          box as CBoxUiToggle,
+          value
+        ).init();
+        break;
+
+      case 'tx':
+      case 'border':
+      case 'transition':
+      case 'icon-prefix':
+      case 'icon-suffix':
+      case 'icon-prefix-active':
+      case 'icon-suffix-active':
+      case 'icon-prefix-focus-within':
+      case 'icon-suffix-focus-within':
+      case 'icon-prefix-hover':
+      case 'icon-suffix-hover':
+      case 'icon-prefix-target':
+      case 'icon-suffix-target':
+        if (value === 'none') return;
+        new (await import('./CSSProperty/Splitter.attribute')).SplitterAttribute(
+          box,
+          attr,
+          value
+        ).init();
+        break;
+
+      case 'icon-prefix-focus':
+      case 'icon-suffix-focus':
+      case 'icon-prefix-focus-visible':
+      case 'icon-suffix-focus-visible':
+        if (value === 'none') return;
+        box.tabIndex = 0;
+        new (await import('./CSSProperty/Splitter.attribute')).SplitterAttribute(
+          box,
+          attr,
+          value
+        ).init();
+        break;
+
+      case 'icon-prefix-toggle':
+      case 'icon-suffix-toggle':
+        new (await import('./CSSProperty/ToggleSplitter.attribute')).ToggleSplitterAttribute(
+          box as CBoxUiToggle,
+          attr,
+          value
+        ).init();
+        break;
+
+      case 'bg':
+        if (value === 'none') break;
+        new (await import('./CSSProperty/VariableAttribute')).VariableAttribute(
+          box,
+          attr,
+          value
+        ).init();
+        break;
+
+      case 'cursor':
+      case 'display':
+      case 'flex-direction':
+      case 'flex-grow':
+      case 'flex-shrink':
+      case 'flex-wrap':
+      case 'opacity':
+      case 'order':
+      case 'outline':
+      case 'overflow':
+      case 'overflow-x':
+      case 'overflow-y':
+      case 'position':
+      case 'shadow':
+      case 'tx-overflow':
+      case 'tx-transform':
+      case 'user-select':
+      case 'visibility':
+      case 'whitespace':
+      case 'z-index':
+        if (value === 'none') break;
+        new (await import('./CSSProperty/ValueAttribute')).ValueAttribute(box, attr, value).init();
+        break;
+
+      case 'round':
       case 'left':
       case 'top':
       case 'right':
       case 'bottom':
-        (await import('./CSSProperty/SizeVariableAttribute')).SizeVariableAttribute.init(
-          box,
-          attr,
-          value as string
-        );
-        break;
-
-      case 'display':
-      case 'icon-suffix-hover':
-      case 'icon-prefix-hover':
-      case 'icon-suffix':
-      case 'icon-prefix':
-        if (value === 'none') break;
-        (await import('./CSSProperty/ValueAttribute')).ValueAttribute.init(box, attr, value);
-        break;
-
-      case 'icon-prefix-color-hover':
-      case 'icon-prefix-color':
-      case 'icon-suffix-color':
-      case 'icon-suffix-color-hover':
-      case 'icon-prefix-size':
-      case 'icon-suffix-size':
-      case 'icon-prefix-size-hover':
-      case 'icon-suffix-size-hover':
-        if (value === 'none') break;
-        (await import('./CSSProperty/SizeVariableAttribute')).SizeVariableAttribute.init(
-          box,
-          attr,
-          value as CXIcon.Set['src']
-        );
-        break;
-
-      case 'bg-toggle':
-      case 'tx-toggle':
-        (await import('./toggle/toggle.attribute')).ToggleAttribute.init(
-          box as CBoxWithToggle,
-          attr,
-          value
-        );
-        break;
-
-      case 'bg-color':
-      case 'tx-color':
-      case 'bg-active':
-      case 'tx-active':
-      case 'bg-hover':
-      case 'tx-hover':
-      case 'bg-focus':
-      case 'tx-focus':
-        (await import('./CSSProperty/VariableAttribute')).VariableAttribute.init(box, attr, value);
-        break;
-
       case 'col-gap':
       case 'row-gap':
       case 'h':
@@ -93,11 +164,11 @@ export class AttributeFactory {
       case 'pb':
       case 'px':
       case 'py':
-        (await import('./CSSProperty/SizeVariableAttribute')).SizeVariableAttribute.init(
+        new (await import('./CSSProperty/SizeVariableAttribute')).SizeVariableAttribute(
           box,
           attr,
           value
-        );
+        ).init();
         break;
 
       default:

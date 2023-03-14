@@ -1,5 +1,5 @@
 import {
-  attributeChnged as attributeChanged,
+  attributeChanged as attributeChanged,
   AttributeChangedType,
 } from './types/attribute-changed.types';
 import { CBoxName } from './types/c-box.name';
@@ -10,6 +10,7 @@ export class Box extends HTMLElement {
   }
 
   async attributeChangedCallback(attr: AttributeChangedType, oldValue: string, newValue: string) {
+    if (!newValue) return;
     (await import('./attributes/AttributesFactory')).AttributeFactory.construct(
       this,
       attr,

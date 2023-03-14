@@ -5,29 +5,4 @@ c-box {
     border-radius: var(--size-8);
     background-color: var(--white);
   }
-
-  &[input-box] {
-    input {
-      &::placeholder {
-        font-family: Sarabun-Regular;
-      }
-    }
-
-    display: inline-block;
-    border: 2px solid var(--primary-400);
-    width: var(--size-300);
-    border-radius: var(--base-size-8);
-    background-color: var(--white);
-    padding: var(--size-8) var(--size-12);
-  }
-
-  &[input-box='focus'] {
-    border: 2px solid var(--primary-500);
-    color: var(--primary-500);
-  }
-
-  &[input-box='default'] {
-    border: 2px solid var(--gray-400);
-    color: var(--gray-600);
-  }
 }

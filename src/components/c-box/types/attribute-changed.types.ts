@@ -1,20 +1,30 @@
 export const padding = ['p', 'px', 'py', 'pt', 'pb', 'pl', 'pr'] as const;
+
 export const margin = ['m', 'mx', 'my', 'mt', 'mb', 'ml', 'mr'] as const;
 export const widthHeight = ['w', 'min-w', 'max-w', 'h', 'min-h', 'max-h'] as const;
-export const layout = ['display', 'left', 'top', 'right', 'bottom'] as const;
-export const gap = ['row-gap', 'col-gap'] as const;
-export const color = [
-  'bg-color',
-  'tx-color',
-  'tx-hover',
-  'bg-hover',
-  'tx-active',
-  'bg-active',
-  'bg-focus',
-  'tx-focus',
-  'bg-toggle',
-  'tx-toggle',
+export const position = ['position', 'left', 'top', 'right', 'bottom', 'z-index'] as const;
+export const display = [
+  'display',
+  'visibility',
+  'user-select',
+  'whitespace',
+  'cursor',
+  'transition',
 ] as const;
+export const flex = ['flex-direction', 'flex-grow', 'flex-shrink', 'flex-wrap', 'order'] as const;
+export const text = ['tx-overflow', 'tx-transform', 'tx'] as const;
+export const overflow = ['overflow', 'overflow-x', 'overflow-y', 'overflow-y'] as const;
+export const border = [
+  'border',
+  'border-left',
+  'border-right',
+  'border-top',
+  'border-bottom',
+  'round',
+  'outline',
+] as const;
+export const gap = ['row-gap', 'col-gap'] as const;
+export const color = ['bg', 'tx', 'shadow', 'opacity'] as const;
 
 export const utilsAttributes = [
   ...padding,
@@ -22,40 +32,64 @@ export const utilsAttributes = [
   ...widthHeight,
   ...color,
   ...gap,
-  ...layout,
+  ...position,
+  ...display,
+  ...text,
+  ...border,
+  ...flex,
+  ...overflow,
 ] as const;
 export type UtilsAttributeType = typeof utilsAttributes[number];
 
 export const CBoxPopoverAttributes = ['popover-close-button'] as const;
 export const CBoxIconAttributes = [
   'icon-prefix',
-  'icon-prefix-color',
-  'icon-prefix-size',
   'icon-suffix',
-  'icon-suffix-color',
-  'icon-suffix-size',
-
+  'icon-prefix-active',
+  'icon-suffix-active',
+  'icon-prefix-focus',
+  'icon-suffix-focus',
+  'icon-prefix-focus-within',
+  'icon-suffix-focus-within',
+  'icon-prefix-focus-visible',
+  'icon-suffix-focus-visible',
   'icon-prefix-hover',
-  'icon-prefix-color-hover',
-  'icon-prefix-size-hover',
   'icon-suffix-hover',
-  'icon-suffix-color-hover',
-  'icon-suffix-size-hover',
+  'icon-prefix-target',
+  'icon-suffix-target',
+  'icon-prefix-toggle',
+  'icon-suffix-toggle',
 ] as const;
 
-export const uiStyles = ['ui'] as const;
+export const uiStylingAttributes = [
+  'ui',
+  'ui-active',
+  'ui-focus',
+  'ui-focus-visible',
+  'ui-focus-within',
+  'ui-hover',
+  'ui-target',
+  'ui-toggle',
+] as const;
 export type CBoxPopoverType = typeof CBoxPopoverAttributes[number];
-export type PopoverAbilitiesType = Record<typeof attributeChnged[number], () => void>;
+export type PopoverAbilitiesType = Record<typeof attributeChanged[number], () => void>;
 
-export const attributeChnged = [
+export const attributeChanged = [
   ...CBoxPopoverAttributes,
   ...CBoxIconAttributes,
   ...utilsAttributes,
-  ...uiStyles,
+  ...uiStylingAttributes,
 ] as const;
-export type AttributeChangedType = typeof attributeChnged[number];
+export type AttributeChangedType = typeof attributeChanged[number];
 
 export type OnToggleStatus = Record<'setToggleStatus', (status: ToggleStatus) => void>;
 export type ToggleStatus = 'default' | 'toggled';
 export type ToggleAttrStatus = Record<'bg-toggle' | 'tx-toggle', ToggleStatus>;
+
 export type CBoxWithToggle = CBox.Ref & ToggleAttrStatus & OnToggleStatus;
+
+export type CBoxUiToggle = HTMLElement & {
+  uiToggled?: boolean;
+  uiCache?: { [value: string]: unknown };
+  uiName?: string;
+};

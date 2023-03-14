@@ -1,40 +1,53 @@
 import { stylesMapper } from '../../styles-mapper/styles-mapper';
 
-export class UI {
-  static init(box: CBox.Ref, value: string) {
-    if (!value) return;
+export class UIAttribute {
+  private uiNameIndex = {} as { [uiName: string]: number };
+  constructor(
+    private box: HTMLElement,
+    private value: string,
+    private state?: 'active' | 'focus' | 'focus-within' | 'focus-visible' | 'hover' | 'target'
+  ) {}
+  init() {
+    let isUpdated = false;
 
-    const styles = value.split(',').map((style) => style.trim());
-    const shadowRoot = box.attachShadow({ mode: 'open' });
+    let uiAttr = `${this.state ? 'ui-' + this.state : 'ui'}`;
 
-    const shadowStyle = document.createElement('style');
-    shadowRoot.appendChild(shadowStyle);
-
-    const slot = document.createElement('slot');
-    shadowRoot.appendChild(slot);
+    const styles = this.value.split(',').map((style) => style.trim());
 
     for (const style of styles) {
       const [uiName, uiStyle] = style.split(':').map((s) => s.trim());
 
       if (uiName && uiStyle) {
-        let styleText = uiStyle
+        const styleText = uiStyle
           .split(' ')
-          .filter((s) => s)
+          .filter(Boolean)
           .map((s) => {
             const styleProp = stylesMapper.get(`c-box[${s.replace('!', '').trim()}]`);
-            if (!styleProp) return '';
-            return `${styleProp}${s.endsWith('!') ? '!important' : ''};`;
+            return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
           })
           .join('');
 
         if (styleText) {
-          const styleSheet = shadowRoot.styleSheets[0];
-          styleSheet.insertRule(`:host([_ui~='${uiName}']){${styleText}}`, 0);
+          const styleSheet = this.box.shadowRoot!.styleSheets[0];
+
+          const rule = `:host([_${uiAttr}~="${uiName}"]${
+            this.state ? ':' + this.state : ''
+          }){${styleText}}`;
+          styleSheet.insertRule(rule, 0);
+
+          if (typeof this.uiNameIndex[uiName] === 'number') {
+            styleSheet.deleteRule(this.uiNameIndex[uiName]);
+          }
+          this.uiNameIndex[uiName] = styleSheet.cssRules.length - 1;
         }
+        isUpdated = true;
       }
     }
 
-    box.setAttribute('_ui', styles.map((s) => s.split(':')[0].trim()).join(' '));
-    box.removeAttribute('ui');
+    if (isUpdated) {
+      const uiAttrValue = styles.map((s) => s.split(':')[0].trim()).join(' ');
+      this.box.setAttribute(`_${uiAttr}`, uiAttrValue);
+      this.box.removeAttribute(uiAttr);
+    }
   }
 }
