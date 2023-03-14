@@ -90,6 +90,7 @@ export type CBoxWithToggle = CBox.Ref & ToggleAttrStatus & OnToggleStatus;
 
 export type CBoxUiToggle = HTMLElement & {
   uiToggled?: boolean;
+  iconToggled?: boolean;
   uiCache?: { [value: string]: unknown };
   uiName?: string;
 };

@@ -1,6 +1,6 @@
 import { CBoxUiToggle } from '../../types/attribute-changed.types';
 
-export class ToggleSplitterAttribute {
+export class IconToggleAttribute {
   constructor(private box: CBoxUiToggle, private attr: string, private value: string) {}
   init() {
     if (typeof this.box.uiCache?.[this.value] === 'number') return;
@@ -16,19 +16,19 @@ export class ToggleSplitterAttribute {
   }
 
   private setToggleEvent() {
-    if (this.box?.uiToggled === undefined) {
-      this.box.uiToggled = false;
+    if (this.box?.iconToggled === undefined) {
+      this.box.iconToggled = false;
       this.box.addEventListener('click', this.toggleEvent);
     }
   }
 
   private toggleEvent = () => {
-    this.box.uiToggled = !this.box.uiToggled;
+    this.box.iconToggled = !this.box.iconToggled;
     this.checkToggle();
   };
 
   private checkToggle() {
-    if (this.box.uiToggled) {
+    if (this.box.iconToggled) {
       this.box.setAttribute(this.attr, this.box.uiCache!.value as string);
     } else {
       this.box.removeAttribute(this.attr);
