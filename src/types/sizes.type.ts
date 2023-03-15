@@ -552,7 +552,7 @@ export const SIZE_NUMBERS = [
   '998',
   '1000',
 ] as const;
-
+export type SizeNumber = typeof SIZE_NUMBERS[number];
 export const SIZES_VALUES = SIZE_NUMBERS.map((size) => `size-${size}`) as SizeTypes[];
 
 export type SizeAttr = Partial<Record<`size-${typeof SIZE_NUMBERS[number]}`, boolean>>;

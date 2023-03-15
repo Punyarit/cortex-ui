@@ -15,26 +15,28 @@ import { delay } from '../../helpers/delay';
 import { InputDateType } from './types/datepicker.types';
 import { CxDatepickerName } from './types/datepicker.name';
 import { PopoverContent } from '../popover/types/popover.types';
-import { SizeTypes } from '../../types/sizes.type';
+import { UI } from './datepicker.ui';
+import { SizeNumber } from '../../types/sizes.type';
 
 // export const onPressed = 'pressed';
 
 @customElement(CxDatepickerName)
 export class DatePicker extends ComponentBase<CXDatePicker.Props> {
-  #inputLongUI = 'inputLongUI: inline-flex items-center col-gap-6';
-  #inputShortUI = 'inputShortUI: inline-flex flex-col row-gap-4';
-
   config: CXDatePicker.Set = {
     date: new Date(),
     min: undefined,
     max: undefined,
-    selection: {
-      type: 'single',
-      select: 'later',
-    },
-    daterange: false,
+    selectLater: true,
+    multiSelect: false,
+    daterange: true,
     display: '1-calendar',
     inputStyle: 'short',
+    valueStyle: 'medium',
+  };
+
+  styles: CXDatePicker.Var = {
+    heightInput: '44',
+    widthInput: '310',
   };
 
   @state()
@@ -48,6 +50,9 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     super.connectedCallback();
     if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
+
+    if (this.var) this.cacheVariables(this.var);
+    if (this.styles) this.setVar();
   }
 
   render(): TemplateResult {
@@ -71,7 +76,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
           </c-box>
         </c-box>
         <c-box slot="popover" ${ref(this.popoverContentRef)}>
-          <c-box content p-0>
+          <c-box content p="0">
             <cx-calendar
               ${ref(this.cxCalendarRef)}
               @select-date="${this.selectDate}"
@@ -87,7 +92,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private setInputStyle() {
-    return this.set.inputStyle === 'long' ? this.#inputLongUI : this.#inputShortUI;
+    return this.set.inputStyle === 'long' ? UI.inputLong : UI.inputShort;
   }
 
   createRenderRoot(): this {
@@ -97,14 +102,12 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   private renderInputBox(text: string, type: InputDateType) {
     return html`
       <c-box
-        w-full
-        flex
-        col-gap-8
-        border-box
-        icon-prefix="calendar-alt-line"
-        items-center
+        ui="${UI.inputDateBox}"
+        icon-prefix="22 calendar-alt-line gray-600"
         input-date-type="${type}"
         input-box="default"
+        w="${this.var.widthInput!}"
+        h="${this.var.heightInput!}"
         >${text}</c-box
       >
     `;
@@ -113,8 +116,12 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   private getSelectedDateRangeText() {
     if (!this.selectedDate) return;
     const { startdate, enddate } = this.selectedDate as DateRangeSelected;
-    const startdateFormatted = dateFormat(startdate, dateShortOption);
-    const enddateFormatted = dateFormat(enddate, dateShortOption);
+    const startdateFormatted = dateFormat(startdate, {
+      dateStyle: this.set.valueStyle,
+    });
+    const enddateFormatted = dateFormat(enddate, {
+      dateStyle: this.set.valueStyle,
+    });
     return { startdate: startdateFormatted, enddate: enddateFormatted };
   }
 
@@ -228,17 +235,19 @@ declare global {
     type Ref = DatePicker;
 
     type Var = {
-      width?: SizeTypes;
+      widthInput?: SizeNumber;
+      heightInput?: SizeNumber;
     };
 
     type Set = CXCalendar.Set & {
       inputStyle?: 'short' | 'long';
+      valueStyle?: Intl.DateTimeFormatOptions['dateStyle'];
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
 
     type Props = {
-      var: Pick<Var, never>;
+      var: Var;
       set: Set;
       fix: Fix;
       make: Var;

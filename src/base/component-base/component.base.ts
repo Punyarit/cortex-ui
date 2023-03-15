@@ -16,7 +16,7 @@ export abstract class ComponentBase<Props extends Properties>
   @property({ type: Object }) public set!: Props['set'];
 
   config!: Props['set'];
-  oldVar: Props['var'] = {};
+  styles: Props['var'] = {};
   make = (styles: Props['make']) => {
     this.var = styles;
   };
@@ -77,14 +77,18 @@ export abstract class ComponentBase<Props extends Properties>
 
   cacheVariables(vars: Props['var']): void {
     for (const key in vars) {
-      this.oldVar[key] = vars[key];
+      this.styles[key] = vars[key];
     }
+  }
+
+  setVar() {
+    this.var = { ...(this.styles as Record<keyof Props['var'], unknown>) };
   }
 
   getCssText(): string {
     let cssText = ``;
-    for (const key in this.oldVar) {
-      cssText = `${cssText}--${key}:var(--${this.oldVar[key]})!important;`;
+    for (const key in this.styles) {
+      cssText = `${cssText}--${key}:var(--${this.styles[key]})!important;`;
     }
     return cssText;
   }

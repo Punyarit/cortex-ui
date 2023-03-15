@@ -24,10 +24,8 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     display: '1-calendar',
     min: undefined,
     max: undefined,
-    selection: {
-      type: 'single',
-      select: 'later',
-    },
+    selectLater: true,
+    multiSelect: false,
     daterange: false,
   };
 
@@ -136,7 +134,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   private setSelectedImmediately() {
-    if (this.set.selection?.select === 'immediately') {
+    if (!this.set.selectLater) {
       const { daterange, date } = this.set;
       const attrName = daterange ? 'startdate' : 'single';
       this.calendarMonitorRef.value?.setAttribute(
@@ -169,7 +167,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
   private selectDate = (e: Event) => {
     const event = e as CXSingleCalendar.SelectDate;
-    if (this.set.selection?.type === 'single') {
+    if (!this.set.multiSelect) {
       this.setCustomEvent('select-date', {
         date: event.detail.date,
       });
@@ -322,10 +320,8 @@ declare global {
       display?: '1-calendar' | '2-calendars';
       min?: Date;
       max?: Date;
-      selection?: {
-        type: 'single' | 'multiple'; //<-- waiting
-        select: 'immediately' | 'later';
-      };
+      multiSelect?: boolean;
+      selectLater?: boolean;
       daterange?: boolean;
     };
 

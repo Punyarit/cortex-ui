@@ -13,7 +13,7 @@ export type Properties = {
 };
 
 export type OnVariable<Var extends Properties[VarKey]> = {
-  oldVar: Var;
+  styles: Var;
   setHostVariables: () => void;
   cacheVariables: (vars: Var) => void;
   getCssText: (vars: Var) => string;
