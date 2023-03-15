@@ -28,10 +28,12 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     max: undefined,
     selectLater: true,
     multiSelect: false,
-    daterange: true,
+    daterange: false,
     display: '1-calendar',
-    inputStyle: 'short',
-    valueStyle: 'medium',
+    inputStyle: 'long',
+    valueStyle: {
+      dateStyle: 'medium',
+    },
   };
 
   styles: CXDatePicker.Var = {
@@ -65,7 +67,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
           position: 'bottom-left',
           openby: 'click',
           mouseleave: 'none',
-          focusout: 'none',
+          focusout: 'close',
         } as CXPopover.Set}">
         <c-box slot="host">
           <c-box
@@ -116,12 +118,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   private getSelectedDateRangeText() {
     if (!this.selectedDate) return;
     const { startdate, enddate } = this.selectedDate as DateRangeSelected;
-    const startdateFormatted = dateFormat(startdate, {
-      dateStyle: this.set.valueStyle,
-    });
-    const enddateFormatted = dateFormat(enddate, {
-      dateStyle: this.set.valueStyle,
-    });
+    const startdateFormatted = dateFormat(startdate, this.set.valueStyle);
+    const enddateFormatted = dateFormat(enddate, this.set.valueStyle);
     return { startdate: startdateFormatted, enddate: enddateFormatted };
   }
 
@@ -130,7 +128,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
       const dateRangeText = this.getSelectedDateRangeText();
       return this.getInputBoxForDateRange(dateRangeText?.startdate, dateRangeText?.enddate);
     } else {
-      const dateText = dateFormat(this.selectedDate as Date, dateShortOption);
+      const dateText = dateFormat(this.selectedDate as Date, this.set.valueStyle);
       return this.getInputBoxForSingleDate(dateText);
     }
   }
@@ -241,7 +239,7 @@ declare global {
 
     type Set = CXCalendar.Set & {
       inputStyle?: 'short' | 'long';
-      valueStyle?: Intl.DateTimeFormatOptions['dateStyle'];
+      valueStyle?: Intl.DateTimeFormatOptions;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
