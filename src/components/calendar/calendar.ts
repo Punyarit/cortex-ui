@@ -24,7 +24,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     display: '1-calendar',
     min: undefined,
     max: undefined,
-    selectLater: true,
+    initValue: true,
     multiSelect: false,
     daterange: false,
   };
@@ -134,7 +134,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   private setSelectedImmediately() {
-    if (!this.set.selectLater) {
+    if (this.set.initValue) {
       const { daterange, date } = this.set;
       const attrName = daterange ? 'startdate' : 'single';
       this.calendarMonitorRef.value?.setAttribute(
@@ -321,7 +321,7 @@ declare global {
       min?: Date;
       max?: Date;
       multiSelect?: boolean;
-      selectLater?: boolean;
+      initValue?: boolean;
       daterange?: boolean;
     };
 

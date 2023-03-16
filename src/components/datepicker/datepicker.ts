@@ -15,7 +15,7 @@ import { delay } from '../../helpers/delay';
 import { InputDateType } from './types/datepicker.types';
 import { CxDatepickerName } from './types/datepicker.name';
 import { PopoverContent } from '../popover/types/popover.types';
-import { UI } from './datepicker.ui';
+import { UI } from './ui/datepicker.ui';
 import { SizeNumber } from '../../types/sizes.type';
 
 // export const onPressed = 'pressed';
@@ -26,7 +26,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     date: new Date(),
     min: undefined,
     max: undefined,
-    selectLater: true,
+    initValue: true,
     multiSelect: false,
     daterange: false,
     display: '1-calendar',
@@ -70,10 +70,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
           focusout: 'close',
         } as CXPopover.Set}">
         <c-box slot="host">
-          <c-box
-            w="${this.setWidthStyle()}"
-            ui="${this.setInputStyle()}"
-            ${ref(this.inputBoxWrapperRef)}>
+          <c-box ui="${this.setInputStyle()}" ${ref(this.inputBoxWrapperRef)}>
             ${this.renderDateInput()}
           </c-box>
         </c-box>
@@ -90,7 +87,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private setWidthStyle() {
-    return this.set.inputStyle === 'long' ? '632' : '328';
+    return this.set.inputStyle === 'long' && this.set.daterange ? '632' : '328';
   }
 
   private setInputStyle() {
