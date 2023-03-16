@@ -133,13 +133,28 @@ export const getCalendarDetail = ({
     -firstDayOfMonth + 1
   );
 
+  let minDate: Date | undefined;
+  if (min) {
+    minDate = new Date(min);
+    minDate.setHours(0);
+    minDate.setMinutes(0);
+    minDate.setSeconds(0);
+  }
+
+  let maxDate: Date | undefined;
+  if (max) {
+    maxDate = new Date(max);
+    maxDate.setHours(0);
+    maxDate.setMinutes(0);
+    maxDate.setSeconds(0);
+  }
   for (let weekRow = 0; weekRow < 6; weekRow++) {
     const week: CalendarValue[] = [];
     for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
       const value = currentDate.getDate();
       const type = getCalendarType(currentDate, date.getMonth());
       const period = getPeriod(today, currentDate);
-      const minmax = getMinMax(min, max, currentDate);
+      const minmax = getMinMax(minDate, maxDate, currentDate);
 
       week.push({
         value,
