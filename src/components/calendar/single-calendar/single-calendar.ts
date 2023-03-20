@@ -9,7 +9,7 @@ import {
   shortDayOption,
   yearDayOption,
 } from '../../../helpers/functions/date/date-methods';
-import { DateRangeSelected } from '../types/calendar.types';
+import { DateRangeType } from '../types/calendar.types';
 import { CalendarBaseMethod } from './calendar-states/calendar-base';
 import { CalendarDateRangeSelectState } from './calendar-states/daterange-select';
 import { CalendarSingleSelectState } from './calendar-states/single-select';
@@ -280,7 +280,7 @@ declare global {
     };
 
     type Details = {
-      ['select-date']: { event: string; date: Date | DateRangeSelected };
+      ['select-date']: { event: string; date: Date | DateRangeType };
     };
 
     type Events = {

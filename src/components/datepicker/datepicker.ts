@@ -5,7 +5,7 @@ import { createRef, ref } from 'lit/directives/ref.js';
 import '../c-box/c-box';
 import '../popover/popover';
 import '../calendar/calendar';
-import { DateRangeSelected } from '../calendar/types/calendar.types';
+import { DateRangeType } from '../calendar/types/calendar.types';
 import {
   convertDateToArrayNumber,
   dateFormat,
@@ -45,7 +45,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   };
 
   @state()
-  private selectedDate?: Date | DateRangeSelected;
+  private selectedDate?: Date | DateRangeType;
 
   private inputBoxWrapperRef = createRef<HTMLSlotElement>();
   private cxCalendarRef = createRef<CXCalendar.Ref>();
@@ -119,8 +119,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     `;
   }
   private getSelectedDateRangeText() {
-    const selectedDateRange = this.selectedDate as DateRangeSelected;
-    const dateRangeValue = this.set.value as DateRangeSelected;
+    const selectedDateRange = this.selectedDate as DateRangeType;
+    const dateRangeValue = this.set.value as DateRangeType;
 
     const startdate =
       selectedDateRange?.startdate || (this.set.initValue ? dateRangeValue?.startdate : undefined);
@@ -175,23 +175,23 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute('enddate-selected', '');
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute(
       'old-enddate',
-      convertDateToArrayNumber((this.selectedDate as DateRangeSelected)?.enddate!)?.join('-')!
+      convertDateToArrayNumber((this.selectedDate as DateRangeType)?.enddate!)?.join('-')!
     );
-    (this.selectedDate as DateRangeSelected).enddate = undefined;
+    (this.selectedDate as DateRangeType).enddate = undefined;
     this.requestUpdate();
   }
 
   private async selectDate(e: CXCalendar.SelectDate) {
     const { date } = e.detail;
     if (this.set.daterange) {
-      this.setSelectDateRangeFocus(date as DateRangeSelected);
+      this.setSelectDateRangeFocus(date as DateRangeType);
     }
     await this.setClosePopover(date);
     this.selectedDate = date;
     this.setCustomEvent('select-date', { date });
   }
 
-  private setSelectDateRangeFocus(date: DateRangeSelected) {
+  private setSelectDateRangeFocus(date: DateRangeType) {
     const startdateInput = this.inputBoxWrapperRef.value!.firstElementChild as HTMLElement;
     const enddateInput = this.inputBoxWrapperRef.value!.lastElementChild as HTMLElement;
 
@@ -203,9 +203,9 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     }
   }
 
-  private async setClosePopover(date: Date | DateRangeSelected) {
+  private async setClosePopover(date: Date | DateRangeType) {
     if (this.set.daterange) {
-      if (!((date as DateRangeSelected).startdate && (date as DateRangeSelected).enddate)) return;
+      if (!((date as DateRangeType).startdate && (date as DateRangeType).enddate)) return;
       // 📌 delay for animation selected enddate scale
       await delay(175);
       this.popoverContentRef.value?.popoverState?.closePopover(null);
@@ -268,14 +268,17 @@ declare global {
     };
 
     type Details = {
-      ['select-date']: { date: Date | DateRangeSelected };
+      ['select-date']: { date: Date | DateRangeType };
     };
 
     type Events = {
-      ['select-date']: (detail: SelectDate) => void;
+      ['select-date']: (detail: SelectDate.Single | SelectDate.DateRange) => void;
     };
 
-    type SelectDate = CustomEvent<Details['select-date']>;
+    namespace SelectDate {
+      type Single = CustomEvent<Date>;
+      type DateRange = CustomEvent<DateRangeType>;
+    }
 
     // type Details = {
     //   [onPressed]: { event: string };

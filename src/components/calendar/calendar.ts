@@ -12,7 +12,7 @@ import {
   getPreviousMonth,
 } from '../../helpers/functions/date/date-methods';
 import { mutableElement } from '../../helpers/functions/observe-element/mutable-element';
-import { DateRangeSelected } from './types/calendar.types';
+import { DateRangeType } from './types/calendar.types';
 import { CxCalendarName } from './types/calendar.name';
 
 // export const onPressed = 'pressed';
@@ -145,7 +145,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       };
 
       if (daterange) {
-        const dateRangeValue = value as DateRangeSelected;
+        const dateRangeValue = value as DateRangeType;
         updateAttribute('startdate-selected', dateRangeValue.startdate!);
         updateAttribute('enddate-selected', dateRangeValue.enddate!);
         updateAttribute('latest-date-hover', dateRangeValue.enddate!);
@@ -330,7 +330,7 @@ declare global {
       multiSelect?: boolean;
       initValue?: boolean;
       daterange?: boolean;
-      value?: Date | DateRangeSelected;
+      value?: Date | DateRangeType;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
@@ -343,7 +343,7 @@ declare global {
     };
 
     type Details = {
-      ['select-date']: { date: Date | DateRangeSelected };
+      ['select-date']: { date: Date | DateRangeType };
     };
 
     type Events = {
@@ -351,8 +351,6 @@ declare global {
     };
 
     type SelectDate = CustomEvent<Details['select-date']>;
-
-    // type Pressed = CustomEvent<Details[typeof onPressed]>;
   }
 
   interface HTMLElementTagNameMap {
