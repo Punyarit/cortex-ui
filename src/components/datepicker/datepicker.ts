@@ -56,16 +56,20 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
 
+    // 📌only use when component styles base on c-box *The Component does not have shadowRoot.
     if (this.var) this.cacheVariables(this.var);
     if (this.styles) this.setVar();
   }
+
+  @state()
+  datepickerState: 'opened' | 'closed' = 'closed';
 
   render(): TemplateResult {
     return html`
       <style></style>
       <cx-popover
-        @on-opened="${this.popoverOpened}"
-        @on-closed="${this.popoverClosed}"
+        @opened="${this.popoverOpened}"
+        @closed="${this.popoverClosed}"
         .set="${{
           position: 'bottom-left',
           openby: 'click',
@@ -79,18 +83,18 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
         </c-box>
         <c-box slot="popover" ${ref(this.popoverContentRef)}>
           <c-box content p="0">
-            <cx-calendar
-              ${ref(this.cxCalendarRef)}
-              @select-date="${this.selectDate}"
-              .set="${this.set}"></cx-calendar>
+            ${this.datepickerState === 'opened'
+              ? html`
+                  <cx-calendar
+                    ${ref(this.cxCalendarRef)}
+                    @select-date="${this.selectDate}"
+                    .set="${this.set}"></cx-calendar>
+                `
+              : undefined}
           </c-box>
         </c-box>
       </cx-popover>
     `;
-  }
-
-  private setWidthStyle() {
-    return this.set.inputStyle === 'long' && this.set.daterange ? '632' : '328';
   }
 
   private setInputStyle() {
@@ -140,7 +144,9 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     }
   }
 
-  private popoverClosed() {
+  private popoverClosed(e: CXPopover.OnClosed) {
+    this.datepickerState = e.detail.state;
+
     const firstInput = this.inputBoxWrapperRef.value!.firstElementChild as HTMLElement;
     if (this.set.daterange) {
       const enddateInput = this.inputBoxWrapperRef.value!.lastElementChild as HTMLElement;
@@ -152,6 +158,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private popoverOpened(e: CXPopover.OnOpened) {
+    this.datepickerState = e.detail.state;
     const inputDateBoxRef = e.detail.event.target as HTMLElement;
     if (!inputDateBoxRef.hasAttribute('input-box')) return;
 

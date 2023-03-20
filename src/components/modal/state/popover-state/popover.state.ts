@@ -62,16 +62,17 @@ export class PopoverState {
     this.setMouseleaveEvent();
     requestAnimationFrame(() => {
       this.setPopoverContentOpacity('1');
-      this.onEvent('on-opened', triggerEvent);
+      this.onEvent('opened', triggerEvent);
     });
     return this;
   }
 
-  private onEvent(event: 'on-opened' | 'on-closed', triggerEvent?: Event) {
+  private onEvent(event: 'opened' | 'closed', triggerEvent?: Event) {
     this.popoverHost.dispatchEvent(
       new CustomEvent(event, {
         detail: {
           event: triggerEvent,
+          state: event,
         },
       })
     );
@@ -258,7 +259,7 @@ export class PopoverState {
     this.appendContentBackToRoot();
     this.removeMouseEvent();
     this.setPopoverClosedDone(true);
-    this.onEvent('on-closed');
+    this.onEvent('closed');
   };
 
   private setPopoverContentAnimation(status: 'in' | 'out') {

@@ -133,6 +133,8 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     this.updateSelectedDates();
   }
 
+  
+
   private updateSelectedDates(): void {
     const { initValue, value, daterange } = this.set;
 

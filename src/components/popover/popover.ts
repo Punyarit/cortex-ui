@@ -115,14 +115,17 @@ declare global {
     };
 
     type Details = {
-      ['on-opened']: { event: Event };
+      ['opened']: { event: Event; state: 'closed' };
+      ['closed']: { event: Event; state: 'closed' };
     };
 
     type Events = {
-      ['on-opened']: (detail: OnOpened) => void;
+      ['opened']: (detail: OnOpened) => void;
+      ['closed']: (detail: OnClosed) => void;
     };
 
-    type OnOpened = CustomEvent<Details['on-opened']>;
+    type OnOpened = CustomEvent<Details['opened']>;
+    type OnClosed = CustomEvent<Details['closed']>;
   }
 
   interface HTMLElementTagNameMap {
