@@ -130,20 +130,32 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
   firstUpdated() {
     this.observeCalendarMonitor();
-    this.setSelectedImmediately();
+    this.updateSelectedDates();
   }
 
-  private setSelectedImmediately() {
-    if (this.set.initValue) {
-      const { daterange, date } = this.set;
-      const attrName = daterange ? 'startdate' : 'single';
-      this.calendarMonitorRef.value?.setAttribute(
-        `${attrName}-selected`,
-        convertDateToArrayNumber(date)?.join('-')!
-      );
+  private updateSelectedDates(): void {
+    const { initValue, value, daterange } = this.set;
+
+    if (initValue && value) {
+      const calendarMonitor = this.calendarMonitorRef.value;
+
+      const updateAttribute = (attributeName: string, date: Date) => {
+        const dateArray = convertDateToArrayNumber(date);
+        if (calendarMonitor && dateArray) {
+          calendarMonitor.setAttribute(attributeName, dateArray.join('-'));
+        }
+      };
+
+      if (daterange) {
+        const dateRangeValue = value as DateRangeSelected;
+        updateAttribute('startdate-selected', dateRangeValue.startdate!);
+        updateAttribute('enddate-selected', dateRangeValue.enddate!);
+        updateAttribute('latest-date-hover', dateRangeValue.enddate!);
+      } else {
+        updateAttribute('single-selected', value as Date);
+      }
     }
   }
-
   private observeCalendarMonitor() {
     mutableElement(this.calendarMonitorRef.value!, 'attributes', (m) => {
       const singleCalendars = (m.target as HTMLElement)
@@ -316,6 +328,7 @@ declare global {
     type Var = unknown;
 
     type Set = {
+      // 📌date: Date is date from server (the current date). this prop "date" use for init current date of calendar component.
       date: Date;
       display?: '1-calendar' | '2-calendars';
       min?: Date;
@@ -323,6 +336,7 @@ declare global {
       multiSelect?: boolean;
       initValue?: boolean;
       daterange?: boolean;
+      value?: Date | DateRangeSelected;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };

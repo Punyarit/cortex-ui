@@ -34,6 +34,9 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     valueStyle: {
       dateStyle: 'medium',
     },
+    value: undefined,
+    focusout: 'close',
+    mouseleave: 'none',
   };
 
   styles: CXDatePicker.Var = {
@@ -66,8 +69,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
         .set="${{
           position: 'bottom-left',
           openby: 'click',
-          mouseleave: 'none',
-          focusout: 'close',
+          mouseleave: this.set.mouseleave,
+          focusout: this.set.focusout,
         } as CXPopover.Set}">
         <c-box slot="host">
           <c-box ui="${this.setInputStyle()}" ${ref(this.inputBoxWrapperRef)}>
@@ -113,10 +116,17 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private getSelectedDateRangeText() {
-    if (!this.selectedDate) return;
-    const { startdate, enddate } = this.selectedDate as DateRangeSelected;
-    const startdateFormatted = dateFormat(startdate, this.set.valueStyle);
-    const enddateFormatted = dateFormat(enddate, this.set.valueStyle);
+    const selectedDateRange = this.selectedDate as DateRangeSelected;
+    const dateRangeValue = this.set.value as DateRangeSelected;
+    const startdateFormatted = dateFormat(
+      selectedDateRange?.startdate || (this.set.initValue ? dateRangeValue?.startdate : undefined),
+      this.set.valueStyle
+    );
+
+    const enddateFormatted = dateFormat(
+      selectedDateRange?.enddate || (this.set.initValue ? dateRangeValue?.enddate : undefined),
+      this.set.valueStyle
+    );
     return { startdate: startdateFormatted, enddate: enddateFormatted };
   }
 
@@ -125,7 +135,10 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
       const dateRangeText = this.getSelectedDateRangeText();
       return this.getInputBoxForDateRange(dateRangeText?.startdate, dateRangeText?.enddate);
     } else {
-      const dateText = dateFormat(this.selectedDate as Date, this.set.valueStyle);
+      const dateText = dateFormat(
+        (this.selectedDate as Date) || (this.set.initValue ? this.set.value : undefined),
+        this.set.valueStyle
+      );
       return this.getInputBoxForSingleDate(dateText);
     }
   }
@@ -237,6 +250,8 @@ declare global {
     type Set = CXCalendar.Set & {
       inputStyle?: 'short' | 'long';
       valueStyle?: Intl.DateTimeFormatOptions;
+      focusout?: 'close' | 'none';
+      mouseleave?: 'close' | 'none';
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };

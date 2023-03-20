@@ -18,7 +18,6 @@ export class CalendarDateRangeSelectState {
     const dateHoverAttr = this.calendarMethod.getCalendarMonitorAttr('latest-date-hover');
     const startdateAttr = this.calendarMethod.getCalendarMonitorAttr('startdate-selected');
     const enddateAttr = this.calendarMethod.getCalendarMonitorAttr('enddate-selected');
-
     // 📌 has dateHoverAttr mean have date hover cached
     if (dateHoverAttr) {
       const [startdate, enddate, hoverDate] = this.setDateBetweenHighLight(
@@ -40,7 +39,7 @@ export class CalendarDateRangeSelectState {
   ) {
     // 📌if enddate ? enddate : hoverDate mean if select date range done(has startdate and enddate) lasted-date-hover = enddate
     const enddate = enddateAttr ? this.calendarMethod.getDateFromString(enddateAttr) : undefined;
-
+    console.log('daterange-select.js |enddate| = ', enddate);
     const startdate = this.calendarMethod.getDateFromString(startdateAttr);
     const hoverDate = this.calendarMethod.getDateFromString(dateHoverAttr);
 
