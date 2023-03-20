@@ -1,4 +1,8 @@
 @font-face {
+  font-family: 'block-custom';
+  src: url('../../assets/icons/custom/block.woff2') format('woff2');
+}
+@font-face {
   font-family: 'calendar-plus-custom';
   src: url('../../assets/icons/custom/calendar-plus.woff2') format('woff2');
 }
@@ -9,6 +13,14 @@
 @font-face {
   font-family: 'comment-check-custom';
   src: url('../../assets/icons/custom/comment-check.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'delete-tag-custom';
+  src: url('../../assets/icons/custom/delete-tag.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'emoji-wink-custom';
+  src: url('../../assets/icons/custom/emoji-wink.woff2') format('woff2');
 }
 @font-face {
   font-family: 'er-covid-alert-custom';
@@ -25,6 +37,10 @@
 @font-face {
   font-family: 'er-noncovid1-custom';
   src: url('../../assets/icons/custom/er-noncovid1.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'exit-right-custom';
+  src: url('../../assets/icons/custom/exit-right.woff2') format('woff2');
 }
 @font-face {
   font-family: 'eye-glare-custom';
@@ -61,6 +77,10 @@
 @font-face {
   font-family: 'task-custom';
   src: url('../../assets/icons/custom/task.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'vacation-custom';
+  src: url('../../assets/icons/custom/vacation.woff2') format('woff2');
 }
 @font-face {
   font-family: '0-plus-line';
