@@ -29,8 +29,6 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     daterange: false,
   };
 
-  #firstUpdatedCalendar = false;
-
   // 📌 0 = previous month
   // 📌 -304 = current month
   // 📌 -608 = next month
@@ -133,8 +131,6 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     this.updateSelectedDates();
   }
 
-  
-
   private updateSelectedDates(): void {
     const { initValue, value, daterange } = this.set;
 
@@ -201,8 +197,6 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   private generateCalendar() {
-    if (this.#firstUpdatedCalendar) return;
-
     const currentMonth = this.set.date;
     const previousMonth = getPreviousMonth(currentMonth);
     const nextMonth = getNextMonth(currentMonth);
@@ -228,8 +222,6 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
         ];
         break;
     }
-
-    this.#firstUpdatedCalendar = true;
   }
 
   private translateMonth(direction: 'previous' | 'next') {
