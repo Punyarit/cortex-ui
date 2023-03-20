@@ -114,32 +114,29 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
       >
     `;
   }
-
   private getSelectedDateRangeText() {
     const selectedDateRange = this.selectedDate as DateRangeSelected;
     const dateRangeValue = this.set.value as DateRangeSelected;
-    const startdateFormatted = dateFormat(
-      selectedDateRange?.startdate || (this.set.initValue ? dateRangeValue?.startdate : undefined),
-      this.set.valueStyle
-    );
 
-    const enddateFormatted = dateFormat(
-      selectedDateRange?.enddate || (this.set.initValue ? dateRangeValue?.enddate : undefined),
-      this.set.valueStyle
-    );
+    const startdate =
+      selectedDateRange?.startdate || (this.set.initValue ? dateRangeValue?.startdate : undefined);
+    const enddate =
+      selectedDateRange?.enddate || (this.set.initValue ? dateRangeValue?.enddate : undefined);
+
+    const startdateFormatted = dateFormat(startdate, this.set.valueStyle);
+    const enddateFormatted = dateFormat(enddate, this.set.valueStyle);
+
     return { startdate: startdateFormatted, enddate: enddateFormatted };
   }
 
   private renderDateInput() {
     if (this.set.daterange) {
-      const dateRangeText = this.getSelectedDateRangeText();
-      return this.getInputBoxForDateRange(dateRangeText?.startdate, dateRangeText?.enddate);
+      const { startdate, enddate } = this.getSelectedDateRangeText();
+      return this.getInputBoxForDateRange(startdate, enddate);
     } else {
-      const dateText = dateFormat(
-        (this.selectedDate as Date) || (this.set.initValue ? this.set.value : undefined),
-        this.set.valueStyle
-      );
-      return this.getInputBoxForSingleDate(dateText);
+      const date = (this.selectedDate as Date) || (this.set.initValue ? this.set.value : undefined);
+      const dateFormatted = dateFormat(date, this.set.valueStyle);
+      return this.getInputBoxForSingleDate(dateFormatted);
     }
   }
 
