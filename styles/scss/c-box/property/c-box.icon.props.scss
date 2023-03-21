@@ -6,7 +6,7 @@ c-box[icon-prefix] {
     color: var(--icon-prefix-color);
   }
 
-  &[icon-prefix='none']::before {
+  &[icon-prefix~='none']::before {
     content: none;
   }
 }
@@ -19,7 +19,7 @@ c-box[icon-suffix] {
     color: var(--icon-suffix-color);
   }
 
-  &[icon-suffix='none']::after {
+  &[icon-suffix~='none']::after {
     content: none;
   }
 }
@@ -33,7 +33,7 @@ c-box[icon-prefix-active]:active {
     color: var(--icon-prefix-active-color);
   }
 
-  &[icon-prefix-active='none']::before {
+  &[icon-prefix-active~='none']::before {
     content: none;
   }
 }
@@ -46,7 +46,7 @@ c-box[icon-suffix-active]:active {
     color: var(--icon-suffix-active-color);
   }
 
-  &[icon-suffix-active='none']::after {
+  &[icon-suffix-active~='none']::after {
     content: none;
   }
 }
@@ -60,7 +60,7 @@ c-box[icon-prefix-focus]:focus {
     color: var(--icon-prefix-focus-color);
   }
 
-  &[icon-prefix-focus='none']::before {
+  &[icon-prefix-focus~='none']::before {
     content: none;
   }
 }
@@ -73,7 +73,7 @@ c-box[icon-suffix-focus]:focus {
     color: var(--icon-suffix-focus-color);
   }
 
-  &[icon-suffix-focus='none']::after {
+  &[icon-suffix-focus~='none']::after {
     content: none;
   }
 }
@@ -87,7 +87,7 @@ c-box[icon-prefix-focus-within]:focus-within {
     color: var(--icon-prefix-focus-within-color);
   }
 
-  &[icon-prefix-focus-within='none']::before {
+  &[icon-prefix-focus-within~='none']::before {
     content: none;
   }
 }
@@ -100,7 +100,7 @@ c-box[icon-suffix-focus-within]:focus-within {
     color: var(--icon-suffix-focus-within-color);
   }
 
-  &[icon-suffix-focus-within='none']::after {
+  &[icon-suffix-focus-within~='none']::after {
     content: none;
   }
 }
@@ -114,7 +114,7 @@ c-box[icon-prefix-focus-visible]:focus-visible {
     color: var(--icon-prefix-focus-visible-color);
   }
 
-  &[icon-prefix-focus-visible='none']::before {
+  &[icon-prefix-focus-visible~='none']::before {
     content: none;
   }
 }
@@ -127,7 +127,7 @@ c-box[icon-suffix-focus-visible]:focus-visible {
     color: var(--icon-suffix-focus-visible-color);
   }
 
-  &[icon-suffix-focus-visible='none']::after {
+  &[icon-suffix-focus-visible~='none']::after {
     content: none;
   }
 }
@@ -141,7 +141,7 @@ c-box[icon-prefix-hover]:hover {
     color: var(--icon-prefix-hover-color);
   }
 
-  &[icon-prefix-hover='none']::before {
+  &[icon-prefix-hover~='none']::before {
     content: none;
   }
 }
@@ -154,7 +154,7 @@ c-box[icon-suffix-hover]:hover {
     color: var(--icon-suffix-hover-color);
   }
 
-  &[icon-suffix-hover='none']::after {
+  &[icon-suffix-hover~='none']::after {
     content: none;
   }
 }
@@ -168,7 +168,7 @@ c-box[icon-prefix-target]:target {
     color: var(--icon-prefix-target-color);
   }
 
-  &[icon-prefix-target='none']::before {
+  &[icon-prefix-target~='none']::before {
     content: none;
   }
 }
@@ -181,7 +181,7 @@ c-box[icon-suffix-target]:target {
     color: var(--icon-suffix-target-color);
   }
 
-  &[icon-suffix-target='none']::after {
+  &[icon-suffix-target~='none']::after {
     content: none;
   }
 }
@@ -195,7 +195,7 @@ c-box[icon-prefix-toggle] {
     color: var(--icon-prefix-toggle-color);
   }
 
-  &[icon-prefix-toggle='none']::before {
+  &[icon-prefix-toggle~='none']::before {
     content: none;
   }
 }
@@ -208,7 +208,7 @@ c-box[icon-suffix-toggle] {
     color: var(--icon-suffix-toggle-color);
   }
 
-  &[icon-suffix-toggle='none']::after {
+  &[icon-suffix-toggle~='none']::after {
     content: none;
   }
 }
