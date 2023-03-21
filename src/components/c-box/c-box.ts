@@ -11,11 +11,18 @@ export class Box extends HTMLElement {
 
   async attributeChangedCallback(attr: AttributeChangedType, oldValue: string, newValue: string) {
     if (!newValue) return;
-    (await import('./attributes/AttributesFactory')).AttributeFactory.construct(
-      this,
-      attr,
-      newValue
-    );
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(async (entry) => {
+        if (entry.isIntersecting) {
+          (await import('./attributes/AttributesFactory')).AttributeFactory.construct(
+            this,
+            attr,
+            newValue
+          );
+        }
+      });
+    });
+    observer.observe(this as HTMLElement);
   }
 }
 customElements.define(CBoxName, Box);
