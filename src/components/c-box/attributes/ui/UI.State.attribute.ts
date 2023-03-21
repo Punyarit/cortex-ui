@@ -1,8 +1,13 @@
 import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
 import { stylesMapper } from '../../styles-mapper/styles-mapper';
 
-export class UIAttribute {
-  constructor(private attr: string, private box: HTMLElement, private value: string) {}
+export class UIStateAttribute {
+  constructor(
+    private attr: string,
+    private box: HTMLElement,
+    private value: string,
+    private state: 'active' | 'focus' | 'focus-within' | 'focus-visible' | 'hover' | 'target'
+  ) {}
   init() {
     const styles = this.value.split(',').map((style) => style.trim());
 
@@ -21,8 +26,8 @@ export class UIAttribute {
 
         if (styleText) {
           const styleSheet = this.box.shadowRoot!.styleSheets[0];
-          const selectorText = `:host([_${this.attr}~="${uiName}"])`;
 
+          const selectorText = `:host([_${this.attr}~="${uiName}"]:${this.state})`;
           const indexSelector = findCssRuleIndex(styleSheet!, selectorText);
           if (typeof indexSelector === 'number') {
             styleSheet?.deleteRule(indexSelector);

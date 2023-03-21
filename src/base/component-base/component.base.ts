@@ -2,6 +2,8 @@ import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { OnConfig, OnVariable, Properties, set, vars } from './types/components.base.types';
 
+const constructionToken = Symbol();
+
 export abstract class ComponentBase<Props extends Properties>
   extends LitElement
   implements OnVariable<Props['var']>, OnConfig<Props['set'], Props['fix']>
@@ -14,6 +16,7 @@ export abstract class ComponentBase<Props extends Properties>
    */
   @property({ type: Object }) public var!: Props['var'];
   @property({ type: Object }) public set!: Props['set'];
+  @property({ type: String }) public query?: string;
 
   config!: Props['set'];
   styles: Props['var'] = {};
@@ -42,12 +45,16 @@ export abstract class ComponentBase<Props extends Properties>
     // 📌 offsetParent === null mean element is not visible from dom
     if (this.offsetParent === null) return;
 
-    if (changedProperties.has(set)) {
+    if (changedProperties.has('query')) {
+      QueryRef.set(this.query!, this, constructionToken);
+    }
+
+    if (changedProperties.has('set')) {
       this.cacheConfig(this.set);
       this.exec();
     }
 
-    if (changedProperties.has(vars)) {
+    if (changedProperties.has("var")) {
       requestAnimationFrame(() => {
         this.cacheVariables(this.var);
         this.setHostVariables();
@@ -102,5 +109,46 @@ export abstract class ComponentBase<Props extends Properties>
         bubbles: true,
       })
     );
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    if (this.query) {
+      QueryRef.delete(this.query!, constructionToken);
+    }
+  }
+}
+
+export class QueryRef {
+  static ref = new Map<string, HTMLElement>();
+
+  public static get(queryId: string) {
+    return QueryRef.ref.get(queryId);
+  }
+
+  static set(queryId: string, element: HTMLElement, safeToken: symbol) {
+    if (QueryRef.has(queryId)) {
+      throw new Error(`Query id "${queryId}" is already in use, please use another query id.`);
+    }
+
+    if (safeToken !== constructionToken) {
+      throw new Error(
+        'QueryRef.set() is not constructable. The QueryRef.set() only use for Cortex-Components'
+      );
+    }
+    QueryRef.ref.set(queryId, element);
+  }
+
+  static delete(queryId: string, safeToken: symbol) {
+    if (safeToken !== constructionToken) {
+      throw new Error(
+        'QueryRef.delete() is not constructable. The QueryRef.delete() only use for Cortex-Components'
+      );
+    }
+    QueryRef.ref.delete(queryId);
+  }
+
+  public static has(queryId: string) {
+    return QueryRef.ref.has(queryId);
   }
 }

@@ -1,11 +1,11 @@
+import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
 import { stylesMapper } from '../../styles-mapper/styles-mapper';
-import { CBoxUiToggle } from '../../types/attribute-changed.types';
+import { CBoxUiAttribute } from '../../types/attribute-changed.types';
 
 export class UIToggleAttribute {
-  constructor(private box: CBoxUiToggle, private value: string) {}
+  constructor(private box: CBoxUiAttribute, private value: string) {}
 
   public init() {
-    this.setUiCache();
     const styles = this.getStyles();
     this.setUiStyle(styles);
 
@@ -35,17 +35,6 @@ export class UIToggleAttribute {
     }
   }
 
-  private setCSSRule(uiName: string, styleText: string): CSSStyleSheet {
-    const styleSheet = this.box.shadowRoot!.styleSheets[0];
-    const rule = `:host([_ui-toggle~="${uiName}"]){${styleText}}`;
-    styleSheet.insertRule(rule, 0);
-
-    return styleSheet;
-  }
-  private setUiCache() {
-    !this.box.uiCache && (this.box.uiCache = {});
-  }
-
   private getStyles(): string[] {
     return this.value.split(',').map((style) => style.trim());
   }
@@ -65,21 +54,22 @@ export class UIToggleAttribute {
       .join('');
   }
 
-  private replaceCSSRule(styleSheet: CSSStyleSheet, uiName: string) {
-    if (typeof this.box.uiCache![uiName] === 'number') {
-      styleSheet.deleteRule(this.box.uiCache![uiName] as number);
-    }
-    this.box.uiCache![uiName] = styleSheet.cssRules.length - 1;
-  }
-
   private setUiStyle(styles: string[]): void {
     for (const style of styles) {
       const [uiName, uiStyle] = this.getUiAttrs(style);
       if (uiName && uiStyle) {
         const styleText = this.getUiStyleText(uiStyle);
         if (styleText) {
-          const styleSheet = this.setCSSRule(uiName, styleText);
-          this.replaceCSSRule(styleSheet, uiName);
+          const styleSheet = this.box.shadowRoot!.styleSheets[0];
+
+          const selectorText = `:host([_ui-toggle~="${uiName}"])`;
+          const indexSelector = findCssRuleIndex(styleSheet!, selectorText);
+          if (typeof indexSelector === 'number') {
+            styleSheet?.deleteRule(indexSelector);
+          }
+
+          const rule = `${selectorText}{${styleText}}`;
+          styleSheet.insertRule(rule, 0);
         }
       }
     }

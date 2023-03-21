@@ -1,7 +1,8 @@
-import { CBoxUiToggle } from '../../types/attribute-changed.types';
+import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
+import { CBoxUiAttribute } from '../../types/attribute-changed.types';
 
 export class IconToggleAttribute {
-  constructor(private box: CBoxUiToggle, private attr: string, private value: string) {}
+  constructor(private box: CBoxUiAttribute, private attr: string, private value: string) {}
   init() {
     if (typeof this.box.uiCache?.[this.value] === 'number') return;
 
@@ -42,12 +43,19 @@ export class IconToggleAttribute {
 
   private setCSSRule() {
     if (this.value === 'none') return;
-    const styleSheet = this.box.shadowRoot!.styleSheets[0];
+
+    const styleSheet = this.box.shadowRoot?.styleSheets[0];
+    const selectorText = `:host([${this.attr}])`;
+    const indexSelector = findCssRuleIndex(styleSheet!, selectorText);
+    if (typeof indexSelector === 'number') {
+      styleSheet?.deleteRule(indexSelector);
+    }
+
     const [size, source, color] = this.value.split(' ');
     styleSheet?.insertRule(
-      `:host{--${this.attr}:${source};--${this.attr}-size:var(--size-${size});--${this.attr}-color:var(--${color});}`,
+      `${selectorText}{--${this.attr}:${source};--${this.attr}-size:var(--size-${size});--${this.attr}-color:var(--${color});}`,
       styleSheet?.cssRules.length || 0
     );
-    this.box.uiCache![this.value] = styleSheet.cssRules.length - 1;
+    this.box.uiCache![this.value] = styleSheet!.cssRules.length - 1;
   }
 }

@@ -1,6 +1,6 @@
 import { checkCBoxclosest as checkCBoxClosest } from '../../../helpers/check-component-closest';
 import { PopoverCloseButtonErrorText } from '../errors/popover-close-button-error-text';
-import { AttributeChangedType, CBoxUiToggle } from '../types/attribute-changed.types';
+import { AttributeChangedType, CBoxUiAttribute } from '../types/attribute-changed.types';
 
 export class AttributeFactory {
   static async construct(box: CBox.Ref, attr: AttributeChangedType, value: string) {
@@ -16,6 +16,7 @@ export class AttributeFactory {
       shadowRoot.appendChild(slot);
     }
 
+    // TODO:next toggle-group
     switch (attr) {
       // 📌Component ingredient
       case 'popover-close-button':
@@ -23,48 +24,86 @@ export class AttributeFactory {
         new (await import('./popover/PopoverCloseButton')).POpoverCloseButton(box).init();
         break;
 
+      // done
       // 📌 UI Attributes
       case 'ui':
-        new (await import('./ui/Ui.attribute')).UIAttribute(box, value).init();
+        new (await import('./ui/Ui.attribute')).UIAttribute(attr, box, value).init();
         break;
 
+      // done
       // 📌 Apply styles when element is focused
       case 'ui-active':
-        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'active').init();
+        new (await import('./ui/UI.State.attribute')).UIStateAttribute(
+          attr,
+          box,
+          value,
+          'active'
+        ).init();
         break;
 
+      // done
       // 📌 Apply styles when element is focused
       case 'ui-focus':
         box.tabIndex = 0;
-        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'focus').init();
+        new (await import('./ui/UI.State.attribute')).UIStateAttribute(
+          attr,
+          box,
+          value,
+          'focus'
+        ).init();
         break;
 
+      // done
       // 📌 Apply style when element is focused via keyboard or non-mouse interaction
       case 'ui-focus-visible':
         box.tabIndex = 0;
-        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'focus-visible').init();
+        new (await import('./ui/UI.State.attribute')).UIStateAttribute(
+          attr,
+          box,
+          value,
+          'focus-visible'
+        ).init();
         break;
 
+      // done
       //📌 Apply styles to the outer element (parent element) when the focus-element (child element) is focused
       case 'ui-focus-within':
-        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'focus-within').init();
+        new (await import('./ui/UI.State.attribute')).UIStateAttribute(
+          attr,
+          box,
+          value,
+          'focus-within'
+        ).init();
         break;
 
+      // done
       case 'ui-hover':
-        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'hover').init();
+        new (await import('./ui/UI.State.attribute')).UIStateAttribute(
+          attr,
+          box,
+          value,
+          'hover'
+        ).init();
         break;
 
+      // done
       case 'ui-target':
-        new (await import('./ui/Ui.attribute')).UIAttribute(box, value, 'target').init();
+        new (await import('./ui/UI.State.attribute')).UIStateAttribute(
+          attr,
+          box,
+          value,
+          'target'
+        ).init();
         break;
 
       case 'ui-toggle':
         new (await import('./ui/UI-Toggle.attribute')).UIToggleAttribute(
-          box as CBoxUiToggle,
+          box as CBoxUiAttribute,
           value
         ).init();
         break;
 
+      // done
       case 'transition':
         if (value === 'none') return;
         new (await import('./CSSProperty/SplitterEach.attribute')).SplitterEachAttribute(
@@ -74,6 +113,7 @@ export class AttributeFactory {
         ).init();
         break;
 
+      // done
       case 'tx':
       case 'border':
       case 'icon-prefix':
@@ -94,6 +134,7 @@ export class AttributeFactory {
         ).init();
         break;
 
+      // done
       case 'icon-prefix-focus':
       case 'icon-suffix-focus':
       case 'icon-prefix-focus-visible':
@@ -107,15 +148,17 @@ export class AttributeFactory {
         ).init();
         break;
 
+      // done
       case 'icon-prefix-toggle':
       case 'icon-suffix-toggle':
         new (await import('./CSSProperty/ToggleSplitter.attribute')).IconToggleAttribute(
-          box as CBoxUiToggle,
+          box as CBoxUiAttribute,
           attr,
           value
         ).init();
         break;
 
+      // done
       case 'bg':
         if (value === 'none') break;
         new (await import('./CSSProperty/VariableAttribute')).VariableAttribute(
@@ -125,6 +168,7 @@ export class AttributeFactory {
         ).init();
         break;
 
+      // done
       case 'cursor':
       case 'display':
       case 'flex-direction':
@@ -149,6 +193,7 @@ export class AttributeFactory {
         new (await import('./CSSProperty/ValueAttribute')).ValueAttribute(box, attr, value).init();
         break;
 
+      // done
       case 'round':
       case 'left':
       case 'top':
