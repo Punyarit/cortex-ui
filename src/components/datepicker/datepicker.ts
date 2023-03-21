@@ -5,7 +5,7 @@ import { createRef, ref } from 'lit/directives/ref.js';
 import '../c-box/c-box';
 import '../popover/popover';
 import '../calendar/calendar';
-import { DateRangeType } from '../calendar/types/calendar.types';
+import { DateRangeType, SingleDate } from '../calendar/types/calendar.types';
 import {
   convertDateToArrayNumber,
   dateFormat,
@@ -181,14 +181,14 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     this.requestUpdate();
   }
 
-  private async selectDate(e: CXCalendar.SelectDate) {
-    const { date } = e.detail;
+  private async selectDate(e: CXDatePicker.SelectDate.Single | CXDatePicker.SelectDate.DateRange) {
     if (this.set.daterange) {
-      this.setSelectDateRangeFocus(date as DateRangeType);
+      this.setSelectDateRangeFocus(e.detail as DateRangeType);
+    } else {
+      this.selectedDate = (e.detail as SingleDate).date;
     }
-    await this.setClosePopover(date);
-    this.selectedDate = date;
-    this.setCustomEvent('select-date', { date });
+    this.setCustomEvent('select-date', { ...e.detail });
+    await this.setClosePopover(e.detail);
   }
 
   private setSelectDateRangeFocus(date: DateRangeType) {
@@ -203,14 +203,14 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     }
   }
 
-  private async setClosePopover(date: Date | DateRangeType) {
+  private async setClosePopover(date: SingleDate | DateRangeType) {
     if (this.set.daterange) {
       if (!((date as DateRangeType).startdate && (date as DateRangeType).enddate)) return;
       // 📌 delay for animation selected enddate scale
       await delay(175);
       this.popoverContentRef.value?.popoverState?.closePopover(null);
     } else {
-      if (!(date as Date)) return;
+      if (!(date as SingleDate).date) return;
       // 📌 delay for animation selected enddate scale
       await delay(175);
       this.popoverContentRef.value?.popoverState?.closePopover(null);
@@ -268,7 +268,7 @@ declare global {
     };
 
     type Details = {
-      ['select-date']: { date: Date | DateRangeType };
+      ['select-date']: SingleDate | DateRangeType;
     };
 
     type Events = {
@@ -276,19 +276,9 @@ declare global {
     };
 
     namespace SelectDate {
-      type Single = CustomEvent<Date>;
+      type Single = CustomEvent<SingleDate>;
       type DateRange = CustomEvent<DateRangeType>;
     }
-
-    // type Details = {
-    //   [onPressed]: { event: string };
-    // };
-
-    // type Events = {
-    //   [onPressed]: (detail: Pressed) => void;
-    // };
-
-    // type Pressed = CustomEvent<Details[typeof onPressed]>;
   }
 
   interface HTMLElementTagNameMap {

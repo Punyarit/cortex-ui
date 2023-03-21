@@ -12,7 +12,7 @@ import {
   getPreviousMonth,
 } from '../../helpers/functions/date/date-methods';
 import { mutableElement } from '../../helpers/functions/observe-element/mutable-element';
-import { DateRangeType } from './types/calendar.types';
+import { DateRangeType, SingleDate } from './types/calendar.types';
 import { CxCalendarName } from './types/calendar.name';
 
 // export const onPressed = 'pressed';
@@ -176,13 +176,19 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   private selectDate = (e: Event) => {
-    const event = e as CXSingleCalendar.SelectDate;
-    if (!this.set.multiSelect) {
+    if (this.set.daterange) {
+      const { enddate, startdate } = (e as CXDatePicker.SelectDate.DateRange).detail;
       this.setCustomEvent('select-date', {
-        date: event.detail.date,
+        enddate,
+        startdate,
+      });
+    } else {
+      const { date } = (e as CXDatePicker.SelectDate.Single).detail;
+
+      this.setCustomEvent('select-date', {
+        date,
       });
     }
-    // this.dateDOMSelected = event.detail.dateDOM;
   };
 
   connectedCallback() {
@@ -343,14 +349,17 @@ declare global {
     };
 
     type Details = {
-      ['select-date']: { date: Date | DateRangeType };
+      ['select-date']: SingleDate | DateRangeType;
     };
 
     type Events = {
-      ['select-date']: (detail: SelectDate) => void;
+      ['select-date']: (detail: SelectDate.Single | SelectDate.DateRange) => void;
     };
 
-    type SelectDate = CustomEvent<Details['select-date']>;
+    namespace SelectDate {
+      type Single = CustomEvent<SingleDate>;
+      type DateRange = CustomEvent<DateRangeType>;
+    }
   }
 
   interface HTMLElementTagNameMap {

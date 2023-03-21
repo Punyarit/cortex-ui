@@ -39,7 +39,6 @@ export class CalendarDateRangeSelectState {
   ) {
     // 📌if enddate ? enddate : hoverDate mean if select date range done(has startdate and enddate) lasted-date-hover = enddate
     const enddate = enddateAttr ? this.calendarMethod.getDateFromString(enddateAttr) : undefined;
-    console.log('daterange-select.js |enddate| = ', enddate);
     const startdate = this.calendarMethod.getDateFromString(startdateAttr);
     const hoverDate = this.calendarMethod.getDateFromString(dateHoverAttr);
 
@@ -192,11 +191,8 @@ export class CalendarDateRangeSelectState {
     this.setDateRangeWhenDone();
     const [startDate, endDate] = this.calendarMethod.getUpdatedStartEndAttributes();
     this.signleCalendar.setCustomEvent('select-date', {
-      event: 'select-date',
-      date: {
-        startdate: convertDateStringToDate(startDate),
-        enddate: convertDateStringToDate(endDate),
-      },
+      startdate: convertDateStringToDate(startDate),
+      enddate: convertDateStringToDate(endDate),
     });
   }
 

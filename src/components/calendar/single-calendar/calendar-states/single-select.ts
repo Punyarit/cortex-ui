@@ -40,7 +40,6 @@ export class CalendarSingleSelectState {
     this.calendarMethod.setSingleSelectAttribute(year, month, date);
     this.signleCalendar.fix().selected(selectedDate).exec();
     this.signleCalendar.setCustomEvent('select-date', {
-      event: 'select-date',
       date: selectedDate,
     });
   }
