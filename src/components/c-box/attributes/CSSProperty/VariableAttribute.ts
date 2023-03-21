@@ -1,15 +1,37 @@
 import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
-import { CBoxUiAttribute } from '../../types/attribute-changed.types';
 
 export class VariableAttribute {
   constructor(private box: CBox.Ref, private attr: string, private value: string) {}
+
   init() {
-    const styleSheet = this.box.shadowRoot?.styleSheets[0];
-    const selectorText = `:host([${this.attr}])`;
-    const indexSelector = findCssRuleIndex(styleSheet!, selectorText);
+    const stylesheet = this.getStylesheet();
+    const selectorText = this.createSelectorText();
+    this.removeExistingRule(stylesheet!, selectorText);
+
+    const newRule = this.createRule(selectorText);
+    stylesheet?.insertRule(newRule);
+  }
+
+  private getStylesheet() {
+    return this.box.shadowRoot?.styleSheets[0];
+  }
+
+  private createSelectorText() {
+    return `:host([${this.attr}])`;
+  }
+
+  private removeExistingRule(stylesheet: CSSStyleSheet, selectorText: string) {
+    const indexSelector = findCssRuleIndex(stylesheet, selectorText);
     if (typeof indexSelector === 'number') {
-      styleSheet?.deleteRule(indexSelector);
+      stylesheet.deleteRule(indexSelector);
     }
-    styleSheet?.insertRule(`${selectorText}{--${this.attr}:var(--${this.value})}`);
+  }
+
+  private createRule(selectorText: string) {
+    const valueWithImportant = this.value.endsWith('!') ? '!important' : '';
+
+    return `${selectorText} {
+      --${this.attr}: var(--${this.value.replace('!', '')})${valueWithImportant};
+    }`;
   }
 }

@@ -151,7 +151,7 @@ export class AttributeFactory {
       // done
       case 'icon-prefix-toggle':
       case 'icon-suffix-toggle':
-        new (await import('./CSSProperty/ToggleSplitter.attribute')).IconToggleAttribute(
+        new (await import('./CSSProperty/ToggleSplitter.attribute')).ToggleSplitterAttribute(
           box as CBoxUiAttribute,
           attr,
           value

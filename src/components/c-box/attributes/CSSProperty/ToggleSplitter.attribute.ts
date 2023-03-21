@@ -1,10 +1,11 @@
 import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
 import { CBoxUiAttribute } from '../../types/attribute-changed.types';
 
-export class IconToggleAttribute {
+export class ToggleSplitterAttribute {
   constructor(private box: CBoxUiAttribute, private attr: string, private value: string) {}
+
   init() {
-    if (typeof this.box.uiCache?.[this.value] === 'number') return;
+    if (this.isUiCacheValueSet()) return;
 
     this.setUiCache();
     this.setCSSRule();
@@ -16,8 +17,12 @@ export class IconToggleAttribute {
     }
   }
 
+  private isUiCacheValueSet() {
+    return typeof this.box.uiCache?.[this.value] === 'number';
+  }
+
   private setToggleEvent() {
-    if (this.box?.iconToggled === undefined) {
+    if (this.box.iconToggled === undefined) {
       this.box.iconToggled = false;
       this.box.addEventListener('click', this.toggleEvent);
     }
@@ -37,25 +42,54 @@ export class IconToggleAttribute {
   }
 
   private setUiCache() {
-    !this.box.uiCache && (this.box.uiCache = {});
+    if (!this.box.uiCache) {
+      this.box.uiCache = {};
+    }
     this.box.uiCache.value = this.value;
   }
 
   private setCSSRule() {
     if (this.value === 'none') return;
 
-    const styleSheet = this.box.shadowRoot?.styleSheets[0];
-    const selectorText = `:host([${this.attr}])`;
-    const indexSelector = findCssRuleIndex(styleSheet!, selectorText);
-    if (typeof indexSelector === 'number') {
-      styleSheet?.deleteRule(indexSelector);
-    }
+    const stylesheet = this.getStylesheet();
+    const selectorText = this.createSelectorText();
+    this.removeExistingRule(stylesheet!, selectorText);
 
     const [size, source, color] = this.value.split(' ');
-    styleSheet?.insertRule(
-      `${selectorText}{--${this.attr}:${source};--${this.attr}-size:var(--size-${size});--${this.attr}-color:var(--${color});}`,
-      styleSheet?.cssRules.length || 0
-    );
-    this.box.uiCache![this.value] = styleSheet!.cssRules.length - 1;
+    const newRule = this.createRule(selectorText, size, source, color);
+    this.insertRuleAndUpdateCache(stylesheet!, newRule);
+  }
+
+  private getStylesheet() {
+    return this.box.shadowRoot?.styleSheets[0];
+  }
+
+  private createSelectorText() {
+    return `:host([${this.attr}])`;
+  }
+
+  private removeExistingRule(stylesheet: CSSStyleSheet, selectorText: string) {
+    const indexSelector = findCssRuleIndex(stylesheet, selectorText);
+    if (typeof indexSelector === 'number') {
+      stylesheet.deleteRule(indexSelector);
+    }
+  }
+
+  private createRule(selectorText: string, size: string, source: string, color: string) {
+    const sourceWithImportant = source.endsWith('!') ? '!important' : '';
+    const sizeWithImportant = size.endsWith('!') ? '!important' : '';
+    const colorWithImportant = color.endsWith('!') ? 'important' : '';
+
+    return `${selectorText} {
+      --${this.attr}: ${source.replace('!', '')}${sourceWithImportant};
+      --${this.attr}-size: var(--size-${size.replace('!', '')})${sizeWithImportant};
+      --${this.attr}-color: var(--${color.replace('!', '')})${colorWithImportant};
+      `;
+  }
+
+  private insertRuleAndUpdateCache(stylesheet: CSSStyleSheet, cssRule: string) {
+    const newIndex = stylesheet.cssRules.length;
+    stylesheet.insertRule(cssRule, newIndex);
+    this.box.uiCache![this.value] = newIndex;
   }
 }
