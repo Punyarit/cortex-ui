@@ -5658,3 +5658,15 @@
   font-family: 'wrap-text-solid';
   src: url('../../assets/icons/solid/wrap-text.woff2') format('woff2');
 }
+@font-face {
+  font-family: 'cloud-sun-u';
+  src: url('../../assets/icons/u/cloud-sun.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'moon-u';
+  src: url('../../assets/icons/u/moon.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'sunset-u';
+  src: url('../../assets/icons/u/sunset.woff2') format('woff2');
+}

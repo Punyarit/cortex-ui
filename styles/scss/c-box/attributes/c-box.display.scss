@@ -5,11 +5,11 @@ c-box {
 }
 
 c-box[display] {
-  display: var(--display);
+  display: var(--display) !important;
 }
 
 c-box[flex-center] {
-  display: flex;
+  display: flex !important;
   justify-content: center;
   align-items: center;
 }
@@ -17,7 +17,7 @@ c-box[flex-center] {
 @each $display in $displays {
   c-box[#{$display}] {
     // 📌moust use !important because c-box { display-block } will priority when use in _ui
-    display: #{$display};
+    display: #{$display} !important;
   }
 }
 
