@@ -90,6 +90,7 @@ export class AttributeFactory {
 
       case 'ui-toggle':
         new (await import('./ui/UI-Toggle.attribute')).UIToggleAttribute(
+          attr,
           box as CBoxUiAttribute,
           value
         ).init();

@@ -1,11 +1,13 @@
 import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
 import { stylesMapper } from '../../styles-mapper/styles-mapper';
 import { CBoxUiAttribute } from '../../types/attribute-changed.types';
+import { UIScopedStyles } from '../UIScopedStyles';
 
 export class UIToggleAttribute {
-  constructor(private box: CBoxUiAttribute, private value: string) {}
+  constructor(private attr: string, private box: CBoxUiAttribute, private value: string) {}
 
   public init() {
+    UIScopedStyles.setStylesheet();
     const styles = this.getStyles();
     this.setUiStyle(styles);
 
@@ -15,10 +17,10 @@ export class UIToggleAttribute {
   }
 
   private setUiAttrs() {
-    if (this.box.getAttribute('_ui-toggle')) {
-      this.box.setAttribute('_ui-toggle', this.box.uiName!);
+    if (this.box.getAttribute(`_${this.attr}`)) {
+      this.box.setAttribute(`_${this.attr}`, this.box.uiName!);
     }
-    this.box.removeAttribute('ui-toggle');
+    this.box.removeAttribute(`${this.attr}`);
   }
 
   private setToggleEvent() {
@@ -27,9 +29,9 @@ export class UIToggleAttribute {
       this.box.addEventListener('click', () => {
         this.box.uiToggled = !this.box.uiToggled;
         if (this.box.uiToggled) {
-          this.box.setAttribute('_ui-toggle', this.box.uiName!);
+          this.box.setAttribute(`_${this.attr}`, this.box.uiName!);
         } else {
-          this.box.removeAttribute('_ui-toggle');
+          this.box.removeAttribute(`_${this.attr}`);
         }
       });
     }
@@ -59,18 +61,7 @@ export class UIToggleAttribute {
       const [uiName, uiStyle] = this.getUiAttrs(style);
       if (uiName && uiStyle) {
         const styleText = this.getUiStyleText(uiStyle);
-        if (styleText) {
-          const styleSheet = this.box.shadowRoot?.styleSheets[0];
-
-          const selectorText = `:host([_ui-toggle~="${uiName}"])`;
-          const indexSelector = findCssRuleIndex(styleSheet!, selectorText);
-          if (typeof indexSelector === 'number') {
-            styleSheet?.deleteRule(indexSelector);
-          }
-
-          const rule = `${selectorText}{${styleText}}`;
-          styleSheet?.insertRule(rule, 0);
-        }
+        UIScopedStyles.scopeStyles(styleText, this.box, uiName, this.attr);
       }
     }
   }

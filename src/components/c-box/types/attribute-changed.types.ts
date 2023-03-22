@@ -74,6 +74,16 @@ export const uiStylingAttributes = [
 export type CBoxPopoverType = typeof CBoxPopoverAttributes[number];
 export type PopoverAbilitiesType = Record<typeof attributeChanged[number], () => void>;
 
+export const uiStates = [
+  'active',
+  'focus',
+  'focus-within',
+  'focus-visible',
+  'hover',
+  'target',
+] as const;
+export type UiStateType = typeof uiStates[number];
+
 export const attributeChanged = [
   ...CBoxPopoverAttributes,
   ...CBoxIconAttributes,

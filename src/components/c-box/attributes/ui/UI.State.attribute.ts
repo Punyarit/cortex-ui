@@ -1,14 +1,18 @@
 import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
 import { stylesMapper } from '../../styles-mapper/styles-mapper';
+import { CBoxUiAttribute, UiStateType } from '../../types/attribute-changed.types';
+import { UIScopedStyles } from '../UIScopedStyles';
 
 export class UIStateAttribute {
   constructor(
     private attr: string,
-    private box: HTMLElement,
+    private box: CBoxUiAttribute,
     private value: string,
-    private state: 'active' | 'focus' | 'focus-within' | 'focus-visible' | 'hover' | 'target'
+    private state: UiStateType
   ) {}
   init() {
+    UIScopedStyles.setStylesheet();
+
     const styles = this.value.split(',').map((style) => style.trim());
 
     for (const style of styles) {
@@ -24,18 +28,7 @@ export class UIStateAttribute {
           })
           .join('');
 
-        if (styleText) {
-          const styleSheet = this.box.shadowRoot?.styleSheets[0];
-
-          const selectorText = `:host([_${this.attr}~="${uiName}"]:${this.state})`;
-          const indexSelector = findCssRuleIndex(styleSheet!, selectorText);
-          if (typeof indexSelector === 'number') {
-            styleSheet?.deleteRule(indexSelector);
-          }
-
-          const rule = `${selectorText}{${styleText}}`;
-          styleSheet?.insertRule(rule, 0);
-        }
+        UIScopedStyles.scopeStyles(styleText, this.box, uiName, this.attr, this.state);
       }
     }
 

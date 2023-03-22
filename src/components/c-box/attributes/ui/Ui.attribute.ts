@@ -1,11 +1,10 @@
-import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
 import { stylesMapper } from '../../styles-mapper/styles-mapper';
 import { CBoxUiAttribute } from '../../types/attribute-changed.types';
-import { ScopedStyles } from '../ScopedStyles';
+import { UIScopedStyles } from '../UIScopedStyles';
 export class UIAttribute {
   constructor(private attr: string, private box: CBoxUiAttribute, private value: string) {}
   init() {
-    ScopedStyles.set();
+    UIScopedStyles.setStylesheet();
     if (!this.value) return;
     const styles = this.value?.split(',')?.map((style) => style.trim());
 
@@ -22,35 +21,7 @@ export class UIAttribute {
           })
           .join('');
 
-        if (styleText) {
-          if (!this.box.scopedCache) {
-            this.box.scopedCache = new Map();
-          }
-          let selectorText: string | undefined;
-
-          if (this.box.scopedCache.has(uiName)) {
-            selectorText = this.box.scopedCache.get(uiName)?.[0];
-          } else {
-            if (this.box.scopedCache.size) {
-              selectorText = `c-box[_${this.attr}~="${uiName}"][c${
-                this.box.scopedCache.values().next().value[1]
-              }]`;
-            } else {
-              selectorText = `c-box[_${this.attr}~="${uiName}"][c${ScopedStyles.counter}]`;
-              this.box.setAttribute(`c${ScopedStyles.counter}`, '');
-              this.box.scopedCache.set(uiName, [selectorText, ScopedStyles.counter]);
-              ScopedStyles.counter++;
-            }
-          }
-
-          const indexSelector = findCssRuleIndex(ScopedStyles.sheet, selectorText!);
-          if (typeof indexSelector === 'number') {
-            ScopedStyles.sheet?.deleteRule(indexSelector);
-          }
-
-          const rule = `${selectorText}{${styleText}}`;
-          ScopedStyles.sheet?.insertRule(rule, 0);
-        }
+        UIScopedStyles.scopeStyles(styleText, this.box, uiName, this.attr);
       }
     }
 
