@@ -13,21 +13,12 @@ export class Box extends HTMLElement {
 
   async attributeChangedCallback(attr: AttributeChangedType, oldValue: string, newValue: string) {
     if (!newValue) return;
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach(async (entry) => {
-        if (entry.isIntersecting) {
-          this.setAttribute('is-visible', 'true');
-          (await import('./attributes/AttributesFactory')).AttributeFactory.construct(
-            this,
-            attr,
-            newValue
-          );
-        } else {
-          this.setAttribute('is-visible', 'false');
-        }
-      });
-    });
-    this.observer.observe(this as HTMLElement);
+    this.setAttribute('is-visible', 'true');
+    (await import('./attributes/AttributesFactory')).AttributeFactory.construct(
+      this,
+      attr,
+      newValue
+    );
   }
 }
 customElements.define(CBoxName, Box);

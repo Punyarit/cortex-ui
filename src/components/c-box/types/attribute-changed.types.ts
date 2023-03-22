@@ -88,7 +88,8 @@ export type ToggleAttrStatus = Record<'bg-toggle' | 'tx-toggle', ToggleStatus>;
 
 export type CBoxWithToggle = CBox.Ref & ToggleAttrStatus & OnToggleStatus;
 
-export type CBoxUiAttribute = HTMLElement & {
+export type CBoxUiAttribute = CBox.Ref & {
+  scopedCache?: Map<string, [string, number]>;
   uiToggled?: boolean;
   iconToggled?: boolean;
   uiCache?: { [value: string]: unknown };

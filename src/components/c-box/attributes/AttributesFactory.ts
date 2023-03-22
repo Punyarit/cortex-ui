@@ -8,14 +8,6 @@ export class AttributeFactory {
       throw `The attribute "${attr}" should not be valued as "value".`;
     }
 
-    if (!box.shadowRoot) {
-      const shadowRoot = box.attachShadow({ mode: 'open' });
-      const slot = document.createElement('slot');
-      const uiStyle = document.createElement('style');
-      shadowRoot.appendChild(uiStyle);
-      shadowRoot.appendChild(slot);
-    }
-
     // TODO:next toggle-group
     switch (attr) {
       // 📌Component ingredient
