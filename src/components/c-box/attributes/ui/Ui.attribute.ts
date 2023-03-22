@@ -20,16 +20,16 @@ export class UIAttribute {
           .join('');
 
         if (styleText) {
-          const styleSheet = this.box.shadowRoot!.styleSheets[0];
+          const styleSheet = this.box.shadowRoot?.styleSheets[0];
           const selectorText = `:host([_${this.attr}~="${uiName}"])`;
 
-          const indexSelector = findCssRuleIndex(styleSheet!, selectorText);
+          const indexSelector = findCssRuleIndex(styleSheet, selectorText);
           if (typeof indexSelector === 'number') {
             styleSheet?.deleteRule(indexSelector);
           }
 
           const rule = `${selectorText}{${styleText}}`;
-          styleSheet.insertRule(rule, 0);
+          styleSheet?.insertRule(rule, 0);
         }
       }
     }

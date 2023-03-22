@@ -6,7 +6,7 @@ export class SizeVariableAttribute {
   init() {
     const stylesheet = this.getStylesheet();
     const selectorText = this.createSelectorText();
-    this.removeExistingRule(stylesheet!, selectorText);
+    this.removeExistingRule(stylesheet, selectorText);
 
     const newRule = this.createRule(selectorText);
     stylesheet?.insertRule(newRule);
@@ -20,7 +20,7 @@ export class SizeVariableAttribute {
     return `:host([${this.attr}])`;
   }
 
-  private removeExistingRule(stylesheet: CSSStyleSheet, selectorText: string) {
+  private removeExistingRule(stylesheet: CSSStyleSheet | undefined, selectorText: string) {
     const indexSelector = findCssRuleIndex(stylesheet, selectorText);
     if (typeof indexSelector === 'number') {
       stylesheet?.deleteRule(indexSelector);

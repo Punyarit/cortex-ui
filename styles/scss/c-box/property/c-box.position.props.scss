@@ -1,16 +1,3 @@
-
-c-box[left] {
-  left: var(--left);
-}
-
-c-box[top] {
-  top: var(--top);
-}
-
-c-box[right] {
-  right: var(--right);
-}
-
-c-box[bottom] {
-  bottom: var(--bottom);
+c-box[opacity] {
+  opacity: var(--opacity);
 }

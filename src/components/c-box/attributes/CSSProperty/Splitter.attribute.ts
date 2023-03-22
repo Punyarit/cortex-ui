@@ -6,7 +6,7 @@ export class SplitterAttribute {
   init() {
     const stylesheet = this.getStylesheet();
     const selectorText = this.createSelectorText();
-    this.removeExistingRule(stylesheet!, selectorText);
+    this.removeExistingRule(stylesheet, selectorText);
 
     const [size, source, color] = this.value.split(' ');
     const newRule = this.createRule(selectorText, size, source, color);
@@ -23,7 +23,7 @@ export class SplitterAttribute {
   }
 
   private removeExistingRule(stylesheet: CSSStyleSheet | undefined, selectorText: string) {
-    const indexSelector = findCssRuleIndex(stylesheet!, selectorText);
+    const indexSelector = findCssRuleIndex(stylesheet, selectorText);
     if (typeof indexSelector === 'number') {
       stylesheet?.deleteRule(indexSelector);
     }

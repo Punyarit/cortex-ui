@@ -9,20 +9,25 @@ export class Box extends HTMLElement {
     return attributeChanged;
   }
 
+  private observer?: IntersectionObserver;
+
   async attributeChangedCallback(attr: AttributeChangedType, oldValue: string, newValue: string) {
     if (!newValue) return;
-    const observer = new IntersectionObserver((entries) => {
+    this.observer = new IntersectionObserver((entries) => {
       entries.forEach(async (entry) => {
         if (entry.isIntersecting) {
+          this.setAttribute('is-visible', 'true');
           (await import('./attributes/AttributesFactory')).AttributeFactory.construct(
             this,
             attr,
             newValue
           );
+        } else {
+          this.setAttribute('is-visible', 'false');
         }
       });
     });
-    observer.observe(this as HTMLElement);
+    this.observer.observe(this as HTMLElement);
   }
 }
 customElements.define(CBoxName, Box);

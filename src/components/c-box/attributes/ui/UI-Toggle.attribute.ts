@@ -60,7 +60,7 @@ export class UIToggleAttribute {
       if (uiName && uiStyle) {
         const styleText = this.getUiStyleText(uiStyle);
         if (styleText) {
-          const styleSheet = this.box.shadowRoot!.styleSheets[0];
+          const styleSheet = this.box.shadowRoot?.styleSheets[0];
 
           const selectorText = `:host([_ui-toggle~="${uiName}"])`;
           const indexSelector = findCssRuleIndex(styleSheet!, selectorText);
@@ -69,7 +69,7 @@ export class UIToggleAttribute {
           }
 
           const rule = `${selectorText}{${styleText}}`;
-          styleSheet.insertRule(rule, 0);
+          styleSheet?.insertRule(rule, 0);
         }
       }
     }

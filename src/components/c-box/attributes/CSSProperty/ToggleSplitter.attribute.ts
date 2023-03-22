@@ -53,7 +53,7 @@ export class ToggleSplitterAttribute {
 
     const stylesheet = this.getStylesheet();
     const selectorText = this.createSelectorText();
-    this.removeExistingRule(stylesheet!, selectorText);
+    this.removeExistingRule(stylesheet, selectorText);
 
     const [size, source, color] = this.value.split(' ');
     const newRule = this.createRule(selectorText, size, source, color);
@@ -68,10 +68,10 @@ export class ToggleSplitterAttribute {
     return `:host([${this.attr}])`;
   }
 
-  private removeExistingRule(stylesheet: CSSStyleSheet, selectorText: string) {
+  private removeExistingRule(stylesheet: CSSStyleSheet | undefined, selectorText: string) {
     const indexSelector = findCssRuleIndex(stylesheet, selectorText);
     if (typeof indexSelector === 'number') {
-      stylesheet.deleteRule(indexSelector);
+      stylesheet?.deleteRule(indexSelector);
     }
   }
 
@@ -87,9 +87,9 @@ export class ToggleSplitterAttribute {
       `;
   }
 
-  private insertRuleAndUpdateCache(stylesheet: CSSStyleSheet, cssRule: string) {
-    const newIndex = stylesheet.cssRules.length;
-    stylesheet.insertRule(cssRule, newIndex);
+  private insertRuleAndUpdateCache(stylesheet: CSSStyleSheet | undefined, cssRule: string) {
+    const newIndex = stylesheet?.cssRules.length;
+    stylesheet?.insertRule(cssRule, newIndex);
     this.box.uiCache![this.value] = newIndex;
   }
 }

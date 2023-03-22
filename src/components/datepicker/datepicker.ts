@@ -136,6 +136,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   private renderDateInput() {
     if (this.set.daterange) {
       const { startdate, enddate } = this.getSelectedDateRangeText();
+      console.log('datepicker.js |startdate| = ', startdate);
+      console.log('datepicker.js |enddate| = ', enddate);
       return this.getInputBoxForDateRange(startdate, enddate);
     } else {
       const date = (this.selectedDate as Date) || (this.set.initValue ? this.set.value : undefined);
@@ -192,8 +194,11 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private setSelectDateRangeFocus(date: DateRangeType) {
+    console.log('datepicker.js |date| = ', date);
     const startdateInput = this.inputBoxWrapperRef.value!.firstElementChild as HTMLElement;
     const enddateInput = this.inputBoxWrapperRef.value!.lastElementChild as HTMLElement;
+    console.log('datepicker.js |startdateInput| = ', startdateInput);
+    console.log('datepicker.js |enddateInput| = ', enddateInput);
 
     if (!date.startdate) {
       this.setFocusOnInputBox(startdateInput);

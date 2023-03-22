@@ -10,21 +10,21 @@ export class SplitterEachAttribute {
 
     const cssText = this.createCssText();
     const newRule = this.buildRule(selectorText, cssText);
-    stylesheet.insertRule(newRule, 0);
+    stylesheet?.insertRule(newRule, 0);
   }
 
   private getStylesheet() {
-    return this.box.shadowRoot!.styleSheets[0];
+    return this.box.shadowRoot?.styleSheets[0];
   }
 
   private createSelectorText() {
     return `:host([${this.attr}])`;
   }
 
-  private removeExistingRule(stylesheet: CSSStyleSheet, selectorText: string) {
+  private removeExistingRule(stylesheet: CSSStyleSheet | undefined, selectorText: string) {
     const indexSelector = findCssRuleIndex(stylesheet, selectorText);
     if (typeof indexSelector === 'number') {
-      stylesheet.deleteRule(indexSelector);
+      stylesheet?.deleteRule(indexSelector);
     }
   }
 

@@ -1,4 +1,8 @@
-export function findCssRuleIndex(sheet: CSSStyleSheet, ruleSelector: string): number | null {
+export function findCssRuleIndex(
+  sheet: CSSStyleSheet | undefined,
+  ruleSelector: string
+): number | null {
+  if (!sheet) return null;
   const rules = sheet.cssRules;
   const len = rules.length;
 

@@ -25,7 +25,7 @@ export class UIStateAttribute {
           .join('');
 
         if (styleText) {
-          const styleSheet = this.box.shadowRoot!.styleSheets[0];
+          const styleSheet = this.box.shadowRoot?.styleSheets[0];
 
           const selectorText = `:host([_${this.attr}~="${uiName}"]:${this.state})`;
           const indexSelector = findCssRuleIndex(styleSheet!, selectorText);
@@ -34,7 +34,7 @@ export class UIStateAttribute {
           }
 
           const rule = `${selectorText}{${styleText}}`;
-          styleSheet.insertRule(rule, 0);
+          styleSheet?.insertRule(rule, 0);
         }
       }
     }
