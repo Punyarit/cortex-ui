@@ -61,7 +61,7 @@ export class UIToggleAttribute {
       const [uiName, uiStyle] = this.getUiAttrs(style);
       if (uiName && uiStyle) {
         const styleText = this.getUiStyleText(uiStyle);
-        UIScopedStyles.scopeStyles(styleText, this.box, uiName, this.attr);
+        UIScopedStyles.scopeStyles('style', styleText, this.box, uiName, this.attr);
       }
     }
   }

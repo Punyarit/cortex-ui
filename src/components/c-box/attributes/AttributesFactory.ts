@@ -221,6 +221,13 @@ export class AttributeFactory {
         ).init();
         break;
 
+      case 'visible':
+        new (await import('./Observer/VisibleObserver')).VisibleObserver(
+          box as CBox.Ref & { isVisible: boolean; visibleEntry: IntersectionObserverEntry },
+          value
+        ).init();
+        break;
+
       default:
         break;
     }

@@ -1,34 +1,15 @@
 import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
+import { UIScopedStyles } from '../UIScopedStyles';
 
 export class SplitterEachAttribute {
   constructor(private box: CBox.Ref, private attr: string, private value: string) {}
 
   init() {
-    const stylesheet = this.getStylesheet();
-    const selectorText = this.createSelectorText();
-    this.removeExistingRule(stylesheet, selectorText);
-
-    const cssText = this.createCssText();
-    const newRule = this.buildRule(selectorText, cssText);
-    stylesheet?.insertRule(newRule, 0);
+    UIScopedStyles.setStylesheet();
+    UIScopedStyles.scopedProperty('spitter-each', this.createStyleText(), this.attr, this.box);
   }
 
-  private getStylesheet() {
-    return this.box.shadowRoot?.styleSheets[0];
-  }
-
-  private createSelectorText() {
-    return `:host([${this.attr}])`;
-  }
-
-  private removeExistingRule(stylesheet: CSSStyleSheet | undefined, selectorText: string) {
-    const indexSelector = findCssRuleIndex(stylesheet, selectorText);
-    if (typeof indexSelector === 'number') {
-      stylesheet?.deleteRule(indexSelector);
-    }
-  }
-
-  private createCssText() {
+  private createStyleText() {
     const attrs = this.value.split(' ');
     let cssText = '';
 
@@ -41,9 +22,5 @@ export class SplitterEachAttribute {
     }
 
     return cssText;
-  }
-
-  private buildRule(selectorText: string, cssText: string) {
-    return `${selectorText}{${cssText}}`;
   }
 }

@@ -1,5 +1,6 @@
 export const padding = ['p', 'px', 'py', 'pt', 'pb', 'pl', 'pr'] as const;
-
+export const observer = ['visible'] as const;
+export type ObserverType = typeof observer[number];
 export const margin = ['m', 'mx', 'my', 'mt', 'mb', 'ml', 'mr'] as const;
 export const widthHeight = ['w', 'min-w', 'max-w', 'h', 'min-h', 'max-h'] as const;
 export const position = ['position', 'left', 'top', 'right', 'bottom', 'z-index'] as const;
@@ -38,6 +39,7 @@ export const utilsAttributes = [
   ...border,
   ...flex,
   ...overflow,
+  ...observer,
 ] as const;
 export type UtilsAttributeType = typeof utilsAttributes[number];
 
@@ -105,5 +107,11 @@ export type CBoxUiAttribute = CBox.Ref & {
   uiCache?: { [value: string]: unknown };
   uiName?: string;
   variableCache?: Map<string, number>;
-  valueCache?: Map<string, number>;
+  valueCache?: Map<string, unknown>;
 };
+
+// to fix
+// const abbrStyleMapper = new Map([
+//   ['h', 'height'],
+//   ['w', 'width'],
+// ]);

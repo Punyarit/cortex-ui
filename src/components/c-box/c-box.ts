@@ -9,11 +9,8 @@ export class Box extends HTMLElement {
     return attributeChanged;
   }
 
-  private observer?: IntersectionObserver;
-
   async attributeChangedCallback(attr: AttributeChangedType, oldValue: string, newValue: string) {
     if (!newValue) return;
-    this.setAttribute('is-visible', 'true');
     (await import('./attributes/AttributesFactory')).AttributeFactory.construct(
       this,
       attr,

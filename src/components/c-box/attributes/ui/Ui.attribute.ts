@@ -21,7 +21,7 @@ export class UIAttribute {
           })
           .join('');
 
-        UIScopedStyles.scopeStyles(styleText, this.box, uiName, this.attr);
+        UIScopedStyles.scopeStyles('style', styleText, this.box, uiName, this.attr);
       }
     }
 
