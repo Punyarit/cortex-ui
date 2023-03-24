@@ -56,7 +56,7 @@ export class IconToggleAttribute {
   private setCSSRule() {
     if (this.value === 'none') return;
     const prefixSuffix = this.attr.split('-')[1] === 'prefix' ? '::before' : '::after';
-    ScopedIcon.scope('prop', this.createStyleText(prefixSuffix), this.attr, this.box, prefixSuffix);
+    ScopedIcon.scope('prop', this.createStyleText(prefixSuffix), this.attr, this.box);
   }
 
   private createStyleText(prefixSuffix: '::before' | '::after', iconState?: string) {

@@ -10,14 +10,7 @@ export class IconAttribute {
     UIScopedStyles.setStylesheet();
     const iconState = this.attr.split('-')[2] ? `:${this.attr.split('-')[2]}` : undefined;
     const prefixSuffix = this.attr.split('-')[1] === 'prefix' ? '::before' : '::after';
-    ScopedIcon.scope(
-      'prop',
-      this.createStyleText(prefixSuffix, iconState),
-      this.attr,
-      this.box,
-      prefixSuffix,
-      iconState
-    );
+    ScopedIcon.scope('prop', this.createStyleText(prefixSuffix, iconState), this.attr, this.box);
   }
 
   private createStyleText(prefixSuffix: '::before' | '::after', iconState?: string) {

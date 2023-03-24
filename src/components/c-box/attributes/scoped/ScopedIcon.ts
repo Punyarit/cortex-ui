@@ -9,8 +9,6 @@ export class ScopedIcon {
     styleText: string,
     attr: string,
     box: CBoxUiAttribute,
-    prefixSuffix: '::before' | '::after',
-    iconState?: string
   ) {
     if (!box.scopedCache) {
       box.scopedCache = {};
