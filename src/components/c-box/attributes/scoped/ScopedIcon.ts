@@ -13,38 +13,34 @@ export class ScopedIcon {
     iconState?: string
   ) {
     if (!box.scopedCache) {
-      box.scopedCache = new Map();
+      box.scopedCache = {};
     }
 
     let selectorText: string | undefined;
 
-    if (box.scopedCache.has(attr)) {
-      selectorText = box.scopedCache.get(attr)?.[0];
+    if (box.scopedCache[attr]) {
+      selectorText = box.scopedCache[attr][0];
     } else {
       if (box.scopedCache.size) {
-        selectorText = UIScopedStyles.setSelectorText(
-          type,
-          attr,
-          box.scopedCache.values().next().value[1]
-        );
+        selectorText = UIScopedStyles.setSelectorText(type, attr, box.scopedCache[attr][1]);
       } else {
         selectorText = UIScopedStyles.setSelectorText(type, attr, UIScopedStyles.counter);
 
         box.setAttribute(`c${UIScopedStyles.counter}`, '');
-        box.scopedCache.set(attr, [selectorText!, UIScopedStyles.counter]);
+
         UIScopedStyles.counter++;
       }
     }
 
-    const indexSelector = findCssRuleIndex(
-      UIScopedStyles.sheet,
-      `${selectorText}${iconState || ''}${prefixSuffix}`
-    );
-    if (typeof indexSelector === 'number') {
-      UIScopedStyles.sheet?.deleteRule(indexSelector);
+    if (typeof box.scopedCache?.[attr]?.[1] === 'number') {
+      UIScopedStyles.sheet?.deleteRule(box.scopedCache?.[attr]?.[1]);
+    }
+
+    if (typeof box.scopedCache?.[attr]?.[1] !== 'number') {
+      box.scopedCache[attr] = [selectorText!, UIScopedStyles.counter - 1];
     }
 
     const rule = `${selectorText}${styleText}`;
-    UIScopedStyles.sheet?.insertRule(rule, 0);
+    UIScopedStyles.sheet?.insertRule(rule, box.scopedCache[attr][1]);
   }
 }

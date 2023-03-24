@@ -1,6 +1,6 @@
-import { findCssRuleIndex } from "../../../../helpers/functions/cssRule/findCssRuleIndex"
-import { CBoxUiAttribute, UiStateType } from "../../types/attribute-changed.types"
-import { UIScopedStyles } from "./UIScoped"
+import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
+import { CBoxUiAttribute, UiStateType } from '../../types/attribute-changed.types';
+import { UIScopedStyles } from './UIScoped';
 
 export class ScopedStyle {
   static scope(
@@ -13,18 +13,18 @@ export class ScopedStyle {
   ) {
     if (styleText) {
       if (!box.scopedCache) {
-        box.scopedCache = new Map();
+        box.scopedCache = {};
       }
       let selectorText: string | undefined;
 
-      if (box.scopedCache.has(uiName)) {
-        selectorText = box.scopedCache.get(uiName)?.[0];
+      if (box.scopedCache[uiName]) {
+        selectorText = box.scopedCache[uiName][0];
       } else {
         if (box.scopedCache.size) {
           selectorText = UIScopedStyles.setSelectorText(
             type,
             attr,
-            box.scopedCache.values().next().value[1],
+            box.scopedCache[uiName][1],
             uiName,
             state
           );
@@ -38,18 +38,20 @@ export class ScopedStyle {
           );
 
           box.setAttribute(`c${UIScopedStyles.counter}`, '');
-          box.scopedCache.set(uiName, [selectorText!, UIScopedStyles.counter]);
           UIScopedStyles.counter++;
         }
       }
 
-      const indexSelector = findCssRuleIndex(UIScopedStyles.sheet, selectorText!);
-      if (typeof indexSelector === 'number') {
-        UIScopedStyles.sheet?.deleteRule(indexSelector);
+      if (typeof box.scopedCache?.[uiName]?.[1] === 'number') {
+        UIScopedStyles.sheet?.deleteRule(box.scopedCache?.[uiName]?.[1]);
+      }
+
+      if (typeof box.scopedCache?.[uiName]?.[1] !== 'number') {
+        box.scopedCache[uiName] = [selectorText!, UIScopedStyles.counter - 1];
       }
 
       const rule = `${selectorText}{${styleText}}`;
-      UIScopedStyles.sheet?.insertRule(rule, UIScopedStyles.sheet.cssRules.length);
+      UIScopedStyles.sheet?.insertRule(rule, box.scopedCache[uiName][1]);
     }
   }
 }
