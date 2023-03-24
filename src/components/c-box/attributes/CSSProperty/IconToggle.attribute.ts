@@ -1,8 +1,11 @@
 import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
+import { iconStyleMapper } from '../../styles-mapper/abbr-styles-mapper';
 import { CBoxUiAttribute } from '../../types/attribute-changed.types';
-import { UIScopedStyles } from '../UIScopedStyles';
+import { ScopedIcon } from '../scoped/ScopedIcon';
+import { ScopedProperty } from '../scoped/ScopedProperty';
+import { UIScopedStyles } from '../scoped/UIScoped';
 
-export class ToggleSplitterAttribute {
+export class IconToggleAttribute {
   constructor(private box: CBoxUiAttribute, private attr: string, private value: string) {}
 
   init() {
@@ -52,25 +55,31 @@ export class ToggleSplitterAttribute {
 
   private setCSSRule() {
     if (this.value === 'none') return;
-
-    const [size, source, color] = this.value.split(' ');
-    UIScopedStyles.scopedProperty(
-      'toggle-splitter',
-      this.createStyleText(size, source, color),
-      this.attr,
-      this.box
-    );
+    const prefixSuffix = this.attr.split('-')[1] === 'prefix' ? '::before' : '::after';
+    ScopedIcon.scope('prop', this.createStyleText(prefixSuffix), this.attr, this.box, prefixSuffix);
   }
 
-  private createStyleText(size: string, source: string, color: string) {
-    const sourceWithImportant = source.endsWith('!') ? '!important' : '';
-    const sizeWithImportant = size.endsWith('!') ? '!important' : '';
-    const colorWithImportant = color.endsWith('!') ? 'important' : '';
-
-    return `
-      --${this.attr}: ${source.replace('!', '')}${sourceWithImportant};
-      --${this.attr}-size: var(--size-${size.replace('!', '')})${sizeWithImportant};
-      --${this.attr}-color: var(--${color.replace('!', '')})${colorWithImportant};
+  private createStyleText(prefixSuffix: '::before' | '::after', iconState?: string) {
+    const [size, source, color] = this.value.split(' ');
+    if (size === 'none') {
+      return `${iconState || ''}${prefixSuffix}{
+        content: none;
+      }
       `;
+    } else {
+      const [iconSize, iconSrc, iconColor] = iconStyleMapper.get(this.attr)!;
+
+      const sourceWithImportant = source.endsWith('!') ? '!important' : '';
+      const sizeWithImportant = size.endsWith('!') ? '!important' : '';
+      const colorWithImportant = color.endsWith('!') ? '!important' : '';
+
+      return `${iconState || ''}${prefixSuffix}{
+        content: '\uE800';
+        ${iconSrc}: ${source.replace('!', '')}${sourceWithImportant};
+        ${iconSize}: var(--size-${size.replace('!', '')})${sizeWithImportant};
+        ${iconColor}: var(--${color.replace('!', '')})${colorWithImportant};
+      }
+      `;
+    }
   }
 }

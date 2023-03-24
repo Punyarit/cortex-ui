@@ -4,10 +4,6 @@ c-box {
   display: block;
 }
 
-c-box[display] {
-  display: var(--display) !important;
-}
-
 c-box[flex-center] {
   display: flex !important;
   justify-content: center;

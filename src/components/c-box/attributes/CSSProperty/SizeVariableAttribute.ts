@@ -1,17 +1,22 @@
 import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
-import { UIScopedStyles } from '../UIScopedStyles';
+import { abbrStylesMapper } from '../../styles-mapper/abbr-styles-mapper';
+import { ScopedProperty } from '../scoped/ScopedProperty';
+import { UIScopedStyles } from '../scoped/UIScoped';
 
 export class SizeVariableAttribute {
   constructor(private box: CBox.Ref, private attr: string, private value: string) {}
 
   init() {
     UIScopedStyles.setStylesheet();
-    UIScopedStyles.scopedProperty('value', this.createStyleText(), this.attr, this.box);
+    ScopedProperty.scope('prop', this.createStyleText(), this.attr, this.box);
   }
 
   private createStyleText() {
     const valueWithImportant = this.value.endsWith('!') ? '!important' : '';
 
-    return `--${this.attr}: var(--size-${this.value.replace('!', '')})${valueWithImportant};`;
+    return `{${abbrStylesMapper.get(this.attr)}: var(--size-${this.value.replace(
+      '!',
+      ''
+    )})${valueWithImportant};}`;
   }
 }

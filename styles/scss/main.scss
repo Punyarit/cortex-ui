@@ -1,4 +1,6 @@
-@import './body';
-@import './scrollbar.scss';
-@import './print';
-@import './shake-efx';
+@import './common/body';
+@import './common/scrollbar.scss';
+@import './common/print';
+@import './common/shake-efx';
+
+// 📌สาเหตุที่ไม่รวม css เป็นไฟล์เดยวเพราะ c-box.attribute จะต้องถูก นำไปใช้เป็นตัว style mapper

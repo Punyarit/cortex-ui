@@ -1,7 +1,8 @@
 import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
 import { stylesMapper } from '../../styles-mapper/styles-mapper';
 import { CBoxUiAttribute } from '../../types/attribute-changed.types';
-import { UIScopedStyles } from '../UIScopedStyles';
+import { ScopedStyle } from '../scoped/ScopedStyles'
+import { UIScopedStyles } from '../scoped/UIScoped';
 
 export class UIToggleAttribute {
   constructor(private attr: string, private box: CBoxUiAttribute, private value: string) {}
@@ -61,7 +62,7 @@ export class UIToggleAttribute {
       const [uiName, uiStyle] = this.getUiAttrs(style);
       if (uiName && uiStyle) {
         const styleText = this.getUiStyleText(uiStyle);
-        UIScopedStyles.scopeStyles('style', styleText, this.box, uiName, this.attr);
+        ScopedStyle.scope('style', styleText, this.box, uiName, this.attr);
       }
     }
   }

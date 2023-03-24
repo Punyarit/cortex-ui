@@ -88,6 +88,7 @@ export class AttributeFactory {
         ).init();
         break;
 
+      // done
       case 'ui-toggle':
         new (await import('./ui/UI-Toggle.attribute')).UIToggleAttribute(
           attr,
@@ -97,9 +98,13 @@ export class AttributeFactory {
         break;
 
       // done
-      case 'transition':
+      case 'border':
+      case 'border-left':
+      case 'border-top':
+      case 'border-right':
+      case 'border-bottom':
         if (value === 'none') return;
-        new (await import('./CSSProperty/SplitterEach.attribute')).SplitterEachAttribute(
+        new (await import('./CSSProperty/Border.attribute')).BorderAttribute(
           box,
           attr,
           value
@@ -108,7 +113,11 @@ export class AttributeFactory {
 
       // done
       case 'tx':
-      case 'border':
+        if (value === 'none') return;
+        new (await import('./CSSProperty/TextAttribute')).TextAttribute(box, attr, value).init();
+        break;
+
+      // done
       case 'icon-prefix':
       case 'icon-suffix':
       case 'icon-prefix-active':
@@ -119,12 +128,7 @@ export class AttributeFactory {
       case 'icon-suffix-hover':
       case 'icon-prefix-target':
       case 'icon-suffix-target':
-        if (value === 'none') return;
-        new (await import('./CSSProperty/Splitter.attribute')).SplitterAttribute(
-          box,
-          attr,
-          value
-        ).init();
+        new (await import('./CSSProperty/IconAttribute')).IconAttribute(box, attr, value).init();
         break;
 
       // done
@@ -132,19 +136,13 @@ export class AttributeFactory {
       case 'icon-suffix-focus':
       case 'icon-prefix-focus-visible':
       case 'icon-suffix-focus-visible':
-        if (value === 'none') return;
         box.tabIndex = 0;
-        new (await import('./CSSProperty/Splitter.attribute')).SplitterAttribute(
-          box,
-          attr,
-          value
-        ).init();
+        new (await import('./CSSProperty/IconAttribute')).IconAttribute(box, attr, value).init();
         break;
 
-      // done
       case 'icon-prefix-toggle':
       case 'icon-suffix-toggle':
-        new (await import('./CSSProperty/ToggleSplitter.attribute')).ToggleSplitterAttribute(
+        new (await import('./CSSProperty/IconToggle.attribute')).IconToggleAttribute(
           box as CBoxUiAttribute,
           attr,
           value
@@ -153,7 +151,6 @@ export class AttributeFactory {
 
       // done
       case 'bg':
-        if (value === 'none') break;
         new (await import('./CSSProperty/VariableAttribute')).VariableAttribute(
           box,
           attr,
@@ -162,8 +159,10 @@ export class AttributeFactory {
         break;
 
       // done
+      case 'transition':
       case 'cursor':
       case 'display':
+      case 'flex-basis':
       case 'flex-direction':
       case 'flex-grow':
       case 'flex-shrink':
@@ -175,7 +174,6 @@ export class AttributeFactory {
       case 'overflow-x':
       case 'overflow-y':
       case 'position':
-      case 'shadow':
       case 'tx-overflow':
       case 'tx-transform':
       case 'user-select':
@@ -205,16 +203,24 @@ export class AttributeFactory {
       case 'mt':
       case 'mr':
       case 'mb':
-      case 'mx':
-      case 'my':
       case 'p':
       case 'pl':
       case 'pt':
       case 'pr':
       case 'pb':
+        new (await import('./CSSProperty/SizeVariableAttribute')).SizeVariableAttribute(
+          box,
+          attr,
+          value
+        ).init();
+        break;
+
+      // done
+      case 'mx':
+      case 'my':
       case 'px':
       case 'py':
-        new (await import('./CSSProperty/SizeVariableAttribute')).SizeVariableAttribute(
+        new (await import('./CSSProperty/XYSizeAttribute')).XYSizeVariableAttribute(
           box,
           attr,
           value
@@ -233,3 +239,4 @@ export class AttributeFactory {
     }
   }
 }
+// case 'shadow':

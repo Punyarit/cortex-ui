@@ -112,8 +112,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
         icon-prefix="22 calendar-alt-line gray-600"
         input-date-type="${type}"
         input-box="default"
-        w="${this.var.widthInput!}"
-        h="${this.var.heightInput!}"
+        w="${this.var.widthInput!}!"
+        h="${this.var.heightInput!}!"
         >${text}</c-box
       >
     `;

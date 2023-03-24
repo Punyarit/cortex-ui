@@ -1,7 +1,8 @@
 import { findCssRuleIndex } from '../../../../helpers/functions/cssRule/findCssRuleIndex';
 import { stylesMapper } from '../../styles-mapper/styles-mapper';
 import { CBoxUiAttribute, UiStateType } from '../../types/attribute-changed.types';
-import { UIScopedStyles } from '../UIScopedStyles';
+import { ScopedStyle } from '../scoped/ScopedStyles'
+import { UIScopedStyles } from '../scoped/UIScoped';
 
 export class UIStateAttribute {
   constructor(
@@ -28,7 +29,7 @@ export class UIStateAttribute {
           })
           .join('');
 
-        UIScopedStyles.scopeStyles('state', styleText, this.box, uiName, this.attr, this.state);
+        ScopedStyle.scope('state', styleText, this.box, uiName, this.attr, this.state);
       }
     }
 

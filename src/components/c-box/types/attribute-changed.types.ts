@@ -12,7 +12,14 @@ export const display = [
   'cursor',
   'transition',
 ] as const;
-export const flex = ['flex-direction', 'flex-grow', 'flex-shrink', 'flex-wrap', 'order'] as const;
+export const flex = [
+  'flex-direction',
+  'flex-grow',
+  'flex-shrink',
+  'flex-wrap',
+  'flex-basis',
+  'order',
+] as const;
 export const text = ['tx-overflow', 'tx-transform', 'tx'] as const;
 export const overflow = ['overflow', 'overflow-x', 'overflow-y', 'overflow-y'] as const;
 export const border = [

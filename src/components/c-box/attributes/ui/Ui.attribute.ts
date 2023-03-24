@@ -1,6 +1,7 @@
 import { stylesMapper } from '../../styles-mapper/styles-mapper';
 import { CBoxUiAttribute } from '../../types/attribute-changed.types';
-import { UIScopedStyles } from '../UIScopedStyles';
+import { ScopedStyle } from '../scoped/ScopedStyles'
+import { UIScopedStyles } from '../scoped/UIScoped';
 export class UIAttribute {
   constructor(private attr: string, private box: CBoxUiAttribute, private value: string) {}
   init() {
@@ -21,7 +22,7 @@ export class UIAttribute {
           })
           .join('');
 
-        UIScopedStyles.scopeStyles('style', styleText, this.box, uiName, this.attr);
+        ScopedStyle.scope('style', styleText, this.box, uiName, this.attr);
       }
     }
 

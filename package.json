@@ -1,6 +1,6 @@
 {
   "name": "@cortex-ui/core",
-  "version": "0.0.235",
+  "version": "0.0.241",
   "description": "Cortex-UI is Web Component develop from Cortex Design System from Hlab Designer Team.",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "compress-js": "yarn gulp compress",
     "convert-scss": "yarn sass styles/scss/main.scss styles/css/cortex-ui.css --style compressed",
     "convert-cbox-attribute": "yarn sass styles/scss/c-box/attributes/index.scss styles/css/c-box.attribute.css --style compressed",
-    "convert-cbox": "yarn sass styles/scss/c-box/root.scss styles/css/c-box.utils.css --style compressed",
+    "convert-cbox": "yarn sass styles/scss/c-box/utils/index.scss styles/css/c-box.utils.css --style compressed",
     "export-components": "node script/export.script.js",
     "public": "node script/publish.script.js",
     "clear-cache": "rm -rf cx",
