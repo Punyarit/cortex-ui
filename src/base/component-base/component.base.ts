@@ -54,7 +54,7 @@ export abstract class ComponentBase<Props extends Properties>
       this.exec();
     }
 
-    if (changedProperties.has("var")) {
+    if (changedProperties.has('var')) {
       requestAnimationFrame(() => {
         this.cacheVariables(this.var);
         this.setHostVariables();
@@ -122,8 +122,8 @@ export abstract class ComponentBase<Props extends Properties>
 export class QueryRef {
   static ref = new Map<string, HTMLElement>();
 
-  public static get(queryId: string) {
-    return QueryRef.ref.get(queryId);
+  public static get<T>(queryId: string): T {
+    return QueryRef.ref.get(queryId) as T;
   }
 
   static set(queryId: string, element: HTMLElement, safeToken: symbol) {

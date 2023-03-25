@@ -21,8 +21,7 @@ export type calendarType = 'current-month' | 'previous-month' | 'next-month';
 
 export function dateFormat(date: Date | number | undefined, options?: Intl.DateTimeFormatOptions) {
   if (!date) return;
-  const formater = new Intl.DateTimeFormat('th-TH', options);
-  return formater.format(date);
+  return new Intl.DateTimeFormat('th-TH', options).format(date);
 }
 
 export function getPreviousMonth(date: Date) {

@@ -9,5 +9,5 @@ export namespace CX {
   export const Modal = ModalCaller;
   export const ModalRef = ModalSingleton;
   export const QueryRef = CXQueryRef;
-  export const Query = QueryRef.get;
+  export const Query = <T>(query: string) => QueryRef.get<T>(query);
 }

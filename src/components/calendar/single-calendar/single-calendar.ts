@@ -9,7 +9,7 @@ import {
   shortDayOption,
   yearDayOption,
 } from '../../../helpers/functions/date/date-methods';
-import { DateRangeType, SingleDate } from '../types/calendar.types';
+import { RangeValueType, DateValueType } from '../types/calendar.types';
 import { CalendarBaseMethod } from './calendar-states/calendar-base';
 import { CalendarDateRangeSelectState } from './calendar-states/daterange-select';
 import { CalendarSingleSelectState } from './calendar-states/single-select';
@@ -278,19 +278,6 @@ declare global {
       fix: Fix;
       make: Var;
     };
-
-    type Details = {
-      ['select-date']: SingleDate | DateRangeType;
-    };
-
-    type Events = {
-      ['select-date']: (detail: SelectDate.Single | SelectDate.DateRange) => void;
-    };
-
-    namespace SelectDate {
-      type Single = CustomEvent<SingleDate>;
-      type DateRange = CustomEvent<DateRangeType>;
-    }
   }
 
   interface HTMLElementTagNameMap {

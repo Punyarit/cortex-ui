@@ -1,8 +1,8 @@
-export type DateRangeType = {
+export type RangeValueType = {
   startdate: Date | undefined;
   enddate: Date | undefined;
 };
 
-export type SingleDate = {
+export type DateValueType = {
   date: Date;
 };

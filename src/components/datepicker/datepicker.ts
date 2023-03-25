@@ -5,7 +5,7 @@ import { createRef, ref } from 'lit/directives/ref.js';
 import '../c-box/c-box';
 import '../popover/popover';
 import '../calendar/calendar';
-import { DateRangeType, SingleDate } from '../calendar/types/calendar.types';
+import { RangeValueType, DateValueType } from '../calendar/types/calendar.types';
 import {
   convertDateToArrayNumber,
   dateFormat,
@@ -34,7 +34,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     valueStyle: {
       dateStyle: 'medium',
     },
-    value: undefined,
+    dateValue: undefined,
+    rangeValue: undefined,
     focusout: 'close',
     mouseleave: 'none',
   };
@@ -44,12 +45,10 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     widthInput: '310',
   };
 
-  @state()
-  private selectedDate?: Date | DateRangeType;
-
   private inputBoxWrapperRef = createRef<HTMLSlotElement>();
   private cxCalendarRef = createRef<CXCalendar.Ref>();
   private popoverContentRef = createRef<PopoverContent>();
+  private endDateCache?: Date;
 
   connectedCallback() {
     super.connectedCallback();
@@ -119,13 +118,10 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     `;
   }
   private getSelectedDateRangeText() {
-    const selectedDateRange = this.selectedDate as DateRangeType;
-    const dateRangeValue = this.set.value as DateRangeType;
+    const dateRangeValue = this.set.rangeValue as RangeValueType;
 
-    const startdate =
-      selectedDateRange?.startdate || (this.set.initValue ? dateRangeValue?.startdate : undefined);
-    const enddate =
-      selectedDateRange?.enddate || (this.set.initValue ? dateRangeValue?.enddate : undefined);
+    const startdate = this.set.initValue ? dateRangeValue?.startdate : undefined;
+    const enddate = this.set.initValue ? dateRangeValue?.enddate : undefined;
 
     const startdateFormatted = dateFormat(startdate, this.set.valueStyle);
     const enddateFormatted = dateFormat(enddate, this.set.valueStyle);
@@ -138,8 +134,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
       const { startdate, enddate } = this.getSelectedDateRangeText();
       return this.getInputBoxForDateRange(startdate, enddate);
     } else {
-      const date = (this.selectedDate as Date) || (this.set.initValue ? this.set.value : undefined);
-      const dateFormatted = dateFormat(date, this.set.valueStyle);
+      const date = this.set.initValue ? this.set.dateValue : undefined;
+      const dateFormatted = dateFormat((date as DateValueType)?.date!, this.set.valueStyle);
       return this.getInputBoxForSingleDate(dateFormatted);
     }
   }
@@ -152,6 +148,10 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
       const enddateInput = this.inputBoxWrapperRef.value!.lastElementChild as HTMLElement;
       this.setDefaultOnInputBox(firstInput);
       this.setDefaultOnInputBox(enddateInput);
+
+      if (this.set.rangeValue?.startdate && !this.set.rangeValue.enddate) {
+        this.set.rangeValue.enddate = this.endDateCache;
+      }
     } else {
       this.setDefaultOnInputBox(firstInput);
     }
@@ -175,24 +175,24 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute('enddate-selected', '');
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute(
       'old-enddate',
-      convertDateToArrayNumber((this.selectedDate as DateRangeType)?.enddate!)?.join('-')!
+      convertDateToArrayNumber(this.set.rangeValue?.enddate!)?.join('-')!
     );
-    (this.selectedDate as DateRangeType).enddate = undefined;
-    this.requestUpdate();
+
+    if (this.set?.rangeValue?.enddate) {
+      this.endDateCache = this.set.rangeValue.enddate;
+      this.set.rangeValue.enddate = undefined;
+    }
   }
 
-  private async selectDate(e: CXDatePicker.SelectDate.Single | CXDatePicker.SelectDate.DateRange) {
+  private async selectDate(e: CXDatePicker.SelectDate.Date | CXDatePicker.SelectDate.Range) {
     if (this.set.daterange) {
-      this.setSelectDateRangeFocus(e.detail as DateRangeType);
-      this.selectedDate = e.detail as DateRangeType;
-    } else {
-      this.selectedDate = (e.detail as SingleDate).date;
+      this.setSelectDateRangeFocus(e.detail as RangeValueType);
     }
     this.setCustomEvent('select-date', { ...e.detail });
     await this.setClosePopover(e.detail);
   }
 
-  private setSelectDateRangeFocus(date: DateRangeType) {
+  private setSelectDateRangeFocus(date: RangeValueType) {
     const startdateInput = this.inputBoxWrapperRef.value!.firstElementChild as HTMLElement;
     const enddateInput = this.inputBoxWrapperRef.value!.lastElementChild as HTMLElement;
 
@@ -204,14 +204,14 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     }
   }
 
-  private async setClosePopover(date: SingleDate | DateRangeType) {
+  private async setClosePopover(date: DateValueType | RangeValueType) {
     if (this.set.daterange) {
-      if (!((date as DateRangeType).startdate && (date as DateRangeType).enddate)) return;
+      if (!((date as RangeValueType).startdate && (date as RangeValueType).enddate)) return;
       // 📌 delay for animation selected enddate scale
       await delay(175);
       this.popoverContentRef.value?.popoverState?.closePopover(null);
     } else {
-      if (!(date as SingleDate).date) return;
+      if (!(date as DateValueType).date) return;
       // 📌 delay for animation selected enddate scale
       await delay(175);
       this.popoverContentRef.value?.popoverState?.closePopover(null);
@@ -268,27 +268,17 @@ declare global {
       make: Var;
     };
 
-    type Details = {
-      ['select-date']: SingleDate | DateRangeType;
-    };
-
-    type Events = {
-      ['select-date']: (detail: SelectDate.Single | SelectDate.DateRange) => void;
-    };
-
+    namespace Value {
+      type Date = DateValueType;
+      type Range = DateValueType;
+    }
     namespace SelectDate {
-      type Single = CustomEvent<SingleDate>;
-      type DateRange = CustomEvent<DateRangeType>;
+      type Date = CustomEvent<DateValueType>;
+      type Range = CustomEvent<RangeValueType>;
     }
   }
 
   interface HTMLElementTagNameMap {
     [CxDatepickerName]: CXDatePicker.Ref;
   }
-
-  // namespace JSX {
-  //  interface IntrinsicElements {
-  //   [tagName]: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> | CXDatePicker.Ref;
-  //  }
-  // }
 }

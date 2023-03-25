@@ -12,7 +12,7 @@ import {
   getPreviousMonth,
 } from '../../helpers/functions/date/date-methods';
 import { mutableElement } from '../../helpers/functions/observe-element/mutable-element';
-import { DateRangeType, SingleDate } from './types/calendar.types';
+import { RangeValueType, DateValueType } from './types/calendar.types';
 import { CxCalendarName } from './types/calendar.name';
 
 // export const onPressed = 'pressed';
@@ -27,6 +27,8 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     initValue: true,
     multiSelect: false,
     daterange: false,
+    dateValue: undefined,
+    rangeValue: undefined,
   };
 
   // 📌 0 = previous month
@@ -132,9 +134,9 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   private updateSelectedDates(): void {
-    const { initValue, value, daterange } = this.set;
+    const { initValue, dateValue, rangeValue, daterange } = this.set;
 
-    if (initValue && value) {
+    if (initValue && (dateValue || rangeValue)) {
       const calendarMonitor = this.calendarMonitorRef.value;
 
       const updateAttribute = (attributeName: string, date: Date) => {
@@ -145,12 +147,11 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       };
 
       if (daterange) {
-        const dateRangeValue = value as DateRangeType;
-        updateAttribute('startdate-selected', dateRangeValue.startdate!);
-        updateAttribute('enddate-selected', dateRangeValue.enddate!);
-        updateAttribute('latest-date-hover', dateRangeValue.enddate!);
+        updateAttribute('startdate-selected', rangeValue?.startdate!);
+        updateAttribute('enddate-selected', rangeValue?.enddate!);
+        updateAttribute('latest-date-hover', rangeValue?.enddate!);
       } else {
-        updateAttribute('single-selected', value as Date);
+        updateAttribute('single-selected', dateValue!.date);
       }
     }
   }
@@ -177,13 +178,13 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
   private selectDate = (e: Event) => {
     if (this.set.daterange) {
-      const { enddate, startdate } = (e as CXDatePicker.SelectDate.DateRange).detail;
+      const { enddate, startdate } = (e as CXDatePicker.SelectDate.Range).detail;
       this.setCustomEvent('select-date', {
         enddate,
         startdate,
       });
     } else {
-      const { date } = (e as CXDatePicker.SelectDate.Single).detail;
+      const { date } = (e as CXDatePicker.SelectDate.Date).detail;
 
       this.setCustomEvent('select-date', {
         date,
@@ -336,7 +337,8 @@ declare global {
       multiSelect?: boolean;
       initValue?: boolean;
       daterange?: boolean;
-      value?: Date | DateRangeType;
+      dateValue?: DateValueType;
+      rangeValue?: RangeValueType;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
@@ -347,19 +349,6 @@ declare global {
       fix: Fix;
       make: Var;
     };
-
-    type Details = {
-      ['select-date']: SingleDate | DateRangeType;
-    };
-
-    type Events = {
-      ['select-date']: (detail: SelectDate.Single | SelectDate.DateRange) => void;
-    };
-
-    namespace SelectDate {
-      type Single = CustomEvent<SingleDate>;
-      type DateRange = CustomEvent<DateRangeType>;
-    }
   }
 
   interface HTMLElementTagNameMap {
