@@ -26,7 +26,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     max: undefined,
     initValue: true,
     multiSelect: false,
-    daterange: false,
+    dateRange: false,
     dateValue: undefined,
     rangeValue: undefined,
   };
@@ -121,7 +121,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
             (calendar) =>
               html` <cx-single-calendar
                 @select-date="${this.selectDate}"
-                .set="${{ calendar, daterange: this.set.daterange }}">
+                .set="${{ calendar, daterange: this.set.dateRange }}">
               </cx-single-calendar>`
           )}
         </div>
@@ -134,7 +134,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   private updateSelectedDates(): void {
-    const { initValue, dateValue, rangeValue, daterange } = this.set;
+    const { initValue, dateValue, rangeValue, dateRange: daterange } = this.set;
 
     if (initValue && (dateValue || rangeValue)) {
       const calendarMonitor = this.calendarMonitorRef.value;
@@ -177,7 +177,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   private selectDate = (e: Event) => {
-    if (this.set.daterange) {
+    if (this.set.dateRange) {
       const { enddate, startdate } = (e as CXDatePicker.SelectDate.Range).detail;
       this.setCustomEvent('select-date', {
         enddate,
@@ -250,7 +250,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     });
 
     const singleCalendar = document.createElement('cx-single-calendar') as CXSingleCalendar.Ref;
-    singleCalendar.fix().calendar(generatedMonth).daterange(this.set.daterange).exec();
+    singleCalendar.fix().calendar(generatedMonth).daterange(this.set.dateRange).exec();
     singleCalendar.addEventListener('select-date', this.selectDate);
 
     return singleCalendar;
@@ -336,7 +336,7 @@ declare global {
       max?: Date;
       multiSelect?: boolean;
       initValue?: boolean;
-      daterange?: boolean;
+      dateRange?: boolean;
       dateValue?: DateValueType;
       rangeValue?: RangeValueType;
     };

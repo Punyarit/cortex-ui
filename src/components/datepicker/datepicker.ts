@@ -28,7 +28,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     max: undefined,
     initValue: true,
     multiSelect: false,
-    daterange: false,
+    dateRange: false,
     display: '1-calendar',
     inputStyle: 'long',
     valueStyle: {
@@ -130,7 +130,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private renderDateInput() {
-    if (this.set.daterange) {
+    if (this.set.dateRange) {
       const { startdate, enddate } = this.getSelectedDateRangeText();
       return this.getInputBoxForDateRange(startdate, enddate);
     } else {
@@ -144,7 +144,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     this.datepickerState = e.detail.state;
 
     const firstInput = this.inputBoxWrapperRef.value!.firstElementChild as HTMLElement;
-    if (this.set.daterange) {
+    if (this.set.dateRange) {
       const enddateInput = this.inputBoxWrapperRef.value!.lastElementChild as HTMLElement;
       this.setDefaultOnInputBox(firstInput);
       this.setDefaultOnInputBox(enddateInput);
@@ -185,7 +185,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private async selectDate(e: CXDatePicker.SelectDate.Date | CXDatePicker.SelectDate.Range) {
-    if (this.set.daterange) {
+    if (this.set.dateRange) {
       this.setSelectDateRangeFocus(e.detail as RangeValueType);
     }
     this.setCustomEvent('select-date', { ...e.detail });
@@ -205,7 +205,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private async setClosePopover(date: DateValueType | RangeValueType) {
-    if (this.set.daterange) {
+    if (this.set.dateRange) {
       if (!((date as RangeValueType).startdate && (date as RangeValueType).enddate)) return;
       // 📌 delay for animation selected enddate scale
       await delay(175);
