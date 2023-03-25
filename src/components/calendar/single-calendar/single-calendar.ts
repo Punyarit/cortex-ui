@@ -5,11 +5,10 @@ import {
   CalendarResult,
   CalendarValue,
   dateFormat,
+  getDayOfWeek,
   longMonthOption,
-  shortDayOption,
   yearDayOption,
 } from '../../../helpers/functions/date/date-methods';
-import { RangeValueType, DateValueType } from '../types/calendar.types';
 import { CalendarBaseMethod } from './calendar-states/calendar-base';
 import { CalendarDateRangeSelectState } from './calendar-states/daterange-select';
 import { CalendarSingleSelectState } from './calendar-states/single-select';
@@ -175,7 +174,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     }
   `;
 
-  public day = [0, 1, 2, 3, 4, 5, 6];
+  public day = [1, 2, 3, 4, 5, 6, 0];
   public dateSelectedDOM?: HTMLElement;
   public startDateSelectedDOM?: HTMLElement;
   public endDateSelectedDOM?: HTMLElement;
@@ -209,12 +208,9 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
         </div>
         <!-- day -->
         <div>
-          ${this.day.map(
-            (day) =>
-              html`<div class="day">
-                ${dateFormat(this.calendarMethod.dateConverted(day), shortDayOption)}
-              </div>`
-          )}
+          ${this.day.map((day) => {
+            return html`<div class="day">${getDayOfWeek(day, { weekday: 'short' })}</div>`;
+          })}
         </div>
         <!-- week -->
         <div

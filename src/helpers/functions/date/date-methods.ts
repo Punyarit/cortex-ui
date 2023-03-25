@@ -24,6 +24,14 @@ export function dateFormat(date: Date | number | undefined, options?: Intl.DateT
   return new Intl.DateTimeFormat('th-TH', options).format(date);
 }
 
+export function getDayOfWeek(dayNumber: number, options: Intl.DateTimeFormatOptions) {
+  const date = new Date();
+  const day = (date.getDay() - dayNumber) % 7;
+  date.setDate(date.getDate() - day);
+
+  return new Intl.DateTimeFormat('th-TH', options).format(date);
+}
+
 export function getPreviousMonth(date: Date) {
   const newDate = new Date(date);
   newDate.setMonth(newDate.getMonth() - 1);
