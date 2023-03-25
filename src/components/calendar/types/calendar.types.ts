@@ -1,6 +1,6 @@
 export type RangeValueType = {
-  startdate: Date | undefined;
-  enddate: Date | undefined;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
 };
 
 export type DateValueType = {

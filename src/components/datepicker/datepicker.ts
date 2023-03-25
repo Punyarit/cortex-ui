@@ -120,8 +120,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   private getSelectedDateRangeText() {
     const dateRangeValue = this.set.rangeValue as RangeValueType;
 
-    const startdate = this.set.initValue ? dateRangeValue?.startdate : undefined;
-    const enddate = this.set.initValue ? dateRangeValue?.enddate : undefined;
+    const startdate = this.set.initValue ? dateRangeValue?.startDate : undefined;
+    const enddate = this.set.initValue ? dateRangeValue?.endDate : undefined;
 
     const startdateFormatted = dateFormat(startdate, this.set.valueStyle);
     const enddateFormatted = dateFormat(enddate, this.set.valueStyle);
@@ -149,8 +149,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
       this.setDefaultOnInputBox(firstInput);
       this.setDefaultOnInputBox(enddateInput);
 
-      if (this.set.rangeValue?.startdate && !this.set.rangeValue.enddate) {
-        this.set.rangeValue.enddate = this.endDateCache;
+      if (this.set.rangeValue?.startDate && !this.set.rangeValue.endDate) {
+        this.set.rangeValue.endDate = this.endDateCache;
       }
     } else {
       this.setDefaultOnInputBox(firstInput);
@@ -175,12 +175,12 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute('enddate-selected', '');
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute(
       'old-enddate',
-      convertDateToArrayNumber(this.set.rangeValue?.enddate!)?.join('-')!
+      convertDateToArrayNumber(this.set.rangeValue?.endDate!)?.join('-')!
     );
 
-    if (this.set?.rangeValue?.enddate) {
-      this.endDateCache = this.set.rangeValue.enddate;
-      this.set.rangeValue.enddate = undefined;
+    if (this.set?.rangeValue?.endDate) {
+      this.endDateCache = this.set.rangeValue.endDate;
+      this.set.rangeValue.endDate = undefined;
     }
   }
 
@@ -196,7 +196,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     const startdateInput = this.inputBoxWrapperRef.value!.firstElementChild as HTMLElement;
     const enddateInput = this.inputBoxWrapperRef.value!.lastElementChild as HTMLElement;
 
-    if (!date.startdate) {
+    if (!date.startDate) {
       this.setFocusOnInputBox(startdateInput);
     } else {
       this.setDefaultOnInputBox(startdateInput);
@@ -206,7 +206,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
 
   private async setClosePopover(date: DateValueType | RangeValueType) {
     if (this.set.dateRange) {
-      if (!((date as RangeValueType).startdate && (date as RangeValueType).enddate)) return;
+      if (!((date as RangeValueType).startDate && (date as RangeValueType).endDate)) return;
       // 📌 delay for animation selected enddate scale
       await delay(175);
       this.popoverContentRef.value?.popoverState?.closePopover(null);

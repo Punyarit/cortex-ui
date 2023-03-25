@@ -147,9 +147,9 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       };
 
       if (daterange) {
-        updateAttribute('startdate-selected', rangeValue?.startdate!);
-        updateAttribute('enddate-selected', rangeValue?.enddate!);
-        updateAttribute('latest-date-hover', rangeValue?.enddate!);
+        updateAttribute('startdate-selected', rangeValue?.startDate!);
+        updateAttribute('enddate-selected', rangeValue?.endDate!);
+        updateAttribute('latest-date-hover', rangeValue?.endDate!);
       } else {
         updateAttribute('single-selected', dateValue!.date);
       }
@@ -178,10 +178,10 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
   private selectDate = (e: Event) => {
     if (this.set.dateRange) {
-      const { enddate, startdate } = (e as CXDatePicker.SelectDate.Range).detail;
+      const { endDate, startDate } = (e as CXDatePicker.SelectDate.Range).detail;
       this.setCustomEvent('select-date', {
-        enddate,
-        startdate,
+        endDate,
+        startDate,
       });
     } else {
       const { date } = (e as CXDatePicker.SelectDate.Date).detail;
