@@ -349,6 +349,15 @@ declare global {
       fix: Fix;
       make: Var;
     };
+
+    namespace Value {
+      type Date = DateValueType;
+      type Range = DateValueType;
+    }
+    namespace SelectDate {
+      type Date = CustomEvent<DateValueType>;
+      type Range = CustomEvent<RangeValueType>;
+    }
   }
 
   interface HTMLElementTagNameMap {
