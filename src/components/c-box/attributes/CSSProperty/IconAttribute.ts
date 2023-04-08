@@ -27,6 +27,7 @@ export class IconAttribute {
       const sizeWithImportant = size.endsWith('!') ? '!important' : '';
       const colorWithImportant = color.endsWith('!') ? '!important' : '';
 
+      //active::before {}
       return `${iconState || ''}${prefixSuffix}{
         content: '\uE800';
         ${iconSrc}: ${source.replace('!', '')}${sourceWithImportant};

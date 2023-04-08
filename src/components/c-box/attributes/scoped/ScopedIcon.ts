@@ -38,6 +38,7 @@ export class ScopedIcon {
       box.scopedCache[attr] = [selectorText!, UIScopedStyles.counter - 1];
     }
 
+    // c-box[]
     const rule = `${selectorText}${styleText}`;
     UIScopedStyles.sheet?.insertRule(rule, box.scopedCache[attr][1]);
   }
