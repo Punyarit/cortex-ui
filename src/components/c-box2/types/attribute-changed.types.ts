@@ -116,7 +116,7 @@ export type AttributeChangedType = typeof attributeChanged[number];
 export type OnToggleStatus = Record<'setToggleStatus', (status: ToggleStatus) => void>;
 export type ToggleStatus = 'default' | 'toggled';
 
-export type CBoxUiAttribute = CBox.Ref & {
+export type CBoxUiAttribute = CBoxTest.Ref & {
   scopedCache?: Record<string, [string, number]>;
   uiToggled?: boolean;
   iconToggled?: boolean;

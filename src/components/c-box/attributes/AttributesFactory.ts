@@ -3,7 +3,7 @@ import { PopoverCloseButtonErrorText } from '../errors/popover-close-button-erro
 import { AttributeChangedType, CBoxUiAttribute } from '../types/attribute-changed.types';
 
 export class AttributeFactory {
-  static async construct(box: CBox.Ref, attr: AttributeChangedType, value: string) {
+  static async construct(box: CBoxTest.Ref, attr: AttributeChangedType, value: string) {
     if (value === 'value') {
       throw `The attribute "${attr}" should not be valued as "value".`;
     }
@@ -229,7 +229,7 @@ export class AttributeFactory {
 
       case 'visible':
         new (await import('./Observer/VisibleObserver')).VisibleObserver(
-          box as CBox.Ref & { isVisible: boolean; visibleEntry: IntersectionObserverEntry },
+          box as CBoxTest.Ref & { isVisible: boolean; visibleEntry: IntersectionObserverEntry },
           value
         ).init();
         break;

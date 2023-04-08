@@ -1,15 +1,25 @@
+c-box[select-none-pointer] {
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 c-box[select-none] {
+  -webkit-user-select: none;
   user-select: none;
 }
 
 c-box[select-text] {
+  -webkit-user-select: text;
   user-select: text;
 }
 
 c-box[select-all] {
+  -webkit-user-select: all;
   user-select: all;
 }
 
 c-box[select-auto] {
+  -webkit-user-select: auto;
   user-select: auto;
 }

@@ -4,7 +4,7 @@ import { ScopedIcon } from '../scoped/ScopedIcon';
 import { UIScopedStyles } from '../scoped/UIScoped';
 
 export class IconAttribute {
-  constructor(private box: CBox.Ref, private attr: string, private value: string) {}
+  constructor(private box: CBoxTest.Ref, private attr: string, private value: string) {}
 
   init() {
     UIScopedStyles.setStylesheet();

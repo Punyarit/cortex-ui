@@ -1,1 +1,1 @@
-export const CBoxName = 'c-box';
+export const CBoxName = 'c-box_';

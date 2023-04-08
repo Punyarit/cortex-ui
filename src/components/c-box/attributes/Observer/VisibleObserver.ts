@@ -1,7 +1,7 @@
 export class VisibleObserver {
   private observer?: IntersectionObserver;
   constructor(
-    private box: CBox.Ref & { isVisible: boolean; visibleEntry: IntersectionObserverEntry },
+    private box: CBoxTest.Ref & { isVisible: boolean; visibleEntry: IntersectionObserverEntry },
     private value: string
   ) {}
   init() {

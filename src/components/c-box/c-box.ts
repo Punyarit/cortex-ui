@@ -21,7 +21,7 @@ export class Box extends HTMLElement {
 customElements.define(CBoxName, Box);
 
 declare global {
-  namespace CBox {
+  namespace CBoxTest {
     type Ref = Box;
   }
 
@@ -34,6 +34,6 @@ declare global {
   }
 
   interface HTMLElementTagNameMap {
-    [CBoxName]: CBox.Ref;
+    [CBoxName]: CBoxTest.Ref;
   }
 }

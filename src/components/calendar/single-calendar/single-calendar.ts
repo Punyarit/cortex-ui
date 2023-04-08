@@ -174,7 +174,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     }
   `;
 
-  public day = [1, 2, 3, 4, 5, 6, 0];
+  public day = [0, 1, 2, 3, 4, 5, 6];
   public dateSelectedDOM?: HTMLElement;
   public startDateSelectedDOM?: HTMLElement;
   public endDateSelectedDOM?: HTMLElement;

@@ -5,7 +5,7 @@ import { ScopedProperty } from '../scoped/ScopedProperty';
 import { UIScopedStyles } from '../scoped/UIScoped';
 
 export class ValueAttribute {
-  constructor(private box: CBox.Ref, private attr: string, private value: string) {}
+  constructor(private box: CBoxTest.Ref, private attr: string, private value: string) {}
 
   init() {
     UIScopedStyles.setStylesheet();
