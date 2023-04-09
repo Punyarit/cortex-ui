@@ -78,32 +78,12 @@ export class CBox extends HTMLElement {
       throw SyntaxError('Icon properties can only have a type of string or string[].');
     }
 
-    // for (let index = 0; index < styles.length; ++index) {
-    //   const [iconName, iconStyle] = styles[index].split(':').map((s) => s.trim());
-    //   if (iconName && iconStyle) {
-    //     const [size, color, side] = iconStyle.split(' ');
-    //     const sizeImportant = size.endsWith('!') ? '!important' : '';
-    //     const colorImportant = color.endsWith('!') ? '!important' : '';
-    //     const iconSide = side ? side : 'before';
-    //     const iconClassName = `${iconName}__${iconSide}`;
-
-    //     this.iconStyles[iconClassName] = `:host(.${iconClassName})::${iconSide}{
-    //       content: '\uE800';
-    //       font-family: ${iconName};
-    //       font-size: var(--size-${size.replace('!', '')})${sizeImportant};
-    //       color: var(--${color.replace('!', '')})${colorImportant};
-    //     }`;
-
-    //     className += (className ? ' ' : '') + iconClassName;
-    //   }
-    // }
-
     let className = '';
     // create dynamic style
     for (let index = 0; index < styles.length; ++index) {
       const [iconName, style] = styles[index].split(':').map((s) => s.trim());
       if (iconName && style) {
-        let iconSide = '';
+        let iconSide = 'before';
         const cssText = style
           .split(' ')
           .filter((s) => {
@@ -111,7 +91,7 @@ export class CBox extends HTMLElement {
               iconSide = s;
               return false;
             } else {
-              return true;
+              return Boolean(s);
             }
           })
           .map((s) => {
@@ -121,7 +101,9 @@ export class CBox extends HTMLElement {
           .join('');
         const iconClassName = `${iconName}__${iconSide}`;
         className += (className ? ' ' : '') + iconClassName;
-        this.iconStyles[iconClassName] = `:host(.${iconClassName})::${iconSide}{content: '\uE800';font-family: ${iconName};${cssText}}`;
+        this.iconStyles[
+          iconClassName
+        ] = `:host(.${iconClassName})::${iconSide}{content: '\uE800';font-family: ${iconName};${cssText}}`;
       }
     }
 
@@ -130,13 +112,17 @@ export class CBox extends HTMLElement {
   }
   public updateStyles() {
     // may be dirty but this can improve dom. *remove all whitespace without using helper function.
-    this.styleElement.textContent = `:host{display:block}${this.uiStyles ? Object.values(this.uiStyles).join('') : ''}${this.uiStates?.active ? Object.values(this.uiStates.active).join('') : ''}${this.uiStates?.focus ? Object.values(this.uiStates.focus).join('') : ''}${
-        this.uiStates?.['focus-within'] ? Object.values(this.uiStates['focus-within']).join('') : ''
-      }${
-        this.uiStates?.['focus-visible']
-          ? Object.values(this.uiStates['focus-visible']).join('')
-          : ''
-      }${this.uiStates?.hover ? Object.values(this.uiStates.hover).join('') : ''}${this.uiStates?.target ? Object.values(this.uiStates.target).join('') : ''}${this.iconStyles ? Object.values(this.iconStyles).join('') : ''}}
+    this.styleElement.textContent = `:host{display:block}${
+      this.uiStyles ? Object.values(this.uiStyles).join('') : ''
+    }${this.uiStates?.active ? Object.values(this.uiStates.active).join('') : ''}${
+      this.uiStates?.focus ? Object.values(this.uiStates.focus).join('') : ''
+    }${
+      this.uiStates?.['focus-within'] ? Object.values(this.uiStates['focus-within']).join('') : ''
+    }${
+      this.uiStates?.['focus-visible'] ? Object.values(this.uiStates['focus-visible']).join('') : ''
+    }${this.uiStates?.hover ? Object.values(this.uiStates.hover).join('') : ''}${
+      this.uiStates?.target ? Object.values(this.uiStates.target).join('') : ''
+    }${this.iconStyles ? Object.values(this.iconStyles).join('') : ''}}
     `;
   }
 
