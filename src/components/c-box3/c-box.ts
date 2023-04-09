@@ -1,8 +1,10 @@
 import { stylesMapper } from './styles-mapper/styles-mapper';
-import { UiClassName, StyleStates, UiStates } from './types/c-box.types';
+import { UiClassName, StyleStates, UiStates, UiPseudoState } from './types/c-box.types';
 
 export class CBox extends HTMLElement {
   public uiStyles?: UiClassName;
+  public uiBefore?: UiPseudoState;
+  public uiAfter?: UiPseudoState;
   public uiStates?: UiStates;
 
   public iconStyles?: UiClassName;
@@ -65,51 +67,120 @@ export class CBox extends HTMLElement {
     this.setUi(value, this, 'target');
   }
 
+  // icon
   set icon(value: string | string[]) {
     if (!value) return;
-    this.iconStyles ||= {};
-
-    let styles: string[];
-    if (typeof value === 'string') {
-      styles = value?.split(',')?.map((style) => style.trim());
-    } else if (Array.isArray(value)) {
-      styles = value;
-    } else {
-      throw SyntaxError('Icon properties can only have a type of string or string[].');
-    }
-
-    let className = '';
-    // create dynamic style
-    for (let index = 0; index < styles.length; ++index) {
-      const [iconName, style] = styles[index].split(':').map((s) => s.trim());
-      if (iconName && style) {
-        let iconSide = 'before';
-        const cssText = style
-          .split(' ')
-          .filter((s) => {
-            if (s === 'before' || s === 'after') {
-              iconSide = s;
-              return false;
-            } else {
-              return Boolean(s);
-            }
-          })
-          .map((s) => {
-            const styleProp = stylesMapper.get(`c-box[${s.replace('!', '').trim()}]`);
-            return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
-          })
-          .join('');
-        const iconClassName = `${iconName}__${iconSide}`;
-        className += (className ? ' ' : '') + iconClassName;
-        this.iconStyles[
-          iconClassName
-        ] = `:host(.${iconClassName})::${iconSide}{content: '\uE800';font-family: ${iconName};${cssText}}`;
-      }
-    }
-
-    this.className = className;
-    this.updateStyles();
+    this.setIcon(value, this);
   }
+
+  set ['icon-active'](value: string | string[]) {
+    if (!value) return;
+    this.setIcon(value, this, 'active');
+  }
+
+  set ['icon-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setIcon(value, this, 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setIcon(value, this, 'focus-within');
+  }
+
+  set ['icon-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setIcon(value, this, 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setIcon(value, this, 'hover');
+  }
+
+  set ['icon-target'](value: string | string[]) {
+    if (!value) return;
+    this.setIcon(value, this, 'target');
+  }
+
+  // before
+  set ['ui-before'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'before');
+  }
+
+  set ['ui-active-before'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'before', 'active');
+  }
+
+  set ['ui-focus-before'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'before', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-focus-visible-before'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'before', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-focus-within-before'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'before', 'focus-within');
+  }
+
+  set ['ui-hover-before'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'before', 'hover');
+  }
+
+  set ['ui-target-before'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'before', 'target');
+  }
+
+  // after
+  set ['ui-after'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'after');
+  }
+
+  set ['ui-active-after'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'after', 'active');
+  }
+
+  set ['ui-focus-after'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'after', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-focus-visible-after'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'after', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-focus-within-after'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'after', 'focus-within');
+  }
+
+  set ['ui-hover-after'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'after', 'hover');
+  }
+
+  set ['ui-target-after'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'after', 'target');
+  }
+
   public updateStyles() {
     // may be dirty but this can improve dom. *remove all whitespace without using helper function.
     this.styleElement.textContent = `:host{display:block}${
@@ -122,7 +193,9 @@ export class CBox extends HTMLElement {
       this.uiStates?.['focus-visible'] ? Object.values(this.uiStates['focus-visible']).join('') : ''
     }${this.uiStates?.hover ? Object.values(this.uiStates.hover).join('') : ''}${
       this.uiStates?.target ? Object.values(this.uiStates.target).join('') : ''
-    }${this.iconStyles ? Object.values(this.iconStyles).join('') : ''}}
+    }${this.iconStyles ? Object.values(this.iconStyles).join('') : ''}${
+      this.uiBefore ? Object.values(this.uiBefore).join('') : ''
+    }${this.uiAfter ? Object.values(this.uiAfter).join('') : ''}}
     `;
   }
 
@@ -136,6 +209,21 @@ export class CBox extends HTMLElement {
   async setUi(value: string | string[], box: CBox.Ref, state?: StyleStates) {
     const { StylesScoper } = await import('./styles-scoper/styles-scoper');
     StylesScoper.scope(value, box, state);
+  }
+
+  async setPseudoUi(
+    value: string | string[],
+    box: CBox.Ref,
+    pseudo: 'before' | 'after',
+    state?: StyleStates
+  ) {
+    const { StylesPseudo } = await import('./styles-scoper/styles-pseudo');
+    StylesPseudo.scope(value, box, pseudo, state);
+  }
+
+  async setIcon(value: string | string[], box: CBox.Ref, state?: StyleStates) {
+    const { StylesIcon } = await import('./styles-scoper/styles-icon');
+    StylesIcon.scope(value, box, state);
   }
 }
 

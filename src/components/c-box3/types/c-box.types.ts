@@ -12,4 +12,8 @@ export type UiClassName = {
   [className: string]: string;
 };
 
+export type UiPseudoState = {
+  [state: string]: string;
+};
+
 export type UiStates = Partial<Record<Partial<StyleStates>, UiClassName>>;
