@@ -19,6 +19,7 @@ export class StylesPseudo {
       throw SyntaxError('UI properties can only have a type of string or string[].');
     }
 
+    // create dynamic style
     for (let index = 0; index < styles.length; ++index) {
       const [content, style] = styles[index].split(':').map((s) => s.trim());
       if (content && style) {
@@ -37,6 +38,7 @@ export class StylesPseudo {
       }
     }
 
+    console.log('styles-pseudo.js |box.uiBefore| = ', box.uiBefore);
     box.updateStyles();
   }
 }

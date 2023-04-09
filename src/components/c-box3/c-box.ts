@@ -6,6 +6,7 @@ export class CBox extends HTMLElement {
   public uiBefore?: UiPseudoState;
   public uiAfter?: UiPseudoState;
   public uiStates?: UiStates;
+  public uiClassNames?: Record<string, string[]>;
 
   public iconStyles?: UiClassName;
 
@@ -23,7 +24,7 @@ export class CBox extends HTMLElement {
 
   set ui(value: string | string[]) {
     if (!value) return;
-    this.uiStyles ||= {};
+    this.uiStyles = {};
     this.setUi(value, this);
   }
 
@@ -207,8 +208,8 @@ export class CBox extends HTMLElement {
   }
 
   async setUi(value: string | string[], box: CBox.Ref, state?: StyleStates) {
-    const { StylesScoper } = await import('./styles-scoper/styles-scoper');
-    StylesScoper.scope(value, box, state);
+    const {  StylesScope } = await import('./styles-scope/styles-scoper');
+    StylesScope.scope(value, box, state);
   }
 
   async setPseudoUi(
@@ -217,12 +218,12 @@ export class CBox extends HTMLElement {
     pseudo: 'before' | 'after',
     state?: StyleStates
   ) {
-    const { StylesPseudo } = await import('./styles-scoper/styles-pseudo');
+    const { StylesPseudo } = await import('./styles-scope/styles-pseudo');
     StylesPseudo.scope(value, box, pseudo, state);
   }
 
   async setIcon(value: string | string[], box: CBox.Ref, state?: StyleStates) {
-    const { StylesIcon } = await import('./styles-scoper/styles-icon');
+    const { StylesIcon } = await import('./styles-scope/styles-icon');
     StylesIcon.scope(value, box, state);
   }
 }

@@ -1,20 +1,33 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { StyleStates } from '../types/c-box.types';
 
-export class StylesScoper {
+export class StylesScope {
   static scope(value: string | string[], box: CBox.Ref, state?: StyleStates) {
-    // assign styles and check type
-    let styles: string[];
+    // Convert input value to an array of styles
+    const styles = StylesScope.getStylesArray(value);
+
+    // Create dynamic styles
+    StylesScope.generateDynamicStyles(styles, box, state);
+
+    // Add classes to element
+    const className = state ? box?.uiStates?.[state] : box.uiStyles;
+    box.uiClassNames ||= {};
+    box.uiClassNames[state ? state : 'ui'] = Object.keys(className!);
+    box.className = Array.from(new Set(Object.values(box.uiClassNames).flat())).join(" ") ;
+    box.updateStyles();
+  }
+
+  static getStylesArray(value: string | string[]): string[] {
     if (typeof value === 'string') {
-      styles = value?.split(',')?.map((style) => style.trim());
+      return value.split(',').map((style) => style.trim());
     } else if (Array.isArray(value)) {
-      styles = value;
+      return value;
     } else {
       throw SyntaxError('UI properties can only have a type of string or string[].');
     }
+  }
 
-    // create dynamic style
-    let classNames = '';
+  static generateDynamicStyles(styles: string[], box: CBox.Ref, state?: StyleStates): void {
     for (let index = 0; index < styles.length; ++index) {
       const [className, style] = styles[index].split(':').map((s) => s.trim());
       if (className && style) {
@@ -27,7 +40,6 @@ export class StylesScoper {
           })
           .join('');
 
-        classNames += (classNames ? ' ' : '') + className;
         if (state && box?.uiStates?.[state]) {
           (box.uiStates as any)[state][className] = `:host(.${className}:${state}){${cssText}}`;
         } else if (box?.uiStyles) {
@@ -35,9 +47,5 @@ export class StylesScoper {
         }
       }
     }
-
-    // add classes to element
-    box.className = classNames;
-    box.updateStyles();
   }
 }
