@@ -208,7 +208,7 @@ export class CBox extends HTMLElement {
   }
 
   async setUi(value: string | string[], box: CBox.Ref, state?: StyleStates) {
-    const {  StylesScope } = await import('./styles-scope/styles-scoper');
+    const { StylesScope } = await import('./styles-scope/styles-scope');
     StylesScope.scope(value, box, state);
   }
 
