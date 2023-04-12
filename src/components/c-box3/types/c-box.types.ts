@@ -6,6 +6,7 @@ const styleStyles = [
   'focus-visible',
   'hover',
   'target',
+  'toggle',
 ] as const;
 
 export type UiClassName = {

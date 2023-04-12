@@ -5,7 +5,6 @@ export class StylesScope {
   static scope(value: string | string[], box: CBox.Ref, state?: StyleStates) {
     // Convert input value to an array of styles
     const styles = StylesScope.getStylesArray(value);
-
     // Create dynamic styles
     StylesScope.generateDynamicStyles(styles, box, state);
 
@@ -13,7 +12,16 @@ export class StylesScope {
     const className = state ? box?.uiStates?.[state] : box.uiStyles;
     box.uiClassNames ||= {};
     box.uiClassNames[state ? state : 'ui'] = Object.keys(className!);
-    box.className = Array.from(new Set(Object.values(box.uiClassNames).flat())).join(" ") ;
+    if (state !== 'toggle') {
+      box.className = Array.from(new Set(Object.values(box.uiClassNames).flat())).join(' ');
+    } else {
+      // note when use ui-toggle the limitation is cant use onmouseup
+      box.onmouseup = () => {
+        for (let index = 0; index < box.uiClassNames!.toggle.length; index++) {
+          box.classList.toggle(box.uiClassNames!.toggle[index]);
+        }
+      };
+    }
     box.updateStyles();
   }
 
@@ -41,7 +49,9 @@ export class StylesScope {
           .join('');
 
         if (state && box?.uiStates?.[state]) {
-          (box.uiStates as any)[state][className] = `:host(.${className}:${state}){${cssText}}`;
+          (box.uiStates as any)[state][className] = `:host(.${className}${
+            state !== 'toggle' ? `:${state}` : ''
+          }){${cssText}}`;
         } else if (box?.uiStyles) {
           box.uiStyles[className] = `:host(.${className}){${cssText}}`;
         }

@@ -28,6 +28,12 @@ export class CBox extends HTMLElement {
     this.setUi(value, this);
   }
 
+  set ['ui-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.checkState('toggle');
+    this.setUi(value, this, 'toggle');
+  }
+
   set ['ui-active'](value: string | string[]) {
     if (!value) return;
     this.checkState('active');
@@ -194,9 +200,11 @@ export class CBox extends HTMLElement {
       this.uiStates?.['focus-visible'] ? Object.values(this.uiStates['focus-visible']).join('') : ''
     }${this.uiStates?.hover ? Object.values(this.uiStates.hover).join('') : ''}${
       this.uiStates?.target ? Object.values(this.uiStates.target).join('') : ''
-    }${this.iconStyles ? Object.values(this.iconStyles).join('') : ''}${
-      this.uiBefore ? Object.values(this.uiBefore).join('') : ''
-    }${this.uiAfter ? Object.values(this.uiAfter).join('') : ''}}
+    }${this.uiStates?.toggle ? Object.values(this.uiStates.toggle).join('') : ''}${
+      this.iconStyles ? Object.values(this.iconStyles).join('') : ''
+    }${this.uiBefore ? Object.values(this.uiBefore).join('') : ''}${
+      this.uiAfter ? Object.values(this.uiAfter).join('') : ''
+    }}
     `;
   }
 
