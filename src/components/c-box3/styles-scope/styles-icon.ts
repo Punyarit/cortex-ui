@@ -13,7 +13,17 @@ export class StylesIcon {
     } else {
       throw SyntaxError('Icon properties can only have a type of string or string[].');
     }
+    if (state === 'toggle') {
+      box.onmouseup = () => {
+        if (box.hasAttribute('icon-toggle')) {
+          box.removeAttribute('icon-toggle');
+        } else {
+          box.setAttribute('icon-toggle', '\uE800');
+        }
+      };
+    }
 
+    const iconStyles = [];
     // create dynamic style
     for (let index = 0; index < styles.length; ++index) {
       const [iconName, style] = styles[index].split(':').map((s) => s.trim());
@@ -34,11 +44,15 @@ export class StylesIcon {
             return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
           })
           .join('');
-        box.iconStyles[state || ''] = `:host${
-          state ? `(:${state})` : ``
-        }::${iconSide}{content: '\uE800';font-family: ${iconName};${cssText}}`;
+
+        iconStyles[index] = `:host${
+          state && state !== 'toggle' ? `(:${state})` : ``
+        }::${iconSide}{content: ${
+          state === 'toggle' ? `attr(icon-toggle)` : `\uE800`
+        };font-family: ${iconName};${cssText}}`;
       }
     }
+    box.iconStyles[state || 'icon'] = iconStyles.join(' ');
 
     box.updateStyles();
   }

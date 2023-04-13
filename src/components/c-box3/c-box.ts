@@ -80,6 +80,11 @@ export class CBox extends HTMLElement {
     if (!value) return;
     this.setIcon(value, this);
   }
+  
+  set ['icon-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setIcon(value, this, 'toggle');
+  }
 
   set ['icon-active'](value: string | string[]) {
     if (!value) return;
