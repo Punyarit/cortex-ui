@@ -209,11 +209,11 @@ export class CBox extends HTMLElement {
     `;
   }
 
-  private checkState(state?: StyleStates) {
-    if (state && !this.uiStates?.[state]) {
+  private checkState(state: StyleStates) {
+    if (!this.uiStates?.[state]) {
       this.uiStates ||= {};
-      this.uiStates[state] = {};
     }
+    this.uiStates[state] = {};
   }
 
   async setUi(value: string | string[], box: CBox.Ref, state?: StyleStates) {
