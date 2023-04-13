@@ -1,27 +1,23 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
+import { ScopeToggle } from '../toggle-handler/scope-toggle';
 import { StyleStates } from '../types/c-box.types';
 
 export class StylesScope {
-  static scope(value: string | string[], box: CBox.Ref, state?: StyleStates) {
-    // Convert input value to an array of styles
-    const styles = StylesScope.getStylesArray(value);
-    // Create dynamic styles
-    StylesScope.generateDynamicStyles(styles, box, state);
+  static async scope(value: string | string[], box: CBox.Ref, state?: StyleStates) {
+    const styles = this.getStylesArray(value);
+    this.generateDynamicStyles(styles, box, state);
 
-    // Add classes to element
-    const className = state ? box?.uiStates?.[state] : box.uiStyles;
     box.uiClassNames ||= {};
-    box.uiClassNames[state ? state : 'ui'] = Object.keys(className!);
-    if (state !== 'toggle') {
-      box.className = Array.from(new Set(Object.values(box.uiClassNames).flat())).join(' ');
+    box.uiClassNames[state ? state : 'ui'] = Object.keys(
+      (state ? box?.uiStates?.[state] : box.uiStyles)!
+    );
+
+    if (state === 'toggle') {
+      (await import('../toggle-handler/scope-toggle')).ScopeToggle.handle(box);
     } else {
-      // note when use ui-toggle the limitation is cant use onmouseup
-      box.onmouseup = () => {
-        for (let index = 0; index < box.uiClassNames!.toggle.length; index++) {
-          box.classList.toggle(box.uiClassNames!.toggle[index]);
-        }
-      };
+      box.className = Array.from(new Set(Object.values(box.uiClassNames).flat())).join(' ');
     }
+
     box.updateStyles();
   }
 
@@ -36,17 +32,10 @@ export class StylesScope {
   }
 
   static generateDynamicStyles(styles: string[], box: CBox.Ref, state?: StyleStates): void {
-    for (let index = 0; index < styles.length; ++index) {
-      const [className, style] = styles[index].split(':').map((s) => s.trim());
-      if (className && style) {
-        const cssText = style
-          .split(' ')
-          .filter(Boolean)
-          .map((s) => {
-            const styleProp = stylesMapper.get(`c-box[${s.replace('!', '').trim()}]`);
-            return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
-          })
-          .join('');
+    for (const style of styles) {
+      const [className, styleValue] = style.split(':').map((s) => s.trim());
+      if (className && styleValue) {
+        const cssText = this.createCssText(styleValue);
 
         if (state && box?.uiStates?.[state]) {
           (box.uiStates as any)[state][className] = `:host(.${className}${
@@ -57,5 +46,16 @@ export class StylesScope {
         }
       }
     }
+  }
+
+  static createCssText(styleValue: string): string {
+    return styleValue
+      .split(' ')
+      .filter(Boolean)
+      .map((s) => {
+        const styleProp = stylesMapper.get(`c-box[${s.replace('!', '').trim()}]`);
+        return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
+      })
+      .join('');
   }
 }

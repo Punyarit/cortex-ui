@@ -7,6 +7,7 @@ export class CBox extends HTMLElement {
   public uiAfter?: UiPseudoState;
   public uiStates?: UiStates;
   public uiClassNames?: Record<string, string[]>;
+  public uiToggleSelectedRef?: CBox.Ref;
 
   public iconStyles?: UiClassName;
 

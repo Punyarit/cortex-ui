@@ -38,7 +38,6 @@ export class StylesPseudo {
       }
     }
 
-    console.log('styles-pseudo.js |box.uiBefore| = ', box.uiBefore);
     box.updateStyles();
   }
 }
