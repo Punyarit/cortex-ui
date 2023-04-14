@@ -21,20 +21,10 @@ export class CBox extends HTMLElement {
 
   public toggleEvents?: ToggleEvents;
   public cacheToggleEvents?: ToggleEvents;
+  public isDirty?: boolean;
 
-  public toggleStyles(toggleGroup: CBox.Ref | null) {
-    if (toggleGroup?.cacheToggleEvents) {
-      for (const event in toggleGroup.cacheToggleEvents) {
-        toggleGroup.cacheToggleEvents?.[event as UiTypes]?.();
-      }
-    }
-    for (const event in this.toggleEvents) {
-      this.toggleEvents[event as UiTypes]();
-    }
-
-    if (toggleGroup) {
-      toggleGroup.cacheToggleEvents = this.toggleEvents;
-    }
+  public async toggleStyles(toggleGroup: CBox.Ref | null) {
+    (await import('./styles-toggle/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
   }
 
   private styleElement: HTMLStyleElement;
