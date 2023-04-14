@@ -14,7 +14,7 @@ export class StylesIcon {
       throw SyntaxError('Icon properties can only have a type of string or string[].');
     }
     if (state === 'toggle') {
-      (await import('../toggle-handler/icon-toggle')).IconToggle.handle(box);
+      (await import('../styles-toggle/icon-toggle')).IconToggle.handle(box);
     }
 
     const iconStyles = [];

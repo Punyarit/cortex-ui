@@ -1,5 +1,5 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { ScopeToggle } from '../toggle-handler/scope-toggle';
+import { ScopeToggle } from '../styles-toggle/scope-toggle';
 import { StyleStates } from '../types/c-box.types';
 
 export class StylesScope {
@@ -13,7 +13,7 @@ export class StylesScope {
     );
 
     if (state === 'toggle') {
-      (await import('../toggle-handler/scope-toggle')).ScopeToggle.handle(box);
+      (await import('../styles-toggle/scope-toggle')).ScopeToggle.handle(box);
     } else {
       box.className = Array.from(new Set(Object.values(box.uiClassNames).flat())).join(' ');
     }
