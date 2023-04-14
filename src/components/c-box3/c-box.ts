@@ -1,5 +1,13 @@
 import { stylesMapper } from './styles-mapper/styles-mapper';
-import { UiClassName, StyleStates, UiStates, UiPseudoState } from './types/c-box.types';
+import {
+  UiClassName,
+  StyleStates,
+  UiStates,
+  UiPseudoState,
+  UiToggleSelectedRef,
+  ToggleEvents,
+  UiTypes,
+} from './types/c-box.types';
 
 export class CBox extends HTMLElement {
   public uiStyles?: UiClassName;
@@ -7,9 +15,25 @@ export class CBox extends HTMLElement {
   public uiAfter?: UiPseudoState;
   public uiStates?: UiStates;
   public uiClassNames?: Record<string, string[]>;
-  public uiToggleSelectedRef?: CBox.Ref;
-
   public iconStyles?: UiClassName;
+
+  public uiToggleSelectedRef?: UiToggleSelectedRef;
+
+  public toggleEvents?: ToggleEvents;
+  public cacheToggleEvents?: ToggleEvents;
+
+  public toggleStyles(toggleGroup: CBox.Ref) {
+    if (toggleGroup?.cacheToggleEvents) {
+      for (const event in toggleGroup.cacheToggleEvents) {
+        toggleGroup.cacheToggleEvents?.[event as UiTypes]?.();
+      }
+    }
+    for (const event in this.toggleEvents) {
+      this.toggleEvents[event as UiTypes]();
+    }
+
+    toggleGroup.cacheToggleEvents = this.toggleEvents;
+  }
 
   private styleElement: HTMLStyleElement;
   constructor() {
@@ -80,7 +104,7 @@ export class CBox extends HTMLElement {
     if (!value) return;
     this.setIcon(value, this);
   }
-  
+
   set ['icon-toggle'](value: string | string[]) {
     if (!value) return;
     this.setIcon(value, this, 'toggle');

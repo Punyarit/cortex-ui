@@ -1,33 +1,41 @@
+import { ToggleEvents } from '../types/c-box.types';
+
 export class ScopeToggle {
   static handle(box: CBox.Ref) {
-    box.onmouseup = () => {
-      const toggleGroup = box.closest('c-box[toggle-group]') as CBox.Ref;
+    const toggleGroup = box.closest('c-box[toggle-group]') as CBox.Ref;
+    box.toggleEvents ||= {} as ToggleEvents;
+
+    box.toggleEvents.ui = () => {
       if (toggleGroup) {
-        this.handleToggleGroup(toggleGroup, box);
+        if (toggleGroup?.uiToggleSelectedRef?.ui) {
+          this.handleClasses(
+            toggleGroup.uiToggleSelectedRef?.ui,
+            toggleGroup.uiToggleSelectedRef?.ui.uiClassNames!.toggle,
+            true
+          );
+        }
+
+        if (toggleGroup?.uiToggleSelectedRef?.ui !== box) {
+          this.handleClasses(box, box.uiClassNames!.toggle);
+          toggleGroup.uiToggleSelectedRef ||= {} as {
+            ui: CBox.Ref;
+            icon: CBox.Ref;
+          };
+
+          toggleGroup.uiToggleSelectedRef.ui = box;
+        } else {
+          (toggleGroup.uiToggleSelectedRef as any).ui = undefined;
+        }
       } else {
-        this.toggleClasses(box, box.uiClassNames!.toggle);
+        this.handleClasses(box, box.uiClassNames!.toggle);
       }
+    };
+    box.onmouseup = () => {
+      box.toggleStyles(toggleGroup);
     };
   }
 
-  static handleToggleGroup(toggleGroup: CBox.Ref, box: CBox.Ref): void {
-    if (toggleGroup?.uiToggleSelectedRef) {
-      this.toggleClasses(
-        toggleGroup.uiToggleSelectedRef,
-        toggleGroup.uiToggleSelectedRef.uiClassNames!.toggle,
-        true
-      );
-    }
-
-    if (toggleGroup?.uiToggleSelectedRef !== box) {
-      this.toggleClasses(box, box.uiClassNames!.toggle);
-      toggleGroup.uiToggleSelectedRef = box;
-    } else {
-      toggleGroup.uiToggleSelectedRef = undefined;
-    }
-  }
-
-  static toggleClasses(box: CBox.Ref, classNames: string[], removeOnly = false): void {
+  static handleClasses(box: CBox.Ref, classNames: string[], removeOnly = false): void {
     for (const className of classNames) {
       if (removeOnly) {
         box.classList.remove(className);

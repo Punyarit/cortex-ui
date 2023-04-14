@@ -17,4 +17,10 @@ export type UiPseudoState = {
   [state: string]: string;
 };
 
+export type UiTypes = 'ui' | 'icon';
+
+export type UiToggleSelectedRef = Record<UiTypes, CBox.Ref>;
+
+export type ToggleEvents = Record<UiTypes, Function>;
+
 export type UiStates = Partial<Record<Partial<StyleStates>, UiClassName>>;

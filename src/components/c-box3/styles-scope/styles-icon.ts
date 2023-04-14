@@ -2,7 +2,7 @@ import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { StyleStates } from '../types/c-box.types';
 
 export class StylesIcon {
-  static scope(value: string | string[], box: CBox.Ref, state?: StyleStates) {
+  static async scope(value: string | string[], box: CBox.Ref, state?: StyleStates) {
     box.iconStyles ||= {};
 
     let styles: string[];
@@ -14,13 +14,7 @@ export class StylesIcon {
       throw SyntaxError('Icon properties can only have a type of string or string[].');
     }
     if (state === 'toggle') {
-      box.onmouseup = () => {
-        if (box.hasAttribute('icon-toggle')) {
-          box.removeAttribute('icon-toggle');
-        } else {
-          box.setAttribute('icon-toggle', '\uE800');
-        }
-      };
+      (await import('../toggle-handler/icon-toggle')).IconToggle.handle(box);
     }
 
     const iconStyles = [];
@@ -48,7 +42,7 @@ export class StylesIcon {
         iconStyles[index] = `:host${
           state && state !== 'toggle' ? `(:${state})` : ``
         }::${iconSide}{content: ${
-          state === 'toggle' ? `attr(icon-toggle)` : `\uE800`
+          state === 'toggle' ? `attr(icon-toggle-value)` : `'\uE800'`
         };font-family: ${iconName};${cssText}}`;
       }
     }
