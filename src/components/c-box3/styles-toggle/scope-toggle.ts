@@ -2,7 +2,7 @@ import { ToggleEvents } from '../types/c-box.types';
 
 export class ScopeToggle {
   static handle(box: CBox.Ref) {
-    const toggleGroup = box.closest('c-box[toggle-group]') as CBox.Ref;
+    const toggleGroup: CBox.Ref | null = box.closest('c-box[toggle-group]');
     box.toggleEvents ||= {} as ToggleEvents;
 
     box.toggleEvents.ui = () => {

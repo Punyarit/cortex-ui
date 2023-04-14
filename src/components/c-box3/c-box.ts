@@ -22,7 +22,7 @@ export class CBox extends HTMLElement {
   public toggleEvents?: ToggleEvents;
   public cacheToggleEvents?: ToggleEvents;
 
-  public toggleStyles(toggleGroup: CBox.Ref) {
+  public toggleStyles(toggleGroup: CBox.Ref | null) {
     if (toggleGroup?.cacheToggleEvents) {
       for (const event in toggleGroup.cacheToggleEvents) {
         toggleGroup.cacheToggleEvents?.[event as UiTypes]?.();
@@ -32,7 +32,9 @@ export class CBox extends HTMLElement {
       this.toggleEvents[event as UiTypes]();
     }
 
-    toggleGroup.cacheToggleEvents = this.toggleEvents;
+    if (toggleGroup) {
+      toggleGroup.cacheToggleEvents = this.toggleEvents;
+    }
   }
 
   private styleElement: HTMLStyleElement;
