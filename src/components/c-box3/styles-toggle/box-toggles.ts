@@ -19,7 +19,7 @@ export class BoxToggle {
         }
         toggleGroup.isToggleDirty = false;
       } else {
-        toggleGroup.isToggleDirty = true;
+        toggleGroup.isToggleDirty = !toggleGroup.isToggleDirty;
       }
     }
     for (const event in box.toggleEvents) {
