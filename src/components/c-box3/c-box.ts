@@ -1,4 +1,3 @@
-import { stylesMapper } from './styles-mapper/styles-mapper';
 import {
   UiClassName,
   StyleStates,
@@ -6,7 +5,8 @@ import {
   UiPseudoState,
   UiToggleSelectedRef,
   ToggleEvents,
-  UiTypes,
+  UiSpacing,
+  UiSpacingTypes,
 } from './types/c-box.types';
 
 export class CBox extends HTMLElement {
@@ -23,6 +23,7 @@ export class CBox extends HTMLElement {
   public cacheToggleEvents?: ToggleEvents;
   public isToggleDirty?: boolean;
 
+  public uiSpacing?: UiSpacing;
   public async toggleStyles(toggleGroup: CBox.Ref | null) {
     (await import('./styles-toggle/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
   }
@@ -187,7 +188,6 @@ export class CBox extends HTMLElement {
     this.setPseudoUi(value, this, 'after', 'toggle');
   }
 
-
   set ['ui-after-active'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'after', 'active');
@@ -220,6 +220,103 @@ export class CBox extends HTMLElement {
     this.setPseudoUi(value, this, 'after', 'target');
   }
 
+  // spacing
+  set w(value: string) {
+    this.setSpacing(value, 'width', 'w');
+  }
+
+  set ['max-w'](value: string) {
+    this.setSpacing(value, 'max-width', 'max-w');
+  }
+
+  set ['min-w'](value: string) {
+    this.setSpacing(value, 'min-width', 'min-w');
+  }
+
+  set h(value: string) {
+    this.setSpacing(value, 'height', 'h');
+  }
+
+  set ['max-h'](value: string) {
+    this.setSpacing(value, 'max-height', 'max-h');
+  }
+
+  set ['min-h'](value: string) {
+    this.setSpacing(value, 'min-height', 'min-h');
+  }
+
+  set p(value: string) {
+    this.setSpacing(value, 'padding', 'p');
+  }
+
+  set pl(value: string) {
+    this.setSpacing(value, 'padding-left', 'pl');
+  }
+
+  set pt(value: string) {
+    this.setSpacing(value, 'padding-top', 'pt');
+  }
+
+  set pr(value: string) {
+    this.setSpacing(value, 'padding-right', 'pr');
+  }
+
+  set pb(value: string) {
+    this.setSpacing(value, 'padding-bottom', 'pb');
+  }
+
+  set px(value: string) {
+    this.setSpacing(value, ['padding-left', 'padding-right'], 'px');
+  }
+
+  set py(value: string) {
+    this.setSpacing(value, ['padding-top', 'padding-bottom'], 'py');
+  }
+
+  set m(value: string) {
+    this.setSpacing(value, 'margin', 'm');
+  }
+
+  set ml(value: string) {
+    this.setSpacing(value, 'margin-left', 'ml');
+  }
+
+  // the mt property sometimes not working. it may be related to collapsing margins.
+  // workaround add: inline-block / transition to target element
+  set mt(value: string) {
+    this.setSpacing(value, 'margin-top', 'mt');
+  }
+
+  set mr(value: string) {
+    this.setSpacing(value, 'margin-right', 'mr');
+  }
+
+  set mb(value: string) {
+    this.setSpacing(value, 'margin-bottom', 'mb');
+  }
+
+  set mx(value: string) {
+    this.setSpacing(value, ['margin-left', 'margin-right'], 'mx');
+  }
+
+  set my(value: string) {
+    this.setSpacing(value, ['margin-top', 'margin-bottom'], 'my');
+  }
+
+  public async setSpacing(
+    value: string,
+    style: UiSpacingTypes | UiSpacingTypes | UiSpacingTypes[],
+    attr: string
+  ) {
+    if (!value) return;
+    (await import('./styles-scope/styles-attributes')).StylesAttributes.setSpacing(
+      this,
+      value,
+      style,
+      attr
+    );
+  }
+
   public updateStyles() {
     // may be dirty but this can improve dom. *remove all whitespace without using helper function.
     this.styleElement.textContent = `:host{display:block}${
@@ -236,6 +333,16 @@ export class CBox extends HTMLElement {
       this.iconStyles ? Object.values(this.iconStyles).join('') : ''
     }${this.uiBefore ? Object.values(this.uiBefore).join('') : ''}${
       this.uiAfter ? Object.values(this.uiAfter).join('') : ''
+    }${this.uiSpacing?.width || ''}${this.uiSpacing?.height || ''}${this.uiSpacing?.padding || ''}${
+      this.uiSpacing?.['padding-left'] || ''
+    }${this.uiSpacing?.['padding-top'] || ''}${this.uiSpacing?.['padding-right'] || ''}${
+      this.uiSpacing?.['padding-bottom'] || ''
+    }${this.uiSpacing?.margin || ''}${this.uiSpacing?.['margin-left'] || ''}${
+      this.uiSpacing?.['margin-top'] || ''
+    }${this.uiSpacing?.['margin-right'] || ''}${this.uiSpacing?.['margin-bottom'] || ''}${
+      this.uiSpacing?.['max-width'] || ''
+    }${this.uiSpacing?.['max-height'] || ''}${this.uiSpacing?.['min-width'] || ''}${
+      this.uiSpacing?.['min-height'] || ''
     }}
     `;
   }
