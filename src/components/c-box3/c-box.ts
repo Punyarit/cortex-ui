@@ -266,11 +266,11 @@ export class CBox extends HTMLElement {
   }
 
   set px(value: string) {
-    this.setSpacing(value, ['padding-left', 'padding-right'], 'px');
+    this.setSpacing(value, ['padding-left', 'padding-right'], 'px', 'padding-x');
   }
 
   set py(value: string) {
-    this.setSpacing(value, ['padding-top', 'padding-bottom'], 'py');
+    this.setSpacing(value, ['padding-top', 'padding-bottom'], 'py', 'padding-y');
   }
 
   set m(value: string) {
@@ -296,24 +296,26 @@ export class CBox extends HTMLElement {
   }
 
   set mx(value: string) {
-    this.setSpacing(value, ['margin-left', 'margin-right'], 'mx');
+    this.setSpacing(value, ['margin-left', 'margin-right'], 'mx', 'margin-x');
   }
 
   set my(value: string) {
-    this.setSpacing(value, ['margin-top', 'margin-bottom'], 'my');
+    this.setSpacing(value, ['margin-top', 'margin-bottom'], 'my', 'margin-y');
   }
 
   public async setSpacing(
     value: string,
     style: UiSpacingTypes | UiSpacingTypes | UiSpacingTypes[],
-    attr: string
+    attr: string,
+    axis?: 'margin-x' | 'margin-y' | 'padding-x' | 'padding-y'
   ) {
     if (!value) return;
     (await import('./styles-scope/styles-attributes')).StylesAttributes.setSpacing(
       this,
       value,
       style,
-      attr
+      attr,
+      axis
     );
   }
 
@@ -340,10 +342,12 @@ export class CBox extends HTMLElement {
     }${this.uiSpacing?.margin || ''}${this.uiSpacing?.['margin-left'] || ''}${
       this.uiSpacing?.['margin-top'] || ''
     }${this.uiSpacing?.['margin-right'] || ''}${this.uiSpacing?.['margin-bottom'] || ''}${
-      this.uiSpacing?.['max-width'] || ''
-    }${this.uiSpacing?.['max-height'] || ''}${this.uiSpacing?.['min-width'] || ''}${
-      this.uiSpacing?.['min-height'] || ''
-    }}
+      this.uiSpacing?.['margin-x'] || ''
+    }${this.uiSpacing?.['margin-y'] || ''}${this.uiSpacing?.['padding-x'] || ''}${
+      this.uiSpacing?.['padding-y'] || ''
+    }${this.uiSpacing?.['max-width'] || ''}${this.uiSpacing?.['max-height'] || ''}${
+      this.uiSpacing?.['min-width'] || ''
+    }${this.uiSpacing?.['min-height'] || ''}}
     `;
   }
 

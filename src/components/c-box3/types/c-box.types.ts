@@ -38,9 +38,13 @@ export type UiSpacingTypes =
   | 'padding-top'
   | 'padding-right'
   | 'padding-bottom'
+  | 'padding-x'
+  | 'padding-y'
   | 'margin'
   | 'margin-left'
   | 'margin-top'
   | 'margin-right'
-  | 'margin-bottom';
+  | 'margin-bottom'
+  | 'margin-x'
+  | 'margin-y';
 export type UiSpacing = Partial<Record<UiSpacingTypes, string>>;
