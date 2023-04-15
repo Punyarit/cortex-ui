@@ -21,7 +21,7 @@ export class CBox extends HTMLElement {
 
   public toggleEvents?: ToggleEvents;
   public cacheToggleEvents?: ToggleEvents;
-  public isDirty?: boolean;
+  public isToggleDirty?: boolean;
 
   public async toggleStyles(toggleGroup: CBox.Ref | null) {
     (await import('./styles-toggle/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
@@ -140,34 +140,34 @@ export class CBox extends HTMLElement {
     this.setPseudoUi(value, this, 'before');
   }
 
-  set ['ui-active-before'](value: string | string[]) {
+  set ['ui-before-active'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'before', 'active');
   }
 
-  set ['ui-focus-before'](value: string | string[]) {
+  set ['ui-before-focus'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'before', 'focus');
     this.tabIndex = 0;
   }
 
-  set ['ui-focus-visible-before'](value: string | string[]) {
+  set ['ui-before-focus-visible'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'before', 'focus-visible');
     this.tabIndex = 0;
   }
 
-  set ['ui-focus-within-before'](value: string | string[]) {
+  set ['ui-before-focus-within'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'before', 'focus-within');
   }
 
-  set ['ui-hover-before'](value: string | string[]) {
+  set ['ui-before-hover'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'before', 'hover');
   }
 
-  set ['ui-target-before'](value: string | string[]) {
+  set ['ui-before-target'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'before', 'target');
   }
@@ -178,34 +178,34 @@ export class CBox extends HTMLElement {
     this.setPseudoUi(value, this, 'after');
   }
 
-  set ['ui-active-after'](value: string | string[]) {
+  set ['ui-after-active'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'after', 'active');
   }
 
-  set ['ui-focus-after'](value: string | string[]) {
+  set ['ui-after-focus'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'after', 'focus');
     this.tabIndex = 0;
   }
 
-  set ['ui-focus-visible-after'](value: string | string[]) {
+  set ['ui-after-focus-visible'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'after', 'focus-visible');
     this.tabIndex = 0;
   }
 
-  set ['ui-focus-within-after'](value: string | string[]) {
+  set ['ui-after-focus-within'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'after', 'focus-within');
   }
 
-  set ['ui-hover-after'](value: string | string[]) {
+  set ['ui-after-hover'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'after', 'hover');
   }
 
-  set ['ui-target-after'](value: string | string[]) {
+  set ['ui-after-target'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'after', 'target');
   }

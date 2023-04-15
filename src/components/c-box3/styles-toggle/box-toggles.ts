@@ -8,7 +8,7 @@ export class BoxToggle {
           toggleGroup.cacheToggleEvents?.[event as UiTypes]?.();
         }
       } else if (toggleGroup?.cacheToggleEvents !== box.toggleEvents) {
-        if (toggleGroup.isDirty) {
+        if (toggleGroup.isToggleDirty) {
           for (const event in box.toggleEvents) {
             toggleGroup.cacheToggleEvents?.[event as UiTypes]?.();
           }
@@ -17,9 +17,9 @@ export class BoxToggle {
             toggleGroup.cacheToggleEvents?.[event as UiTypes]?.();
           }
         }
-        toggleGroup.isDirty = false;
+        toggleGroup.isToggleDirty = false;
       } else {
-        toggleGroup.isDirty = true;
+        toggleGroup.isToggleDirty = true;
       }
     }
     for (const event in box.toggleEvents) {

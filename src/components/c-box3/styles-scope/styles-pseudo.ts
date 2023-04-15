@@ -22,8 +22,12 @@ export class StylesPseudo {
     // create dynamic style
     for (let index = 0; index < styles.length; ++index) {
       const [content, style] = styles[index].split(':').map((s) => s.trim());
-      if (content && style) {
-        const cssText = style
+      // style can be undefined
+      const styleTexts = style || content;
+
+      // content can be empty string ""
+      if (styleTexts) {
+        const cssText = styleTexts
           .split(' ')
           .filter(Boolean)
           .map((s) => {
@@ -34,7 +38,7 @@ export class StylesPseudo {
 
         (box[pseudo === 'before' ? 'uiBefore' : 'uiAfter'] as UiPseudoState)[state || ''] = `:host${
           state ? `(:${state})` : ``
-        }::${pseudo}{content:'${content}';${cssText}}`;
+        }::${pseudo}{content:'${style ? content : ''}';${cssText}}`;
       }
     }
 
