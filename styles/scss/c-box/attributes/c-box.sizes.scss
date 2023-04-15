@@ -155,5 +155,13 @@ $end: 200;
     c-box[indent-#{$i}] {
       text-indent: var(--size-#{$i});
     }
+
+    c-box[translate-x-#{$i}] {
+      transform: translateX(var(--size-#{$i}));
+    }
+
+    c-box[translate-y-#{$i}] {
+      transform: translateY(var(--size-#{$i}));
+    }
   }
 }
