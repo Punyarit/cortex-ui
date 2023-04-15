@@ -24,6 +24,8 @@ export class CBox extends HTMLElement {
   public isToggleDirty?: boolean;
 
   public uiSpacing?: UiSpacing;
+
+  public uiAnimate?: any;
   public async toggleStyles(toggleGroup: CBox.Ref | null) {
     (await import('./styles-toggle/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
   }
@@ -38,6 +40,14 @@ export class CBox extends HTMLElement {
     const slot = document.createElement('slot');
     shadowRoot.appendChild(this.styleElement);
     shadowRoot.appendChild(slot);
+  }
+
+  set ['ui-animate'](value: string[]) {
+    this.setAnimation(value);
+  }
+
+  public async setAnimation(value: string[]) {
+    (await import('./styles-scope/styles-animate')).StylesAnimate.animate(this, value);
   }
 
   set ui(value: string | string[]) {
@@ -347,7 +357,7 @@ export class CBox extends HTMLElement {
       this.uiSpacing?.['padding-y'] || ''
     }${this.uiSpacing?.['max-width'] || ''}${this.uiSpacing?.['max-height'] || ''}${
       this.uiSpacing?.['min-width'] || ''
-    }${this.uiSpacing?.['min-height'] || ''}}
+    }${this.uiSpacing?.['min-height'] || ''}${this.uiAnimate || ''}}
     `;
   }
 
