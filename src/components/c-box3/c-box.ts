@@ -140,6 +140,11 @@ export class CBox extends HTMLElement {
     this.setPseudoUi(value, this, 'before');
   }
 
+  set ['ui-before-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'before', 'toggle');
+  }
+
   set ['ui-before-active'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'before', 'active');
@@ -177,6 +182,11 @@ export class CBox extends HTMLElement {
     if (!value) return;
     this.setPseudoUi(value, this, 'after');
   }
+  set ['ui-after-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUi(value, this, 'after', 'toggle');
+  }
+
 
   set ['ui-after-active'](value: string | string[]) {
     if (!value) return;

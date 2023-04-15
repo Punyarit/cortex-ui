@@ -1,4 +1,4 @@
-import { ToggleEvents } from '../types/c-box.types';
+import { ToggleEvents, UiToggleSelectedRef } from '../types/c-box.types';
 
 export class ScopeToggle {
   static handle(box: CBox.Ref) {
@@ -17,14 +17,11 @@ export class ScopeToggle {
 
         if (toggleGroup?.uiToggleSelectedRef?.ui !== box) {
           this.handleClasses(box, box.uiClassNames!.toggle);
-          toggleGroup.uiToggleSelectedRef ||= {} as {
-            ui: CBox.Ref;
-            icon: CBox.Ref;
-          };
+          toggleGroup.uiToggleSelectedRef ||= {} as UiToggleSelectedRef;
 
           toggleGroup.uiToggleSelectedRef.ui = box;
         } else {
-          (toggleGroup.uiToggleSelectedRef as any).ui = undefined;
+          toggleGroup.uiToggleSelectedRef.ui = undefined;
         }
       } else {
         this.handleClasses(box, box.uiClassNames!.toggle);

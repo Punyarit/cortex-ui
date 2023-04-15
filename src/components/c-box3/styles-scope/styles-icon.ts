@@ -40,10 +40,8 @@ export class StylesIcon {
           .join('');
 
         iconStyles[index] = `:host${
-          state && state !== 'toggle' ? `(:${state})` : ``
-        }::${iconSide}{content: ${
-          state === 'toggle' ? `attr(icon-toggle-value)` : `'\uE800'`
-        };font-family: ${iconName};${cssText}}`;
+          state === 'toggle' ? '([icon-toggle])' : state ? `(:${state})` : ''
+        }::${iconSide}{content: '\uE800';font-family: ${iconName};${cssText}}`;
       }
     }
     box.iconStyles[state || 'icon'] = iconStyles.join(' ');

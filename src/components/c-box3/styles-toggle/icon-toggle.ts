@@ -1,4 +1,4 @@
-import { ToggleEvents } from '../types/c-box.types';
+import { ToggleEvents, UiToggleSelectedRef } from '../types/c-box.types';
 
 export class IconToggle {
   static handle(box: CBox.Ref) {
@@ -8,24 +8,21 @@ export class IconToggle {
     box.toggleEvents.icon = () => {
       if (toggleGroup) {
         if (toggleGroup?.uiToggleSelectedRef?.icon) {
-          toggleGroup.uiToggleSelectedRef.icon.removeAttribute('icon-toggle-value');
+          toggleGroup.uiToggleSelectedRef.icon.removeAttribute('icon-toggle');
         }
 
         if (toggleGroup?.uiToggleSelectedRef?.icon !== box) {
-          box.setAttribute('icon-toggle-value', '\uE800');
-          toggleGroup.uiToggleSelectedRef ||= {} as {
-            ui: CBox.Ref;
-            icon: CBox.Ref;
-          };
+          box.setAttribute('icon-toggle', '');
+          toggleGroup.uiToggleSelectedRef ||= {} as UiToggleSelectedRef;
           toggleGroup.uiToggleSelectedRef.icon = box;
         } else {
-          (toggleGroup.uiToggleSelectedRef as any).icon = undefined;
+          toggleGroup.uiToggleSelectedRef.icon = undefined;
         }
       } else {
-        if (box.hasAttribute('icon-toggle-value')) {
-          box.removeAttribute('icon-toggle-value');
+        if (box.hasAttribute('icon-toggle')) {
+          box.removeAttribute('icon-toggle');
         } else {
-          box.setAttribute('icon-toggle-value', '\uE800');
+          box.setAttribute('icon-toggle', '');
         }
       }
     };

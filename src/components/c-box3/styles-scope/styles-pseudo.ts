@@ -2,7 +2,7 @@ import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { StyleStates, UiPseudoState } from '../types/c-box.types';
 
 export class StylesPseudo {
-  static scope(
+  static async scope(
     value: string | string[],
     box: CBox.Ref,
     pseudo: 'before' | 'after',
@@ -19,10 +19,14 @@ export class StylesPseudo {
       throw SyntaxError('UI properties can only have a type of string or string[].');
     }
 
+    if (state === 'toggle') {
+      (await import('../styles-toggle/pseudo-toggle')).PseudoToggle.handle(box, pseudo);
+    }
+
     // create dynamic style
     for (let index = 0; index < styles.length; ++index) {
       const [content, style] = styles[index].split(':').map((s) => s.trim());
-      // style can be undefined
+      // style can be undefined *note if style = undefined that mean content is styles (ui-before="styles")
       const styleTexts = style || content;
 
       // content can be empty string ""
@@ -37,7 +41,7 @@ export class StylesPseudo {
           .join('');
 
         (box[pseudo === 'before' ? 'uiBefore' : 'uiAfter'] as UiPseudoState)[state || ''] = `:host${
-          state ? `(:${state})` : ``
+          state === 'toggle' ? `([${pseudo}-toggle])` : state ? `(:${state})` : ''
         }::${pseudo}{content:'${style ? content : ''}';${cssText}}`;
       }
     }

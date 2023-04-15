@@ -17,9 +17,9 @@ export type UiPseudoState = {
   [state: string]: string;
 };
 
-export type UiTypes = 'ui' | 'icon';
+export type UiTypes = 'ui' | 'icon' | 'before' | 'after';
 
-export type UiToggleSelectedRef = Record<UiTypes, CBox.Ref>;
+export type UiToggleSelectedRef = Record<UiTypes, CBox.Ref | undefined>;
 
 export type ToggleEvents = Record<UiTypes, Function>;
 
