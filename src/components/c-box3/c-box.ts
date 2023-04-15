@@ -7,6 +7,7 @@ import {
   ToggleEvents,
   UiSpacing,
   UiSpacingTypes,
+  UiAnimateState,
 } from './types/c-box.types';
 
 export class CBox extends HTMLElement {
@@ -25,7 +26,10 @@ export class CBox extends HTMLElement {
 
   public uiSpacing?: UiSpacing;
 
-  public uiAnimate?: any;
+  public uiAnimate?: string;
+
+  public uiAnimateStates?: UiAnimateState;
+
   public async toggleStyles(toggleGroup: CBox.Ref | null) {
     (await import('./styles-toggle/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
   }
@@ -46,8 +50,34 @@ export class CBox extends HTMLElement {
     this.setAnimation(value);
   }
 
-  public async setAnimation(value: string[]) {
-    (await import('./styles-scope/styles-animate')).StylesAnimate.animate(this, value);
+  set ['ui-animate-active'](value: string[]) {
+    this.setAnimation(value, 'active');
+  }
+
+  set ['ui-animate-focus'](value: string[]) {
+    this.setAnimation(value, 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-animate-focus-within'](value: string[]) {
+    this.setAnimation(value, 'focus-within');
+  }
+
+  set ['ui-animate-focus-visible'](value: string[]) {
+    this.setAnimation(value, 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-animate-hover'](value: string[]) {
+    this.setAnimation(value, 'hover');
+  }
+
+  set ['ui-animate-target'](value: string[]) {
+    this.setAnimation(value, 'target');
+  }
+
+  public async setAnimation(value: string[], state?: StyleStates) {
+    (await import('./styles-scope/styles-animate')).StylesAnimate.animate(this, value, state);
   }
 
   set ui(value: string | string[]) {
@@ -357,7 +387,13 @@ export class CBox extends HTMLElement {
       this.uiSpacing?.['padding-y'] || ''
     }${this.uiSpacing?.['max-width'] || ''}${this.uiSpacing?.['max-height'] || ''}${
       this.uiSpacing?.['min-width'] || ''
-    }${this.uiSpacing?.['min-height'] || ''}${this.uiAnimate || ''}}
+    }${this.uiSpacing?.['min-height'] || ''}${this.uiAnimate || ''}${
+      this.uiAnimateStates?.active || ''
+    }${this.uiAnimateStates?.['focus-visible'] || ''}${
+      this.uiAnimateStates?.['focus-within'] || ''
+    }${this.uiAnimateStates?.focus || ''}${this.uiAnimateStates?.hover || ''}${
+      this.uiAnimateStates?.target || ''
+    }}
     `;
   }
 

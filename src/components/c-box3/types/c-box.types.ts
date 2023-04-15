@@ -48,3 +48,5 @@ export type UiSpacingTypes =
   | 'margin-x'
   | 'margin-y';
 export type UiSpacing = Partial<Record<UiSpacingTypes, string>>;
+
+export type UiAnimateState = Partial<Record<StyleStates, string>>;

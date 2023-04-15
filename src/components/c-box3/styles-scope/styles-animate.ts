@@ -1,7 +1,8 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
+import { StyleStates } from '../types/c-box.types';
 
 export class StylesAnimate {
-  static animate(box: CBox.Ref, value: string[]) {
+  static animate(box: CBox.Ref, value: string[], state?: StyleStates) {
     const val = value.slice(0, value.length - 1);
 
     const rules = [];
@@ -11,9 +12,17 @@ export class StylesAnimate {
       rules[index] = `${keyframe}{${cssText}}`;
     }
 
-    box.uiAnimate = `@keyframes ui-animate{${rules.join('')}}:host{animation: ui-animate ${
-      value[value.length - 1]
-    };}`;
+    if (state) {
+      box.uiAnimateStates ||= {};
+      box.uiAnimateStates[state] = `@keyframes ui-animate-${state}{${rules.join('')}}:host${
+        state ? `(:${state})` : ''
+      }{animation: ui-animate-${state} ${value[value.length - 1]};}`;
+    } else {
+      box.uiAnimate = `@keyframes ui-animate{${rules.join('')}}:host{animation: ui-animate ${
+        value[value.length - 1]
+      };}`;
+    }
+
     box.updateStyles();
   }
 
