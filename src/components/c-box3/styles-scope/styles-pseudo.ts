@@ -20,7 +20,7 @@ export class StylesPseudo {
     }
 
     if (state === 'toggle') {
-      (await import('../styles-toggle/pseudo-toggle')).PseudoToggle.handle(box, pseudo);
+      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, pseudo);
     }
 
     // create dynamic style
@@ -40,7 +40,9 @@ export class StylesPseudo {
           })
           .join('');
 
-        (box[pseudo === 'before' ? 'uiBefore' : 'uiAfter'] as UiPseudoState)[state || ''] = `:host${
+        (box[pseudo === 'before' ? 'uiBefore' : 'uiAfter'] as UiPseudoState)[
+          state || pseudo
+        ] = `:host${
           state === 'toggle' ? `([${pseudo}-toggle])` : state ? `(:${state})` : ''
         }::${pseudo}{content:'${style ? content : ''}';${cssText}}`;
       }

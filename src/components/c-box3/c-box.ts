@@ -31,7 +31,7 @@ export class CBox extends HTMLElement {
   public uiAnimateStates?: UiAnimateState;
 
   public async toggleStyles(toggleGroup: CBox.Ref | null) {
-    (await import('./styles-toggle/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
+    (await import('./helpers/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
   }
 
   private styleElement: HTMLStyleElement;
@@ -48,6 +48,10 @@ export class CBox extends HTMLElement {
 
   set ['ui-animate'](value: string[]) {
     this.setAnimation(value);
+  }
+
+  set ['ui-animate-toggle'](value: string[]) {
+    this.setAnimation(value, 'toggle');
   }
 
   set ['ui-animate-active'](value: string[]) {
@@ -363,37 +367,17 @@ export class CBox extends HTMLElement {
     // may be dirty but this can improve dom. *remove all whitespace without using helper function.
     this.styleElement.textContent = `:host{display:block}${
       this.uiStyles ? Object.values(this.uiStyles).join('') : ''
-    }${this.uiStates?.active ? Object.values(this.uiStates.active).join('') : ''}${
-      this.uiStates?.focus ? Object.values(this.uiStates.focus).join('') : ''
     }${
-      this.uiStates?.['focus-within'] ? Object.values(this.uiStates['focus-within']).join('') : ''
-    }${
-      this.uiStates?.['focus-visible'] ? Object.values(this.uiStates['focus-visible']).join('') : ''
-    }${this.uiStates?.hover ? Object.values(this.uiStates.hover).join('') : ''}${
-      this.uiStates?.target ? Object.values(this.uiStates.target).join('') : ''
-    }${this.uiStates?.toggle ? Object.values(this.uiStates.toggle).join('') : ''}${
-      this.iconStyles ? Object.values(this.iconStyles).join('') : ''
-    }${this.uiBefore ? Object.values(this.uiBefore).join('') : ''}${
-      this.uiAfter ? Object.values(this.uiAfter).join('') : ''
-    }${this.uiSpacing?.width || ''}${this.uiSpacing?.height || ''}${this.uiSpacing?.padding || ''}${
-      this.uiSpacing?.['padding-left'] || ''
-    }${this.uiSpacing?.['padding-top'] || ''}${this.uiSpacing?.['padding-right'] || ''}${
-      this.uiSpacing?.['padding-bottom'] || ''
-    }${this.uiSpacing?.margin || ''}${this.uiSpacing?.['margin-left'] || ''}${
-      this.uiSpacing?.['margin-top'] || ''
-    }${this.uiSpacing?.['margin-right'] || ''}${this.uiSpacing?.['margin-bottom'] || ''}${
-      this.uiSpacing?.['margin-x'] || ''
-    }${this.uiSpacing?.['margin-y'] || ''}${this.uiSpacing?.['padding-x'] || ''}${
-      this.uiSpacing?.['padding-y'] || ''
-    }${this.uiSpacing?.['max-width'] || ''}${this.uiSpacing?.['max-height'] || ''}${
-      this.uiSpacing?.['min-width'] || ''
-    }${this.uiSpacing?.['min-height'] || ''}${this.uiAnimate || ''}${
-      this.uiAnimateStates?.active || ''
-    }${this.uiAnimateStates?.['focus-visible'] || ''}${
-      this.uiAnimateStates?.['focus-within'] || ''
-    }${this.uiAnimateStates?.focus || ''}${this.uiAnimateStates?.hover || ''}${
-      this.uiAnimateStates?.target || ''
-    }}
+      this.uiStates
+        ? Object.values(this.uiStates)
+            .map((states) => Object.values(states)[0])
+            .join('')
+        : ''
+    }${this.iconStyles ? Object.values(this.iconStyles).join('') : ''}${
+      this.uiBefore ? Object.values(this.uiBefore).join('') : ''
+    }${this.uiAfter ? Object.values(this.uiAfter).join('') : ''}${
+      this.uiSpacing ? Object.values(this.uiSpacing).join('') : ''
+    }${this.uiAnimateStates ? Object.values(this.uiAnimateStates).join('') : ''}}
     `;
   }
 

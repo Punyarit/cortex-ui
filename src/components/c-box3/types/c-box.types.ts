@@ -17,7 +17,7 @@ export type UiPseudoState = {
   [state: string]: string;
 };
 
-export type UiTypes = 'ui' | 'icon' | 'before' | 'after';
+export type UiTypes = 'ui' | 'icon' | 'before' | 'after' | 'animate';
 
 export type UiToggleSelectedRef = Record<UiTypes, CBox.Ref | undefined>;
 
@@ -49,4 +49,4 @@ export type UiSpacingTypes =
   | 'margin-y';
 export type UiSpacing = Partial<Record<UiSpacingTypes, string>>;
 
-export type UiAnimateState = Partial<Record<StyleStates, string>>;
+export type UiAnimateState = Partial<Record<StyleStates | 'default', string>>;

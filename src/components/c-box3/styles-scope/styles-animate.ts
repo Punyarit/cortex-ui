@@ -2,8 +2,12 @@ import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { StyleStates } from '../types/c-box.types';
 
 export class StylesAnimate {
-  static animate(box: CBox.Ref, value: string[], state?: StyleStates) {
+  static async animate(box: CBox.Ref, value: string[], state?: StyleStates) {
     const val = value.slice(0, value.length - 1);
+
+    if (state === 'toggle') {
+      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, 'animate');
+    }
 
     const rules = [];
     for (let index = 0; index < val.length; index++) {
@@ -12,15 +16,15 @@ export class StylesAnimate {
       rules[index] = `${keyframe}{${cssText}}`;
     }
 
+    box.uiAnimateStates ||= {};
     if (state) {
-      box.uiAnimateStates ||= {};
       box.uiAnimateStates[state] = `@keyframes ui-animate-${state}{${rules.join('')}}:host${
-        state ? `(:${state})` : ''
+        state === 'toggle' ? '([animate-toggle])' : state ? `(:${state})` : ''
       }{animation: ui-animate-${state} ${value[value.length - 1]};}`;
     } else {
-      box.uiAnimate = `@keyframes ui-animate{${rules.join('')}}:host{animation: ui-animate ${
-        value[value.length - 1]
-      };}`;
+      box.uiAnimateStates.default = `@keyframes ui-animate{${rules.join(
+        ''
+      )}}:host{animation: ui-animate ${value[value.length - 1]};}`;
     }
 
     box.updateStyles();

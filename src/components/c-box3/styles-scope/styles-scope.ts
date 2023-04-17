@@ -1,5 +1,4 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { ScopeToggle } from '../styles-toggle/scope-toggle';
 import { StyleStates } from '../types/c-box.types';
 
 export class StylesScope {
@@ -13,10 +12,9 @@ export class StylesScope {
     );
 
     if (state === 'toggle') {
-      (await import('../styles-toggle/scope-toggle')).ScopeToggle.handle(box);
-    } else {
-      box.className = Array.from(new Set(Object.values(box.uiClassNames).flat())).join(' ');
+      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, 'ui');
     }
+    box.className = Array.from(new Set(Object.values(box.uiClassNames).flat())).join(' ');
 
     box.updateStyles();
   }
@@ -39,7 +37,7 @@ export class StylesScope {
 
         if (state && box?.uiStates?.[state]) {
           (box.uiStates as any)[state][className] = `:host(.${className}${
-            state !== 'toggle' ? `:${state}` : ''
+            state === 'toggle' ? '[ui-toggle]' : state ? `:${state}` : ''
           }){${cssText}}`;
         } else if (box?.uiStyles) {
           box.uiStyles[className] = `:host(.${className}){${cssText}}`;
