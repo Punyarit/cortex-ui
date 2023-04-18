@@ -1,5 +1,5 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { breakpointSet } from '../types/c-box.breakpoint'
+import { breakpointMinMax } from '../types/c-box.breakpoint'
 import { Breakpoint, StyleStates } from '../types/c-box.types';
 
 export class StylesScopeBreakpoint {
@@ -9,7 +9,7 @@ export class StylesScopeBreakpoint {
     box: CBox.Ref,
     state?: StyleStates
   ) {
-    const breakpointSize = breakpointSet[breakpoint];
+    const breakpointSize = breakpointMinMax[breakpoint];
     if (state) {
       box.uiBreakpointStates ||= {};
       (box.uiBreakpointStates as any)[breakpointSize.min || breakpointSize.max!] ||= {};
