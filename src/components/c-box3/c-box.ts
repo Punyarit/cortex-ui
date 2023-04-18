@@ -10,6 +10,7 @@ import {
   UiAnimateState,
   UiBreakpointState,
   UiBreakpoint,
+  Breakpoint,
 } from './types/c-box.types';
 
 export class CBox extends HTMLElement {
@@ -227,6 +228,41 @@ export class CBox extends HTMLElement {
     this.setBreakpoint(value, 'xl', 'toggle');
   }
 
+  // __
+  set ['ui-xxl'](value: string[]) {
+    this.setBreakpoint(value, 'xxl');
+  }
+
+  set ['ui-xxl-active'](value: string[]) {
+    this.setBreakpoint(value, 'xxl', 'active');
+  }
+
+  set ['ui-xxl-focus'](value: string[]) {
+    this.setBreakpoint(value, 'xxl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-xxl-focus-visible'](value: string[]) {
+    this.setBreakpoint(value, 'xxl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-xxl-focus-within'](value: string[]) {
+    this.setBreakpoint(value, 'xxl', 'focus-within');
+  }
+
+  set ['ui-xxl-hover'](value: string[]) {
+    this.setBreakpoint(value, 'xxl', 'hover');
+  }
+
+  set ['ui-xxl-target'](value: string[]) {
+    this.setBreakpoint(value, 'xxl', 'target');
+  }
+
+  set ['ui-xxl-toggle'](value: string[]) {
+    this.setBreakpoint(value, 'xxl', 'toggle');
+  }
+
   // ui animate
   set ['ui-animate'](value: string[]) {
     this.setAnimation(value);
@@ -266,11 +302,7 @@ export class CBox extends HTMLElement {
     (await import('./styles-scope/styles-animate')).StylesAnimate.animate(this, value, state);
   }
 
-  public async setBreakpoint(
-    value: string[],
-    breakpoint: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
-    state?: StyleStates
-  ) {
+  public async setBreakpoint(value: string[], breakpoint: Breakpoint, state?: StyleStates) {
     (await import('./styles-scope-breakpoint/styles-scope-breakpoint')).StylesScopeBreakpoint.scope(
       breakpoint,
       value,
