@@ -271,7 +271,7 @@ export class CBox extends HTMLElement {
     breakpoint: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
     state?: StyleStates
   ) {
-    (await import('./styles-scope/styles-breakpoint')).StylesBreakpoint.scope(
+    (await import('./styles-scope-breakpoint/styles-scope-breakpoint')).StylesScopeBreakpoint.scope(
       breakpoint,
       value,
       this,

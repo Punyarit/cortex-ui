@@ -1,39 +1,15 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
+import { breakpointSet } from '../types/c-box.breakpoint'
 import { Breakpoint, StyleStates } from '../types/c-box.types';
 
-export class StylesBreakpoint {
-  static breakpoints: Record<Breakpoint, { min?: number; max?: number }> = {
-    xs: {
-      max: 599,
-    },
-    sm: {
-      min: 600,
-      max: 959,
-    },
-    md: {
-      min: 960,
-      max: 1279,
-    },
-    lg: {
-      min: 1280,
-      max: 1919,
-    },
-    xl: {
-      min: 1920,
-      max: 2559,
-    },
-    xxl: {
-      min: 2560,
-    },
-  };
-
+export class StylesScopeBreakpoint {
   static async scope(
     breakpoint: Breakpoint,
     value: string | string[],
     box: CBox.Ref,
     state?: StyleStates
   ) {
-    const breakpointSize = this.breakpoints[breakpoint];
+    const breakpointSize = breakpointSet[breakpoint];
     if (state) {
       box.uiBreakpointStates ||= {};
       (box.uiBreakpointStates as any)[breakpointSize.min || breakpointSize.max!] ||= {};
