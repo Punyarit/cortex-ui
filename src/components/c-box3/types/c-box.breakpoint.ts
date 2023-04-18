@@ -1,6 +1,8 @@
 import { Breakpoint } from './c-box.types';
 
-export const breakpointMinMax: Record<Breakpoint, { min?: number; max?: number }> = {
+export type BreakpointMinMax = Record<Breakpoint, { min?: number; max?: number }>;
+
+export const breakpointMinMax: BreakpointMinMax = {
   xs: {
     max: 599,
   },
