@@ -1,7 +1,7 @@
-import { ToggleEvents, UiToggleSelectedRef } from '../types/c-box.types';
+import { ToggleEvents, UiToggleSelectedRef, UiTypes } from '../types/c-box.types';
 
 export class StyleToggle {
-  static handle(box: CBox.Ref, refName: 'ui' | 'before' | 'after' | 'animate' | 'icon') {
+  static handle(box: CBox.Ref, refName: UiTypes) {
     const toggleAttr = `${refName}-toggle`;
     const toggleGroup: CBox.Ref | null = box.closest('c-box[toggle-group]');
     box.toggleEvents ||= {} as ToggleEvents;

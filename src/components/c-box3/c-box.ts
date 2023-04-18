@@ -8,6 +8,8 @@ import {
   UiSpacing,
   UiSpacingTypes,
   UiAnimateState,
+  UiBreakpointState,
+  UiBreakpoint,
 } from './types/c-box.types';
 
 export class CBox extends HTMLElement {
@@ -23,6 +25,9 @@ export class CBox extends HTMLElement {
   public toggleEvents?: ToggleEvents;
   public cacheToggleEvents?: ToggleEvents;
   public isToggleDirty?: boolean;
+
+  public uiBreakpoint?: UiBreakpoint;
+  public uiBreakpointStates?: UiBreakpointState;
 
   public uiSpacing?: UiSpacing;
 
@@ -46,6 +51,183 @@ export class CBox extends HTMLElement {
     shadowRoot.appendChild(slot);
   }
 
+  // fix xs = 0 - 600 px. in the future the breakpoint will set in theme
+  set ['ui-xs'](value: string[]) {
+    this.setBreakpoint(value, 'xs');
+  }
+
+  set ['ui-xs-active'](value: string[]) {
+    this.setBreakpoint(value, 'xs', 'active');
+  }
+
+  set ['ui-xs-focus'](value: string[]) {
+    this.setBreakpoint(value, 'xs', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-xs-focus-visible'](value: string[]) {
+    this.setBreakpoint(value, 'xs', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-xs-focus-within'](value: string[]) {
+    this.setBreakpoint(value, 'xs', 'focus-within');
+  }
+
+  set ['ui-xs-hover'](value: string[]) {
+    this.setBreakpoint(value, 'xs', 'hover');
+  }
+
+  set ['ui-xs-target'](value: string[]) {
+    this.setBreakpoint(value, 'xs', 'target');
+  }
+
+  set ['ui-xs-toggle'](value: string[]) {
+    this.setBreakpoint(value, 'xs', 'toggle');
+  }
+
+  // ___
+  set ['ui-sm'](value: string[]) {
+    this.setBreakpoint(value, 'sm');
+  }
+
+  set ['ui-sm-active'](value: string[]) {
+    this.setBreakpoint(value, 'sm', 'active');
+  }
+
+  set ['ui-sm-focus'](value: string[]) {
+    this.setBreakpoint(value, 'sm', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-sm-focus-visible'](value: string[]) {
+    this.setBreakpoint(value, 'sm', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-sm-focus-within'](value: string[]) {
+    this.setBreakpoint(value, 'sm', 'focus-within');
+  }
+
+  set ['ui-sm-hover'](value: string[]) {
+    this.setBreakpoint(value, 'sm', 'hover');
+  }
+
+  set ['ui-sm-target'](value: string[]) {
+    this.setBreakpoint(value, 'sm', 'target');
+  }
+
+  set ['ui-sm-toggle'](value: string[]) {
+    this.setBreakpoint(value, 'sm', 'toggle');
+  }
+
+  // __
+  set ['ui-md'](value: string[]) {
+    this.setBreakpoint(value, 'md');
+  }
+
+  set ['ui-md-active'](value: string[]) {
+    this.setBreakpoint(value, 'md', 'active');
+  }
+
+  set ['ui-md-focus'](value: string[]) {
+    this.setBreakpoint(value, 'md', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-md-focus-visible'](value: string[]) {
+    this.setBreakpoint(value, 'md', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-md-focus-within'](value: string[]) {
+    this.setBreakpoint(value, 'md', 'focus-within');
+  }
+
+  set ['ui-md-hover'](value: string[]) {
+    this.setBreakpoint(value, 'md', 'hover');
+  }
+
+  set ['ui-md-target'](value: string[]) {
+    this.setBreakpoint(value, 'md', 'target');
+  }
+
+  set ['ui-md-toggle'](value: string[]) {
+    this.setBreakpoint(value, 'md', 'toggle');
+  }
+
+  //
+
+  set ['ui-lg'](value: string[]) {
+    this.setBreakpoint(value, 'lg');
+  }
+
+  set ['ui-lg-active'](value: string[]) {
+    this.setBreakpoint(value, 'lg', 'active');
+  }
+
+  set ['ui-lg-focus'](value: string[]) {
+    this.setBreakpoint(value, 'lg', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-lg-focus-visible'](value: string[]) {
+    this.setBreakpoint(value, 'lg', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-lg-focus-within'](value: string[]) {
+    this.setBreakpoint(value, 'lg', 'focus-within');
+  }
+
+  set ['ui-lg-hover'](value: string[]) {
+    this.setBreakpoint(value, 'lg', 'hover');
+  }
+
+  set ['ui-lg-target'](value: string[]) {
+    this.setBreakpoint(value, 'lg', 'target');
+  }
+
+  set ['ui-lg-toggle'](value: string[]) {
+    this.setBreakpoint(value, 'lg', 'toggle');
+  }
+
+  // __
+  set ['ui-xl'](value: string[]) {
+    this.setBreakpoint(value, 'xl');
+  }
+
+  set ['ui-xl-active'](value: string[]) {
+    this.setBreakpoint(value, 'xl', 'active');
+  }
+
+  set ['ui-xl-focus'](value: string[]) {
+    this.setBreakpoint(value, 'xl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-xl-focus-visible'](value: string[]) {
+    this.setBreakpoint(value, 'xl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-xl-focus-within'](value: string[]) {
+    this.setBreakpoint(value, 'xl', 'focus-within');
+  }
+
+  set ['ui-xl-hover'](value: string[]) {
+    this.setBreakpoint(value, 'xl', 'hover');
+  }
+
+  set ['ui-xl-target'](value: string[]) {
+    this.setBreakpoint(value, 'xl', 'target');
+  }
+
+  set ['ui-xl-toggle'](value: string[]) {
+    this.setBreakpoint(value, 'xl', 'toggle');
+  }
+
+  // ui animate
   set ['ui-animate'](value: string[]) {
     this.setAnimation(value);
   }
@@ -82,6 +264,19 @@ export class CBox extends HTMLElement {
 
   public async setAnimation(value: string[], state?: StyleStates) {
     (await import('./styles-scope/styles-animate')).StylesAnimate.animate(this, value, state);
+  }
+
+  public async setBreakpoint(
+    value: string[],
+    breakpoint: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
+    state?: StyleStates
+  ) {
+    (await import('./styles-scope/styles-breakpoint')).StylesBreakpoint.scope(
+      breakpoint,
+      value,
+      this,
+      state
+    );
   }
 
   set ui(value: string | string[]) {
@@ -377,7 +572,20 @@ export class CBox extends HTMLElement {
       this.uiBefore ? Object.values(this.uiBefore).join('') : ''
     }${this.uiAfter ? Object.values(this.uiAfter).join('') : ''}${
       this.uiSpacing ? Object.values(this.uiSpacing).join('') : ''
-    }${this.uiAnimateStates ? Object.values(this.uiAnimateStates).join('') : ''}}
+    }${this.uiAnimateStates ? Object.values(this.uiAnimateStates).join('') : ''}${
+      this.uiBreakpoint
+        ? Object.values(this.uiBreakpoint)
+            .flatMap((styles) => Object.values(styles!))
+            .join('')
+        : ''
+    }${
+      this.uiBreakpointStates
+        ? Object.values(this.uiBreakpointStates)
+            .flatMap((breakpointObj) => Object.values(breakpointObj!))
+            .flatMap((stateObj) => Object.values(stateObj))
+            .join('')
+        : ''
+    }}}
     `;
   }
 
