@@ -11,6 +11,7 @@ import {
   UiBreakpointState,
   UiBreakpoint,
   Breakpoint,
+  UiIconBreakpoint,
 } from './types/c-box.types';
 
 export class CBox extends HTMLElement {
@@ -29,6 +30,7 @@ export class CBox extends HTMLElement {
 
   public uiBreakpoint?: UiBreakpoint;
   public uiBreakpointStates?: UiBreakpointState;
+  public iconBreakpoint?: UiIconBreakpoint;
 
   public uiSpacing?: UiSpacing;
 
@@ -366,44 +368,302 @@ export class CBox extends HTMLElement {
   // icon
   set icon(value: string | string[]) {
     if (!value) return;
-    this.setIcon(value, this);
+    this.setIcon(value);
   }
 
   set ['icon-toggle'](value: string | string[]) {
     if (!value) return;
-    this.setIcon(value, this, 'toggle');
+    this.setIcon(value, 'toggle');
   }
 
   set ['icon-active'](value: string | string[]) {
     if (!value) return;
-    this.setIcon(value, this, 'active');
+    this.setIcon(value, 'active');
   }
 
   set ['icon-focus'](value: string | string[]) {
     if (!value) return;
-    this.setIcon(value, this, 'focus');
+    this.setIcon(value, 'focus');
     this.tabIndex = 0;
   }
 
   set ['icon-focus-within'](value: string | string[]) {
     if (!value) return;
-    this.setIcon(value, this, 'focus-within');
+    this.setIcon(value, 'focus-within');
   }
 
   set ['icon-focus-visible'](value: string | string[]) {
     if (!value) return;
-    this.setIcon(value, this, 'focus-visible');
+    this.setIcon(value, 'focus-visible');
     this.tabIndex = 0;
   }
 
   set ['icon-hover'](value: string | string[]) {
     if (!value) return;
-    this.setIcon(value, this, 'hover');
+    this.setIcon(value, 'hover');
   }
 
   set ['icon-target'](value: string | string[]) {
     if (!value) return;
-    this.setIcon(value, this, 'target');
+    this.setIcon(value, 'target');
+  }
+
+  // icon xs
+  set ['icon-xs'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xs');
+  }
+
+  set ['icon-xs-active'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xs', 'active');
+  }
+
+  set ['icon-xs-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xs', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-xs-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xs', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-xs-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xs', 'focus-within');
+  }
+
+  set ['icon-xs-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xs', 'hover');
+  }
+
+  set ['icon-xs-target'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xs', 'target');
+  }
+
+  set ['icon-xs-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xs', 'toggle');
+  }
+
+  // icon sm
+  set ['icon-sm'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'sm');
+  }
+
+  set ['icon-sm-active'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'sm', 'active');
+  }
+
+  set ['icon-sm-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'sm', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-sm-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'sm', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-sm-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'sm', 'focus-within');
+  }
+
+  set ['icon-sm-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'sm', 'hover');
+  }
+
+  set ['icon-sm-target'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'sm', 'target');
+  }
+
+  set ['icon-sm-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'sm', 'toggle');
+  }
+
+  // icon md
+  set ['icon-md'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'md');
+  }
+
+  set ['icon-md-active'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'md', 'active');
+  }
+
+  set ['icon-md-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'md', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-md-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'md', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-md-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'md', 'focus-within');
+  }
+
+  set ['icon-md-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'md', 'hover');
+  }
+
+  set ['icon-md-target'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'md', 'target');
+  }
+
+  set ['icon-md-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'md', 'toggle');
+  }
+
+  // icon lg
+  set ['icon-lg'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'lg');
+  }
+
+  set ['icon-lg-active'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'lg', 'active');
+  }
+
+  set ['icon-lg-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'lg', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-lg-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'lg', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-lg-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'lg', 'focus-within');
+  }
+
+  set ['icon-lg-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'lg', 'hover');
+  }
+
+  set ['icon-lg-target'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'lg', 'target');
+  }
+
+  set ['icon-lg-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'lg', 'toggle');
+  }
+
+  // icon xl
+  set ['icon-xl'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xl');
+  }
+
+  set ['icon-xl-active'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xl', 'active');
+  }
+
+  set ['icon-xl-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-xl-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-xl-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xl', 'focus-within');
+  }
+
+  set ['icon-xl-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xl', 'hover');
+  }
+
+  set ['icon-xl-target'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xl', 'target');
+  }
+
+  set ['icon-xl-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xl', 'toggle');
+  }
+
+  // icon xxl
+  set ['icon-xxl'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xxl');
+  }
+
+  set ['icon-xxl-active'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xxl', 'active');
+  }
+
+  set ['icon-xxl-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xxl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-xxl-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xxl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['icon-xxl-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xxl', 'focus-within');
+  }
+
+  set ['icon-xxl-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xxl', 'hover');
+  }
+
+  set ['icon-xxl-target'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xxl', 'target');
+  }
+
+  set ['icon-xxl-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setIconBreakpoint(value, 'xxl', 'toggle');
   }
 
   // before
@@ -591,6 +851,7 @@ export class CBox extends HTMLElement {
   }
 
   public updateStyles() {
+    console.log('c-box.js |this.iconBreakpoint| = ', this.iconBreakpoint);
     // may be dirty but this can improve dom. *remove all whitespace without using helper function.
     this.styleElement.textContent = `:host{display:block}${
       this.uiStyles ? Object.values(this.uiStyles).join('') : ''
@@ -615,6 +876,12 @@ export class CBox extends HTMLElement {
         ? Object.values(this.uiBreakpointStates)
             .flatMap((breakpointObj) => Object.values(breakpointObj!))
             .flatMap((stateObj) => Object.values(stateObj))
+            .join('')
+        : ''
+    }${
+      this.iconBreakpoint
+        ? Object.values(this.iconBreakpoint)
+            .flatMap((res) => Object.values(res!))
             .join('')
         : ''
     }}}
@@ -643,9 +910,18 @@ export class CBox extends HTMLElement {
     StylesPseudo.scope(value, box, pseudo, state);
   }
 
-  async setIcon(value: string | string[], box: CBox.Ref, state?: StyleStates) {
+  async setIcon(value: string | string[], state?: StyleStates) {
     const { StylesIcon } = await import('./styles-scope/styles-icon');
-    StylesIcon.scope(value, box, state);
+    StylesIcon.scope(value, this, state);
+  }
+
+  async setIconBreakpoint(value: string | string[], breakpoint: Breakpoint, state?: StyleStates) {
+    (await import('./styles-scope-breakpoint/styles-icon-breakpoint')).StylesIconBreakpoint.scope(
+      breakpoint,
+      value,
+      this,
+      state
+    );
   }
 }
 
