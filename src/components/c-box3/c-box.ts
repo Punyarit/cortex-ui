@@ -12,6 +12,7 @@ import {
   UiBreakpoint,
   Breakpoint,
   UiIconBreakpoint,
+  UiPseudoBreakpoint,
 } from './types/c-box.types';
 
 export class CBox extends HTMLElement {
@@ -31,6 +32,8 @@ export class CBox extends HTMLElement {
   public uiBreakpoint?: UiBreakpoint;
   public uiBreakpointStates?: UiBreakpointState;
   public iconBreakpoint?: UiIconBreakpoint;
+  public uiBeforeBreakpoint?: UiPseudoBreakpoint;
+  public uiAfterBreakpoint?: UiPseudoBreakpoint;
 
   public uiSpacing?: UiSpacing;
 
@@ -709,7 +712,524 @@ export class CBox extends HTMLElement {
     this.setPseudoUi(value, this, 'before', 'target');
   }
 
-  // after
+  // before xs
+  set ['ui-before-xs'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xs');
+  }
+
+  set ['ui-before-xs-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xs', 'active');
+  }
+
+  set ['ui-before-xs-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xs', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-xs-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xs', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-xs-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xs', 'focus-within');
+  }
+
+  set ['ui-before-xs-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xs', 'hover');
+  }
+
+  set ['ui-before-xs-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xs', 'target');
+  }
+
+  set ['ui-before-xs-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xs', 'toggle');
+  }
+
+  // before sm
+  set ['ui-before-sm'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'sm');
+  }
+
+  set ['ui-before-sm-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'sm', 'active');
+  }
+
+  set ['ui-before-sm-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'sm', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-sm-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'sm', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-sm-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'sm', 'focus-within');
+  }
+
+  set ['ui-before-sm-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'sm', 'hover');
+  }
+
+  set ['ui-before-sm-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'sm', 'target');
+  }
+
+  set ['ui-before-sm-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'sm', 'toggle');
+  }
+
+  // before md
+  set ['ui-before-md'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'md');
+  }
+
+  set ['ui-before-md-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'md', 'active');
+  }
+
+  set ['ui-before-md-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'md', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-md-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'md', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-md-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'md', 'focus-within');
+  }
+
+  set ['ui-before-md-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'md', 'hover');
+  }
+
+  set ['ui-before-md-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'md', 'target');
+  }
+
+  set ['ui-before-md-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'md', 'toggle');
+  }
+
+  // before lg
+  set ['ui-before-lg'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'lg');
+  }
+
+  set ['ui-before-lg-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'lg', 'active');
+  }
+
+  set ['ui-before-lg-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'lg', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-lg-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'lg', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-lg-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'lg', 'focus-within');
+  }
+
+  set ['ui-before-lg-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'lg', 'hover');
+  }
+
+  set ['ui-before-lg-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'lg', 'target');
+  }
+
+  set ['ui-before-lg-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'lg', 'toggle');
+  }
+
+  // before lx
+  set ['ui-before-xl'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xl');
+  }
+
+  set ['ui-before-xl-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xl', 'active');
+  }
+
+  set ['ui-before-xl-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-xl-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-xl-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xl', 'focus-within');
+  }
+
+  set ['ui-before-xl-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xl', 'hover');
+  }
+
+  set ['ui-before-xl-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xl', 'target');
+  }
+
+  set ['ui-before-xl-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xl', 'toggle');
+  }
+
+  // before xll
+  set ['ui-before-xxl'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xxl');
+  }
+
+  set ['ui-before-xxl-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xxl', 'active');
+  }
+
+  set ['ui-before-xxl-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xxl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-xxl-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xxl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-before-xxl-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xxl', 'focus-within');
+  }
+
+  set ['ui-before-xxl-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xxl', 'hover');
+  }
+
+  set ['ui-before-xxl-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xxl', 'target');
+  }
+
+  set ['ui-before-xxl-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'before', 'xxl', 'toggle');
+  }
+
+  // _____________
+  // before xs
+  set ['ui-after-xs'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xs');
+  }
+
+  set ['ui-after-xs-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xs', 'active');
+  }
+
+  set ['ui-after-xs-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xs', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-xs-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xs', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-xs-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xs', 'focus-within');
+  }
+
+  set ['ui-after-xs-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xs', 'hover');
+  }
+
+  set ['ui-after-xs-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xs', 'target');
+  }
+
+  set ['ui-after-xs-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xs', 'toggle');
+  }
+
+  // after sm
+  set ['ui-after-sm'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'sm');
+  }
+
+  set ['ui-after-sm-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'sm', 'active');
+  }
+
+  set ['ui-after-sm-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'sm', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-sm-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'sm', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-sm-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'sm', 'focus-within');
+  }
+
+  set ['ui-after-sm-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'sm', 'hover');
+  }
+
+  set ['ui-after-sm-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'sm', 'target');
+  }
+
+  set ['ui-after-sm-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'sm', 'toggle');
+  }
+
+  // after md
+  set ['ui-after-md'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'md');
+  }
+
+  set ['ui-after-md-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'md', 'active');
+  }
+
+  set ['ui-after-md-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'md', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-md-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'md', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-md-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'md', 'focus-within');
+  }
+
+  set ['ui-after-md-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'md', 'hover');
+  }
+
+  set ['ui-after-md-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'md', 'target');
+  }
+
+  set ['ui-after-md-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'md', 'toggle');
+  }
+
+  // after lg
+  set ['ui-after-lg'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'lg');
+  }
+
+  set ['ui-after-lg-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'lg', 'active');
+  }
+
+  set ['ui-after-lg-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'lg', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-lg-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'lg', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-lg-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'lg', 'focus-within');
+  }
+
+  set ['ui-after-lg-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'lg', 'hover');
+  }
+
+  set ['ui-after-lg-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'lg', 'target');
+  }
+
+  set ['ui-after-lg-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'lg', 'toggle');
+  }
+
+  // after lx
+  set ['ui-after-xl'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xl');
+  }
+
+  set ['ui-after-xl-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xl', 'active');
+  }
+
+  set ['ui-after-xl-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-xl-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-xl-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xl', 'focus-within');
+  }
+
+  set ['ui-after-xl-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xl', 'hover');
+  }
+
+  set ['ui-after-xl-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xl', 'target');
+  }
+
+  set ['ui-after-xl-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xl', 'toggle');
+  }
+
+  // after xll
+  set ['ui-after-xxl'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xxl');
+  }
+
+  set ['ui-after-xxl-active'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xxl', 'active');
+  }
+
+  set ['ui-after-xxl-focus'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xxl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-xxl-focus-visible'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xxl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['ui-after-xxl-focus-within'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xxl', 'focus-within');
+  }
+
+  set ['ui-after-xxl-hover'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xxl', 'hover');
+  }
+
+  set ['ui-after-xxl-target'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xxl', 'target');
+  }
+
+  set ['ui-after-xxl-toggle'](value: string | string[]) {
+    if (!value) return;
+    this.setPseudoUiBreakpoint(value, 'after', 'xxl', 'toggle');
+  }
+
+  // after _______
   set ['ui-after'](value: string | string[]) {
     if (!value) return;
     this.setPseudoUi(value, this, 'after');
@@ -851,7 +1371,6 @@ export class CBox extends HTMLElement {
   }
 
   public updateStyles() {
-    console.log('c-box.js |this.iconBreakpoint| = ', this.iconBreakpoint);
     // may be dirty but this can improve dom. *remove all whitespace without using helper function.
     this.styleElement.textContent = `:host{display:block}${
       this.uiStyles ? Object.values(this.uiStyles).join('') : ''
@@ -884,7 +1403,19 @@ export class CBox extends HTMLElement {
             .flatMap((res) => Object.values(res!))
             .join('')
         : ''
-    }}}
+    }${
+      this.uiBeforeBreakpoint
+        ? Object.values(this.uiBeforeBreakpoint).flatMap((breakpointObj) =>
+            Object.values(breakpointObj!)
+          )
+        : ''
+    }${
+      this.uiAfterBreakpoint
+        ? Object.values(this.uiAfterBreakpoint).flatMap((breakpointObj) =>
+            Object.values(breakpointObj!)
+          )
+        : ''
+    }
     `;
   }
 
@@ -908,6 +1439,17 @@ export class CBox extends HTMLElement {
   ) {
     const { StylesPseudo } = await import('./styles-scope/styles-pseudo');
     StylesPseudo.scope(value, box, pseudo, state);
+  }
+
+  async setPseudoUiBreakpoint(
+    value: string | string[],
+    pseudo: 'before' | 'after',
+    breakpoint: Breakpoint,
+    state?: StyleStates
+  ) {
+    await (
+      await import('./styles-scope-breakpoint/styles-pseudo-breakpoint')
+    ).StylesPseudoBreakpoint.scope(breakpoint, value, this, pseudo, state);
   }
 
   async setIcon(value: string | string[], state?: StyleStates) {
