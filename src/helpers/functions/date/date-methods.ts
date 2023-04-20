@@ -25,10 +25,7 @@ export function dateFormat(date: Date | number | undefined, options?: Intl.DateT
 }
 
 export function getDayOfWeek(dayNumber: number, options: Intl.DateTimeFormatOptions) {
-  const date = new Date();
-  const day = (date.getDay() - dayNumber) % 7;
-  date.setDate(date.getDate() - day);
-
+  const date = new Date(1970, 0, 4 + dayNumber);
   return new Intl.DateTimeFormat('th-TH', options).format(date);
 }
 
