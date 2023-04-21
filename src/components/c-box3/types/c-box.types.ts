@@ -46,7 +46,13 @@ export type UiTypes =
   | 'after-md'
   | 'after-lg'
   | 'after-xl'
-  | 'after-xxl';
+  | 'after-xxl'
+  | 'animate-xs'
+  | 'animate-sm'
+  | 'animate-md'
+  | 'animate-lg'
+  | 'animate-xl'
+  | 'animate-xxl';
 
 export type UiToggleSelectedRef = Record<UiTypes, CBox.Ref | undefined>;
 
@@ -59,6 +65,8 @@ export type UiBreakpointState = Partial<Record<number, UiStates>>;
 export type UiIconBreakpoint = Partial<Record<number, UiClassName>>;
 export type UiBreakpoint = Partial<Record<number, UiClassName>>;
 export type UiPseudoBreakpoint = Partial<Record<number, UiPseudoState>>;
+export type UiAnimateBreakpoint = Partial<Record<number, string>>;
+export type UiAnimateStatesBreakpoint = Partial<Record<number, UiAnimateState>>;
 
 export type UiStates = Partial<Record<Partial<StyleStates>, UiClassName>>;
 export const uiSpacingAttributes = ['w', 'h', 'p', 'm'] as const;

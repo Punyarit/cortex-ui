@@ -3,6 +3,10 @@ import { StyleStates } from '../types/c-box.types';
 
 export class StylesScope {
   static async scope(value: string | string[], box: CBox.Ref, state?: StyleStates) {
+    if (state) {
+      box.uiStates ||= {};
+      box.uiStates[state] ||= {};
+    }
     const styles = this.getStylesArray(value);
     this.generateDynamicStyles(styles, box, state);
 
