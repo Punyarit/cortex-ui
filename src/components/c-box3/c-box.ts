@@ -15,6 +15,7 @@ import {
   UiPseudoBreakpoint,
   UiAnimateStatesBreakpoint,
   UiInput,
+  UiInputBreakpoint,
 } from './types/c-box.types';
 
 export class CBox extends HTMLElement {
@@ -43,6 +44,7 @@ export class CBox extends HTMLElement {
   public uiAnimateStatesBreakpoint?: UiAnimateStatesBreakpoint;
 
   public uiInput?: UiInput;
+  public uiInputBreakpoint?: UiInputBreakpoint;
 
   public async toggleStyles(toggleGroup: CBox.Ref | null) {
     (await import('./helpers/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
@@ -1570,6 +1572,7 @@ export class CBox extends HTMLElement {
     this.setSpacing(value, ['margin-top', 'margin-bottom'], 'my', 'margin-y');
   }
 
+  // input
   set ['input'](value: string | string[]) {
     this.setUiInput(value);
   }
@@ -1590,8 +1593,122 @@ export class CBox extends HTMLElement {
     this.setUiInput(value, 'hover');
   }
 
+  // input xs
+  set ['input-xs'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xs');
+  }
+
+  set ['input-xs-active'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xs', 'active');
+  }
+
+  set ['input-xs-focus-visible'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xs', 'focus-visible');
+  }
+
+  set ['input-xs-hover'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xs', 'hover');
+  }
+
+  // input sm
+  set ['input-sm'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'sm');
+  }
+
+  set ['input-sm-active'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'sm', 'active');
+  }
+
+  set ['input-sm-focus-visible'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'sm', 'focus-visible');
+  }
+
+  set ['input-sm-hover'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'sm', 'hover');
+  }
+
+  // input md
+  set ['input-md'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'md');
+  }
+
+  set ['input-md-active'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'md', 'active');
+  }
+
+  set ['input-md-focus-visible'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'md', 'focus-visible');
+  }
+
+  set ['input-md-hover'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'md', 'hover');
+  }
+
+  // input lg
+  set ['input-lg'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'lg');
+  }
+
+  set ['input-lg-active'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'lg', 'active');
+  }
+
+  set ['input-lg-focus-visible'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'lg', 'focus-visible');
+  }
+
+  set ['input-lg-hover'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'lg', 'hover');
+  }
+  // input xl
+  set ['input-xl'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xl');
+  }
+
+  set ['input-xl-active'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xl', 'active');
+  }
+
+  set ['input-xl-focus-visible'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xl', 'focus-visible');
+  }
+
+  set ['input-xl-hover'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xl', 'hover');
+  }
+
+   // input xxl
+   set ['input-xxl'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xxl');
+  }
+
+  set ['input-xxl-active'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xxl', 'active');
+  }
+
+  set ['input-xxl-focus-visible'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xxl', 'focus-visible');
+  }
+
+  set ['input-xxl-hover'](value: string | string[]) {
+    this.setUiInputBreakpoint(value, 'xxl', 'hover');
+  }
+  
   public async setUiInput(value: string | string[], state?: StyleStates) {
     await (await import('./styles-scope/styles-input')).StylesInput.scope(value, this, state);
+  }
+
+  public async setUiInputBreakpoint(
+    value: string | string[],
+    breakpoint: Breakpoint,
+    state?: StyleStates
+  ) {
+    (await import('./styles-scope-breakpoint/styles-input-breakpoint')).StylesInputBreakpoint.scope(
+      breakpoint,
+      value,
+      this,
+      state
+    );
   }
 
   public async setSpacing(
@@ -1611,6 +1728,7 @@ export class CBox extends HTMLElement {
   }
 
   public updateStyles() {
+    console.log('c-box.js |this.uiInputBreakpoint| = ', this.uiInputBreakpoint);
     // may be dirty but this can improve dom. *remove all whitespace without using helper function.
     this.styleElement.textContent = `:host{display:block}${
       this.uiStyles ? Object.values(this.uiStyles).join('') : ''
@@ -1665,6 +1783,13 @@ export class CBox extends HTMLElement {
       this.uiInput
         ? Object.values(this.uiInput)
             .flatMap((r) => Object.values(r!))
+            .join('')
+        : ''
+    }${
+      this.uiInputBreakpoint
+        ? Object.values(this.uiInputBreakpoint)
+            .flatMap((breakpointObj) => Object.values(breakpointObj!))
+            .flatMap((stateObj) => Object.values(stateObj))
             .join('')
         : ''
     }

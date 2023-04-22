@@ -87,6 +87,7 @@ export type UiStates = Partial<Record<Partial<StyleStates>, UiClassName>>;
 export type UiInput = Partial<
   Record<StyleStates | 'default', Partial<Record<InputSelector, string>>>
 >;
+export type UiInputBreakpoint = Partial<Record<number, UiInput>>;
 export const uiSpacingAttributes = ['w', 'h', 'p', 'm'] as const;
 export type UiSpacingAttributes = (typeof uiSpacingAttributes)[number];
 export type UiSpacingTypes =
