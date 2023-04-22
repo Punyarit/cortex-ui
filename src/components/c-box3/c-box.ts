@@ -13,8 +13,8 @@ import {
   Breakpoint,
   UiIconBreakpoint,
   UiPseudoBreakpoint,
-  UiAnimateBreakpoint,
   UiAnimateStatesBreakpoint,
+  UiInput,
 } from './types/c-box.types';
 
 export class CBox extends HTMLElement {
@@ -41,6 +41,8 @@ export class CBox extends HTMLElement {
 
   public uiAnimateStates?: UiAnimateState;
   public uiAnimateStatesBreakpoint?: UiAnimateStatesBreakpoint;
+
+  public uiInput?: UiInput;
 
   public async toggleStyles(toggleGroup: CBox.Ref | null) {
     (await import('./helpers/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
@@ -1568,6 +1570,30 @@ export class CBox extends HTMLElement {
     this.setSpacing(value, ['margin-top', 'margin-bottom'], 'my', 'margin-y');
   }
 
+  set ['input'](value: string | string[]) {
+    this.setUiInput(value);
+  }
+
+  set ['input-active'](value: string | string[]) {
+    this.setUiInput(value, 'active');
+  }
+
+  set ['input-focus'](value: string | string[]) {
+    this.setUiInput(value, 'focus');
+  }
+
+  set ['input-focus-visible'](value: string | string[]) {
+    this.setUiInput(value, 'focus-visible');
+  }
+
+  set ['input-hover'](value: string | string[]) {
+    this.setUiInput(value, 'hover');
+  }
+
+  public async setUiInput(value: string | string[], state?: StyleStates) {
+    await (await import('./styles-scope/styles-input')).StylesInput.scope(value, this, state);
+  }
+
   public async setSpacing(
     value: string,
     style: UiSpacingTypes | UiSpacingTypes | UiSpacingTypes[],
@@ -1585,7 +1611,6 @@ export class CBox extends HTMLElement {
   }
 
   public updateStyles() {
-    console.log('c-box.js |this.uiAnimateStatesBreakpoint| = ', this.uiAnimateStatesBreakpoint);
     // may be dirty but this can improve dom. *remove all whitespace without using helper function.
     this.styleElement.textContent = `:host{display:block}${
       this.uiStyles ? Object.values(this.uiStyles).join('') : ''
@@ -1634,6 +1659,12 @@ export class CBox extends HTMLElement {
       this.uiAnimateStatesBreakpoint
         ? Object.values(this.uiAnimateStatesBreakpoint)
             .flatMap((breakpointObj) => Object.values(breakpointObj!))
+            .join('')
+        : ''
+    }${
+      this.uiInput
+        ? Object.values(this.uiInput)
+            .flatMap((r) => Object.values(r!))
             .join('')
         : ''
     }

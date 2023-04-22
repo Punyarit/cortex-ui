@@ -1,4 +1,4 @@
-export type StyleStates = typeof styleStyles[number];
+export type StyleStates = (typeof styleStyles)[number];
 const styleStyles = [
   'active',
   'focus',
@@ -54,12 +54,27 @@ export type UiTypes =
   | 'animate-xl'
   | 'animate-xxl';
 
+export type InputSelector =
+  | 'input'
+  | 'placeholder'
+  | 'disabled'
+  | 'checkbox'
+  | 'checked'
+  | 'required'
+  | 'optional'
+  | 'valid'
+  | 'invalid'
+  | 'in-range'
+  | 'out-of-range'
+  | 'read-only'
+  | 'read-write';
+
 export type UiToggleSelectedRef = Record<UiTypes, CBox.Ref | undefined>;
 
 export type ToggleEvents = Record<UiTypes, Function>;
 
 export const breakpoints = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
-export type Breakpoint = typeof breakpoints[number];
+export type Breakpoint = (typeof breakpoints)[number];
 
 export type UiBreakpointState = Partial<Record<number, UiStates>>;
 export type UiIconBreakpoint = Partial<Record<number, UiClassName>>;
@@ -69,8 +84,11 @@ export type UiAnimateBreakpoint = Partial<Record<number, string>>;
 export type UiAnimateStatesBreakpoint = Partial<Record<number, UiAnimateState>>;
 
 export type UiStates = Partial<Record<Partial<StyleStates>, UiClassName>>;
+export type UiInput = Partial<
+  Record<StyleStates | 'default', Partial<Record<InputSelector, string>>>
+>;
 export const uiSpacingAttributes = ['w', 'h', 'p', 'm'] as const;
-export type UiSpacingAttributes = typeof uiSpacingAttributes[number];
+export type UiSpacingAttributes = (typeof uiSpacingAttributes)[number];
 export type UiSpacingTypes =
   | 'width'
   | 'max-width'
