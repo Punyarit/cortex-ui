@@ -18,7 +18,16 @@ export class StylesScope {
     if (state === 'toggle') {
       (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, 'ui');
     }
+
     box.className = Array.from(new Set(Object.values(box.uiClassNames).flat())).join(' ');
+
+    // generate style text
+    box.uiStylesCSSResult = box.uiStyles ? Object.values(box.uiStyles).join('') : '';
+    box.uiStatesCSSResult = box.uiStates
+      ? Object.values(box.uiStates)
+          .map((states) => Object.values(states)[0])
+          .join('')
+      : '';
 
     box.updateStyles();
   }

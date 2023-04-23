@@ -10,7 +10,10 @@ export class StylesAnimateBreakpoint {
     state?: StyleStates
   ) {
     if (state === 'toggle') {
-      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, `animate-${breakpoint}`);
+      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(
+        box,
+        `animate-${breakpoint}`
+      );
     }
 
     const breakpointSize = breakpointMinMax[breakpoint];
@@ -19,6 +22,12 @@ export class StylesAnimateBreakpoint {
     initializeUiBreakpoint(box, breakpointSize, state);
 
     this.generateDynamicStyles(breakpoint, breakpointSize, box, value, state);
+
+    box.uiAnimateStatesBreakpointCSSResult = box.uiAnimateStatesBreakpoint
+      ? Object.values(box.uiAnimateStatesBreakpoint)
+          .flatMap((breakpointObj) => Object.values(breakpointObj!))
+          .join('')
+      : '';
 
     box.updateStyles();
   }

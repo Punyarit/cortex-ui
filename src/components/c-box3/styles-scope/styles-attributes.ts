@@ -27,6 +27,7 @@ export class StylesAttributes {
         box.uiSpacing[style] = `:host([${attribute}]){${style}:var(--size-${val})${important}}`;
       }
     }
+    box.uiSpacingCSSResult = box.uiSpacing ? Object.values(box.uiSpacing).join('') : '';
     box.updateStyles();
   }
 }

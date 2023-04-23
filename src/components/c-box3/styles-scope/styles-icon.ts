@@ -46,6 +46,7 @@ export class StylesIcon {
     }
     box.iconStyles[state || 'icon'] = iconStyles.join(' ');
 
+    box.iconStylesCSSResult = box.iconStyles ? Object.values(box.iconStyles).join('') : '';
     box.updateStyles();
   }
 }

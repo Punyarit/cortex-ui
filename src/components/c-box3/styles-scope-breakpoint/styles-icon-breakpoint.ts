@@ -22,6 +22,11 @@ export class StylesIconBreakpoint {
       (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, `icon-${breakpoint}`);
     }
 
+    box.iconBreakpointCSSResult = box.iconBreakpoint
+    ? Object.values(box.iconBreakpoint)
+        .flatMap((res) => Object.values(res!))
+        .join('')
+    : ''
     box.updateStyles();
   }
 

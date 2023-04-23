@@ -25,6 +25,13 @@ export class StylesInputBreakpoint {
 
     this.generateDynamicStyles(breakpointSize, styles, box, target, state);
 
+    box.uiInputBreakpointCSSResult = box.uiInputBreakpoint
+      ? Object.values(box.uiInputBreakpoint)
+          .flatMap((breakpointObj) => Object.values(breakpointObj!))
+          .flatMap((stateObj) => Object.values(stateObj))
+          .join('')
+      : '';
+
     box.updateStyles();
   }
 

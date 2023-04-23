@@ -26,6 +26,18 @@ export class StylesPseudoBreakpoint {
       );
     }
 
+    box.uiBeforeBreakpointCSSResult = box.uiBeforeBreakpoint
+      ? Object.values(box.uiBeforeBreakpoint)
+          .flatMap((breakpointObj) => Object.values(breakpointObj!))
+          .join('')
+      : '';
+
+    box.uiAfterBreakpointCSSResult = box.uiAfterBreakpoint
+      ? Object.values(box.uiAfterBreakpoint)
+          .flatMap((breakpointObj) => Object.values(breakpointObj!))
+          .join('')
+      : '';
+      
     box.updateStyles();
   }
 

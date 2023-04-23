@@ -27,6 +27,10 @@ export class StylesAnimate {
       )}}:host{animation: ui-animate ${value[value.length - 1]};}`;
     }
 
+    box.uiAnimateStatesCSSResult = box.uiAnimateStates
+      ? Object.values(box.uiAnimateStates).join('')
+      : '';
+
     box.updateStyles();
   }
 

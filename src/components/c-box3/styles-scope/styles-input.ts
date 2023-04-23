@@ -15,6 +15,12 @@ export class StylesInput {
     const styles = this.getStylesArray(value);
     this.generateDynamicStyles(styles, box, target, state);
 
+    box.uiInputCSSResult = box.uiInput
+      ? Object.values(box.uiInput)
+          .flatMap((r) => Object.values(r!))
+          .join('')
+      : '';
+
     box.updateStyles();
   }
 

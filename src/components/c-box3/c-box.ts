@@ -20,11 +20,24 @@ import {
 
 export class CBox extends HTMLElement {
   public uiStyles?: UiClassName;
-  public uiBefore?: UiPseudoState;
-  public uiAfter?: UiPseudoState;
+  public uiStylesCSSResult?: string;
+
   public uiStates?: UiStates;
-  public uiClassNames?: Record<string, string[]>;
+  public uiStatesCSSResult?: string;
+
   public iconStyles?: UiClassName;
+  public iconStylesCSSResult?: string;
+
+  public uiBefore?: UiPseudoState;
+  public uiBeforeCSSResult?: string;
+
+  public uiAfter?: UiPseudoState;
+  public uiAfterCSSResult?: string;
+
+  public uiSpacing?: UiSpacing;
+  public uiSpacingCSSResult?: string;
+
+  public uiClassNames?: Record<string, string[]>;
 
   public uiToggleSelectedRef?: UiToggleSelectedRef;
 
@@ -33,18 +46,30 @@ export class CBox extends HTMLElement {
   public isToggleDirty?: boolean;
 
   public uiBreakpoint?: UiBreakpoint;
-  public uiBreakpointStates?: UiBreakpointState;
-  public iconBreakpoint?: UiIconBreakpoint;
-  public uiBeforeBreakpoint?: UiPseudoBreakpoint;
-  public uiAfterBreakpoint?: UiPseudoBreakpoint;
+  public uiBreakpointCSSResult?: string;
 
-  public uiSpacing?: UiSpacing;
+  public uiBreakpointStates?: UiBreakpointState;
+  public uiBreakpointStatesCSSResult?: string;
+
+  public iconBreakpoint?: UiIconBreakpoint;
+  public iconBreakpointCSSResult?: string;
+
+  public uiBeforeBreakpoint?: UiPseudoBreakpoint;
+  public uiBeforeBreakpointCSSResult?: string;
+  public uiAfterBreakpoint?: UiPseudoBreakpoint;
+  public uiAfterBreakpointCSSResult?: string;
 
   public uiAnimateStates?: UiAnimateState;
+  public uiAnimateStatesCSSResult?: string;
+
   public uiAnimateStatesBreakpoint?: UiAnimateStatesBreakpoint;
+  public uiAnimateStatesBreakpointCSSResult?: string;
 
   public uiInput?: UiInput;
+  public uiInputCSSResult?: string;
+
   public uiInputBreakpoint?: UiInputBreakpoint;
+  public uiInputBreakpointCSSResult?: string;
 
   public async toggleStyles(toggleGroup: CBox.Ref | null) {
     (await import('./helpers/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
@@ -1677,8 +1702,8 @@ export class CBox extends HTMLElement {
     this.setUiInputBreakpoint(value, 'xl', 'hover');
   }
 
-   // input xxl
-   set ['input-xxl'](value: string | string[]) {
+  // input xxl
+  set ['input-xxl'](value: string | string[]) {
     this.setUiInputBreakpoint(value, 'xxl');
   }
 
@@ -1693,7 +1718,7 @@ export class CBox extends HTMLElement {
   set ['input-xxl-hover'](value: string | string[]) {
     this.setUiInputBreakpoint(value, 'xxl', 'hover');
   }
-  
+
   public async setUiInput(value: string | string[], state?: StyleStates) {
     await (await import('./styles-scope/styles-input')).StylesInput.scope(value, this, state);
   }
@@ -1728,71 +1753,18 @@ export class CBox extends HTMLElement {
   }
 
   public updateStyles() {
-    console.log('c-box.js |this.uiInputBreakpoint| = ', this.uiInputBreakpoint);
     // may be dirty but this can improve dom. *remove all whitespace without using helper function.
-    this.styleElement.textContent = `:host{display:block}${
-      this.uiStyles ? Object.values(this.uiStyles).join('') : ''
-    }${
-      this.uiStates
-        ? Object.values(this.uiStates)
-            .map((states) => Object.values(states)[0])
-            .join('')
-        : ''
-    }${this.iconStyles ? Object.values(this.iconStyles).join('') : ''}${
-      this.uiBefore ? Object.values(this.uiBefore).join('') : ''
-    }${this.uiAfter ? Object.values(this.uiAfter).join('') : ''}${
-      this.uiSpacing ? Object.values(this.uiSpacing).join('') : ''
-    }${this.uiAnimateStates ? Object.values(this.uiAnimateStates).join('') : ''}${
-      this.uiBreakpoint
-        ? Object.values(this.uiBreakpoint)
-            .flatMap((styles) => Object.values(styles!))
-            .join('')
-        : ''
-    }${
-      this.uiBreakpointStates
-        ? Object.values(this.uiBreakpointStates)
-            .flatMap((breakpointObj) => Object.values(breakpointObj!))
-            .flatMap((stateObj) => Object.values(stateObj))
-            .join('')
-        : ''
-    }${
-      this.iconBreakpoint
-        ? Object.values(this.iconBreakpoint)
-            .flatMap((res) => Object.values(res!))
-            .join('')
-        : ''
-    }${
-      this.uiBeforeBreakpoint
-        ? Object.values(this.uiBeforeBreakpoint).flatMap((breakpointObj) =>
-            Object.values(breakpointObj!)
-          )
-        : ''
-    }${
-      this.uiAfterBreakpoint
-        ? Object.values(this.uiAfterBreakpoint).flatMap((breakpointObj) =>
-            Object.values(breakpointObj!)
-          )
-        : ''
-    }${
-      this.uiAnimateStatesBreakpoint
-        ? Object.values(this.uiAnimateStatesBreakpoint)
-            .flatMap((breakpointObj) => Object.values(breakpointObj!))
-            .join('')
-        : ''
-    }${
-      this.uiInput
-        ? Object.values(this.uiInput)
-            .flatMap((r) => Object.values(r!))
-            .join('')
-        : ''
-    }${
-      this.uiInputBreakpoint
-        ? Object.values(this.uiInputBreakpoint)
-            .flatMap((breakpointObj) => Object.values(breakpointObj!))
-            .flatMap((stateObj) => Object.values(stateObj))
-            .join('')
-        : ''
-    }
+    this.styleElement.textContent = `:host{display:block}${this.uiStylesCSSResult || ''}${
+      this.uiStatesCSSResult || ''
+    }${this.iconStylesCSSResult || ''}${this.uiBeforeCSSResult || ''}${
+      this.uiAfterCSSResult || ''
+    }${this.uiSpacingCSSResult || ''}${this.uiAnimateStatesCSSResult || ''}${
+      this.uiBreakpointCSSResult || ''
+    }${this.uiBreakpointStatesCSSResult || ''}${this.iconBreakpointCSSResult || ''}${
+      this.uiBeforeBreakpointCSSResult || ''
+    }${this.uiAfterBreakpointCSSResult || ''}${this.uiAnimateStatesBreakpointCSSResult || ''}${
+      this.uiInputCSSResult || ''
+    }${this.uiInputBreakpointCSSResult || ''}
     `;
   }
 

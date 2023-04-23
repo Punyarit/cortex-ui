@@ -27,6 +27,19 @@ export class StylesScopeBreakpoint {
 
     box.className = Array.from(new Set(Object.values(box.uiClassNames!).flat())).join(' ');
 
+    box.uiBreakpointCSSResult = box.uiBreakpoint
+      ? Object.values(box.uiBreakpoint)
+          .flatMap((styles) => Object.values(styles!))
+          .join('')
+      : '';
+
+    box.uiBreakpointStatesCSSResult = box.uiBreakpointStates
+      ? Object.values(box.uiBreakpointStates)
+          .flatMap((breakpointObj) => Object.values(breakpointObj!))
+          .flatMap((stateObj) => Object.values(stateObj))
+          .join('')
+      : '';
+
     box.updateStyles();
   }
 

@@ -48,6 +48,9 @@ export class StylesPseudo {
       }
     }
 
+    box.uiBeforeCSSResult = box.uiBefore ? Object.values(box.uiBefore).join('') : '';
+    box.uiAfterCSSResult = box.uiAfter ? Object.values(box.uiAfter).join('') : '';
+
     box.updateStyles();
   }
 }
