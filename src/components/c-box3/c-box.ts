@@ -568,7 +568,6 @@ export class CBox extends HTMLElement {
 
   set ui(value: string | string[]) {
     if (!value) return;
-    this.uiStyles = {};
     this.setUi(value, this);
   }
 

@@ -5,8 +5,11 @@ export class StylesScope {
   static async scope(value: string | string[], box: CBox.Ref, state?: StyleStates) {
     if (state) {
       box.uiStates ||= {};
-      box.uiStates[state] ||= {};
+      box.uiStates[state] = {};
+    } else {
+      box.uiStyles = {};
     }
+
     const styles = this.getStylesArray(value);
     this.generateDynamicStyles(styles, box, state);
 
@@ -25,7 +28,7 @@ export class StylesScope {
     box.uiStylesCSSResult = box.uiStyles ? Object.values(box.uiStyles).join('') : '';
     box.uiStatesCSSResult = box.uiStates
       ? Object.values(box.uiStates)
-          .map((states) => Object.values(states)[0])
+          .flatMap((states) => Object.values(states))
           .join('')
       : '';
 
