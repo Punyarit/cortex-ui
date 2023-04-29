@@ -11,7 +11,7 @@ export class VariableAttribute {
   }
 
   private createStyleText() {
-    const valueWithImportant = this.value.endsWith('!') ? '!important' : '';
+    const valueWithImportant = this.value?.endsWith('!') ? '!important' : '';
     return `{${abbrStylesMapper.get(this.attr)}: var(--${this.value.replace(
       '!',
       ''

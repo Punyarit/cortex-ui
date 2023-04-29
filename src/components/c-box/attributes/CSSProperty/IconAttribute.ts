@@ -23,9 +23,9 @@ export class IconAttribute {
     } else {
       const [iconSize, iconSrc, iconColor] = iconStyleMapper.get(this.attr)!;
 
-      const sourceWithImportant = source.endsWith('!') ? '!important' : '';
-      const sizeWithImportant = size.endsWith('!') ? '!important' : '';
-      const colorWithImportant = color.endsWith('!') ? '!important' : '';
+      const sourceWithImportant = source?.endsWith('!') ? '!important' : '';
+      const sizeWithImportant = size?.endsWith('!') ? '!important' : '';
+      const colorWithImportant = color?.endsWith('!') ? '!important' : '';
 
       return `${iconState || ''}${prefixSuffix}{
         content: '\uE800';

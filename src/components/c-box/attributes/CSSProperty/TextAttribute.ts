@@ -13,9 +13,9 @@ export class TextAttribute {
   private createStyleText() {
     const [attrSize, attrSource, attrColor] = this.value.split(' ');
 
-    const sizeWithImportant = attrSize.endsWith('!') ? '!important' : '';
-    const sourceWithImportant = attrSource.endsWith('!') ? '!important' : '';
-    const colorWithImportant = attrColor.endsWith('!') ? '!important' : '';
+    const sizeWithImportant = attrSize?.endsWith('!') ? '!important' : '';
+    const sourceWithImportant = attrSource?.endsWith('!') ? '!important' : '';
+    const colorWithImportant = attrColor?.endsWith('!') ? '!important' : '';
     const [fontSize, fontFamily, fontColor] = abbrMultiStyleMapper.get(this.attr)!;
     return `{
         ${fontFamily}: var(--${attrSource.replace('!', '')})${sourceWithImportant};

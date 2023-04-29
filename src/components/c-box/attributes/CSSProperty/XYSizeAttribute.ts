@@ -12,7 +12,7 @@ export class XYSizeVariableAttribute {
   }
 
   private createStyleText() {
-    const valueWithImportant = this.value.endsWith('!') ? '!important' : '';
+    const valueWithImportant = this.value?.endsWith('!') ? '!important' : '';
     const [style1, style2] = xyStyleMapper.get(this.attr)!;
     return `{
       ${style1}: var(--size-${this.value.replace('!', '')})${valueWithImportant};

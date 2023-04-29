@@ -22,7 +22,7 @@ export class UiStyle {
           .filter(Boolean)
           .map((s) => {
             const styleProp = stylesMapper.get(`c-box[${s.replace('!', '').trim()}]`);
-            return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
+            return styleProp ? `${styleProp}${s?.endsWith('!') ? '!important' : ''};` : '';
           })
           .join('');
 

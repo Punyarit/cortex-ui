@@ -13,7 +13,7 @@ export class ValueAttribute {
   }
 
   private createStyleText() {
-    const valueWithImportant = this.value.endsWith('!') ? '!important' : '';
+    const valueWithImportant = this.value?.endsWith('!') ? '!important' : '';
     return `{${abbrStylesMapper.get(this.attr)}: ${this.value.replace(
       '!',
       ''

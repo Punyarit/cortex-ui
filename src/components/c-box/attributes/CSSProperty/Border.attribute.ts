@@ -13,9 +13,9 @@ export class BorderAttribute {
   private createStyleText() {
     const [attrSize, attrType, attrColor] = this.value.split(' ');
 
-    const sizeWithImportant = attrSize.endsWith('!') ? '!important' : '';
-    const sourceWithImportant = attrType.endsWith('!') ? '!important' : '';
-    const colorWithImportant = attrColor.endsWith('!') ? '!important' : '';
+    const sizeWithImportant = attrSize?.endsWith('!') ? '!important' : '';
+    const sourceWithImportant = attrType?.endsWith('!') ? '!important' : '';
+    const colorWithImportant = attrColor?.endsWith('!') ? '!important' : '';
     const [borderWidth, borderStyle, borderColor] = abbrMultiStyleMapper.get(this.attr)!;
     return `{
         ${borderStyle}: ${attrType.replace('!', '')}${sourceWithImportant};
