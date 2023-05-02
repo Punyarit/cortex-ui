@@ -1,4 +1,4 @@
-import { Breakpoint } from './cx-div.types';
+import { Breakpoint } from './c-div.types';
 
 export type BreakpointMinMax = Record<Breakpoint, { min?: number; max?: number }>;
 

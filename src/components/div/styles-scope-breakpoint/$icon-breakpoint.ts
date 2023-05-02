@@ -1,6 +1,6 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { breakpointMinMax } from '../types/cx-div.breakpoint';
-import { Breakpoint, StyleStates } from '../types/cx-div.types';
+import { breakpointMinMax } from '../types/c-div.breakpoint';
+import { Breakpoint, StyleStates } from '../types/c-div.types';
 
 export class StylesIconBreakpoint {
   static async scope(
@@ -69,7 +69,7 @@ export class StylesIconBreakpoint {
             }
           })
           .map((s) => {
-            const styleProp = stylesMapper.get(`c-box[${s.replace('!', '').trim()}]`);
+            const styleProp = stylesMapper.get(`c-div[${s.replace('!', '').trim()}]`);
             return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
           })
           .join('');

@@ -1,5 +1,5 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { StyleStates } from '../types/cx-div.types';
+import { StyleStates } from '../types/c-div.types';
 
 export class StylesScope {
   static async scope(value: string | string[], box: CXDiv.Ref, state?: StyleStates) {
@@ -19,7 +19,7 @@ export class StylesScope {
     );
 
     if (state === 'toggle') {
-      (await import('../helpers/toggle-event')).StyleToggle.handle(box, 'ui');
+      (await import('../helpers/toggle-event')).StyleToggle.handle(box, 'class');
     }
 
     box.className = Array.from(new Set(Object.values(box.classNames).flat())).join(' ');
@@ -53,7 +53,7 @@ export class StylesScope {
 
         if (state && box?.classStateMap?.[state]) {
           (box.classStateMap as any)[state][className] = `:host(.${className}${
-            state === 'toggle' ? '[ui-toggle]' : state ? `:${state}` : ''
+            state === 'toggle' ? '[class-toggle]' : state ? `:${state}` : ''
           }){${cssText}}`;
         } else if (box?.classMap) {
           box.classMap[className] = `:host(.${className}){${cssText}}`;
@@ -67,7 +67,7 @@ export class StylesScope {
       .split(' ')
       .filter(Boolean)
       .map((s) => {
-        const styleProp = stylesMapper.get(`c-box[${s.replace('!', '').trim()}]`);
+        const styleProp = stylesMapper.get(`c-div[${s.replace('!', '').trim()}]`);
         return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
       })
       .join('');

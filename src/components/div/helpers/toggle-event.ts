@@ -1,9 +1,9 @@
-import { ToggleEvents, UiToggleSelectedRef, UiTypes } from '../types/cx-div.types';
+import { ToggleEvents, UiToggleSelectedRef, UiTypes } from '../types/c-div.types';
 
 export class StyleToggle {
   static handle(box: CXDiv.Ref, refName: UiTypes) {
     const toggleAttr = `${refName}-toggle`;
-    const toggleGroup: CXDiv.Ref | null = box.closest('cx-div[toggle-group]');
+    const toggleGroup: CXDiv.Ref | null = box.closest('c-div[toggle-group]');
     box.toggleEvents ||= {} as ToggleEvents;
 
     box.toggleEvents[refName] = () => {

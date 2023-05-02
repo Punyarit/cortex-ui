@@ -16,7 +16,7 @@ import {
   UiAnimateStatesBreakpoint,
   UiInput,
   UiInputBreakpoint,
-} from './types/cx-div.types';
+} from './types/c-div.types';
 
 export class Div extends HTMLElement {
   public classMap?: UiClassName;

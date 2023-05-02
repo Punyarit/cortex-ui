@@ -1,0 +1,45 @@
+$percentages: ();
+@for $i from 1 through 100 {
+  $percentages: append($percentages, $i * 1%);
+}
+
+@each $percentage in $percentages {
+  c-div[w-#{index($percentages, $percentage)}pc] {
+    width: $percentage;
+  }
+
+  c-div[min-w-#{index($percentages, $percentage)}pc] {
+    min-width: $percentage;
+  }
+
+  c-div[max-w-#{index($percentages, $percentage)}pc] {
+    max-width: $percentage;
+  }
+
+  c-div[h-#{index($percentages, $percentage)}pc] {
+    height: $percentage;
+  }
+
+  c-div[min-h-#{index($percentages, $percentage)}pc] {
+    min-height: $percentage;
+  }
+
+  c-div[max-h-#{index($percentages, $percentage)}pc] {
+    max-height: $percentage;
+  }
+
+  c-div[basis-#{index($percentages, $percentage)}pc] {
+    flex-basis: $percentage;
+  }
+
+  c-div[line-h-#{index($percentages, $percentage)}pc] {
+    line-height: $percentage;
+  }
+  c-div[letter-spacing-#{index($percentages, $percentage)}pc] {
+    letter-spacing: $percentage;
+  }
+
+  c-div[indent-#{index($percentages, $percentage)}pc] {
+    text-indent: $percentage;
+  }
+}

@@ -1,5 +1,5 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { StyleStates } from '../types/cx-div.types';
+import { StyleStates } from '../types/c-div.types';
 
 export class SlotMap {
   static async map(value: string | string[], box: CXDiv.Ref, state?: StyleStates) {
@@ -55,7 +55,7 @@ export class SlotMap {
       .split(' ')
       .filter(Boolean)
       .map((s) => {
-        const styleProp = stylesMapper.get(`c-box[${s.replace('!', '').trim()}]`);
+        const styleProp = stylesMapper.get(`c-div[${s.replace('!', '').trim()}]`);
         return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
       })
       .join('');

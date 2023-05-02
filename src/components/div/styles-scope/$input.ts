@@ -1,12 +1,12 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { InputSelector, StyleStates, UiInput } from '../types/cx-div.types';
+import { InputSelector, StyleStates, UiInput } from '../types/c-div.types';
 
 export class StylesInput {
   static scope(value: string | string[], box: CXDiv.Ref, state?: StyleStates) {
     const target = box.children[0].tagName.toLowerCase();
     if (target !== 'input' && target !== 'textarea') {
       throw SyntaxError(
-        "When using cx-div with '$input' property, must only be applied to the INPUT or TEXTAREA element."
+        "When using c-div with '$input' property, must only be applied to the INPUT or TEXTAREA element."
       );
     }
     box.inputMap ||= {};
@@ -62,7 +62,7 @@ export class StylesInput {
       .split(' ')
       .filter(Boolean)
       .map((s) => {
-        const styleProp = stylesMapper.get(`c-box[${s.replace('!', '').trim()}]`);
+        const styleProp = stylesMapper.get(`c-div[${s.replace('!', '').trim()}]`);
         return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
       })
       .join('');

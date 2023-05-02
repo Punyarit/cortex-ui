@@ -1,4 +1,4 @@
-import { UiSpacing, UiSpacingTypes } from '../types/cx-div.types';
+import { UiSpacing, UiSpacingTypes } from '../types/c-div.types';
 
 export class StylesAttributes {
   static setSpacing(

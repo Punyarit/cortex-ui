@@ -1,4 +1,4 @@
-import { UiTypes } from '../types/cx-div.types';
+import { UiTypes } from '../types/c-div.types';
 
 export class BoxToggle {
   static toggleStyles(box: CXDiv.Ref, toggleGroup: CXDiv.Ref | null) {

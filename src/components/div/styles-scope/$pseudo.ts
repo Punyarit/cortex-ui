@@ -1,5 +1,5 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { StyleStates, UiPseudoState } from '../types/cx-div.types';
+import { StyleStates, UiPseudoState } from '../types/c-div.types';
 
 export class StylesPseudo {
   static async scope(
@@ -35,7 +35,7 @@ export class StylesPseudo {
           .split(' ')
           .filter(Boolean)
           .map((s) => {
-            const styleProp = stylesMapper.get(`c-box[${s.replace('!', '').trim()}]`);
+            const styleProp = stylesMapper.get(`c-div[${s.replace('!', '').trim()}]`);
             return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
           })
           .join('');

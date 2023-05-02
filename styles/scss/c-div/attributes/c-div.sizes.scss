@@ -1,0 +1,167 @@
+$start: 0;
+$end: 200;
+
+// if more than 200 should use property instead attribute such as w="500"
+@for $i from $start through $end {
+  @if $i == 0 or $i >= 100 and $i % 2 == 0 or $i <= 100 {
+    c-div[h-#{$i}] {
+      height: var(--size-#{$i});
+    }
+
+    c-div[min-h-#{$i}] {
+      min-height: var(--size-#{$i});
+    }
+
+    c-div[max-h-#{$i}] {
+      max-height: var(--size-#{$i});
+    }
+
+    c-div[w-#{$i}] {
+      width: var(--size-#{$i});
+    }
+
+    c-div[min-w-#{$i}] {
+      min-width: var(--size-#{$i});
+    }
+
+    c-div[max-w-#{$i}] {
+      max-width: var(--size-#{$i});
+    }
+
+    c-div[round-#{$i}] {
+      border-radius: var(--size-#{$i});
+    }
+
+    c-div[left-#{$i}] {
+      left: var(--size-#{$i});
+    }
+
+    c-div[right-#{$i}] {
+      right: var(--size-#{$i});
+    }
+
+    c-div[top-#{$i}] {
+      top: var(--size-#{$i});
+    }
+
+    c-div[bottom-#{$i}] {
+      bottom: var(--size-#{$i});
+    }
+
+    c-div[tx-#{$i}] {
+      font-size: var(--size-#{$i});
+    }
+
+    // margin
+
+    c-div[m-#{$i}] {
+      margin: var(--size-#{$i});
+    }
+
+    c-div[mx-#{$i}] {
+      margin-left: var(--size-#{$i});
+      margin-right: var(--size-#{$i});
+    }
+    c-div[my-#{$i}] {
+      margin-top: var(--size-#{$i});
+      margin-bottom: var(--size-#{$i});
+    }
+
+    c-div[mt-#{$i}] {
+      margin-top: var(--size-#{$i});
+    }
+    c-div[mb-#{$i}] {
+      margin-bottom: var(--size-#{$i});
+    }
+
+    c-div[ml-#{$i}] {
+      margin-left: var(--size-#{$i});
+    }
+
+    c-div[mr-#{$i}] {
+      margin-right: var(--size-#{$i});
+    }
+
+    // padding
+    c-div[p-#{$i}] {
+      padding: var(--size-#{$i});
+    }
+
+    c-div[px-#{$i}] {
+      padding-left: var(--size-#{$i});
+      padding-right: var(--size-#{$i});
+    }
+    c-div[py-#{$i}] {
+      padding-top: var(--size-#{$i});
+      padding-bottom: var(--size-#{$i});
+    }
+
+    c-div[pt-#{$i}] {
+      padding-top: var(--size-#{$i});
+    }
+    c-div[pb-#{$i}] {
+      padding-bottom: var(--size-#{$i});
+    }
+
+    c-div[pl-#{$i}] {
+      padding-left: var(--size-#{$i});
+    }
+
+    c-div[pr-#{$i}] {
+      padding-right: var(--size-#{$i});
+    }
+
+    // border
+    c-div[border-#{$i}] {
+      border-width: var(--size-#{$i});
+    }
+
+    c-div[border-left-#{$i}] {
+      border-left-width: var(--size-#{$i});
+    }
+
+    c-div[border-top-#{$i}] {
+      border-top-width: var(--size-#{$i});
+    }
+
+    c-div[border-right-#{$i}] {
+      border-right-width: var(--size-#{$i});
+    }
+
+    c-div[border-bottom-#{$i}] {
+      border-bottom-width: var(--size-#{$i});
+    }
+
+    c-div[col-gap-#{$i}] {
+      column-gap: var(--size-#{$i});
+    }
+
+    c-div[row-gap-#{$i}] {
+      row-gap: var(--size-#{$i});
+    }
+
+    c-div[basis-#{$i}] {
+      flex-basis: var(--size-#{$i});
+    }
+
+    c-div[line-h-#{$i}] {
+      line-height: var(--size-#{$i});
+    }
+
+    c-div[letter-spacing-#{$i}] {
+      letter-spacing: var(--size-#{$i});
+    }
+
+    c-div[indent-#{$i}] {
+      text-indent: var(--size-#{$i});
+    }
+
+    c-div[translate-x-#{$i}] {
+      transform: translateX(var(--size-#{$i}));
+    }
+
+    c-div[translate-y-#{$i}] {
+      transform: translateY(var(--size-#{$i}));
+    }
+  }
+}

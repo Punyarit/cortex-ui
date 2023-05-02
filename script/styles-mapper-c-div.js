@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const cssFilePath = path.resolve(__dirname, '../styles/css/c-box.attribute.css');
+const cssFilePath = path.resolve(__dirname, '../styles/css/c-div.attribute.css');
 const outputFilePath = path.resolve(
   __dirname,
   '../src/components/div/styles-mapper/styles-mapper.ts'

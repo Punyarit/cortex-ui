@@ -1,0 +1,17 @@
+c-div[order-0] {
+  order: none;
+}
+
+c-div[order-first] {
+  order: -9999;
+}
+
+c-div[order-last] {
+  order: 9999;
+}
+
+@for $i from 1 through 50 {
+  c-div[order-#{$i}] {
+    order: $i;
+  }
+}
