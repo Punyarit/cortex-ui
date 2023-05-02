@@ -1,14 +1,14 @@
-import { UiSpacing, UiSpacingTypes } from '../types/c-box.types';
+import { UiSpacing, UiSpacingTypes } from '../types/cx-div.types';
 
 export class StylesAttributes {
   static setSpacing(
-    box: CBox.Ref,
+    box: CXDiv.Ref,
     value: string,
     style: UiSpacingTypes | UiSpacingTypes[],
     attr: string,
     axis?: 'margin-x' | 'margin-y' | 'padding-x' | 'padding-y'
   ) {
-    box.uiSpacing ||= {} as UiSpacing;
+    box.spaceMap ||= {} as UiSpacing;
     const important = value?.endsWith('!') ? '!important' : '';
     const val = value.replace('!', '');
     const attribute = `${attr}-${value}`;
@@ -20,14 +20,14 @@ export class StylesAttributes {
         for (let index = 0; index < style.length; index++) {
           styles[index] = `${style[index]}:var(--size-${val})${important};`;
         }
-        box.uiSpacing[axis!] = `:host([${attribute}]){${styles.join('')}}`;
+        box.spaceMap[axis!] = `:host([${attribute}]){${styles.join('')}}`;
       }
     } else {
       if (+value > 200) {
-        box.uiSpacing[style] = `:host([${attribute}]){${style}:var(--size-${val})${important}}`;
+        box.spaceMap[style] = `:host([${attribute}]){${style}:var(--size-${val})${important}}`;
       }
     }
-    box.uiSpacingCSSResult = box.uiSpacing ? Object.values(box.uiSpacing).join('') : '';
+    box.spaceCSSResult = box.spaceMap ? Object.values(box.spaceMap).join('') : '';
     box.updateStyles();
   }
 }

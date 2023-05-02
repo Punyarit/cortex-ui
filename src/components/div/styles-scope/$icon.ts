@@ -1,9 +1,9 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { StyleStates } from '../types/c-box.types';
+import { StyleStates } from '../types/cx-div.types';
 
 export class StylesIcon {
-  static async scope(value: string | string[], box: CBox.Ref, state?: StyleStates) {
-    box.iconStyles ||= {};
+  static async scope(value: string | string[], box: CXDiv.Ref, state?: StyleStates) {
+    box.iconMap ||= {};
 
     let styles: string[];
     if (typeof value === 'string') {
@@ -14,7 +14,7 @@ export class StylesIcon {
       throw SyntaxError('Icon properties can only have a type of string or string[].');
     }
     if (state === 'toggle') {
-      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, 'icon');
+      (await import('../helpers/toggle-event')).StyleToggle.handle(box, 'icon');
     }
 
     const iconStyles = [];
@@ -44,9 +44,9 @@ export class StylesIcon {
         }::${iconSide}{content: '\uE800';font-family: ${iconName};${cssText}}`;
       }
     }
-    box.iconStyles[state || 'icon'] = iconStyles.join(' ');
+    box.iconMap[state || 'icon'] = iconStyles.join(' ');
 
-    box.iconStylesCSSResult = box.iconStyles ? Object.values(box.iconStyles).join('') : '';
+    box.iconCSSResult = box.iconMap ? Object.values(box.iconMap).join('') : '';
     box.updateStyles();
   }
 }

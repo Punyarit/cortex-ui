@@ -1,8 +1,8 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { StyleStates } from '../types/c-box.types';
+import { StyleStates } from '../types/cx-div.types';
 
 export class SlotMap {
-  static async map(value: string | string[], box: CBox.Ref, state?: StyleStates) {
+  static async map(value: string | string[], box: CXDiv.Ref, state?: StyleStates) {
     box.slotMap ||= {};
     box.slotMap[state || 'default'] = {};
     const styles = this.getStylesArray(value);
@@ -10,7 +10,7 @@ export class SlotMap {
     this.generateDynamicStyles(styles, box, state);
 
     if (state === 'toggle') {
-      (await import('./styles-toggle')).StyleToggle.handle(box, 'slot');
+      (await import('../helpers/toggle-event')).StyleToggle.handle(box, 'slot');
     }
 
     // generate style text
@@ -35,7 +35,7 @@ export class SlotMap {
 
   static generateDynamicStyles(
     styles: string | string[],
-    box: CBox.Ref,
+    box: CXDiv.Ref,
     state?: StyleStates
   ): void {
     for (const style of styles) {

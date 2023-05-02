@@ -1,33 +1,33 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { StyleStates } from '../types/c-box.types';
+import { StyleStates } from '../types/cx-div.types';
 
 export class StylesScope {
-  static async scope(value: string | string[], box: CBox.Ref, state?: StyleStates) {
+  static async scope(value: string | string[], box: CXDiv.Ref, state?: StyleStates) {
     if (state) {
-      box.uiStates ||= {};
-      box.uiStates[state] = {};
+      box.classStateMap ||= {};
+      box.classStateMap[state] = {};
     } else {
-      box.uiStyles = {};
+      box.classMap = {};
     }
 
     const styles = this.getStylesArray(value);
     this.generateDynamicStyles(styles, box, state);
 
-    box.uiClassNames ||= {};
-    box.uiClassNames[state ? state : 'ui'] = Object.keys(
-      (state ? box?.uiStates?.[state] : box.uiStyles)!
+    box.classNames ||= {};
+    box.classNames[state ? state : 'ui'] = Object.keys(
+      (state ? box?.classStateMap?.[state] : box.classMap)!
     );
 
     if (state === 'toggle') {
-      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, 'ui');
+      (await import('../helpers/toggle-event')).StyleToggle.handle(box, 'ui');
     }
 
-    box.className = Array.from(new Set(Object.values(box.uiClassNames).flat())).join(' ');
+    box.className = Array.from(new Set(Object.values(box.classNames).flat())).join(' ');
 
     // generate style text
-    box.uiStylesCSSResult = box.uiStyles ? Object.values(box.uiStyles).join('') : '';
-    box.uiStatesCSSResult = box.uiStates
-      ? Object.values(box.uiStates)
+    box.classCSSResult = box.classMap ? Object.values(box.classMap).join('') : '';
+    box.classStateCSSResult = box.classStateMap
+      ? Object.values(box.classStateMap)
           .flatMap((states) => Object.values(states))
           .join('')
       : '';
@@ -45,18 +45,18 @@ export class StylesScope {
     }
   }
 
-  static generateDynamicStyles(styles: string[], box: CBox.Ref, state?: StyleStates): void {
+  static generateDynamicStyles(styles: string[], box: CXDiv.Ref, state?: StyleStates): void {
     for (const style of styles) {
       const [className, styleValue] = style.split(':').map((s) => s.trim());
       if (className && styleValue) {
         const cssText = this.createCssText(styleValue);
 
-        if (state && box?.uiStates?.[state]) {
-          (box.uiStates as any)[state][className] = `:host(.${className}${
+        if (state && box?.classStateMap?.[state]) {
+          (box.classStateMap as any)[state][className] = `:host(.${className}${
             state === 'toggle' ? '[ui-toggle]' : state ? `:${state}` : ''
           }){${cssText}}`;
-        } else if (box?.uiStyles) {
-          box.uiStyles[className] = `:host(.${className}){${cssText}}`;
+        } else if (box?.classMap) {
+          box.classMap[className] = `:host(.${className}){${cssText}}`;
         }
       }
     }

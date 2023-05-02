@@ -1,31 +1,32 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { breakpointMinMax } from '../types/c-box.breakpoint';
-import { Breakpoint, StyleStates } from '../types/c-box.types';
+import { breakpointMinMax } from '../types/cx-div.breakpoint';
+import { Breakpoint, StyleStates } from '../types/cx-div.types';
 
-export class StylesAnimateBreakpoint {
-  static async scope(
+export class StyleBreakpoint {
+  static async setHostStyle(
     breakpoint: Breakpoint,
-    value: string | string[],
-    box: CBox.Ref,
+    styles: string | string[],
+    box: CXDiv.Ref,
     state?: StyleStates
   ) {
-    if (state === 'toggle') {
-      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(
-        box,
-        `animate-${breakpoint}`
-      );
-    }
-
     const breakpointSize = breakpointMinMax[breakpoint];
 
     // Initialize breakpoint and state data structures
     initializeUiBreakpoint(box, breakpointSize, state);
 
-    this.generateDynamicStyles(breakpoint, breakpointSize, box, value, state);
+    this.generateDynamicStyles(breakpoint, breakpointSize, styles, box, state);
 
-    box.uiAnimateStatesBreakpointCSSResult = box.uiAnimateStatesBreakpoint
-      ? Object.values(box.uiAnimateStatesBreakpoint)
+    if (state === 'toggle') {
+      (await import('../helpers/toggle-event')).StyleToggle.handle(
+        box,
+        `style-${breakpoint}`
+      );
+    }
+
+    box.styleBreakpointCSSResult = box.styleBreakpoint
+      ? Object.values(box.styleBreakpoint)
           .flatMap((breakpointObj) => Object.values(breakpointObj!))
+          .flatMap((stateObj) => Object.values(stateObj))
           .join('')
       : '';
 
@@ -38,25 +39,26 @@ export class StylesAnimateBreakpoint {
       min?: number | undefined;
       max?: number | undefined;
     },
-    box: CBox.Ref,
-    value: string | string[],
+    styleValue: string | string[],
+    box: CXDiv.Ref,
     state?: StyleStates
   ): void {
-    const val = value.slice(0, value.length - 1);
-    const mediaRule = createMediaRule(breakpointSize);
-
-    const rules = [];
-    for (let index = 0; index < val.length; index++) {
-      const [keyframe, styles] = val[index].split(':');
-      const cssText = this.createCssText(styles);
-      rules[index] = `${keyframe}{${cssText}}`;
+    let cssText: string[] = [];
+    if (Array.isArray(styleValue)) {
+      for (let index = 0; index < styleValue.length; ++index) {
+        cssText[index] = this.createCssText(styleValue[index]);
+      }
+    } else {
+      cssText[0] = this.createCssText(styleValue);
     }
 
-    (box.uiAnimateStatesBreakpoint as any)[breakpointSize.min || breakpointSize.max!][
+    const mediaRule = createMediaRule(breakpointSize);
+
+    (box.styleBreakpoint as any)[breakpointSize.min || breakpointSize.max!][
       state || 'default'
-    ] = `@keyframes ui-animate-${breakpoint}{${rules.join('')}}${mediaRule}{:host${
-      state === 'toggle' ? `([animate-${breakpoint}-toggle])` : state ? `(:${state})` : ''
-    }{animation: ui-animate-${breakpoint} ${value[value.length - 1]};}}`;
+    ] = `${mediaRule}{:host${
+      state === 'toggle' ? `([style-${breakpoint}-toggle])` : state ? `(:${state})` : ''
+    }{${cssText.join('')}}}`;
   }
 
   static createCssText(styleValue: string): string {
@@ -71,18 +73,17 @@ export class StylesAnimateBreakpoint {
   }
 }
 function initializeUiBreakpoint(
-  box: CBox.Ref,
+  box: CXDiv.Ref,
   breakpointSize: {
     min?: number | undefined;
     max?: number | undefined;
   },
   state?: StyleStates
 ): void {
-  box.uiAnimateStatesBreakpoint ||= {};
-  (box.uiAnimateStatesBreakpoint as any)[breakpointSize.min || breakpointSize.max!] ||= {};
-  (box.uiAnimateStatesBreakpoint as any)[breakpointSize.min || breakpointSize.max!][
-    state || 'default'
-  ] ||= {};
+  box.styleBreakpoint ||= {};
+  (box.styleBreakpoint as any)[breakpointSize.min || breakpointSize.max!] ||= {};
+  (box.styleBreakpoint as any)[breakpointSize.min || breakpointSize.max!][state || 'default'] ||=
+    {};
 }
 
 function createMediaRule(breakpointSize: {

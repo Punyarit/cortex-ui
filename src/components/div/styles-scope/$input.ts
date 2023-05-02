@@ -1,22 +1,22 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { InputSelector, StyleStates, UiInput } from '../types/c-box.types';
+import { InputSelector, StyleStates, UiInput } from '../types/cx-div.types';
 
 export class StylesInput {
-  static scope(value: string | string[], box: CBox.Ref, state?: StyleStates) {
+  static scope(value: string | string[], box: CXDiv.Ref, state?: StyleStates) {
     const target = box.children[0].tagName.toLowerCase();
     if (target !== 'input' && target !== 'textarea') {
       throw SyntaxError(
-        "When using C-BOX with 'input' property, must only be applied to the INPUT or TEXTAREA element."
+        "When using cx-div with '$input' property, must only be applied to the INPUT or TEXTAREA element."
       );
     }
-    box.uiInput ||= {};
-    box.uiInput[state || 'default'] ||= {};
+    box.inputMap ||= {};
+    box.inputMap[state || 'default'] ||= {};
 
     const styles = this.getStylesArray(value);
     this.generateDynamicStyles(styles, box, target, state);
 
-    box.uiInputCSSResult = box.uiInput
-      ? Object.values(box.uiInput)
+    box.inputCSSResult = box.inputMap
+      ? Object.values(box.inputMap)
           .flatMap((r) => Object.values(r!))
           .join('')
       : '';
@@ -36,7 +36,7 @@ export class StylesInput {
 
   static generateDynamicStyles(
     styles: string[],
-    box: CBox.Ref,
+    box: CXDiv.Ref,
     target: 'input' | 'textarea',
     state?: StyleStates
   ): void {
@@ -48,7 +48,7 @@ export class StylesInput {
       if (selectorValue && styleValue) {
         const cssText = this.createCssText(styleValue);
 
-        (box.uiInput as any)[state || 'default'][selectorValue] = `::slotted(${target}${
+        (box.inputMap as any)[state || 'default'][selectorValue] = `::slotted(${target}${
           selectorValue !== 'input' && selectorValue !== 'placeholder' ? `:${selectorValue}` : ''
         }${state ? `:${state}` : ''})${
           selectorValue === 'placeholder' ? `::${selectorValue}` : ''

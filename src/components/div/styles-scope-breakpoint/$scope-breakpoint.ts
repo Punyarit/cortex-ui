@@ -1,12 +1,12 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { breakpointMinMax } from '../types/c-box.breakpoint';
-import { Breakpoint, StyleStates } from '../types/c-box.types';
+import { breakpointMinMax } from '../types/cx-div.breakpoint';
+import { Breakpoint, StyleStates } from '../types/cx-div.types';
 
 export class StylesScopeBreakpoint {
   static async scope(
     breakpoint: Breakpoint,
     value: string | string[],
-    box: CBox.Ref,
+    box: CXDiv.Ref,
     state?: StyleStates
   ) {
     const breakpointSize = breakpointMinMax[breakpoint];
@@ -22,19 +22,19 @@ export class StylesScopeBreakpoint {
     updateClassNames(box, breakpointSize, state, breakpoint);
 
     if (state === 'toggle') {
-      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, `ui-${breakpoint}`);
+      (await import('../helpers/toggle-event')).StyleToggle.handle(box, `ui-${breakpoint}`);
     }
 
-    box.className = Array.from(new Set(Object.values(box.uiClassNames!).flat())).join(' ');
+    box.className = Array.from(new Set(Object.values(box.classNames!).flat())).join(' ');
 
-    box.uiBreakpointCSSResult = box.uiBreakpoint
-      ? Object.values(box.uiBreakpoint)
+    box.classBreakpointCSSResult = box.classBreakpoint
+      ? Object.values(box.classBreakpoint)
           .flatMap((styles) => Object.values(styles!))
           .join('')
       : '';
 
-    box.uiBreakpointStatesCSSResult = box.uiBreakpointStates
-      ? Object.values(box.uiBreakpointStates)
+    box.classStateBreakpointCSSResult = box.classStateBreakpoint
+      ? Object.values(box.classStateBreakpoint)
           .flatMap((breakpointObj) => Object.values(breakpointObj!))
           .flatMap((stateObj) => Object.values(stateObj))
           .join('')
@@ -60,7 +60,7 @@ export class StylesScopeBreakpoint {
       max?: number | undefined;
     },
     styles: string[],
-    box: CBox.Ref,
+    box: CXDiv.Ref,
     state?: StyleStates
   ): void {
     const mediaRule = createMediaRule(breakpointSize);
@@ -72,16 +72,16 @@ export class StylesScopeBreakpoint {
 
         if (
           state &&
-          box?.uiBreakpointStates?.[breakpointSize.min || breakpointSize.max!]?.[state]
+          box?.classStateBreakpoint?.[breakpointSize.min || breakpointSize.max!]?.[state]
         ) {
-          (box.uiBreakpointStates as any)[breakpointSize.min || breakpointSize.max!][state][
+          (box.classStateBreakpoint as any)[breakpointSize.min || breakpointSize.max!][state][
             className
           ] = `${mediaRule}{:host(.${className}${createStateSelector(
             state,
             breakpoint
           )}){${cssText}}}`;
-        } else if (box?.uiBreakpoint) {
-          (box.uiBreakpoint[breakpointSize.min || breakpointSize.max!] as any)[
+        } else if (box?.classBreakpoint) {
+          (box.classBreakpoint[breakpointSize.min || breakpointSize.max!] as any)[
             className
           ] = `${mediaRule}{:host(.${className}){${cssText}}}`;
         }
@@ -101,7 +101,7 @@ export class StylesScopeBreakpoint {
   }
 }
 function initializeUiBreakpoint(
-  box: CBox.Ref,
+  box: CXDiv.Ref,
   breakpointSize: {
     min?: number | undefined;
     max?: number | undefined;
@@ -109,17 +109,17 @@ function initializeUiBreakpoint(
   state?: StyleStates
 ): void {
   if (state) {
-    box.uiBreakpointStates ||= {};
-    (box.uiBreakpointStates as any)[breakpointSize.min || breakpointSize.max!] ||= {};
-    (box.uiBreakpointStates as any)[breakpointSize.min || breakpointSize.max!][state] ||= {};
+    box.classStateBreakpoint ||= {};
+    (box.classStateBreakpoint as any)[breakpointSize.min || breakpointSize.max!] ||= {};
+    (box.classStateBreakpoint as any)[breakpointSize.min || breakpointSize.max!][state] ||= {};
   } else {
-    box.uiBreakpoint ||= {};
-    box.uiBreakpoint[breakpointSize.min || breakpointSize.max!] ||= {};
+    box.classBreakpoint ||= {};
+    box.classBreakpoint[breakpointSize.min || breakpointSize.max!] ||= {};
   }
 }
 
 function updateClassNames(
-  box: CBox.Ref,
+  box: CXDiv.Ref,
   breakpointSize: {
     min?: number | undefined;
     max?: number | undefined;
@@ -127,11 +127,11 @@ function updateClassNames(
   state: StyleStates | undefined,
   breakpoint: Breakpoint
 ): void {
-  box.uiClassNames ||= {};
-  box.uiClassNames[state ? `${state}-${breakpoint}` : `ui-${breakpoint}`] = Object.keys(
+  box.classNames ||= {};
+  box.classNames[state ? `${state}-${breakpoint}` : `ui-${breakpoint}`] = Object.keys(
     (state
-      ? box?.uiBreakpointStates?.[breakpointSize.min || breakpointSize.max!]?.[state]
-      : box?.uiBreakpoint?.[breakpointSize.min || breakpointSize.max!])!
+      ? box?.classStateBreakpoint?.[breakpointSize.min || breakpointSize.max!]?.[state]
+      : box?.classBreakpoint?.[breakpointSize.min || breakpointSize.max!])!
   );
 }
 

@@ -1,43 +1,32 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { breakpointMinMax } from '../types/c-box.breakpoint';
-import { Breakpoint, StyleStates } from '../types/c-box.types';
+import { breakpointMinMax } from '../types/cx-div.breakpoint';
+import { Breakpoint, StyleStates } from '../types/cx-div.types';
 
-export class StylesPseudoBreakpoint {
+export class StylesIconBreakpoint {
   static async scope(
     breakpoint: Breakpoint,
     value: string | string[],
-    box: CBox.Ref,
-    pseudo: 'before' | 'after',
+    box: CXDiv.Ref,
     state?: StyleStates
   ) {
     const breakpointSize = breakpointMinMax[breakpoint];
 
     // Initialize breakpoint and state data structures
-    initializeUiBreakpoint(box, breakpointSize, pseudo);
+    initializeUiBreakpoint(box, breakpointSize);
 
     const styles = this.getStylesArray(value);
 
-    this.generateDynamicStyles(breakpoint, breakpointSize, styles, box, pseudo, state);
+    this.generateDynamicStyles(breakpoint, breakpointSize, styles, box, state);
 
     if (state === 'toggle') {
-      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(
-        box,
-        `${pseudo}-${breakpoint}`
-      );
+      (await import('../helpers/toggle-event')).StyleToggle.handle(box, `icon-${breakpoint}`);
     }
 
-    box.uiBeforeBreakpointCSSResult = box.uiBeforeBreakpoint
-      ? Object.values(box.uiBeforeBreakpoint)
-          .flatMap((breakpointObj) => Object.values(breakpointObj!))
-          .join('')
-      : '';
-
-    box.uiAfterBreakpointCSSResult = box.uiAfterBreakpoint
-      ? Object.values(box.uiAfterBreakpoint)
-          .flatMap((breakpointObj) => Object.values(breakpointObj!))
-          .join('')
-      : '';
-      
+    box.iconBreakpointCSSResult = box.iconBreakpoint
+    ? Object.values(box.iconBreakpoint)
+        .flatMap((res) => Object.values(res!))
+        .join('')
+    : ''
     box.updateStyles();
   }
 
@@ -58,46 +47,52 @@ export class StylesPseudoBreakpoint {
       max?: number | undefined;
     },
     styles: string[],
-    box: CBox.Ref,
-    pseudo: 'before' | 'after',
+    box: CXDiv.Ref,
     state?: StyleStates
   ): void {
     const mediaRule = createMediaRule(breakpointSize);
+    const iconStyles = [];
 
     for (let index = 0; index < styles.length; ++index) {
-      const [content, style] = styles[index].split(':').map((s) => s.trim());
-      // style can be undefined *note if style = undefined that mean content is styles (ui-before="styles")
-      const styleTexts = style || content;
-      if (styleTexts) {
-        const cssText = style
+      const [iconName, styleValue] = styles[index].split(':').map((s) => s.trim());
+      if (iconName && styleValue) {
+        let iconSide = 'before';
+
+        const cssText = styleValue
           .split(' ')
-          .filter(Boolean)
+          .filter((s) => {
+            if (s === 'before' || s === 'after') {
+              iconSide = s;
+              return false;
+            } else {
+              return Boolean(s);
+            }
+          })
           .map((s) => {
             const styleProp = stylesMapper.get(`c-box[${s.replace('!', '').trim()}]`);
             return styleProp ? `${styleProp}${s.endsWith('!') ? '!important' : ''};` : '';
           })
           .join('');
 
-        (box[pseudo === 'before' ? 'uiBeforeBreakpoint' : 'uiAfterBreakpoint'] as any)[
-          breakpointSize.min || breakpointSize.max!
-        ][state || pseudo] = `${mediaRule}{:host${
-          state === 'toggle' ? `([${pseudo}-${breakpoint}-toggle])` : state ? `(:${state})` : ''
-        }::${pseudo}{content:'${style ? content : ''}';${cssText}}}`;
+        iconStyles[index] = `${mediaRule}{:host${
+          state === 'toggle' ? `([icon-${breakpoint}-toggle])` : state ? `(:${state})` : ''
+        }::${iconSide}{content: '\uE800';font-family: ${iconName};${cssText}}}`;
       }
     }
+
+    (box.iconBreakpoint as any)[breakpointSize.min || breakpointSize.max!][state || 'icon'] =
+      iconStyles.join(' ');
   }
 }
 function initializeUiBreakpoint(
-  box: CBox.Ref,
+  box: CXDiv.Ref,
   breakpointSize: {
     min?: number | undefined;
     max?: number | undefined;
-  },
-  pseudo: 'before' | 'after'
+  }
 ): void {
-  const breakpointObj = pseudo === 'before' ? 'uiBeforeBreakpoint' : 'uiAfterBreakpoint';
-  box[breakpointObj] ||= {};
-  (box[breakpointObj] as any)[breakpointSize.min || breakpointSize.max!] ||= {};
+  box.iconBreakpoint ||= {};
+  (box.iconBreakpoint as any)[breakpointSize.min || breakpointSize.max!] ||= {};
 }
 
 function createMediaRule(breakpointSize: {

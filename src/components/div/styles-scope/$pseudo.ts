@@ -1,15 +1,15 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { StyleStates, UiPseudoState } from '../types/c-box.types';
+import { StyleStates, UiPseudoState } from '../types/cx-div.types';
 
 export class StylesPseudo {
   static async scope(
     value: string | string[],
-    box: CBox.Ref,
+    box: CXDiv.Ref,
     pseudo: 'before' | 'after',
     state?: StyleStates
   ) {
     let styles: string[];
-    box[pseudo === 'before' ? 'uiBefore' : 'uiAfter'] ||= {};
+    box[pseudo === 'before' ? 'beforeMap' : 'afterMap'] ||= {};
 
     if (typeof value === 'string') {
       styles = value?.split(',')?.map((style) => style.trim());
@@ -20,7 +20,7 @@ export class StylesPseudo {
     }
 
     if (state === 'toggle') {
-      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, pseudo);
+      (await import('../helpers/toggle-event')).StyleToggle.handle(box, pseudo);
     }
 
     // create dynamic style
@@ -40,7 +40,7 @@ export class StylesPseudo {
           })
           .join('');
 
-        (box[pseudo === 'before' ? 'uiBefore' : 'uiAfter'] as UiPseudoState)[
+        (box[pseudo === 'before' ? 'beforeMap' : 'afterMap'] as UiPseudoState)[
           state || pseudo
         ] = `:host${
           state === 'toggle' ? `([${pseudo}-toggle])` : state ? `(:${state})` : ''
@@ -48,8 +48,8 @@ export class StylesPseudo {
       }
     }
 
-    box.uiBeforeCSSResult = box.uiBefore ? Object.values(box.uiBefore).join('') : '';
-    box.uiAfterCSSResult = box.uiAfter ? Object.values(box.uiAfter).join('') : '';
+    box.beforeCSSResult = box.beforeMap ? Object.values(box.beforeMap).join('') : '';
+    box.afterCSSResult = box.afterMap ? Object.values(box.afterMap).join('') : '';
 
     box.updateStyles();
   }

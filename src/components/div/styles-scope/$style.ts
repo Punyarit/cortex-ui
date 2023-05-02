@@ -1,15 +1,15 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { StyleStates } from '../types/c-box.types';
+import { StyleStates } from '../types/cx-div.types';
 
 export class StyleMap {
-  static async style(styles: string | string[], box: CBox.Ref, state?: StyleStates) {
+  static async style(styles: string | string[], box: CXDiv.Ref, state?: StyleStates) {
     box.styleMap ||= {};
     box.styleMap[state || 'default'] = {};
 
     this.generateDynamicStyles(styles, box, state);
 
     if (state === 'toggle') {
-      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, 'style');
+      (await import('../helpers/toggle-event')).StyleToggle.handle(box, 'style');
     }
 
     // generate style text
@@ -20,7 +20,7 @@ export class StyleMap {
 
   static generateDynamicStyles(
     styleValue: string | string[],
-    box: CBox.Ref,
+    box: CXDiv.Ref,
     state?: StyleStates
   ): void {
     let cssText: string[] = [];

@@ -1,28 +1,32 @@
 import { stylesMapper } from '../styles-mapper/styles-mapper';
-import { breakpointMinMax } from '../types/c-box.breakpoint';
-import { Breakpoint, StyleStates } from '../types/c-box.types';
+import { breakpointMinMax } from '../types/cx-div.breakpoint';
+import { Breakpoint, InputSelector, StyleStates } from '../types/cx-div.types';
 
-export class SlotBreakpoint {
-  static async setHostStyle(
+export class StylesInputBreakpoint {
+  static async scope(
     breakpoint: Breakpoint,
     value: string | string[],
-    box: CBox.Ref,
+    box: CXDiv.Ref,
     state?: StyleStates
   ) {
-    
+    const target = box.children[0].tagName.toLowerCase();
+    if (target !== 'input' && target !== 'textarea') {
+      throw SyntaxError(
+        "When using cx-div with '$input' property, must only be applied to the INPUT or TEXTAREA element."
+      );
+    }
+
     const breakpointSize = breakpointMinMax[breakpoint];
 
     // Initialize breakpoint and state data structures
     initializeUiBreakpoint(box, breakpointSize, state);
+
     const styles = this.getStylesArray(value);
 
-    this.generateDynamicStyles(breakpoint, breakpointSize, styles, box, state);
+    this.generateDynamicStyles(breakpointSize, styles, box, target, state);
 
-    if (state === 'toggle') {
-      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, `slot-${breakpoint}`);
-    }
-    box.slotBreakpointCSSResult = box.slotBreakpoint
-      ? Object.values(box.slotBreakpoint)
+    box.inputBreakpointCSSResult = box.inputBreakpoint
+      ? Object.values(box.inputBreakpoint)
           .flatMap((breakpointObj) => Object.values(breakpointObj!))
           .flatMap((stateObj) => Object.values(stateObj))
           .join('')
@@ -31,33 +35,6 @@ export class SlotBreakpoint {
     box.updateStyles();
   }
 
-  static generateDynamicStyles(
-    breakpoint: Breakpoint,
-    breakpointSize: {
-      min?: number | undefined;
-      max?: number | undefined;
-    },
-    styles: string | string[],
-    box: CBox.Ref,
-    state?: StyleStates
-  ): void {
-    const mediaRule = createMediaRule(breakpointSize);
-    for (const style of styles) {
-      const [selector, styleValue] = style.split(': ').map((s) => s.trim());
-      if (selector && styleValue) {
-        const cssText = this.createCssText(styleValue);
-        (box.slotBreakpoint as any)[breakpointSize.min || breakpointSize.max!][state || 'default'][
-          selector
-        ] = `${mediaRule}{${
-          state === 'toggle'
-            ? `:host([slot-${breakpoint}-toggle])`
-            : state
-            ? `:host(:${state})`
-            : ''
-        } ::slotted(${selector}){${cssText}}}`;
-      }
-    }
-  }
   static getStylesArray(value: string | string[]): string[] {
     if (typeof value === 'string') {
       return value.split(',').map((style) => style.trim());
@@ -67,6 +44,38 @@ export class SlotBreakpoint {
       throw SyntaxError('UI properties can only have a type of string or string[].');
     }
   }
+
+  static generateDynamicStyles(
+    breakpointSize: {
+      min?: number | undefined;
+      max?: number | undefined;
+    },
+    styles: string[],
+    box: CXDiv.Ref,
+    target: 'input' | 'textarea',
+    state?: StyleStates
+  ): void {
+    const mediaRule = createMediaRule(breakpointSize);
+
+    for (const style of styles) {
+      const [selectorValue, styleValue] = style.split(':').map((s) => s.trim()) as [
+        InputSelector,
+        string
+      ];
+      if (selectorValue && styleValue) {
+        const cssText = this.createCssText(styleValue);
+
+        (box.inputBreakpoint as any)[breakpointSize.min || breakpointSize.max!][
+          state || 'default'
+        ][selectorValue] = `${mediaRule}{::slotted(${target}${
+          selectorValue !== 'input' && selectorValue !== 'placeholder' ? `:${selectorValue}` : ''
+        }${state ? `:${state}` : ''})${
+          selectorValue === 'placeholder' ? `::${selectorValue}` : ''
+        }{${cssText}}}`;
+      }
+    }
+  }
+
   static createCssText(styleValue: string): string {
     return styleValue
       .split(' ')
@@ -79,16 +88,18 @@ export class SlotBreakpoint {
   }
 }
 function initializeUiBreakpoint(
-  box: CBox.Ref,
+  box: CXDiv.Ref,
   breakpointSize: {
     min?: number | undefined;
     max?: number | undefined;
   },
   state?: StyleStates
 ): void {
-  box.slotBreakpoint ||= {};
-  (box.slotBreakpoint as any)[breakpointSize.min || breakpointSize.max!] ||= {};
-  (box.slotBreakpoint as any)[breakpointSize.min || breakpointSize.max!][state || 'default'] ||= {};
+  box.inputBreakpoint ||= {};
+  (box.inputBreakpoint as any)[breakpointSize.min || breakpointSize.max!] ||= {};
+  (box.inputBreakpoint as any)[breakpointSize.min || breakpointSize.max!] ||= {};
+  (box.inputBreakpoint as any)[breakpointSize.min || breakpointSize.max!][state || 'default'] ||=
+    {};
 }
 
 function createMediaRule(breakpointSize: {

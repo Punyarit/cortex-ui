@@ -83,7 +83,7 @@ export type InputSelector =
   | 'read-only'
   | 'read-write';
 
-export type UiToggleSelectedRef = Record<UiTypes, CBox.Ref | undefined>;
+export type UiToggleSelectedRef = Record<UiTypes, CXDiv.Ref | undefined>;
 
 export type ToggleEvents = Record<UiTypes, Function>;
 

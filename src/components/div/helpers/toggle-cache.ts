@@ -1,7 +1,7 @@
-import { UiTypes } from '../types/c-box.types';
+import { UiTypes } from '../types/cx-div.types';
 
 export class BoxToggle {
-  static toggleStyles(box: CBox.Ref, toggleGroup: CBox.Ref | null) {
+  static toggleStyles(box: CXDiv.Ref, toggleGroup: CXDiv.Ref | null) {
     if (toggleGroup?.cacheToggleEvents) {
       if (toggleGroup.hasAttribute('toggle-hold')) {
         for (const event in toggleGroup.cacheToggleEvents) {

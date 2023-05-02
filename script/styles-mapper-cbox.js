@@ -4,7 +4,7 @@ const path = require('path');
 const cssFilePath = path.resolve(__dirname, '../styles/css/c-box.attribute.css');
 const outputFilePath = path.resolve(
   __dirname,
-  '../src/components/c-box/styles-mapper/styles-mapper.ts'
+  '../src/components/div/styles-mapper/styles-mapper.ts'
 );
 
 fs.readFile(cssFilePath, 'utf8', (err, data) => {
