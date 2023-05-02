@@ -1,0 +1,7 @@
+$box-sizings: border-box, content-box;
+
+@each $box in $box-sizings {
+  c-div[#{$box}] {
+    box-sizing: #{$box};
+  }
+}

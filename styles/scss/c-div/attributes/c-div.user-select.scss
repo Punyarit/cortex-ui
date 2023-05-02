@@ -1,19 +1,19 @@
-c-box[select-none] {
+c-div[select-none] {
   -webkit-user-select: none;
   user-select: none;
 }
 
-c-box[select-text] {
+c-div[select-text] {
   -webkit-user-select: text;
   user-select: text;
 }
 
-c-box[select-all] {
+c-div[select-all] {
   -webkit-user-select: all;
   user-select: all;
 }
 
-c-box[select-auto] {
+c-div[select-auto] {
   -webkit-user-select: auto;
   user-select: auto;
 }

@@ -1,67 +1,67 @@
 $displays: block, inline, inline-block, flex, inline-flex, grid, inline, grid;
 
-c-box[flex-center] {
+c-div[flex-center] {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 @each $display in $displays {
-  c-box[#{$display}] {
+  c-div[#{$display}] {
     display: #{$display};
   }
 }
 
-c-box[display-none] {
+c-div[display-none] {
   display: none;
 }
 
-c-box[display-hidden] {
+c-div[display-hidden] {
   display: hidden;
 }
 
-c-box[justify-start] {
+c-div[justify-start] {
   justify-content: flex-start;
 }
 
-c-box[justify-center] {
+c-div[justify-center] {
   justify-content: center;
 }
 
-c-box[justify-end] {
+c-div[justify-end] {
   justify-content: flex-end;
 }
 
-c-box[justify-between] {
+c-div[justify-between] {
   justify-content: space-between;
 }
 
-c-box[justify-around] {
+c-div[justify-around] {
   justify-content: space-around;
 }
 
-c-box[justify-evenly] {
+c-div[justify-evenly] {
   justify-content: space-evenly;
 }
 
 // align itemes
 
-c-box[items-start] {
+c-div[items-start] {
   align-items: flex-start;
 }
 
-c-box[items-end] {
+c-div[items-end] {
   align-items: flex-end;
 }
 
-c-box[items-center] {
+c-div[items-center] {
   align-items: center;
 }
 
-c-box[items-baseline] {
+c-div[items-baseline] {
   align-items: baseline;
 }
 
-c-box[items-stretch] {
+c-div[items-stretch] {
   align-items: stretch;
 }

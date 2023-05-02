@@ -1,0 +1,45 @@
+c-div[w-full] {
+  width: 100%;
+}
+
+c-div[min-w-full] {
+  min-width: 100%;
+}
+
+c-div[max-w-full] {
+  max-width: 100%;
+}
+
+c-div[h-full] {
+  height: 100%;
+}
+
+c-div[min-h-full] {
+  min-height: 100%;
+}
+
+c-div[max-h-full] {
+  max-height: 100%;
+}
+
+c-div[w-fit] {
+  width: fit-content;
+}
+c-div[w-max] {
+  width: max-content;
+}
+
+c-div[w-min] {
+  width: min-content;
+}
+
+c-div[h-fit] {
+  height: fit-content;
+}
+c-div[h-max] {
+  height: max-content;
+}
+
+c-div[h-min] {
+  height: min-content;
+}
