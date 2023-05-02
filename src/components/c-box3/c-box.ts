@@ -71,6 +71,13 @@ export class CBox extends HTMLElement {
   public uiInputBreakpoint?: UiInputBreakpoint;
   public uiInputBreakpointCSSResult?: string;
 
+  public styleMap?: any;
+  public styleMapCSSResult?: any;
+  public selectorMap?: any;
+
+  public styleBreakpoint?: any;
+  public styleBreakpointCSSResult?: string;
+
   public async toggleStyles(toggleGroup: CBox.Ref | null) {
     (await import('./helpers/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
   }
@@ -85,6 +92,253 @@ export class CBox extends HTMLElement {
     const slot = document.createElement('slot');
     shadowRoot.appendChild(this.styleElement);
     shadowRoot.appendChild(slot);
+  }
+
+  set $style(value: string | string[]) {
+    this.setStyleMap(value);
+  }
+
+  set ['$style-active'](value: string) {
+    this.setStyleMap(value, 'active');
+  }
+
+  set ['$style-focus'](value: string) {
+    this.setStyleMap(value, 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-visible'](value: string) {
+    this.setStyleMap(value, 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-within'](value: string) {
+    this.setStyleMap(value, 'focus-within');
+  }
+
+  set ['$style-hover'](value: string) {
+    this.setStyleMap(value, 'hover');
+  }
+  set ['$style-target'](value: string) {
+    this.setStyleMap(value, 'target');
+  }
+
+  set ['$style-toggle'](value: string) {
+    this.setStyleMap(value, 'toggle');
+  }
+
+  // style breakpoint xs
+  set ['$style-xs'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xs');
+  }
+
+  set ['$style-active-xs'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xs', 'active');
+  }
+
+  set ['$style-focus-xs'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xs', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-visible-xs'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xs', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-within-xs'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xs', 'focus-within');
+  }
+
+  set ['$style-hover-xs'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xs', 'hover');
+  }
+
+  set ['$style-target-xs'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xs', 'target');
+  }
+
+  set ['$style-toggle-xs'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xs', 'toggle');
+  }
+
+  // style breakpoint sm
+  set ['$style-sm'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'sm');
+  }
+
+  set ['$style-active-sm'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'sm', 'active');
+  }
+
+  set ['$style-focus-sm'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'sm', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-visible-sm'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'sm', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-within-sm'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'sm', 'focus-within');
+  }
+
+  set ['$style-hover-sm'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'sm', 'hover');
+  }
+
+  set ['$style-target-sm'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'sm', 'target');
+  }
+
+  set ['$style-toggle-sm'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'sm', 'toggle');
+  }
+
+  // style breakpoint md
+  set ['$style-md'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'md');
+  }
+
+  set ['$style-active-md'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'md', 'active');
+  }
+
+  set ['$style-focus-md'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'md', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-visible-md'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'md', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-within-md'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'md', 'focus-within');
+  }
+
+  set ['$style-hover-md'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'md', 'hover');
+  }
+
+  set ['$style-target-md'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'md', 'target');
+  }
+
+  set ['$style-toggle-md'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'md', 'toggle');
+  }
+
+  // style breakpoint xs
+  set ['$style-lg'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'lg');
+  }
+
+  set ['$style-active-lg'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'lg', 'active');
+  }
+
+  set ['$style-focus-lg'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'lg', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-visible-lg'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'lg', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-within-lg'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'lg', 'focus-within');
+  }
+
+  set ['$style-hover-lg'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'lg', 'hover');
+  }
+
+  set ['$style-target-lg'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'lg', 'target');
+  }
+
+  set ['$style-toggle-lg'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'lg', 'toggle');
+  }
+
+  // style breakpoint xl
+  set ['$style-xl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xl');
+  }
+
+  set ['$style-active-xl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xl', 'active');
+  }
+
+  set ['$style-focus-xl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-visible-xl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-within-xl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xl', 'focus-within');
+  }
+
+  set ['$style-hover-xl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xl', 'hover');
+  }
+
+  set ['$style-target-xl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xl', 'target');
+  }
+
+  set ['$style-toggle-xl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xl', 'toggle');
+  }
+
+  // style breakpoint xxl
+  set ['$style-xxl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xxl');
+  }
+
+  set ['$style-active-xxl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xxl', 'active');
+  }
+
+  set ['$style-focus-xxl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xxl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-visible-xxl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xxl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$style-focus-within-xxl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xxl', 'focus-within');
+  }
+
+  set ['$style-hover-xxl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xxl', 'hover');
+  }
+
+  set ['$style-target-xxl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xxl', 'target');
+  }
+
+  set ['$style-toggle-xxl'](value: string | string[]) {
+    this.setStyleBreakpoint(value, 'xxl', 'toggle');
+  }
+
+  private async setStyleMap(value: string | string[], state?: StyleStates) {
+    await (await import('./styles-scope/style-map')).StyleMap.style(value, this, state);
   }
 
   // fix xs = 0 - 600 px. in the future the breakpoint will set in theme
@@ -559,6 +813,19 @@ export class CBox extends HTMLElement {
 
   public async setBreakpoint(value: string[], breakpoint: Breakpoint, state?: StyleStates) {
     (await import('./styles-scope-breakpoint/styles-scope-breakpoint')).StylesScopeBreakpoint.scope(
+      breakpoint,
+      value,
+      this,
+      state
+    );
+  }
+
+  public async setStyleBreakpoint(
+    value: string | string[],
+    breakpoint: Breakpoint,
+    state?: StyleStates
+  ) {
+    (await import('./styles-scope-breakpoint/style-breakpoint')).StyleBreakpoint.setHostStyle(
       breakpoint,
       value,
       this,
@@ -1763,7 +2030,9 @@ export class CBox extends HTMLElement {
       this.uiBeforeBreakpointCSSResult || ''
     }${this.uiAfterBreakpointCSSResult || ''}${this.uiAnimateStatesBreakpointCSSResult || ''}${
       this.uiInputCSSResult || ''
-    }${this.uiInputBreakpointCSSResult || ''}
+    }${this.uiInputBreakpointCSSResult || ''}${this.styleMapCSSResult || ''}${
+      this.styleBreakpointCSSResult || ''
+    }
     `;
   }
 

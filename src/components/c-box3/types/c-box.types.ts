@@ -52,7 +52,14 @@ export type UiTypes =
   | 'animate-md'
   | 'animate-lg'
   | 'animate-xl'
-  | 'animate-xxl';
+  | 'animate-xxl'
+  | 'style'
+  | 'style-xs'
+  | 'style-sm'
+  | 'style-md'
+  | 'style-lg'
+  | 'style-xl'
+  | 'style-xxl';
 
 export type InputSelector =
   | 'input'
