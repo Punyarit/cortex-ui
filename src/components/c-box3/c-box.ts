@@ -73,10 +73,14 @@ export class CBox extends HTMLElement {
 
   public styleMap?: any;
   public styleMapCSSResult?: any;
-  public selectorMap?: any;
+  public slotMap?: any;
+  public slotMapCSSResult?: string;
 
   public styleBreakpoint?: any;
   public styleBreakpointCSSResult?: string;
+
+  public slotBreakpoint?: any;
+  public slotBreakpointCSSResult?: string;
 
   public async toggleStyles(toggleGroup: CBox.Ref | null) {
     (await import('./helpers/box-toggles')).BoxToggle.toggleStyles(this, toggleGroup);
@@ -92,6 +96,239 @@ export class CBox extends HTMLElement {
     const slot = document.createElement('slot');
     shadowRoot.appendChild(this.styleElement);
     shadowRoot.appendChild(slot);
+  }
+
+  set $slot(value: string | string[]) {
+    this.setSlot(value);
+  }
+
+  set ['$slot-active'](value: string | string[]) {
+    this.setSlot(value, 'active');
+  }
+
+  set ['$slot-focus'](value: string | string[]) {
+    this.setSlot(value, 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$slot-focus-visible'](value: string | string[]) {
+    this.setSlot(value, 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$slot-focus-within'](value: string | string[]) {
+    this.setSlot(value, 'focus-within');
+  }
+
+  set ['$slot-hover'](value: string | string[]) {
+    this.setSlot(value, 'hover');
+  }
+
+  set ['$slot-target'](value: string | string[]) {
+    this.setSlot(value, 'target');
+  }
+
+  set ['$slot-toggle'](value: string | string[]) {
+    this.setSlot(value, 'toggle');
+  }
+
+  // slot xs
+  set ['$slot-xs'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xs');
+  }
+  set ['$slot-active-xs'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xs', 'active');
+  }
+  set ['$slot-focus-xs'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xs', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$slot-focus-visible-xs'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xs', 'focus-visible');
+    this.tabIndex = 0;
+  }
+  set ['$slot-focus-within-xs'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xs', 'focus-within');
+  }
+  set ['$slot-hover-xs'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xs', 'hover');
+  }
+
+  set ['$slot-target-xs'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xs', 'target');
+  }
+
+  set ['$slot-toggle-xs'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xs', 'toggle');
+  }
+
+  // slot sm
+  set ['$slot-sm'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'sm');
+  }
+  set ['$slot-active-sm'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'sm', 'active');
+  }
+  set ['$slot-focus-sm'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'sm', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$slot-focus-visible-sm'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'sm', 'focus-visible');
+    this.tabIndex = 0;
+  }
+  set ['$slot-focus-within-sm'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'sm', 'focus-within');
+  }
+  set ['$slot-hover-sm'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'sm', 'hover');
+  }
+
+  set ['$slot-target-sm'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'sm', 'target');
+  }
+
+  set ['$slot-toggle-sm'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'sm', 'toggle');
+  }
+
+  // slot md
+  set ['$slot-md'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'md');
+  }
+  set ['$slot-active-md'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'md', 'active');
+  }
+  set ['$slot-focus-md'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'md', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$slot-focus-visible-md'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'md', 'focus-visible');
+    this.tabIndex = 0;
+  }
+  set ['$slot-focus-within-md'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'md', 'focus-within');
+  }
+  set ['$slot-hover-md'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'md', 'hover');
+  }
+
+  set ['$slot-target-md'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'md', 'target');
+  }
+
+  set ['$slot-toggle-md'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'md', 'toggle');
+  }
+
+  // slot lg
+  set ['$slot-lg'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'lg');
+  }
+  set ['$slot-active-lg'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'lg', 'active');
+  }
+  set ['$slot-focus-lg'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'lg', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$slot-focus-visible-lg'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'lg', 'focus-visible');
+    this.tabIndex = 0;
+  }
+  set ['$slot-focus-within-lg'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'lg', 'focus-within');
+  }
+  set ['$slot-hover-lg'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'lg', 'hover');
+  }
+
+  set ['$slot-target-lg'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'lg', 'target');
+  }
+
+  set ['$slot-toggle-lg'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'lg', 'toggle');
+  }
+
+  // slot xl
+  set ['$slot-xl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xl');
+  }
+  set ['$slot-active-xl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xl', 'active');
+  }
+  set ['$slot-focus-xl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$slot-focus-visible-xl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+  set ['$slot-focus-within-xl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xl', 'focus-within');
+  }
+  set ['$slot-hover-xl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xl', 'hover');
+  }
+
+  set ['$slot-target-xl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xl', 'target');
+  }
+
+  set ['$slot-toggle-xl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xl', 'toggle');
+  }
+
+  // slot xxl
+  set ['$slot-xxl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xxl');
+  }
+  set ['$slot-active-xxl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xxl', 'active');
+  }
+  set ['$slot-focus-xxl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xxl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$slot-focus-visible-xxl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xxl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+  set ['$slot-focus-within-xxl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xxl', 'focus-within');
+  }
+  set ['$slot-hover-xxl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xxl', 'hover');
+  }
+
+  set ['$slot-target-xxl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xxl', 'target');
+  }
+
+  set ['$slot-toggle-xxl'](value: string | string[]) {
+    this.setSlotBreakpoint(value, 'xxl', 'toggle');
+  }
+  public async setSlotBreakpoint(
+    value: string | string[],
+    breakpoint: Breakpoint,
+    state?: StyleStates
+  ) {
+    await (
+      await import('./styles-scope-breakpoint/slot-breakpoint')
+    ).SlotBreakpoint.setHostStyle(breakpoint, value, this, state);
+  }
+
+  public async setSlot(value: string | string[], state?: StyleStates) {
+    await (await import('./styles-scope/slot')).SlotMap.map(value, this, state);
   }
 
   set $style(value: string | string[]) {
@@ -2032,7 +2269,7 @@ export class CBox extends HTMLElement {
       this.uiInputCSSResult || ''
     }${this.uiInputBreakpointCSSResult || ''}${this.styleMapCSSResult || ''}${
       this.styleBreakpointCSSResult || ''
-    }
+    }${this.slotMapCSSResult || ''}${this.slotBreakpointCSSResult || ''}
     `;
   }
 

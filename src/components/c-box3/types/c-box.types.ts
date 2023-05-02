@@ -59,7 +59,14 @@ export type UiTypes =
   | 'style-md'
   | 'style-lg'
   | 'style-xl'
-  | 'style-xxl';
+  | 'style-xxl'
+  | 'slot'
+  | 'slot-xs'
+  | 'slot-sm'
+  | 'slot-md'
+  | 'slot-lg'
+  | 'slot-xl'
+  | 'slot-xxl';
 
 export type InputSelector =
   | 'input'

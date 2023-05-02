@@ -2,29 +2,27 @@ import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { breakpointMinMax } from '../types/c-box.breakpoint';
 import { Breakpoint, StyleStates } from '../types/c-box.types';
 
-export class StyleBreakpoint {
+export class SlotBreakpoint {
   static async setHostStyle(
     breakpoint: Breakpoint,
-    styles: string | string[],
+    value: string | string[],
     box: CBox.Ref,
     state?: StyleStates
   ) {
+    
     const breakpointSize = breakpointMinMax[breakpoint];
 
     // Initialize breakpoint and state data structures
     initializeUiBreakpoint(box, breakpointSize, state);
+    const styles = this.getStylesArray(value);
 
     this.generateDynamicStyles(breakpoint, breakpointSize, styles, box, state);
 
     if (state === 'toggle') {
-      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(
-        box,
-        `style-${breakpoint}`
-      );
+      (await import('../styles-scope/styles-toggle')).StyleToggle.handle(box, `slot-${breakpoint}`);
     }
-
-    box.styleBreakpointCSSResult = box.styleBreakpoint
-      ? Object.values(box.styleBreakpoint)
+    box.slotBreakpointCSSResult = box.slotBreakpoint
+      ? Object.values(box.slotBreakpoint)
           .flatMap((breakpointObj) => Object.values(breakpointObj!))
           .flatMap((stateObj) => Object.values(stateObj))
           .join('')
@@ -39,28 +37,36 @@ export class StyleBreakpoint {
       min?: number | undefined;
       max?: number | undefined;
     },
-    styleValue: string | string[],
+    styles: string | string[],
     box: CBox.Ref,
     state?: StyleStates
   ): void {
-    let cssText: string[] = [];
-    if (Array.isArray(styleValue)) {
-      for (let index = 0; index < styleValue.length; ++index) {
-        cssText[index] = this.createCssText(styleValue[index]);
-      }
-    } else {
-      cssText[0] = this.createCssText(styleValue);
-    }
-
     const mediaRule = createMediaRule(breakpointSize);
-
-    (box.styleBreakpoint as any)[breakpointSize.min || breakpointSize.max!][
-      state || 'default'
-    ] = `${mediaRule}{:host${
-      state === 'toggle' ? `([style-${breakpoint}-toggle])` : state ? `(:${state})` : ''
-    }{${cssText.join('')}}}`;
+    for (const style of styles) {
+      const [selector, styleValue] = style.split(': ').map((s) => s.trim());
+      if (selector && styleValue) {
+        const cssText = this.createCssText(styleValue);
+        (box.slotBreakpoint as any)[breakpointSize.min || breakpointSize.max!][state || 'default'][
+          selector
+        ] = `${mediaRule}{${
+          state === 'toggle'
+            ? `:host([slot-${breakpoint}-toggle])`
+            : state
+            ? `:host(:${state})`
+            : ''
+        } ::slotted(${selector}){${cssText}}}`;
+      }
+    }
   }
-
+  static getStylesArray(value: string | string[]): string[] {
+    if (typeof value === 'string') {
+      return value.split(',').map((style) => style.trim());
+    } else if (Array.isArray(value)) {
+      return value;
+    } else {
+      throw SyntaxError('UI properties can only have a type of string or string[].');
+    }
+  }
   static createCssText(styleValue: string): string {
     return styleValue
       .split(' ')
@@ -80,10 +86,9 @@ function initializeUiBreakpoint(
   },
   state?: StyleStates
 ): void {
-  box.styleBreakpoint ||= {};
-  (box.styleBreakpoint as any)[breakpointSize.min || breakpointSize.max!] ||= {};
-  (box.styleBreakpoint as any)[breakpointSize.min || breakpointSize.max!][state || 'default'] ||=
-    {};
+  box.slotBreakpoint ||= {};
+  (box.slotBreakpoint as any)[breakpointSize.min || breakpointSize.max!] ||= {};
+  (box.slotBreakpoint as any)[breakpointSize.min || breakpointSize.max!][state || 'default'] ||= {};
 }
 
 function createMediaRule(breakpointSize: {
