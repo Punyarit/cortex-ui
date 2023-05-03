@@ -26,7 +26,7 @@ export class PopoverState {
   #closedDone = false;
 
   private async delayWhenOldPopoverExist() {
-    if (ModalSingleton.modalRef.querySelector('c-box')) await delay(110);
+    if (ModalSingleton.modalRef.querySelector('c-div')) await delay(110);
   }
 
   // 📌w8 for fix. this is utils method can use for improve UX in future
@@ -145,7 +145,7 @@ export class PopoverState {
     this.popoverContent.style.translate = positionResult.translate!;
   }
 
-  // 📌set attribute for benefit to c-box
+  // 📌set attribute for benefit to c-div
   private setArrowpoint(positionResult: PositionResult) {
     if (!this.popoverSet.arrowpoint) return;
     const { width: hostWidth, height: hostHeight } = this.hostRect;
@@ -251,7 +251,7 @@ export class PopoverState {
 
   public closePopover = async (e: MouseEvent | FocusEvent | null) => {
     if (this.#closedDone) return;
-    if ((e?.relatedTarget as HTMLElement)?.closest('c-box[slot="popover"]')) return;
+    if ((e?.relatedTarget as HTMLElement)?.closest('c-div[slot="popover"]')) return;
     this.setPopoverContentAnimation('out');
     await delay(250);
     this.setIsFirstUpdate(true);

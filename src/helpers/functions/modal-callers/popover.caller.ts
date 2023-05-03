@@ -3,7 +3,7 @@ import { PopoverContent } from '../../../components/popover/types/popover.types'
 export class PopoverCaller {
   clear() {
     const popovers = ModalSingleton.modalRef.querySelectorAll(
-      "c-box[slot='popover']"
+      "c-div[slot='popover']"
     ) as NodeListOf<PopoverContent>;
     requestAnimationFrame(() => {
       popovers.forEach((popover) => {

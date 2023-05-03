@@ -28,16 +28,16 @@ export class Tooltip extends ComponentBase<CXTooltip.Props> {
         openby: this.set.openby,
         position: this.set.position,
       } as CXPopover.Set}">
-      <c-box slot="host"> </c-box>
-      <c-box slot="popover" tooltip>
-        <c-box content bg-bluestate-700 tx-white>${this.set.text}</c-box>
-      </c-box>
+      <c-div slot="host"> </c-div>
+      <c-div slot="popover" tooltip>
+        <c-div content bg-bluestate-700 tx-white>${this.set.text}</c-div>
+      </c-div>
     </cx-popover>`;
   }
 
   protected firstUpdated(): void {
     const content = this.firstElementChild;
-    const host = this.querySelector("c-box[slot='host']");
+    const host = this.querySelector("c-div[slot='host']");
     host?.appendChild(content!);
   }
 

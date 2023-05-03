@@ -78,7 +78,7 @@ export class Popover extends ComponentBase<CXPopover.Props> {
       requestAnimationFrame(() => {
         const cBox = this.popoverSlotRef.value?.assignedElements()[0] as HTMLElement;
         if (cBox) {
-          cBox.tagName === 'C-BOX' ? resolve(cBox) : reject(REQUIRED_CBOX_CHILD_POPOVER_ERROR);
+          cBox.tagName === 'C-DIV' ? resolve(cBox) : reject(REQUIRED_CBOX_CHILD_POPOVER_ERROR);
         } else {
           resolve(null);
           console.warn('You must close popover by close button');

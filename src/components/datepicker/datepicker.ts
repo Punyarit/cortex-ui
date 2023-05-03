@@ -55,7 +55,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
 
-    // 📌only use when component styles base on c-box *The Component does not have shadowRoot.
+    // 📌only use when component styles base on c-div *The Component does not have shadowRoot.
     if (this.var) this.cacheVariables(this.var);
     if (this.styles) this.setVar();
   }
@@ -75,13 +75,13 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
           mouseleave: this.set.mouseleave,
           focusout: this.set.focusout,
         } as CXPopover.Set}">
-        <c-box slot="host">
-          <c-box ui="${this.setInputStyle()}" ${ref(this.inputBoxWrapperRef)}>
+        <c-div slot="host">
+          <c-div .$class="${this.setInputStyle()}" ${ref(this.inputBoxWrapperRef)}>
             ${this.renderDateInput()}
-          </c-box>
-        </c-box>
-        <c-box slot="popover" ${ref(this.popoverContentRef)}>
-          <c-box content p="0">
+          </c-div>
+        </c-div>
+        <c-div slot="popover" ${ref(this.popoverContentRef)}>
+          <c-div content .p="${'0'}">
             ${this.datepickerState === 'opened'
               ? html`
                   <cx-calendar
@@ -90,8 +90,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
                     .set="${this.set}"></cx-calendar>
                 `
               : undefined}
-          </c-box>
-        </c-box>
+          </c-div>
+        </c-div>
       </cx-popover>
     `;
   }
@@ -106,14 +106,14 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
 
   private renderInputBox(text: string, type: InputDateType) {
     return html`
-      <c-box
-        ui="${UI.inputDateBox}"
-        icon-prefix="22 calendar-alt-line gray-600"
+      <c-div
+        .$class="${UI.inputDateBox}"
+        .$icon="${'calendar-alt-line: tx-22 gray-600 before'}"
         input-date-type="${type}"
         input-box="default"
-        w="${this.var.widthInput!}!"
-        h="${this.var.heightInput!}!"
-        >${text}</c-box
+        .w="${this.var.widthInput!}"
+        .h="${this.var.heightInput!}"
+        >${text}</c-div
       >
     `;
   }
@@ -224,7 +224,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   ) {
     return html`
       ${this.renderInputBox(startdateFormatted || 'วันเริ่มต้น', 'startdate')}
-      ${this.set.inputStyle === 'long' ? html`<c-box>-</c-box>` : undefined}
+      ${this.set.inputStyle === 'long' ? html`<c-div>-</c-div>` : undefined}
       ${this.renderInputBox(enddateFormatted || 'วันสิ้นสุด', 'enddate')}
     `;
   }
