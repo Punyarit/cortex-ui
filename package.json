@@ -1,6 +1,6 @@
 {
   "name": "@cortex-ui/core",
-  "version": "0.0.255",
+  "version": "0.0.267",
   "description": "Cortex-UI is Web Component develop from Cortex Design System from Hlab Designer Team.",
   "main": "index.js",
   "scripts": {

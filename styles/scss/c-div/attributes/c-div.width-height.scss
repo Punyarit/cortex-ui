@@ -22,7 +22,20 @@ c-div[max-h-full] {
   max-height: 100%;
 }
 
+c-div[w-auto] {
+  width: auto;
+}
+
+c-div[w-inherit] {
+  width: inherit;
+}
+
+c-div[w-init] {
+  width: initial;
+}
+
 c-div[w-fit] {
+  width: -moz-fit-content;
   width: fit-content;
 }
 c-div[w-max] {
@@ -33,9 +46,22 @@ c-div[w-min] {
   width: min-content;
 }
 
+//
+c-div[h-auto] {
+  height: auto;
+}
+
+c-div[h-inherit] {
+  height: inherit;
+}
+
+c-div[h-init] {
+  height: initial;
+}
 c-div[h-fit] {
   height: fit-content;
 }
+
 c-div[h-max] {
   height: max-content;
 }

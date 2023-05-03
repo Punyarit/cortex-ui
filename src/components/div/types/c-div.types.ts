@@ -18,6 +18,13 @@ export type UiPseudoState = {
 };
 
 export type UiTypes =
+  | 'css'
+  | 'css-xs'
+  | 'css-sm'
+  | 'css-md'
+  | 'css-lg'
+  | 'css-xl'
+  | 'css-xxl'
   | 'class'
   | 'class-xs'
   | 'class-sm'

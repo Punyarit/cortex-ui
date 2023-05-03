@@ -82,6 +82,13 @@ export class Div extends HTMLElement {
   public slotBreakpoint?: any;
   public slotBreakpointCSSResult?: string;
 
+  public cssTextMap?: any;
+  public cssTextResult?: string;
+
+  public cssTextBreakpoint?: any;
+  public cssTextBreakpointResult?: string;
+  // public cssTextBreakpointStateResult?: string;
+
   public async toggleStyles(toggleGroup: CXDiv.Ref | null) {
     (await import('./helpers/toggle-cache')).BoxToggle.toggleStyles(this, toggleGroup);
   }
@@ -96,6 +103,264 @@ export class Div extends HTMLElement {
     const slot = document.createElement('slot');
     shadowRoot.appendChild(this.styleElement);
     shadowRoot.appendChild(slot);
+  }
+
+  set $css(value: Record<string, string | number>) {
+    this.setCss(value);
+  }
+
+  set ['$css-active'](value: Record<string, string | number>) {
+    this.setCss(value, 'active');
+  }
+
+  set ['$css-focus'](value: Record<string, string | number>) {
+    this.setCss(value, 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-visible'](value: Record<string, string | number>) {
+    this.setCss(value, 'focus-visible');
+    this.tabIndex = 0;
+  }
+  set ['$css-focus-within'](value: Record<string, string | number>) {
+    this.setCss(value, 'focus-within');
+  }
+
+  set ['$css-hover'](value: Record<string, string | number>) {
+    this.setCss(value, 'hover');
+  }
+
+  set ['$css-target'](value: Record<string, string | number>) {
+    this.setCss(value, 'target');
+  }
+
+  set ['$css-toggle'](value: Record<string, string | number>) {
+    this.setCss(value, 'toggle');
+  }
+
+  // xs
+  set ['$css-xs'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xs');
+  }
+
+  set ['$css-active-xs'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xs', 'active');
+  }
+
+  set ['$css-focus-xs'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xs', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-visible-xs'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xs', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-within-xs'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xs', 'focus-within');
+  }
+
+  set ['$css-hover-xs'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xs', 'hover');
+  }
+
+  set ['$css-target-xs'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xs', 'target');
+  }
+
+  set ['$css-toggle-xs'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xs', 'toggle');
+  }
+
+  // sm
+  set ['$css-sm'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'sm');
+  }
+
+  set ['$css-active-sm'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'sm', 'active');
+  }
+
+  set ['$css-focus-sm'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'sm', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-visible-sm'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'sm', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-within-sm'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'sm', 'focus-within');
+  }
+
+  set ['$css-hover-sm'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'sm', 'hover');
+  }
+
+  set ['$css-target-sm'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'sm', 'target');
+  }
+
+  set ['$css-toggle-sm'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'sm', 'toggle');
+  }
+
+  // md
+  set ['$css-md'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'md');
+  }
+
+  set ['$css-active-md'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'md', 'active');
+  }
+
+  set ['$css-focus-md'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'md', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-visible-md'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'md', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-within-md'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'md', 'focus-within');
+  }
+
+  set ['$css-hover-md'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'md', 'hover');
+  }
+
+  set ['$css-target-md'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'md', 'target');
+  }
+
+  set ['$css-toggle-md'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'md', 'toggle');
+  }
+
+  // lg
+  set ['$css-lg'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'lg');
+  }
+
+  set ['$css-active-lg'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'lg', 'active');
+  }
+
+  set ['$css-focus-lg'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'lg', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-visible-lg'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'lg', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-within-lg'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'lg', 'focus-within');
+  }
+
+  set ['$css-hover-lg'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'lg', 'hover');
+  }
+
+  set ['$css-target-lg'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'lg', 'target');
+  }
+
+  set ['$css-toggle-lg'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'lg', 'toggle');
+  }
+
+  // xl
+  set ['$css-xl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xl');
+  }
+
+  set ['$css-active-xl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xl', 'active');
+  }
+
+  set ['$css-focus-xl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-visible-xl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-within-xl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xl', 'focus-within');
+  }
+
+  set ['$css-hover-xl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xl', 'hover');
+  }
+
+  set ['$css-target-xl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xl', 'target');
+  }
+
+  set ['$css-toggle-xl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xl', 'toggle');
+  }
+  // xxl
+  set ['$css-xxl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xxl');
+  }
+
+  set ['$css-active-xxl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xxl', 'active');
+  }
+
+  set ['$css-focus-xxl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xxl', 'focus');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-visible-xxl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xxl', 'focus-visible');
+    this.tabIndex = 0;
+  }
+
+  set ['$css-focus-within-xxl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xxl', 'focus-within');
+  }
+
+  set ['$css-hover-xxl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xxl', 'hover');
+  }
+
+  set ['$css-target-xxl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xxl', 'target');
+  }
+
+  set ['$css-toggle-xxl'](value: Record<string, string | number>) {
+    this.setCssBreakpoint(value, 'xxl', 'toggle');
+  }
+  public async setCssBreakpoint(
+    value: Record<string, string | number>,
+    breakpoint: Breakpoint,
+    state?: StyleStates
+  ) {
+    (await import('./styles-scope-breakpoint/$css-breakpoint')).CssBreakpoint.setHostStyle(
+      breakpoint,
+      value,
+      this,
+      state
+    );
+  }
+
+  public async setCss(value: Record<string, string | number>, state?: StyleStates) {
+    (await import('./styles-scope/$css')).StylesCss.scope(this, value, state);
   }
 
   set $slot(value: string | string[]) {
@@ -1043,9 +1308,12 @@ export class Div extends HTMLElement {
     breakpoint: Breakpoint,
     state?: StyleStates
   ) {
-    (
-      await import('./styles-scope-breakpoint/$animate-breakpoint')
-    ).StylesAnimateBreakpoint.scope(breakpoint, value, this, state);
+    (await import('./styles-scope-breakpoint/$animate-breakpoint')).StylesAnimateBreakpoint.scope(
+      breakpoint,
+      value,
+      this,
+      state
+    );
   }
 
   public async setClassBreakpoint(value: string[], breakpoint: Breakpoint, state?: StyleStates) {
@@ -2269,7 +2537,9 @@ export class Div extends HTMLElement {
       this.inputBreakpointCSSResult || ''
     }${this.styleMapCSSResult || ''}${this.styleBreakpointCSSResult || ''}${
       this.slotMapCSSResult || ''
-    }${this.slotBreakpointCSSResult || ''}
+    }${this.slotBreakpointCSSResult || ''}${this.cssTextResult || ''}${
+      this.cssTextBreakpointResult || ''
+    }
     `;
   }
 
