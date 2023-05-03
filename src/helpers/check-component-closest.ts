@@ -1,7 +1,7 @@
 import { ComponentNameTypes } from '../types/component.names';
 
-export const checkCBoxclosest = (
-  box: CBox.Ref,
+export const checkCBoxClosest = (
+  box: CXDiv.Ref,
   componentName: ComponentNameTypes,
   errorText: string
 ) => {

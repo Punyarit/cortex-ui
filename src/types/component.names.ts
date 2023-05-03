@@ -1,5 +1,4 @@
 import { CxButtonName } from '../components/button/types/button.name';
-import { CBoxName } from '../components/c-box/types/c-box.name';
 import { CxDialogName } from '../components/dialog/types/dialog.name';
 import { CxIconName } from '../components/icon/types/icon.name';
 import { CxModalName } from '../components/modal/types/modal.name';
@@ -12,7 +11,6 @@ import { CxTransitionName } from '../components/transition/types/transition.name
 
 export const componentNames = [
   CxButtonName,
-  CBoxName,
   CxDialogName,
   CxIconName,
   CxModalName,
@@ -24,4 +22,4 @@ export const componentNames = [
   CxTransitionName,
 ] as const;
 
-export type ComponentNameTypes = typeof componentNames[number];
+export type ComponentNameTypes = (typeof componentNames)[number];
