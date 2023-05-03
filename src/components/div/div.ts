@@ -105,6 +105,14 @@ export class Div extends HTMLElement {
     shadowRoot.appendChild(slot);
   }
 
+  set slots(slots: string | string[]) {
+    this.initSlotName(slots);
+  }
+
+  public async initSlotName(slots: string | string[]) {
+    await (await import('./helpers/initial-slot')).InitialSlot.setSlot(slots, this);
+  }
+
   set $css(value: Record<string, string | number>) {
     this.setCss(value);
   }

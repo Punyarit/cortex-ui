@@ -2,7 +2,7 @@ import { css, html, TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { createRef, ref } from 'lit/directives/ref.js';
-import '../c-box/c-box';
+import '../div/div';
 import '../popover/popover';
 import '../calendar/calendar';
 import { RangeValueType, DateValueType } from '../calendar/types/calendar.types';

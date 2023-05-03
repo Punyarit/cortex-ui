@@ -2,7 +2,7 @@ import { css, html, PropertyValueMap, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import '../popover/popover';
-import '../c-box/c-box';
+import '../div/div';
 import { CxTooltipName } from './types/tooltip.types';
 
 @customElement(CxTooltipName)
