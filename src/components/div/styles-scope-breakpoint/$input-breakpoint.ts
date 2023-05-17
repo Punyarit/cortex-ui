@@ -1,3 +1,4 @@
+import { InitialShadow } from '../helpers/initial-shadow'
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { breakpointMinMax } from '../types/c-div.breakpoint';
 import { Breakpoint, InputSelector, StyleStates } from '../types/c-div.types';
@@ -9,6 +10,8 @@ export class StylesInputBreakpoint {
     box: CXDiv.Ref,
     state?: StyleStates
   ) {
+    InitialShadow.init(box);
+
     const target = box.children[0].tagName.toLowerCase();
     if (target !== 'input' && target !== 'textarea') {
       throw SyntaxError(

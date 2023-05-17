@@ -1,3 +1,4 @@
+import { InitialShadow } from '../helpers/initial-shadow'
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { breakpointMinMax } from '../types/c-div.breakpoint';
 import { Breakpoint, StyleStates } from '../types/c-div.types';
@@ -9,6 +10,8 @@ export class StylesScopeBreakpoint {
     box: CXDiv.Ref,
     state?: StyleStates
   ) {
+    InitialShadow.init(box);
+
     const breakpointSize = breakpointMinMax[breakpoint];
 
     // Initialize breakpoint and state data structures

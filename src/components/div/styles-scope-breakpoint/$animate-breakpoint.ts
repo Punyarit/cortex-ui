@@ -1,3 +1,4 @@
+import { InitialShadow } from '../helpers/initial-shadow';
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { breakpointMinMax } from '../types/c-div.breakpoint';
 import { Breakpoint, StyleStates } from '../types/c-div.types';
@@ -9,11 +10,10 @@ export class StylesAnimateBreakpoint {
     box: CXDiv.Ref,
     state?: StyleStates
   ) {
+    InitialShadow.init(box);
+
     if (state === 'toggle') {
-      (await import('../helpers/toggle-event')).StyleToggle.handle(
-        box,
-        `animate-${breakpoint}`
-      );
+      (await import('../helpers/toggle-event')).StyleToggle.handle(box, `animate-${breakpoint}`);
     }
 
     const breakpointSize = breakpointMinMax[breakpoint];
@@ -80,9 +80,8 @@ function initializeUiBreakpoint(
 ): void {
   box.animateBreakpoint ||= {};
   (box.animateBreakpoint as any)[breakpointSize.min || breakpointSize.max!] ||= {};
-  (box.animateBreakpoint as any)[breakpointSize.min || breakpointSize.max!][
-    state || 'default'
-  ] ||= {};
+  (box.animateBreakpoint as any)[breakpointSize.min || breakpointSize.max!][state || 'default'] ||=
+    {};
 }
 
 function createMediaRule(breakpointSize: {

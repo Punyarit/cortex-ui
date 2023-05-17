@@ -1,3 +1,4 @@
+import { InitialShadow } from '../helpers/initial-shadow'
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { StyleStates, UiPseudoState } from '../types/c-div.types';
 
@@ -8,6 +9,8 @@ export class StylesPseudo {
     pseudo: 'before' | 'after',
     state?: StyleStates
   ) {
+    InitialShadow.init(box);
+
     let styles: string[];
     box[pseudo === 'before' ? 'beforeMap' : 'afterMap'] ||= {};
 

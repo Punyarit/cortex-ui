@@ -1,3 +1,4 @@
+import { InitialShadow } from '../helpers/initial-shadow'
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { breakpointMinMax } from '../types/c-div.breakpoint';
 import { Breakpoint, StyleStates } from '../types/c-div.types';
@@ -62,6 +63,8 @@ export class StylesPseudoBreakpoint {
     pseudo: 'before' | 'after',
     state?: StyleStates
   ): void {
+    InitialShadow.init(box);
+
     const mediaRule = createMediaRule(breakpointSize);
 
     for (let index = 0; index < styles.length; ++index) {

@@ -1,8 +1,11 @@
+import { InitialShadow } from '../helpers/initial-shadow'
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { StyleStates } from '../types/c-div.types';
 
 export class StylesIcon {
   static async scope(value: string | string[], box: CXDiv.Ref, state?: StyleStates) {
+    InitialShadow.init(box);
+
     box.iconMap ||= {};
 
     let styles: string[];

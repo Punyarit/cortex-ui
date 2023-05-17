@@ -1,7 +1,10 @@
+import { InitialShadow } from '../helpers/initial-shadow'
 import { StyleStates } from '../types/c-div.types';
 
 export class StylesCss {
   static async scope(div: CXDiv.Ref, value: Record<string, string | number>, state?: StyleStates) {
+    InitialShadow.init(div);
+
     if (state === 'toggle') {
       (await import('../helpers/toggle-event')).StyleToggle.handle(div, 'css');
     }

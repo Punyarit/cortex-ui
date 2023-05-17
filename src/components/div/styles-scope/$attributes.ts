@@ -1,3 +1,4 @@
+import { InitialShadow } from '../helpers/initial-shadow';
 import { UiSpacing, UiSpacingTypes } from '../types/c-div.types';
 
 export class StylesAttributes {
@@ -8,6 +9,8 @@ export class StylesAttributes {
     attr: string,
     axis?: 'margin-x' | 'margin-y' | 'padding-x' | 'padding-y'
   ) {
+    InitialShadow.init(box);
+
     box.spaceMap ||= {} as UiSpacing;
     const important = value?.endsWith('!') ? '!important' : '';
     const val = value.replace('!', '');

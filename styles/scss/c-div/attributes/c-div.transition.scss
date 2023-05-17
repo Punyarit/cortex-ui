@@ -1,79 +1,66 @@
-c-div[transition-none] {
-  transition: none;
-}
+$transitions: (
+  'none': 0ms,
+  25: 25ms,
+  50: 50ms,
+  75: 75ms,
+  100: 100ms,
+  125: 125ms,
+  150: 150ms,
+  175: 175ms,
+  200: 200ms,
+  250: 250ms,
+  275: 275ms,
+  300: 300ms,
+  325: 325ms,
+  350: 350ms,
+  375: 375ms,
+  400: 400ms,
+  425: 425ms,
+  450: 450ms,
+  475: 475ms,
+  500: 500ms,
+  525: 525ms,
+  550: 550ms,
+  575: 575ms,
+  600: 600ms,
+  625: 625ms,
+  650: 650ms,
+  675: 675ms,
+  700: 700ms,
+  725: 725ms,
+  750: 750ms,
+  775: 775ms,
+  800: 800ms,
+  825: 825ms,
+  850: 850ms,
+  875: 875ms,
+  900: 900ms,
+  925: 925ms,
+  950: 950ms,
+  975: 975ms,
+  1000: 1000ms,
+  1250: 1250ms,
+  1500: 1500ms,
+  1750: 1750ms,
+  2000: 2000ms,
+  2250: 2250ms,
+  2500: 2500ms,
+  2750: 2750ms,
+  3000: 3000ms,
+);
 
-c-div[transition-25] {
-  transition: all 25ms ease;
-}
+$properties: (
+  'all': 'all',
+  'bg': 'background-color',
+  'color': 'color',
+  'opacity': 'opacity',
+  'transform': 'transform',
+);
 
-c-div[transition-50] {
-  transition: all 50ms ease;
-}
-
-c-div[transition-75] {
-  transition: all 75ms ease;
-}
-
-c-div[transition-100] {
-  transition: all 100ms ease;
-}
-
-c-div[transition-125] {
-  transition: all 125ms ease;
-}
-
-c-div[transition-150] {
-  transition: all 150ms ease;
-}
-
-c-div[transition-175] {
-  transition: all 175ms ease;
-}
-
-c-div[transition-200] {
-  transition: all 200ms ease;
-}
-
-c-div[transition-250] {
-  transition: all 250ms ease;
-}
-
-c-div[transition-275] {
-  transition: all 275ms ease;
-}
-
-c-div[transition-300] {
-  transition: all 300ms ease;
-}
-
-c-div[transition-325] {
-  transition: all 325ms ease;
-}
-
-c-div[transition-350] {
-  transition: all 350ms ease;
-}
-
-c-div[transition-375] {
-  transition: all 375ms ease;
-}
-
-c-div[transition-400] {
-  transition: all 400ms ease;
-}
-
-c-div[transition-425] {
-  transition: all 425ms ease;
-}
-
-c-div[transition-450] {
-  transition: all 450ms ease;
-}
-
-c-div[transition-475] {
-  transition: all 475ms ease;
-}
-
-c-div[transition-500] {
-  transition: all 500ms ease;
+@each $time, $duration in $transitions {
+  @each $prop, $property in $properties {
+    c-div[transition-#{$prop}-#{$time}] {
+      transition: #{$property} #{$duration} ease;
+    }
+  }
 }

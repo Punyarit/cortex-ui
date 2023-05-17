@@ -93,17 +93,7 @@ export class Div extends HTMLElement {
     (await import('./helpers/toggle-cache')).BoxToggle.toggleStyles(this, toggleGroup);
   }
 
-  private styleElement: HTMLStyleElement;
-  constructor() {
-    super();
-    // create shadow root
-    const shadowRoot = this.attachShadow({ mode: 'open' });
-    this.styleElement = document.createElement('style');
-    this.styleElement.textContent = ':host{display:block}';
-    const slot = document.createElement('slot');
-    shadowRoot.appendChild(this.styleElement);
-    shadowRoot.appendChild(slot);
-  }
+  public styleElement?: HTMLStyleElement;
 
   set slots(slots: string | string[]) {
     this.initSlotName(slots);
@@ -2533,7 +2523,7 @@ export class Div extends HTMLElement {
 
   public updateStyles() {
     // may be dirty but this can improve dom. *remove all whitespace without using helper function.
-    this.styleElement.textContent = `:host{display:block}${this.classCSSResult || ''}${
+    this.styleElement!.textContent = `:host{display:block;}${this.classCSSResult || ''}${
       this.classStateCSSResult || ''
     }${this.iconCSSResult || ''}${this.beforeCSSResult || ''}${this.afterCSSResult || ''}${
       this.spaceCSSResult || ''
