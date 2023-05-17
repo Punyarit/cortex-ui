@@ -1,25 +1,27 @@
-c-div[w-full] {
-  width: 100%;
-}
+@for $i from 1 through 100 {
+  c-div[w-#{$i}vh] {
+    width: #{$i}vh;
+  }
 
-c-div[min-w-full] {
-  min-width: 100%;
-}
+  c-div[h-#{$i}vh] {
+    height: #{$i}vh;
+  }
 
-c-div[max-w-full] {
-  max-width: 100%;
-}
+  c-div[min-w-#{$i}vh] {
+    min-width: #{$i}vh;
+  }
 
-c-div[h-full] {
-  height: 100%;
-}
+  c-div[min-h-#{$i}vh] {
+    min-height: #{$i}vh;
+  }
 
-c-div[min-h-full] {
-  min-height: 100%;
-}
+  c-div[max-w-#{$i}vh] {
+    max-width: #{$i}vh;
+  }
 
-c-div[max-h-full] {
-  max-height: 100%;
+  c-div[max-h-#{$i}vh] {
+    max-height: #{$i}vh;
+  }
 }
 
 c-div[w-auto] {
