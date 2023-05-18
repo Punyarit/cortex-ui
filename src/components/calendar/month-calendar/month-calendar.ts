@@ -79,7 +79,6 @@ export class MonthCalendar extends LitElement {
                 ? new Date(9999, 0)
                 : new Date(max?.getFullYear()!, max?.getMonth()!);
 
-              console.log('month-calendar.js |maxMonth| = ', maxMonth);
               const date = new Date(this.date.getFullYear(), month);
 
               const shouldVisible = isDateBetween(minMonth, maxMonth, date);

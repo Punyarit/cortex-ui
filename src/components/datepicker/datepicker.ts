@@ -166,22 +166,25 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
 
     if (inputDateType === 'enddate') {
       inputDateBoxRef.setAttribute('input-box', 'focus');
-      this.resetEndDateSelected();
+      if (this.set?.rangeValue?.endDate) {
+        this.endDateCache = this.set.rangeValue.endDate;
+      }
+      requestAnimationFrame(() => {
+        this.resetEndDateSelected();
+      });
     }
     this.setFocusOnInputBox(inputDateBoxRef);
   }
 
-  private resetEndDateSelected() {
+  public resetEndDateSelected() {
+    if (!this.cxCalendarRef.value) return;
+
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute('enddate-selected', '');
     this.cxCalendarRef.value?.calendarMonitorRef.value?.setAttribute(
       'old-enddate',
       convertDateToArrayNumber(this.set.rangeValue?.endDate!)?.join('-')!
     );
-
-    if (this.set?.rangeValue?.endDate) {
-      this.endDateCache = this.set.rangeValue.endDate;
-      this.set.rangeValue.endDate = undefined;
-    }
+    this.cxCalendarRef.value.dateNavigator = this.endDateCache;
   }
 
   private async selectDate(e: CXDatePicker.SelectDate.Date | CXDatePicker.SelectDate.Range) {

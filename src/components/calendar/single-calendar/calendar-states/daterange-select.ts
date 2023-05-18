@@ -29,7 +29,9 @@ export class CalendarDateRangeSelectState {
       // date range cached
     }
     // select
-    this.setSelectedDateRangeHighLight(startdateAttr, enddateAttr);
+    requestAnimationFrame(() => {
+      this.setSelectedDateRangeHighLight(startdateAttr, enddateAttr);
+    });
   }
 
   public setDateBetweenHighLight(
