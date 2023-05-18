@@ -16,12 +16,6 @@ export class DisplayState {
       case 'date':
         return new DateState(this.calendar).generateCalendar();
 
-      case 'month':
-        break;
-
-      case 'year':
-        break;
-
       default:
         break;
     }
@@ -63,10 +57,9 @@ export class DisplayState {
 export class DateState {
   constructor(public calendar: Calendar) {}
   public generateCalendar() {
-    const currentMonth = this.calendar.set.date;
+    const currentMonth = this.calendar.dateNavigator || this.calendar.set.date;
     const previousMonth = getPreviousMonth(currentMonth);
     const nextMonth = getNextMonth(currentMonth);
-
     switch (this.calendar.set.display) {
       case '1-calendar':
         this.calendar.calendarGroup = [

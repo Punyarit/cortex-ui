@@ -85,7 +85,7 @@ export class MonthCalendar extends LitElement {
   selectMonth(date: Date) {
     this.calendar.setDisplayState('date');
     // BUG: when select month/year then select date selector will bug
-    this.calendar.fix().date(date).exec();
+    this.calendar.dateNavigator = date;
   }
 
   protected willUpdate(

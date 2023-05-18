@@ -1,4 +1,4 @@
-import { css, html, TemplateResult } from 'lit';
+import { css, html, PropertyValueMap, TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import '../button/button';
@@ -60,7 +60,6 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
       /* -304 is current month */
       /* -608 is next month */
       display: flex;
-      translate: var(--translate);
       transition: translate 0.25s ease-out;
       transition-timing-function: cubic-bezier(0.1, 0.2, 0.2, 1);
       /* 📌improve ux speed */
@@ -98,6 +97,9 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     size: 'small',
   };
 
+  @property({ type: Date })
+  dateNavigator?: Date;
+
   public calendarMonitorRef = createRef<HTMLDivElement>();
 
   @property({ type: String })
@@ -114,6 +116,10 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
           --translate: ${this.currentTranslateValue}px;
           --display-calendar: ${this.setDisplayCalendar()}px;
         }
+
+        .calendar-monitor {
+          translate: ${this.displayState === 'date' ? 'var(--translate)' : '0'};
+        }
       </style>
 
       <!-- 📌 Calendar Display -->
@@ -128,7 +134,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
           @click="${this.goNext}"
           .var="${this.buttonVar}"
           .set="${this.buttonRightSet}"></cx-button>
-        ${this.renderCalendar()}
+        <div class="calendar-monitor" ${ref(this.calendarMonitorRef)}>${this.renderCalendar()}</div>
       </div>
     `;
   }
@@ -137,18 +143,16 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     switch (this.displayState) {
       case 'date':
         return html`
-          <div class="calendar-monitor" ${ref(this.calendarMonitorRef)}>
-            ${this.calendarGroup.map(
-              (calendar) =>
-                html` <cx-single-calendar
-                  @select-date="${this.selectDate}"
-                  @calendar-display="${(e: CustomEvent) => {
-                    this.goToMonthCalendar(e.detail.date);
-                  }}"
-                  .set="${{ calendar, daterange: this.set.dateRange }}">
-                </cx-single-calendar>`
-            )}
-          </div>
+          ${this.calendarGroup.map(
+            (calendar) =>
+              html` <cx-single-calendar
+                @select-date="${this.selectDate}"
+                @calendar-display="${(e: CustomEvent) => {
+                  this.goToMonthCalendar(e.detail.date);
+                }}"
+                .set="${{ calendar, daterange: this.set.dateRange }}">
+              </cx-single-calendar>`
+          )}
         `;
 
       case 'month':
@@ -245,7 +249,11 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
   }
 
   willUpdate(changedProps: any) {
+    if (this.set.rangeValue?.startDate) {
+      this.dateNavigator = this.set.rangeValue?.startDate;
+    }
     this.calendarDisplayMethods?.generate();
+
     super.willUpdate(changedProps);
   }
 

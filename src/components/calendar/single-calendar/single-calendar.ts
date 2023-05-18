@@ -256,10 +256,10 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     );
   }
 
-  willUpdate(changedProps: Map<string, unknown>) {
+  updated(changedProps: Map<string, unknown>) {
     // ⚠ FIXME: willUpdate will execute everytimes when change month
     this.updateSelected();
-    super.willUpdate(changedProps);
+    super.update(changedProps);
   }
 
   // 📌this methods only call from calendar monitor **observer trigger
