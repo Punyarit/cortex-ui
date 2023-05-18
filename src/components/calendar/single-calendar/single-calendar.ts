@@ -100,6 +100,12 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
       position: relative;
       bottom: var(--size-6);
       font-family: var(--semiBold);
+      cursor: pointer;
+      transition: color 0.25s ease;
+    }
+
+    .title:hover {
+      color: var(--primary-700) !important;
     }
 
     .week {
@@ -109,7 +115,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
     .date[data-period='today'] {
       position: relative;
       z-index: 2;
-      color: var(--primary-700);
+      color: var(--primary-900);
       font-family: var(--extraBold);
     }
 
@@ -198,7 +204,7 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
 
       <div class="calendar">
         <!-- title (month) -->
-        <div class="title">
+        <div class="title" @click="${this.setCalendarDisplay}">
           <div class="month">
             ${dateFormat(this.calendarMethod.dateConverted(), longMonthOption)}
           </div>
@@ -237,6 +243,17 @@ export class SingleCalendar extends ComponentBase<CXSingleCalendar.Props> {
           )}
         </div>
       </div>`;
+  }
+
+  setCalendarDisplay() {
+    this.dispatchEvent(
+      new CustomEvent('calendar-display', {
+        bubbles: true,
+        detail: {
+          date: this.calendarMethod.dateConverted(),
+        },
+      })
+    );
   }
 
   willUpdate(changedProps: Map<string, unknown>) {

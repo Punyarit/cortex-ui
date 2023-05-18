@@ -6,3 +6,5 @@ export type RangeValueType = {
 export type DateValueType = {
   date: Date;
 };
+
+export type CalendarDisplay = 'date' | 'month' | 'year';

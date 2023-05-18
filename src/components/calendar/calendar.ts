@@ -1,5 +1,5 @@
 import { css, html, TemplateResult } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import '../button/button';
 import { createRef, ref } from 'lit/directives/ref.js';
@@ -7,13 +7,15 @@ import './single-calendar/single-calendar';
 import {
   CalendarResult,
   convertDateToArrayNumber,
-  getCalendarDetail,
-  getNextMonth,
-  getPreviousMonth,
 } from '../../helpers/functions/date/date-methods';
 import { mutableElement } from '../../helpers/functions/observe-element/mutable-element';
-import { RangeValueType, DateValueType } from './types/calendar.types';
+import { RangeValueType, DateValueType, CalendarDisplay } from './types/calendar.types';
 import { CxCalendarName } from './types/calendar.name';
+import './month-calendar/month-calendar';
+import './year-calendar/year-calendar';
+import { MonthCalendar } from './month-calendar/month-calendar';
+import { DateState, DisplayState } from './states/DisplayState';
+import { YearCalendar } from './year-calendar/year-calendar';
 
 // export const onPressed = 'pressed';
 
@@ -31,12 +33,14 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     rangeValue: undefined,
   };
 
+  private calendarDisplayMethods?: DisplayState;
+
   // 📌 0 = previous month
   // 📌 -304 = current month
   // 📌 -608 = next month
-  private currentTranslateValue: 0 | -304 | -608 = -304;
+  public currentTranslateValue: 0 | -304 | -608 = -304;
 
-  private calendarGroup!: CalendarResult[];
+  public calendarGroup!: CalendarResult[];
 
   static styles = css`
     :host {
@@ -96,8 +100,15 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
   public calendarMonitorRef = createRef<HTMLDivElement>();
 
+  @property({ type: String })
+  displayState: CalendarDisplay = 'date';
+
+  public monthDisplayRef = createRef<MonthCalendar>();
+  public yearDisplayRef = createRef<YearCalendar>();
+
   render(): TemplateResult {
-    return html` <style>
+    return html`
+      <style>
         :host {
           /* 📌default = current month */
           --translate: ${this.currentTranslateValue}px;
@@ -105,27 +116,62 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
         }
       </style>
 
+      <!-- 📌 Calendar Display -->
       <div class="calendar-group">
         <cx-button
           class="handle-month-previous"
-          @click="${this.goPreviousMonth}"
+          @click="${this.goPrev}"
           .var="${this.buttonVar}"
           .set="${this.buttonLeftSet}"></cx-button>
         <cx-button
           class="handle-month-next"
-          @click="${this.goNextMonth}"
+          @click="${this.goNext}"
           .var="${this.buttonVar}"
           .set="${this.buttonRightSet}"></cx-button>
-        <div class="calendar-monitor" ${ref(this.calendarMonitorRef)}>
-          ${this.calendarGroup.map(
-            (calendar) =>
-              html` <cx-single-calendar
-                @select-date="${this.selectDate}"
-                .set="${{ calendar, daterange: this.set.dateRange }}">
-              </cx-single-calendar>`
-          )}
-        </div>
-      </div>`;
+        ${this.renderCalendar()}
+      </div>
+    `;
+  }
+
+  renderCalendar() {
+    switch (this.displayState) {
+      case 'date':
+        return html`
+          <div class="calendar-monitor" ${ref(this.calendarMonitorRef)}>
+            ${this.calendarGroup.map(
+              (calendar) =>
+                html` <cx-single-calendar
+                  @select-date="${this.selectDate}"
+                  @calendar-display="${(e: CustomEvent) => {
+                    this.goToMonthCalendar(e.detail.date);
+                  }}"
+                  .set="${{ calendar, daterange: this.set.dateRange }}">
+                </cx-single-calendar>`
+            )}
+          </div>
+        `;
+
+      case 'month':
+        return html`<cx-month-calendar ${ref(this.monthDisplayRef)}></cx-month-calendar>`;
+
+      case 'year':
+        return html`<cx-year-calendar ${ref(this.yearDisplayRef)}></cx-year-calendar>`;
+      default:
+        break;
+    }
+  }
+
+  public goToMonthCalendar(date: Date) {
+    this.setDisplayState('month');
+    requestAnimationFrame(() => {
+      if (!this.monthDisplayRef.value) return;
+      this.monthDisplayRef.value.date = date;
+      this.monthDisplayRef.value.calendar = this;
+    });
+  }
+
+  setDisplayState(display: CalendarDisplay) {
+    this.displayState = display;
   }
 
   firstUpdated() {
@@ -135,7 +181,6 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
   private updateSelectedDates(): void {
     const { initValue, dateValue, rangeValue, dateRange: daterange } = this.set;
-
     if (initValue && (dateValue || rangeValue)) {
       const calendarMonitor = this.calendarMonitorRef.value;
 
@@ -176,7 +221,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     }
   }
 
-  private selectDate = (e: Event) => {
+  public selectDate = (e: Event) => {
     if (this.set.dateRange) {
       const { endDate, startDate } = (e as CXDatePicker.SelectDate.Range).detail;
       this.setCustomEvent('select-date', {
@@ -196,128 +241,20 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
     super.connectedCallback();
     if (this.set) this.cacheConfig(this.set);
     if (this.config) this.exec();
+    this.calendarDisplayMethods = new DisplayState(this);
   }
 
   willUpdate(changedProps: any) {
-    this.generateCalendar();
+    this.calendarDisplayMethods?.generate();
     super.willUpdate(changedProps);
   }
 
-  private generateCalendar() {
-    const currentMonth = this.set.date;
-    const previousMonth = getPreviousMonth(currentMonth);
-    const nextMonth = getNextMonth(currentMonth);
-
-    switch (this.set.display) {
-      case '1-calendar':
-        this.calendarGroup = [
-          getCalendarDetail({ date: previousMonth, min: this.set.min, max: this.set.max }),
-          getCalendarDetail({ date: currentMonth, min: this.set.min, max: this.set.max }),
-          getCalendarDetail({ date: nextMonth, min: this.set.min, max: this.set.max }),
-        ];
-        break;
-      case '2-calendars':
-        this.calendarGroup = [
-          getCalendarDetail({ date: previousMonth, min: this.set.min, max: this.set.max }),
-          getCalendarDetail({ date: currentMonth, min: this.set.min, max: this.set.max }),
-          getCalendarDetail({ date: nextMonth, min: this.set.min, max: this.set.max }),
-          getCalendarDetail({
-            date: getNextMonth(nextMonth),
-            min: this.set.min,
-            max: this.set.max,
-          }),
-        ];
-        break;
-    }
+  private goPrev() {
+    this.calendarDisplayMethods?.goPrev();
   }
 
-  private translateMonth(direction: 'previous' | 'next') {
-    this.calendarMonitorRef.value!.style.transition = '0.25s ease-out';
-    this.currentTranslateValue += direction === 'previous' ? 304 : -304;
-    this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
-  }
-
-  private createSingleCalendar(type: 'previous' | 'next', focusedCalendar: CXSingleCalendar.Ref) {
-    const previousMonthFromMonthVisibled =
-      type === 'previous'
-        ? getPreviousMonth(focusedCalendar.set.calendar?.firstDateOfMonth!)
-        : getNextMonth(focusedCalendar.set.calendar?.firstDateOfMonth!);
-
-    const generatedMonth = getCalendarDetail({
-      date: previousMonthFromMonthVisibled,
-      min: this.set.min,
-      max: this.set.max,
-    });
-
-    const singleCalendar = document.createElement('cx-single-calendar') as CXSingleCalendar.Ref;
-    singleCalendar.fix().calendar(generatedMonth).daterange(this.set.dateRange).exec();
-    singleCalendar.addEventListener('select-date', this.selectDate);
-
-    return singleCalendar;
-  }
-  private removeUnusedCalendar(focussedCalendar: CXSingleCalendar.Ref) {
-    if (focussedCalendar) {
-      this.calendarMonitorRef.value?.removeChild(focussedCalendar);
-    }
-  }
-
-  private appendNewCalendar(type: 'previous' | 'next', singleCalendar: CXSingleCalendar.Ref) {
-    const calendarMonitor = this.calendarMonitorRef.value;
-    if (!calendarMonitor) return;
-
-    if (type === 'previous') {
-      calendarMonitor.insertBefore(singleCalendar, calendarMonitor.firstElementChild);
-    } else {
-      calendarMonitor.appendChild(singleCalendar);
-    }
-  }
-  private setTransitionCalendar(type: 'previous' | 'next') {
-    const calendarMonitor = this.calendarMonitorRef.value;
-    if (!calendarMonitor) return;
-
-    calendarMonitor.style.transition = 'none';
-    if (type === 'previous') {
-      this.currentTranslateValue -= 304;
-    } else if (type === 'next') {
-      this.currentTranslateValue += 304;
-    }
-    this.style.setProperty('--translate', `${this.currentTranslateValue}px`);
-  }
-
-  private goPreviousMonth() {
-    this.translateMonth('previous');
-
-    const timer = setTimeout(() => {
-      const singleCalendar = this.createSingleCalendar(
-        'previous',
-        this.calendarMonitorRef.value?.firstElementChild as CXSingleCalendar.Ref
-      );
-      this.removeUnusedCalendar(
-        this.calendarMonitorRef.value?.lastElementChild as CXSingleCalendar.Ref
-      );
-      this.appendNewCalendar('previous', singleCalendar);
-
-      this.setTransitionCalendar('previous');
-
-      clearTimeout(timer);
-    }, 250);
-  }
-
-  private goNextMonth() {
-    this.translateMonth('next');
-    const timer = setTimeout(() => {
-      const singleCalendar = this.createSingleCalendar(
-        'next',
-        this.calendarMonitorRef.value!.lastElementChild as CXSingleCalendar.Ref
-      );
-
-      this.removeUnusedCalendar(
-        this.calendarMonitorRef.value?.firstElementChild as CXSingleCalendar.Ref
-      );
-      this.appendNewCalendar('next', singleCalendar);
-      this.setTransitionCalendar('next');
-      clearTimeout(timer);
-    }, 250);
+  private goNext() {
+    this.calendarDisplayMethods?.goNext();
   }
 }
 

@@ -297,3 +297,12 @@ export function isDateBetween(startDate: Date, endDate: Date, checkDate: Date) {
     (checkDate >= endDate && checkDate <= startDate)
   );
 }
+
+export const generateYearGroup = (date: Date, yearCount: number) => {
+  const year = date.getFullYear();
+  const result: number[] = [];
+  for (let i = year - yearCount; i <= year; i++) {
+    result.push(i);
+  }
+  return result;
+};
