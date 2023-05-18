@@ -1,7 +1,7 @@
 import { css, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { Calendar } from '../calendar';
-import { generateYearGroup } from '../../../helpers/functions/date/date-methods';
+import { generateYearGroup, isDateBetween } from '../../../helpers/functions/date/date-methods';
 
 @customElement('cx-month-calendar')
 export class MonthCalendar extends LitElement {
@@ -18,7 +18,7 @@ export class MonthCalendar extends LitElement {
       transition: color 0.25s ease;
     }
 
-    .month {
+    .months {
       display: flex;
       width: 280px;
       flex-wrap: wrap;
@@ -29,7 +29,7 @@ export class MonthCalendar extends LitElement {
     .title:hover {
       color: var(--primary-700) !important;
     }
-    .month > div {
+    .month {
       width: 69px;
       height: 48px;
       display: flex;
@@ -40,8 +40,16 @@ export class MonthCalendar extends LitElement {
       transition: background-color 0.25s ease;
     }
 
-    .month > div:hover {
+    .month.disabled {
+      cursor: default;
+    }
+
+    .month:not(.disabled):hover {
       background-color: var(--primary-50);
+    }
+
+    .disabled {
+      color: var(--gray-300) !important;
     }
   `;
 
@@ -60,10 +68,24 @@ export class MonthCalendar extends LitElement {
               .replace('พ.ศ.', '')}
           </div>
 
-          <div class="month">
+          <div class="months">
             ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((month) => {
+              const { min, max } = this.calendar.set;
+
+              const minMonth = isNaN(min?.getTime()!)
+                ? new Date(0, 0)
+                : new Date(min?.getFullYear()!, min?.getMonth()!);
+              const maxMonth = isNaN(max?.getTime()!)
+                ? new Date(9999, 0)
+                : new Date(max?.getFullYear()!, max?.getMonth()!);
+
+              console.log('month-calendar.js |maxMonth| = ', maxMonth);
               const date = new Date(this.date.getFullYear(), month);
-              return html`<div @click="${() => this.selectMonth(date)}">
+
+              const shouldVisible = isDateBetween(minMonth, maxMonth, date);
+              return html`<div
+                @click="${shouldVisible ? () => this.selectMonth(date) : null}"
+                class="month ${!shouldVisible ? 'disabled' : ''}">
                 ${Intl.DateTimeFormat('th-TH', { month: 'short' }).format(date)}
               </div>`;
             })}

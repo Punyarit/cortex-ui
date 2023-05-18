@@ -250,7 +250,7 @@ export class Calendar extends ComponentBase<CXCalendar.Props> {
 
   willUpdate(changedProps: any) {
     if (this.set.rangeValue?.startDate) {
-      this.dateNavigator = this.set.rangeValue?.startDate;
+      this.dateNavigator ||= this.set.rangeValue?.startDate;
     }
     this.calendarDisplayMethods?.generate();
 
