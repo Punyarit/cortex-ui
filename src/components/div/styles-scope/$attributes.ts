@@ -14,8 +14,7 @@ export class StylesAttributes {
     box.spaceMap ||= {} as UiSpacing;
     const important = value?.endsWith('!') ? '!important' : '';
     const val = value.replace('!', '');
-    const attribute = `${attr}-${value}`;
-    box.setAttribute(attribute, '');
+    box.setAttribute(attr, value);
     if (Array.isArray(style)) {
       // css size attribute maximum is 200
       if (+value > 200) {
@@ -23,11 +22,11 @@ export class StylesAttributes {
         for (let index = 0; index < style.length; index++) {
           styles[index] = `${style[index]}:var(--size-${val})${important};`;
         }
-        box.spaceMap[axis!] = `:host([${attribute}]){${styles.join('')}}`;
+        box.spaceMap[axis!] = `:host([${attr}='${value}']){${styles.join('')}}`;
       }
     } else {
       if (+value > 200) {
-        box.spaceMap[style] = `:host([${attribute}]){${style}:var(--size-${val})${important}}`;
+        box.spaceMap[style] = `:host([${attr}='${value}']){${style}:var(--size-${val})${important}}`;
       }
     }
     box.spaceCSSResult = box.spaceMap ? Object.values(box.spaceMap).join('') : '';

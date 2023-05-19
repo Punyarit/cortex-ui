@@ -1,4 +1,4 @@
-import { InitialShadow } from '../helpers/initial-shadow'
+import { InitialShadow } from '../helpers/initial-shadow';
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { breakpointMinMax } from '../types/c-div.breakpoint';
 import { Breakpoint, StyleStates } from '../types/c-div.types';
@@ -26,10 +26,10 @@ export class StylesIconBreakpoint {
     }
 
     box.iconBreakpointCSSResult = box.iconBreakpoint
-    ? Object.values(box.iconBreakpoint)
-        .flatMap((res) => Object.values(res!))
-        .join('')
-    : ''
+      ? Object.values(box.iconBreakpoint)
+          .flatMap((res) => Object.values(res!))
+          .join('')
+      : '';
     box.updateStyles();
   }
 
@@ -58,10 +58,12 @@ export class StylesIconBreakpoint {
 
     for (let index = 0; index < styles.length; ++index) {
       const [iconName, styleValue] = styles[index].split(':').map((s) => s.trim());
-      if (iconName && styleValue) {
+      const styleIcon = styleValue || iconName;
+
+      if (iconName && styleIcon) {
         let iconSide = 'before';
 
-        const cssText = styleValue
+        const cssText = styleIcon
           .split(' ')
           .filter((s) => {
             if (s === 'before' || s === 'after') {
@@ -79,7 +81,7 @@ export class StylesIconBreakpoint {
 
         iconStyles[index] = `${mediaRule}{:host${
           state === 'toggle' ? `([icon-${breakpoint}-toggle])` : state ? `(:${state})` : ''
-        }::${iconSide}{content: '\uE800';font-family: ${iconName};${cssText}}}`;
+        }::${iconSide}{${styleValue ? `content: '\uE800';font-family: ${iconName};` : ``}${cssText}}}`;
       }
     }
 

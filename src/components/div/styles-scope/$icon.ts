@@ -1,4 +1,4 @@
-import { InitialShadow } from '../helpers/initial-shadow'
+import { InitialShadow } from '../helpers/initial-shadow';
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { StyleStates } from '../types/c-div.types';
 
@@ -23,10 +23,11 @@ export class StylesIcon {
     const iconStyles = [];
     // create dynamic style
     for (let index = 0; index < styles.length; ++index) {
-      const [iconName, style] = styles[index].split(':').map((s) => s.trim());
-      if (iconName && style) {
+      const [iconName, styleValue] = styles[index].split(':').map((s) => s.trim());
+      const styleIcon = styleValue || iconName;
+      if (iconName && styleIcon) {
         let iconSide = 'before';
-        const cssText = style
+        const cssText = styleIcon
           .split(' ')
           .filter((s) => {
             if (s === 'before' || s === 'after') {
@@ -44,7 +45,7 @@ export class StylesIcon {
 
         iconStyles[index] = `:host${
           state === 'toggle' ? '([icon-toggle])' : state ? `(:${state})` : ''
-        }::${iconSide}{content: '\uE800';font-family: ${iconName};${cssText}}`;
+        }::${iconSide}{${styleValue ? `content: '\uE800';font-family: ${iconName};` : ``}${cssText}}`;
       }
     }
     box.iconMap[state || 'icon'] = iconStyles.join(' ');

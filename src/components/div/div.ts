@@ -1,3 +1,4 @@
+import { DivStore } from './helpers/div-store';
 import {
   UiClassName,
   StyleStates,
@@ -88,6 +89,57 @@ export class Div extends HTMLElement {
   public cssTextBreakpoint?: any;
   public cssTextBreakpointResult?: string;
   // public cssTextBreakpointStateResult?: string;
+
+  // events
+  public $isToggled?: boolean;
+  set $id(value: string) {
+    DivStore.store.set(value, this);
+  }
+  set $click(value: Record<keyof GlobalEventHandlers, Record<string, Record<string, unknown>>>) {
+    const events = Object.entries(value) as [
+      keyof GlobalEventHandlers,
+      Record<string, Record<string, unknown>>
+    ][];
+    this.onclick = () => {
+      events.forEach(([id, styles]) => {
+        const target = DivStore.store.get(id) as Div;
+        Object.entries(styles).forEach(([prop, sx]) => {
+          (target as any)[prop] = sx;
+        });
+      });
+    };
+  }
+
+  set $toggle(value: Record<keyof GlobalEventHandlers, Record<string, Record<string, unknown>>>[]) {
+    const events1 = Object.entries(value[0]) as [
+      keyof GlobalEventHandlers,
+      Record<string, Record<string, unknown>>
+    ][];
+
+    const events2 = Object.entries(value[1]) as [
+      keyof GlobalEventHandlers,
+      Record<string, Record<string, unknown>>
+    ][];
+    this.$isToggled = false;
+    this.onmouseup = () => {
+      this.$isToggled = !this.$isToggled;
+      if (this.$isToggled) {
+        events1.forEach(([id, styles]) => {
+          const target = DivStore.store.get(id) as Div;
+          Object.entries(styles).forEach(([prop, sx]) => {
+            (target as any)[prop] = sx;
+          });
+        });
+      } else {
+        events2.forEach(([id, styles]) => {
+          const target = DivStore.store.get(id) as Div;
+          Object.entries(styles).forEach(([prop, sx]) => {
+            (target as any)[prop] = sx;
+          });
+        });
+      }
+    };
+  }
 
   public async toggleStyles(toggleGroup: CXDiv.Ref | null) {
     (await import('./helpers/toggle-cache')).BoxToggle.toggleStyles(this, toggleGroup);

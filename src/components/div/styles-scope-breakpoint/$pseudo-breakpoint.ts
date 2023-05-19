@@ -72,7 +72,7 @@ export class StylesPseudoBreakpoint {
       // style can be undefined *note if style = undefined that mean content is styles (ui-before="styles")
       const styleTexts = style || content;
       if (styleTexts) {
-        const cssText = style
+        const cssText = styleTexts
           .split(' ')
           .filter(Boolean)
           .map((s) => {
@@ -85,7 +85,7 @@ export class StylesPseudoBreakpoint {
           breakpointSize.min || breakpointSize.max!
         ][state || pseudo] = `${mediaRule}{:host${
           state === 'toggle' ? `([${pseudo}-${breakpoint}-toggle])` : state ? `(:${state})` : ''
-        }::${pseudo}{content:'${style ? content : ''}';${cssText}}}`;
+        }::${pseudo}{${style ? `content:'${content}';` : ''}${cssText}}}`;
       }
     }
   }

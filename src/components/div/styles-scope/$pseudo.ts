@@ -1,4 +1,4 @@
-import { InitialShadow } from '../helpers/initial-shadow'
+import { InitialShadow } from '../helpers/initial-shadow';
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { StyleStates, UiPseudoState } from '../types/c-div.types';
 
@@ -47,7 +47,7 @@ export class StylesPseudo {
           state || pseudo
         ] = `:host${
           state === 'toggle' ? `([${pseudo}-toggle])` : state ? `(:${state})` : ''
-        }::${pseudo}{content:'${style ? content : ''}';${cssText}}`;
+        }::${pseudo}{${style ? `content:'${content}';` : ''}${cssText}}`;
       }
     }
 
