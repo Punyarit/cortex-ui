@@ -9,8 +9,9 @@ import { CxTooltipName } from './types/tooltip.types';
 export class Tooltip extends ComponentBase<CXTooltip.Props> {
   config: CXTooltip.Set = {
     text: 'Tooltip was created!',
-    openby: 'mouseover',
+    openBy: 'mouseover',
     position: 'bottom-center',
+    arrowPoint: false,
   };
 
   connectedCallback() {
@@ -24,8 +25,8 @@ export class Tooltip extends ComponentBase<CXTooltip.Props> {
       .set="${{
         focusout: 'close',
         mouseleave: 'close',
-        arrowpoint: true,
-        openby: this.set.openby,
+        arrowpoint: this.set.arrowPoint,
+        openby: this.set.openBy,
         position: this.set.position,
       } as CXPopover.Set}">
       <c-box slot="host"> </c-box>
@@ -56,7 +57,8 @@ declare global {
     type Set = {
       text: string;
       position?: CXPopover.Set['position'];
-      openby: CXPopover.Set['openby'];
+      openBy: CXPopover.Set['openby'];
+      arrowPoint: boolean;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
