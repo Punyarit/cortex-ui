@@ -4,7 +4,6 @@ import { StyleStates } from '../types/c-div.types';
 
 export class StylesIcon {
   static async scope(value: string | string[], box: CXDiv.Ref, state?: StyleStates) {
-    InitialShadow.init(box);
 
     box.iconMap ||= {};
 

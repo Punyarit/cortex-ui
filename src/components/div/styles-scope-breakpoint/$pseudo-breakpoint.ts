@@ -63,7 +63,6 @@ export class StylesPseudoBreakpoint {
     pseudo: 'before' | 'after',
     state?: StyleStates
   ): void {
-    InitialShadow.init(box);
 
     const mediaRule = createMediaRule(breakpointSize);
 

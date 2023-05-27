@@ -10,7 +10,6 @@ export class CssBreakpoint {
     div: CXDiv.Ref,
     state?: StyleStates
   ) {
-    InitialShadow.init(div);
 
     const breakpointSize = breakpointMinMax[breakpoint];
 

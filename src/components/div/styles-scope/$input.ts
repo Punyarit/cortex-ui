@@ -4,7 +4,6 @@ import { InputSelector, StyleStates, UiInput } from '../types/c-div.types';
 
 export class StylesInput {
   static scope(value: string | string[], box: CXDiv.Ref, state?: StyleStates) {
-    InitialShadow.init(box);
 
     const target = box.children[0].tagName.toLowerCase();
     if (target !== 'input' && target !== 'textarea') {

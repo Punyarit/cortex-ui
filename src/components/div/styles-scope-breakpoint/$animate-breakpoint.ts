@@ -10,7 +10,6 @@ export class StylesAnimateBreakpoint {
     box: CXDiv.Ref,
     state?: StyleStates
   ) {
-    InitialShadow.init(box);
 
     if (state === 'toggle') {
       (await import('../helpers/toggle-event')).StyleToggle.handle(box, `animate-${breakpoint}`);

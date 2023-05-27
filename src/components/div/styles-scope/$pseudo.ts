@@ -9,7 +9,6 @@ export class StylesPseudo {
     pseudo: 'before' | 'after',
     state?: StyleStates
   ) {
-    InitialShadow.init(box);
 
     let styles: string[];
     box[pseudo === 'before' ? 'beforeMap' : 'afterMap'] ||= {};

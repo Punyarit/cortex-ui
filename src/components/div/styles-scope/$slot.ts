@@ -4,7 +4,6 @@ import { StyleStates } from '../types/c-div.types';
 
 export class SlotMap {
   static async map(value: string | string[], box: CXDiv.Ref, state?: StyleStates) {
-    InitialShadow.init(box);
 
     box.slotMap ||= {};
     box.slotMap[state || 'default'] = {};

@@ -1,4 +1,4 @@
-import { InitialShadow } from '../helpers/initial-shadow'
+import { InitialShadow } from '../helpers/initial-shadow';
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { breakpointMinMax } from '../types/c-div.breakpoint';
 import { Breakpoint, StyleStates } from '../types/c-div.types';
@@ -10,8 +10,6 @@ export class StyleBreakpoint {
     box: CXDiv.Ref,
     state?: StyleStates
   ) {
-    InitialShadow.init(box);
-
     const breakpointSize = breakpointMinMax[breakpoint];
 
     // Initialize breakpoint and state data structures
@@ -20,10 +18,7 @@ export class StyleBreakpoint {
     this.generateDynamicStyles(breakpoint, breakpointSize, styles, box, state);
 
     if (state === 'toggle') {
-      (await import('../helpers/toggle-event')).StyleToggle.handle(
-        box,
-        `style-${breakpoint}`
-      );
+      (await import('../helpers/toggle-event')).StyleToggle.handle(box, `style-${breakpoint}`);
     }
 
     box.styleBreakpointCSSResult = box.styleBreakpoint

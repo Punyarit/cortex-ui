@@ -10,7 +10,6 @@ export class StylesIconBreakpoint {
     box: CXDiv.Ref,
     state?: StyleStates
   ) {
-    InitialShadow.init(box);
 
     const breakpointSize = breakpointMinMax[breakpoint];
 

@@ -1,4 +1,5 @@
 import { DivStore } from './helpers/div-store';
+import { InitialShadow } from './helpers/initial-shadow';
 import {
   UiClassName,
   StyleStates,
@@ -88,7 +89,18 @@ export class Div extends HTMLElement {
 
   public cssTextBreakpoint?: any;
   public cssTextBreakpointResult?: string;
+
+  constructor() {
+    super();
+    // create shadow root
+    InitialShadow.init(this);
+  }
   // public cssTextBreakpointStateResult?: string;
+
+  // presets
+  set $preset(value: string | string[]) {
+    console.log('div.js |value| = ', value);
+  }
 
   // events
   public $isToggled?: boolean;

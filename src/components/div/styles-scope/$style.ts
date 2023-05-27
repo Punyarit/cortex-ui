@@ -1,11 +1,9 @@
-import { InitialShadow } from '../helpers/initial-shadow'
+import { InitialShadow } from '../helpers/initial-shadow';
 import { stylesMapper } from '../styles-mapper/styles-mapper';
 import { StyleStates } from '../types/c-div.types';
 
 export class StyleMap {
   static async style(styles: string | string[], box: CXDiv.Ref, state?: StyleStates) {
-    InitialShadow.init(box);
-
     box.styleMap ||= {};
     box.styleMap[state || 'default'] = {};
 

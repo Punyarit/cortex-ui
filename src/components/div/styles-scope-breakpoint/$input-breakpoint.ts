@@ -10,7 +10,6 @@ export class StylesInputBreakpoint {
     box: CXDiv.Ref,
     state?: StyleStates
   ) {
-    InitialShadow.init(box);
 
     const target = box.children[0].tagName.toLowerCase();
     if (target !== 'input' && target !== 'textarea') {

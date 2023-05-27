@@ -4,7 +4,6 @@ import { StyleStates } from '../types/c-div.types';
 
 export class StylesAnimate {
   static async animate(box: CXDiv.Ref, value: string[], state?: StyleStates) {
-    InitialShadow.init(box);
     const val = value.slice(0, value.length - 1);
 
     if (state === 'toggle') {
