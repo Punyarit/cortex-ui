@@ -1,0 +1,45 @@
+c-div[break-before-auto] {
+  -webkit-column-break-before: auto;
+          break-before: auto;
+}
+
+c-div[break-before-always] {
+  -webkit-column-break-before: always;
+          break-before: always;
+}
+
+c-div[break-before-avoid] {
+  -webkit-column-break-before: avoid;
+          break-before: avoid;
+}
+
+c-div[break-before-avoid-column] {
+  -webkit-column-break-before: avoid-column;
+          break-before: avoid-column;
+}
+
+c-div[break-before-avoid-page] {
+  -webkit-column-break-before: avoid;
+          break-before: avoid-page;
+}
+
+c-div[break-before-column] {
+  -webkit-column-break-before: column;
+          break-before: column;
+}
+
+c-div[break-before-left] {
+  -webkit-column-break-before: left;
+          break-before: left;
+}
+
+c-div[break-before-page] {
+  -webkit-column-break-before: page;
+          break-before: page;
+}
+
+c-div[break-before-right] {
+  -webkit-column-break-before: right;
+          break-before: right;
+}
+/*# sourceMappingURL=c-div.break-before.css.map */

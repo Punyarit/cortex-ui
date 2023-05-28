@@ -2,10 +2,6 @@ import { css } from 'lit';
 
 export const colors = css`
   :host {
-    /* Base */
-    --base-white: #ffffff;
-    --base-black: #000000;
-
     /* Gray */
     --base-gray-25: #fcfcfd;
     --base-gray-50: #f9fafb;

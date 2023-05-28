@@ -1,0 +1,1512 @@
+c-div[transition-all-none] {
+  -webkit-transition: all 0ms ease;
+  transition: all 0ms ease;
+}
+
+c-div[transition-bg-none] {
+  -webkit-transition: background-color 0ms ease;
+  transition: background-color 0ms ease;
+}
+
+c-div[transition-color-none] {
+  -webkit-transition: color 0ms ease;
+  transition: color 0ms ease;
+}
+
+c-div[transition-opacity-none] {
+  -webkit-transition: opacity 0ms ease;
+  transition: opacity 0ms ease;
+}
+
+c-div[transition-transform-none] {
+  -webkit-transition: -webkit-transform 0ms ease;
+  transition: -webkit-transform 0ms ease;
+  transition: transform 0ms ease;
+  transition: transform 0ms ease, -webkit-transform 0ms ease;
+}
+
+c-div[transition-all-25] {
+  -webkit-transition: all 25ms ease;
+  transition: all 25ms ease;
+}
+
+c-div[transition-bg-25] {
+  -webkit-transition: background-color 25ms ease;
+  transition: background-color 25ms ease;
+}
+
+c-div[transition-color-25] {
+  -webkit-transition: color 25ms ease;
+  transition: color 25ms ease;
+}
+
+c-div[transition-opacity-25] {
+  -webkit-transition: opacity 25ms ease;
+  transition: opacity 25ms ease;
+}
+
+c-div[transition-transform-25] {
+  -webkit-transition: -webkit-transform 25ms ease;
+  transition: -webkit-transform 25ms ease;
+  transition: transform 25ms ease;
+  transition: transform 25ms ease, -webkit-transform 25ms ease;
+}
+
+c-div[transition-all-50] {
+  -webkit-transition: all 50ms ease;
+  transition: all 50ms ease;
+}
+
+c-div[transition-bg-50] {
+  -webkit-transition: background-color 50ms ease;
+  transition: background-color 50ms ease;
+}
+
+c-div[transition-color-50] {
+  -webkit-transition: color 50ms ease;
+  transition: color 50ms ease;
+}
+
+c-div[transition-opacity-50] {
+  -webkit-transition: opacity 50ms ease;
+  transition: opacity 50ms ease;
+}
+
+c-div[transition-transform-50] {
+  -webkit-transition: -webkit-transform 50ms ease;
+  transition: -webkit-transform 50ms ease;
+  transition: transform 50ms ease;
+  transition: transform 50ms ease, -webkit-transform 50ms ease;
+}
+
+c-div[transition-all-75] {
+  -webkit-transition: all 75ms ease;
+  transition: all 75ms ease;
+}
+
+c-div[transition-bg-75] {
+  -webkit-transition: background-color 75ms ease;
+  transition: background-color 75ms ease;
+}
+
+c-div[transition-color-75] {
+  -webkit-transition: color 75ms ease;
+  transition: color 75ms ease;
+}
+
+c-div[transition-opacity-75] {
+  -webkit-transition: opacity 75ms ease;
+  transition: opacity 75ms ease;
+}
+
+c-div[transition-transform-75] {
+  -webkit-transition: -webkit-transform 75ms ease;
+  transition: -webkit-transform 75ms ease;
+  transition: transform 75ms ease;
+  transition: transform 75ms ease, -webkit-transform 75ms ease;
+}
+
+c-div[transition-all-100] {
+  -webkit-transition: all 100ms ease;
+  transition: all 100ms ease;
+}
+
+c-div[transition-bg-100] {
+  -webkit-transition: background-color 100ms ease;
+  transition: background-color 100ms ease;
+}
+
+c-div[transition-color-100] {
+  -webkit-transition: color 100ms ease;
+  transition: color 100ms ease;
+}
+
+c-div[transition-opacity-100] {
+  -webkit-transition: opacity 100ms ease;
+  transition: opacity 100ms ease;
+}
+
+c-div[transition-transform-100] {
+  -webkit-transition: -webkit-transform 100ms ease;
+  transition: -webkit-transform 100ms ease;
+  transition: transform 100ms ease;
+  transition: transform 100ms ease, -webkit-transform 100ms ease;
+}
+
+c-div[transition-all-125] {
+  -webkit-transition: all 125ms ease;
+  transition: all 125ms ease;
+}
+
+c-div[transition-bg-125] {
+  -webkit-transition: background-color 125ms ease;
+  transition: background-color 125ms ease;
+}
+
+c-div[transition-color-125] {
+  -webkit-transition: color 125ms ease;
+  transition: color 125ms ease;
+}
+
+c-div[transition-opacity-125] {
+  -webkit-transition: opacity 125ms ease;
+  transition: opacity 125ms ease;
+}
+
+c-div[transition-transform-125] {
+  -webkit-transition: -webkit-transform 125ms ease;
+  transition: -webkit-transform 125ms ease;
+  transition: transform 125ms ease;
+  transition: transform 125ms ease, -webkit-transform 125ms ease;
+}
+
+c-div[transition-all-150] {
+  -webkit-transition: all 150ms ease;
+  transition: all 150ms ease;
+}
+
+c-div[transition-bg-150] {
+  -webkit-transition: background-color 150ms ease;
+  transition: background-color 150ms ease;
+}
+
+c-div[transition-color-150] {
+  -webkit-transition: color 150ms ease;
+  transition: color 150ms ease;
+}
+
+c-div[transition-opacity-150] {
+  -webkit-transition: opacity 150ms ease;
+  transition: opacity 150ms ease;
+}
+
+c-div[transition-transform-150] {
+  -webkit-transition: -webkit-transform 150ms ease;
+  transition: -webkit-transform 150ms ease;
+  transition: transform 150ms ease;
+  transition: transform 150ms ease, -webkit-transform 150ms ease;
+}
+
+c-div[transition-all-175] {
+  -webkit-transition: all 175ms ease;
+  transition: all 175ms ease;
+}
+
+c-div[transition-bg-175] {
+  -webkit-transition: background-color 175ms ease;
+  transition: background-color 175ms ease;
+}
+
+c-div[transition-color-175] {
+  -webkit-transition: color 175ms ease;
+  transition: color 175ms ease;
+}
+
+c-div[transition-opacity-175] {
+  -webkit-transition: opacity 175ms ease;
+  transition: opacity 175ms ease;
+}
+
+c-div[transition-transform-175] {
+  -webkit-transition: -webkit-transform 175ms ease;
+  transition: -webkit-transform 175ms ease;
+  transition: transform 175ms ease;
+  transition: transform 175ms ease, -webkit-transform 175ms ease;
+}
+
+c-div[transition-all-200] {
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+c-div[transition-bg-200] {
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+}
+
+c-div[transition-color-200] {
+  -webkit-transition: color 200ms ease;
+  transition: color 200ms ease;
+}
+
+c-div[transition-opacity-200] {
+  -webkit-transition: opacity 200ms ease;
+  transition: opacity 200ms ease;
+}
+
+c-div[transition-transform-200] {
+  -webkit-transition: -webkit-transform 200ms ease;
+  transition: -webkit-transform 200ms ease;
+  transition: transform 200ms ease;
+  transition: transform 200ms ease, -webkit-transform 200ms ease;
+}
+
+c-div[transition-all-250] {
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease;
+}
+
+c-div[transition-bg-250] {
+  -webkit-transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
+}
+
+c-div[transition-color-250] {
+  -webkit-transition: color 250ms ease;
+  transition: color 250ms ease;
+}
+
+c-div[transition-opacity-250] {
+  -webkit-transition: opacity 250ms ease;
+  transition: opacity 250ms ease;
+}
+
+c-div[transition-transform-250] {
+  -webkit-transition: -webkit-transform 250ms ease;
+  transition: -webkit-transform 250ms ease;
+  transition: transform 250ms ease;
+  transition: transform 250ms ease, -webkit-transform 250ms ease;
+}
+
+c-div[transition-all-275] {
+  -webkit-transition: all 275ms ease;
+  transition: all 275ms ease;
+}
+
+c-div[transition-bg-275] {
+  -webkit-transition: background-color 275ms ease;
+  transition: background-color 275ms ease;
+}
+
+c-div[transition-color-275] {
+  -webkit-transition: color 275ms ease;
+  transition: color 275ms ease;
+}
+
+c-div[transition-opacity-275] {
+  -webkit-transition: opacity 275ms ease;
+  transition: opacity 275ms ease;
+}
+
+c-div[transition-transform-275] {
+  -webkit-transition: -webkit-transform 275ms ease;
+  transition: -webkit-transform 275ms ease;
+  transition: transform 275ms ease;
+  transition: transform 275ms ease, -webkit-transform 275ms ease;
+}
+
+c-div[transition-all-300] {
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+}
+
+c-div[transition-bg-300] {
+  -webkit-transition: background-color 300ms ease;
+  transition: background-color 300ms ease;
+}
+
+c-div[transition-color-300] {
+  -webkit-transition: color 300ms ease;
+  transition: color 300ms ease;
+}
+
+c-div[transition-opacity-300] {
+  -webkit-transition: opacity 300ms ease;
+  transition: opacity 300ms ease;
+}
+
+c-div[transition-transform-300] {
+  -webkit-transition: -webkit-transform 300ms ease;
+  transition: -webkit-transform 300ms ease;
+  transition: transform 300ms ease;
+  transition: transform 300ms ease, -webkit-transform 300ms ease;
+}
+
+c-div[transition-all-325] {
+  -webkit-transition: all 325ms ease;
+  transition: all 325ms ease;
+}
+
+c-div[transition-bg-325] {
+  -webkit-transition: background-color 325ms ease;
+  transition: background-color 325ms ease;
+}
+
+c-div[transition-color-325] {
+  -webkit-transition: color 325ms ease;
+  transition: color 325ms ease;
+}
+
+c-div[transition-opacity-325] {
+  -webkit-transition: opacity 325ms ease;
+  transition: opacity 325ms ease;
+}
+
+c-div[transition-transform-325] {
+  -webkit-transition: -webkit-transform 325ms ease;
+  transition: -webkit-transform 325ms ease;
+  transition: transform 325ms ease;
+  transition: transform 325ms ease, -webkit-transform 325ms ease;
+}
+
+c-div[transition-all-350] {
+  -webkit-transition: all 350ms ease;
+  transition: all 350ms ease;
+}
+
+c-div[transition-bg-350] {
+  -webkit-transition: background-color 350ms ease;
+  transition: background-color 350ms ease;
+}
+
+c-div[transition-color-350] {
+  -webkit-transition: color 350ms ease;
+  transition: color 350ms ease;
+}
+
+c-div[transition-opacity-350] {
+  -webkit-transition: opacity 350ms ease;
+  transition: opacity 350ms ease;
+}
+
+c-div[transition-transform-350] {
+  -webkit-transition: -webkit-transform 350ms ease;
+  transition: -webkit-transform 350ms ease;
+  transition: transform 350ms ease;
+  transition: transform 350ms ease, -webkit-transform 350ms ease;
+}
+
+c-div[transition-all-375] {
+  -webkit-transition: all 375ms ease;
+  transition: all 375ms ease;
+}
+
+c-div[transition-bg-375] {
+  -webkit-transition: background-color 375ms ease;
+  transition: background-color 375ms ease;
+}
+
+c-div[transition-color-375] {
+  -webkit-transition: color 375ms ease;
+  transition: color 375ms ease;
+}
+
+c-div[transition-opacity-375] {
+  -webkit-transition: opacity 375ms ease;
+  transition: opacity 375ms ease;
+}
+
+c-div[transition-transform-375] {
+  -webkit-transition: -webkit-transform 375ms ease;
+  transition: -webkit-transform 375ms ease;
+  transition: transform 375ms ease;
+  transition: transform 375ms ease, -webkit-transform 375ms ease;
+}
+
+c-div[transition-all-400] {
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+c-div[transition-bg-400] {
+  -webkit-transition: background-color 400ms ease;
+  transition: background-color 400ms ease;
+}
+
+c-div[transition-color-400] {
+  -webkit-transition: color 400ms ease;
+  transition: color 400ms ease;
+}
+
+c-div[transition-opacity-400] {
+  -webkit-transition: opacity 400ms ease;
+  transition: opacity 400ms ease;
+}
+
+c-div[transition-transform-400] {
+  -webkit-transition: -webkit-transform 400ms ease;
+  transition: -webkit-transform 400ms ease;
+  transition: transform 400ms ease;
+  transition: transform 400ms ease, -webkit-transform 400ms ease;
+}
+
+c-div[transition-all-425] {
+  -webkit-transition: all 425ms ease;
+  transition: all 425ms ease;
+}
+
+c-div[transition-bg-425] {
+  -webkit-transition: background-color 425ms ease;
+  transition: background-color 425ms ease;
+}
+
+c-div[transition-color-425] {
+  -webkit-transition: color 425ms ease;
+  transition: color 425ms ease;
+}
+
+c-div[transition-opacity-425] {
+  -webkit-transition: opacity 425ms ease;
+  transition: opacity 425ms ease;
+}
+
+c-div[transition-transform-425] {
+  -webkit-transition: -webkit-transform 425ms ease;
+  transition: -webkit-transform 425ms ease;
+  transition: transform 425ms ease;
+  transition: transform 425ms ease, -webkit-transform 425ms ease;
+}
+
+c-div[transition-all-450] {
+  -webkit-transition: all 450ms ease;
+  transition: all 450ms ease;
+}
+
+c-div[transition-bg-450] {
+  -webkit-transition: background-color 450ms ease;
+  transition: background-color 450ms ease;
+}
+
+c-div[transition-color-450] {
+  -webkit-transition: color 450ms ease;
+  transition: color 450ms ease;
+}
+
+c-div[transition-opacity-450] {
+  -webkit-transition: opacity 450ms ease;
+  transition: opacity 450ms ease;
+}
+
+c-div[transition-transform-450] {
+  -webkit-transition: -webkit-transform 450ms ease;
+  transition: -webkit-transform 450ms ease;
+  transition: transform 450ms ease;
+  transition: transform 450ms ease, -webkit-transform 450ms ease;
+}
+
+c-div[transition-all-475] {
+  -webkit-transition: all 475ms ease;
+  transition: all 475ms ease;
+}
+
+c-div[transition-bg-475] {
+  -webkit-transition: background-color 475ms ease;
+  transition: background-color 475ms ease;
+}
+
+c-div[transition-color-475] {
+  -webkit-transition: color 475ms ease;
+  transition: color 475ms ease;
+}
+
+c-div[transition-opacity-475] {
+  -webkit-transition: opacity 475ms ease;
+  transition: opacity 475ms ease;
+}
+
+c-div[transition-transform-475] {
+  -webkit-transition: -webkit-transform 475ms ease;
+  transition: -webkit-transform 475ms ease;
+  transition: transform 475ms ease;
+  transition: transform 475ms ease, -webkit-transform 475ms ease;
+}
+
+c-div[transition-all-500] {
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+
+c-div[transition-bg-500] {
+  -webkit-transition: background-color 500ms ease;
+  transition: background-color 500ms ease;
+}
+
+c-div[transition-color-500] {
+  -webkit-transition: color 500ms ease;
+  transition: color 500ms ease;
+}
+
+c-div[transition-opacity-500] {
+  -webkit-transition: opacity 500ms ease;
+  transition: opacity 500ms ease;
+}
+
+c-div[transition-transform-500] {
+  -webkit-transition: -webkit-transform 500ms ease;
+  transition: -webkit-transform 500ms ease;
+  transition: transform 500ms ease;
+  transition: transform 500ms ease, -webkit-transform 500ms ease;
+}
+
+c-div[transition-all-525] {
+  -webkit-transition: all 525ms ease;
+  transition: all 525ms ease;
+}
+
+c-div[transition-bg-525] {
+  -webkit-transition: background-color 525ms ease;
+  transition: background-color 525ms ease;
+}
+
+c-div[transition-color-525] {
+  -webkit-transition: color 525ms ease;
+  transition: color 525ms ease;
+}
+
+c-div[transition-opacity-525] {
+  -webkit-transition: opacity 525ms ease;
+  transition: opacity 525ms ease;
+}
+
+c-div[transition-transform-525] {
+  -webkit-transition: -webkit-transform 525ms ease;
+  transition: -webkit-transform 525ms ease;
+  transition: transform 525ms ease;
+  transition: transform 525ms ease, -webkit-transform 525ms ease;
+}
+
+c-div[transition-all-550] {
+  -webkit-transition: all 550ms ease;
+  transition: all 550ms ease;
+}
+
+c-div[transition-bg-550] {
+  -webkit-transition: background-color 550ms ease;
+  transition: background-color 550ms ease;
+}
+
+c-div[transition-color-550] {
+  -webkit-transition: color 550ms ease;
+  transition: color 550ms ease;
+}
+
+c-div[transition-opacity-550] {
+  -webkit-transition: opacity 550ms ease;
+  transition: opacity 550ms ease;
+}
+
+c-div[transition-transform-550] {
+  -webkit-transition: -webkit-transform 550ms ease;
+  transition: -webkit-transform 550ms ease;
+  transition: transform 550ms ease;
+  transition: transform 550ms ease, -webkit-transform 550ms ease;
+}
+
+c-div[transition-all-575] {
+  -webkit-transition: all 575ms ease;
+  transition: all 575ms ease;
+}
+
+c-div[transition-bg-575] {
+  -webkit-transition: background-color 575ms ease;
+  transition: background-color 575ms ease;
+}
+
+c-div[transition-color-575] {
+  -webkit-transition: color 575ms ease;
+  transition: color 575ms ease;
+}
+
+c-div[transition-opacity-575] {
+  -webkit-transition: opacity 575ms ease;
+  transition: opacity 575ms ease;
+}
+
+c-div[transition-transform-575] {
+  -webkit-transition: -webkit-transform 575ms ease;
+  transition: -webkit-transform 575ms ease;
+  transition: transform 575ms ease;
+  transition: transform 575ms ease, -webkit-transform 575ms ease;
+}
+
+c-div[transition-all-600] {
+  -webkit-transition: all 600ms ease;
+  transition: all 600ms ease;
+}
+
+c-div[transition-bg-600] {
+  -webkit-transition: background-color 600ms ease;
+  transition: background-color 600ms ease;
+}
+
+c-div[transition-color-600] {
+  -webkit-transition: color 600ms ease;
+  transition: color 600ms ease;
+}
+
+c-div[transition-opacity-600] {
+  -webkit-transition: opacity 600ms ease;
+  transition: opacity 600ms ease;
+}
+
+c-div[transition-transform-600] {
+  -webkit-transition: -webkit-transform 600ms ease;
+  transition: -webkit-transform 600ms ease;
+  transition: transform 600ms ease;
+  transition: transform 600ms ease, -webkit-transform 600ms ease;
+}
+
+c-div[transition-all-625] {
+  -webkit-transition: all 625ms ease;
+  transition: all 625ms ease;
+}
+
+c-div[transition-bg-625] {
+  -webkit-transition: background-color 625ms ease;
+  transition: background-color 625ms ease;
+}
+
+c-div[transition-color-625] {
+  -webkit-transition: color 625ms ease;
+  transition: color 625ms ease;
+}
+
+c-div[transition-opacity-625] {
+  -webkit-transition: opacity 625ms ease;
+  transition: opacity 625ms ease;
+}
+
+c-div[transition-transform-625] {
+  -webkit-transition: -webkit-transform 625ms ease;
+  transition: -webkit-transform 625ms ease;
+  transition: transform 625ms ease;
+  transition: transform 625ms ease, -webkit-transform 625ms ease;
+}
+
+c-div[transition-all-650] {
+  -webkit-transition: all 650ms ease;
+  transition: all 650ms ease;
+}
+
+c-div[transition-bg-650] {
+  -webkit-transition: background-color 650ms ease;
+  transition: background-color 650ms ease;
+}
+
+c-div[transition-color-650] {
+  -webkit-transition: color 650ms ease;
+  transition: color 650ms ease;
+}
+
+c-div[transition-opacity-650] {
+  -webkit-transition: opacity 650ms ease;
+  transition: opacity 650ms ease;
+}
+
+c-div[transition-transform-650] {
+  -webkit-transition: -webkit-transform 650ms ease;
+  transition: -webkit-transform 650ms ease;
+  transition: transform 650ms ease;
+  transition: transform 650ms ease, -webkit-transform 650ms ease;
+}
+
+c-div[transition-all-675] {
+  -webkit-transition: all 675ms ease;
+  transition: all 675ms ease;
+}
+
+c-div[transition-bg-675] {
+  -webkit-transition: background-color 675ms ease;
+  transition: background-color 675ms ease;
+}
+
+c-div[transition-color-675] {
+  -webkit-transition: color 675ms ease;
+  transition: color 675ms ease;
+}
+
+c-div[transition-opacity-675] {
+  -webkit-transition: opacity 675ms ease;
+  transition: opacity 675ms ease;
+}
+
+c-div[transition-transform-675] {
+  -webkit-transition: -webkit-transform 675ms ease;
+  transition: -webkit-transform 675ms ease;
+  transition: transform 675ms ease;
+  transition: transform 675ms ease, -webkit-transform 675ms ease;
+}
+
+c-div[transition-all-700] {
+  -webkit-transition: all 700ms ease;
+  transition: all 700ms ease;
+}
+
+c-div[transition-bg-700] {
+  -webkit-transition: background-color 700ms ease;
+  transition: background-color 700ms ease;
+}
+
+c-div[transition-color-700] {
+  -webkit-transition: color 700ms ease;
+  transition: color 700ms ease;
+}
+
+c-div[transition-opacity-700] {
+  -webkit-transition: opacity 700ms ease;
+  transition: opacity 700ms ease;
+}
+
+c-div[transition-transform-700] {
+  -webkit-transition: -webkit-transform 700ms ease;
+  transition: -webkit-transform 700ms ease;
+  transition: transform 700ms ease;
+  transition: transform 700ms ease, -webkit-transform 700ms ease;
+}
+
+c-div[transition-all-725] {
+  -webkit-transition: all 725ms ease;
+  transition: all 725ms ease;
+}
+
+c-div[transition-bg-725] {
+  -webkit-transition: background-color 725ms ease;
+  transition: background-color 725ms ease;
+}
+
+c-div[transition-color-725] {
+  -webkit-transition: color 725ms ease;
+  transition: color 725ms ease;
+}
+
+c-div[transition-opacity-725] {
+  -webkit-transition: opacity 725ms ease;
+  transition: opacity 725ms ease;
+}
+
+c-div[transition-transform-725] {
+  -webkit-transition: -webkit-transform 725ms ease;
+  transition: -webkit-transform 725ms ease;
+  transition: transform 725ms ease;
+  transition: transform 725ms ease, -webkit-transform 725ms ease;
+}
+
+c-div[transition-all-750] {
+  -webkit-transition: all 750ms ease;
+  transition: all 750ms ease;
+}
+
+c-div[transition-bg-750] {
+  -webkit-transition: background-color 750ms ease;
+  transition: background-color 750ms ease;
+}
+
+c-div[transition-color-750] {
+  -webkit-transition: color 750ms ease;
+  transition: color 750ms ease;
+}
+
+c-div[transition-opacity-750] {
+  -webkit-transition: opacity 750ms ease;
+  transition: opacity 750ms ease;
+}
+
+c-div[transition-transform-750] {
+  -webkit-transition: -webkit-transform 750ms ease;
+  transition: -webkit-transform 750ms ease;
+  transition: transform 750ms ease;
+  transition: transform 750ms ease, -webkit-transform 750ms ease;
+}
+
+c-div[transition-all-775] {
+  -webkit-transition: all 775ms ease;
+  transition: all 775ms ease;
+}
+
+c-div[transition-bg-775] {
+  -webkit-transition: background-color 775ms ease;
+  transition: background-color 775ms ease;
+}
+
+c-div[transition-color-775] {
+  -webkit-transition: color 775ms ease;
+  transition: color 775ms ease;
+}
+
+c-div[transition-opacity-775] {
+  -webkit-transition: opacity 775ms ease;
+  transition: opacity 775ms ease;
+}
+
+c-div[transition-transform-775] {
+  -webkit-transition: -webkit-transform 775ms ease;
+  transition: -webkit-transform 775ms ease;
+  transition: transform 775ms ease;
+  transition: transform 775ms ease, -webkit-transform 775ms ease;
+}
+
+c-div[transition-all-800] {
+  -webkit-transition: all 800ms ease;
+  transition: all 800ms ease;
+}
+
+c-div[transition-bg-800] {
+  -webkit-transition: background-color 800ms ease;
+  transition: background-color 800ms ease;
+}
+
+c-div[transition-color-800] {
+  -webkit-transition: color 800ms ease;
+  transition: color 800ms ease;
+}
+
+c-div[transition-opacity-800] {
+  -webkit-transition: opacity 800ms ease;
+  transition: opacity 800ms ease;
+}
+
+c-div[transition-transform-800] {
+  -webkit-transition: -webkit-transform 800ms ease;
+  transition: -webkit-transform 800ms ease;
+  transition: transform 800ms ease;
+  transition: transform 800ms ease, -webkit-transform 800ms ease;
+}
+
+c-div[transition-all-825] {
+  -webkit-transition: all 825ms ease;
+  transition: all 825ms ease;
+}
+
+c-div[transition-bg-825] {
+  -webkit-transition: background-color 825ms ease;
+  transition: background-color 825ms ease;
+}
+
+c-div[transition-color-825] {
+  -webkit-transition: color 825ms ease;
+  transition: color 825ms ease;
+}
+
+c-div[transition-opacity-825] {
+  -webkit-transition: opacity 825ms ease;
+  transition: opacity 825ms ease;
+}
+
+c-div[transition-transform-825] {
+  -webkit-transition: -webkit-transform 825ms ease;
+  transition: -webkit-transform 825ms ease;
+  transition: transform 825ms ease;
+  transition: transform 825ms ease, -webkit-transform 825ms ease;
+}
+
+c-div[transition-all-850] {
+  -webkit-transition: all 850ms ease;
+  transition: all 850ms ease;
+}
+
+c-div[transition-bg-850] {
+  -webkit-transition: background-color 850ms ease;
+  transition: background-color 850ms ease;
+}
+
+c-div[transition-color-850] {
+  -webkit-transition: color 850ms ease;
+  transition: color 850ms ease;
+}
+
+c-div[transition-opacity-850] {
+  -webkit-transition: opacity 850ms ease;
+  transition: opacity 850ms ease;
+}
+
+c-div[transition-transform-850] {
+  -webkit-transition: -webkit-transform 850ms ease;
+  transition: -webkit-transform 850ms ease;
+  transition: transform 850ms ease;
+  transition: transform 850ms ease, -webkit-transform 850ms ease;
+}
+
+c-div[transition-all-875] {
+  -webkit-transition: all 875ms ease;
+  transition: all 875ms ease;
+}
+
+c-div[transition-bg-875] {
+  -webkit-transition: background-color 875ms ease;
+  transition: background-color 875ms ease;
+}
+
+c-div[transition-color-875] {
+  -webkit-transition: color 875ms ease;
+  transition: color 875ms ease;
+}
+
+c-div[transition-opacity-875] {
+  -webkit-transition: opacity 875ms ease;
+  transition: opacity 875ms ease;
+}
+
+c-div[transition-transform-875] {
+  -webkit-transition: -webkit-transform 875ms ease;
+  transition: -webkit-transform 875ms ease;
+  transition: transform 875ms ease;
+  transition: transform 875ms ease, -webkit-transform 875ms ease;
+}
+
+c-div[transition-all-900] {
+  -webkit-transition: all 900ms ease;
+  transition: all 900ms ease;
+}
+
+c-div[transition-bg-900] {
+  -webkit-transition: background-color 900ms ease;
+  transition: background-color 900ms ease;
+}
+
+c-div[transition-color-900] {
+  -webkit-transition: color 900ms ease;
+  transition: color 900ms ease;
+}
+
+c-div[transition-opacity-900] {
+  -webkit-transition: opacity 900ms ease;
+  transition: opacity 900ms ease;
+}
+
+c-div[transition-transform-900] {
+  -webkit-transition: -webkit-transform 900ms ease;
+  transition: -webkit-transform 900ms ease;
+  transition: transform 900ms ease;
+  transition: transform 900ms ease, -webkit-transform 900ms ease;
+}
+
+c-div[transition-all-925] {
+  -webkit-transition: all 925ms ease;
+  transition: all 925ms ease;
+}
+
+c-div[transition-bg-925] {
+  -webkit-transition: background-color 925ms ease;
+  transition: background-color 925ms ease;
+}
+
+c-div[transition-color-925] {
+  -webkit-transition: color 925ms ease;
+  transition: color 925ms ease;
+}
+
+c-div[transition-opacity-925] {
+  -webkit-transition: opacity 925ms ease;
+  transition: opacity 925ms ease;
+}
+
+c-div[transition-transform-925] {
+  -webkit-transition: -webkit-transform 925ms ease;
+  transition: -webkit-transform 925ms ease;
+  transition: transform 925ms ease;
+  transition: transform 925ms ease, -webkit-transform 925ms ease;
+}
+
+c-div[transition-all-950] {
+  -webkit-transition: all 950ms ease;
+  transition: all 950ms ease;
+}
+
+c-div[transition-bg-950] {
+  -webkit-transition: background-color 950ms ease;
+  transition: background-color 950ms ease;
+}
+
+c-div[transition-color-950] {
+  -webkit-transition: color 950ms ease;
+  transition: color 950ms ease;
+}
+
+c-div[transition-opacity-950] {
+  -webkit-transition: opacity 950ms ease;
+  transition: opacity 950ms ease;
+}
+
+c-div[transition-transform-950] {
+  -webkit-transition: -webkit-transform 950ms ease;
+  transition: -webkit-transform 950ms ease;
+  transition: transform 950ms ease;
+  transition: transform 950ms ease, -webkit-transform 950ms ease;
+}
+
+c-div[transition-all-975] {
+  -webkit-transition: all 975ms ease;
+  transition: all 975ms ease;
+}
+
+c-div[transition-bg-975] {
+  -webkit-transition: background-color 975ms ease;
+  transition: background-color 975ms ease;
+}
+
+c-div[transition-color-975] {
+  -webkit-transition: color 975ms ease;
+  transition: color 975ms ease;
+}
+
+c-div[transition-opacity-975] {
+  -webkit-transition: opacity 975ms ease;
+  transition: opacity 975ms ease;
+}
+
+c-div[transition-transform-975] {
+  -webkit-transition: -webkit-transform 975ms ease;
+  transition: -webkit-transform 975ms ease;
+  transition: transform 975ms ease;
+  transition: transform 975ms ease, -webkit-transform 975ms ease;
+}
+
+c-div[transition-all-1000] {
+  -webkit-transition: all 1000ms ease;
+  transition: all 1000ms ease;
+}
+
+c-div[transition-bg-1000] {
+  -webkit-transition: background-color 1000ms ease;
+  transition: background-color 1000ms ease;
+}
+
+c-div[transition-color-1000] {
+  -webkit-transition: color 1000ms ease;
+  transition: color 1000ms ease;
+}
+
+c-div[transition-opacity-1000] {
+  -webkit-transition: opacity 1000ms ease;
+  transition: opacity 1000ms ease;
+}
+
+c-div[transition-transform-1000] {
+  -webkit-transition: -webkit-transform 1000ms ease;
+  transition: -webkit-transform 1000ms ease;
+  transition: transform 1000ms ease;
+  transition: transform 1000ms ease, -webkit-transform 1000ms ease;
+}
+
+c-div[transition-all-1250] {
+  -webkit-transition: all 1250ms ease;
+  transition: all 1250ms ease;
+}
+
+c-div[transition-bg-1250] {
+  -webkit-transition: background-color 1250ms ease;
+  transition: background-color 1250ms ease;
+}
+
+c-div[transition-color-1250] {
+  -webkit-transition: color 1250ms ease;
+  transition: color 1250ms ease;
+}
+
+c-div[transition-opacity-1250] {
+  -webkit-transition: opacity 1250ms ease;
+  transition: opacity 1250ms ease;
+}
+
+c-div[transition-transform-1250] {
+  -webkit-transition: -webkit-transform 1250ms ease;
+  transition: -webkit-transform 1250ms ease;
+  transition: transform 1250ms ease;
+  transition: transform 1250ms ease, -webkit-transform 1250ms ease;
+}
+
+c-div[transition-all-1500] {
+  -webkit-transition: all 1500ms ease;
+  transition: all 1500ms ease;
+}
+
+c-div[transition-bg-1500] {
+  -webkit-transition: background-color 1500ms ease;
+  transition: background-color 1500ms ease;
+}
+
+c-div[transition-color-1500] {
+  -webkit-transition: color 1500ms ease;
+  transition: color 1500ms ease;
+}
+
+c-div[transition-opacity-1500] {
+  -webkit-transition: opacity 1500ms ease;
+  transition: opacity 1500ms ease;
+}
+
+c-div[transition-transform-1500] {
+  -webkit-transition: -webkit-transform 1500ms ease;
+  transition: -webkit-transform 1500ms ease;
+  transition: transform 1500ms ease;
+  transition: transform 1500ms ease, -webkit-transform 1500ms ease;
+}
+
+c-div[transition-all-1750] {
+  -webkit-transition: all 1750ms ease;
+  transition: all 1750ms ease;
+}
+
+c-div[transition-bg-1750] {
+  -webkit-transition: background-color 1750ms ease;
+  transition: background-color 1750ms ease;
+}
+
+c-div[transition-color-1750] {
+  -webkit-transition: color 1750ms ease;
+  transition: color 1750ms ease;
+}
+
+c-div[transition-opacity-1750] {
+  -webkit-transition: opacity 1750ms ease;
+  transition: opacity 1750ms ease;
+}
+
+c-div[transition-transform-1750] {
+  -webkit-transition: -webkit-transform 1750ms ease;
+  transition: -webkit-transform 1750ms ease;
+  transition: transform 1750ms ease;
+  transition: transform 1750ms ease, -webkit-transform 1750ms ease;
+}
+
+c-div[transition-all-2000] {
+  -webkit-transition: all 2000ms ease;
+  transition: all 2000ms ease;
+}
+
+c-div[transition-bg-2000] {
+  -webkit-transition: background-color 2000ms ease;
+  transition: background-color 2000ms ease;
+}
+
+c-div[transition-color-2000] {
+  -webkit-transition: color 2000ms ease;
+  transition: color 2000ms ease;
+}
+
+c-div[transition-opacity-2000] {
+  -webkit-transition: opacity 2000ms ease;
+  transition: opacity 2000ms ease;
+}
+
+c-div[transition-transform-2000] {
+  -webkit-transition: -webkit-transform 2000ms ease;
+  transition: -webkit-transform 2000ms ease;
+  transition: transform 2000ms ease;
+  transition: transform 2000ms ease, -webkit-transform 2000ms ease;
+}
+
+c-div[transition-all-2250] {
+  -webkit-transition: all 2250ms ease;
+  transition: all 2250ms ease;
+}
+
+c-div[transition-bg-2250] {
+  -webkit-transition: background-color 2250ms ease;
+  transition: background-color 2250ms ease;
+}
+
+c-div[transition-color-2250] {
+  -webkit-transition: color 2250ms ease;
+  transition: color 2250ms ease;
+}
+
+c-div[transition-opacity-2250] {
+  -webkit-transition: opacity 2250ms ease;
+  transition: opacity 2250ms ease;
+}
+
+c-div[transition-transform-2250] {
+  -webkit-transition: -webkit-transform 2250ms ease;
+  transition: -webkit-transform 2250ms ease;
+  transition: transform 2250ms ease;
+  transition: transform 2250ms ease, -webkit-transform 2250ms ease;
+}
+
+c-div[transition-all-2500] {
+  -webkit-transition: all 2500ms ease;
+  transition: all 2500ms ease;
+}
+
+c-div[transition-bg-2500] {
+  -webkit-transition: background-color 2500ms ease;
+  transition: background-color 2500ms ease;
+}
+
+c-div[transition-color-2500] {
+  -webkit-transition: color 2500ms ease;
+  transition: color 2500ms ease;
+}
+
+c-div[transition-opacity-2500] {
+  -webkit-transition: opacity 2500ms ease;
+  transition: opacity 2500ms ease;
+}
+
+c-div[transition-transform-2500] {
+  -webkit-transition: -webkit-transform 2500ms ease;
+  transition: -webkit-transform 2500ms ease;
+  transition: transform 2500ms ease;
+  transition: transform 2500ms ease, -webkit-transform 2500ms ease;
+}
+
+c-div[transition-all-2750] {
+  -webkit-transition: all 2750ms ease;
+  transition: all 2750ms ease;
+}
+
+c-div[transition-bg-2750] {
+  -webkit-transition: background-color 2750ms ease;
+  transition: background-color 2750ms ease;
+}
+
+c-div[transition-color-2750] {
+  -webkit-transition: color 2750ms ease;
+  transition: color 2750ms ease;
+}
+
+c-div[transition-opacity-2750] {
+  -webkit-transition: opacity 2750ms ease;
+  transition: opacity 2750ms ease;
+}
+
+c-div[transition-transform-2750] {
+  -webkit-transition: -webkit-transform 2750ms ease;
+  transition: -webkit-transform 2750ms ease;
+  transition: transform 2750ms ease;
+  transition: transform 2750ms ease, -webkit-transform 2750ms ease;
+}
+
+c-div[transition-all-3000] {
+  -webkit-transition: all 3000ms ease;
+  transition: all 3000ms ease;
+}
+
+c-div[transition-bg-3000] {
+  -webkit-transition: background-color 3000ms ease;
+  transition: background-color 3000ms ease;
+}
+
+c-div[transition-color-3000] {
+  -webkit-transition: color 3000ms ease;
+  transition: color 3000ms ease;
+}
+
+c-div[transition-opacity-3000] {
+  -webkit-transition: opacity 3000ms ease;
+  transition: opacity 3000ms ease;
+}
+
+c-div[transition-transform-3000] {
+  -webkit-transition: -webkit-transform 3000ms ease;
+  transition: -webkit-transform 3000ms ease;
+  transition: transform 3000ms ease;
+  transition: transform 3000ms ease, -webkit-transform 3000ms ease;
+}
+
+c-div[transition-all-3250] {
+  -webkit-transition: all 3250ms ease;
+  transition: all 3250ms ease;
+}
+
+c-div[transition-bg-3250] {
+  -webkit-transition: background-color 3250ms ease;
+  transition: background-color 3250ms ease;
+}
+
+c-div[transition-color-3250] {
+  -webkit-transition: color 3250ms ease;
+  transition: color 3250ms ease;
+}
+
+c-div[transition-opacity-3250] {
+  -webkit-transition: opacity 3250ms ease;
+  transition: opacity 3250ms ease;
+}
+
+c-div[transition-transform-3250] {
+  -webkit-transition: -webkit-transform 3250ms ease;
+  transition: -webkit-transform 3250ms ease;
+  transition: transform 3250ms ease;
+  transition: transform 3250ms ease, -webkit-transform 3250ms ease;
+}
+
+c-div[transition-all-3500] {
+  -webkit-transition: all 3500ms ease;
+  transition: all 3500ms ease;
+}
+
+c-div[transition-bg-3500] {
+  -webkit-transition: background-color 3500ms ease;
+  transition: background-color 3500ms ease;
+}
+
+c-div[transition-color-3500] {
+  -webkit-transition: color 3500ms ease;
+  transition: color 3500ms ease;
+}
+
+c-div[transition-opacity-3500] {
+  -webkit-transition: opacity 3500ms ease;
+  transition: opacity 3500ms ease;
+}
+
+c-div[transition-transform-3500] {
+  -webkit-transition: -webkit-transform 3500ms ease;
+  transition: -webkit-transform 3500ms ease;
+  transition: transform 3500ms ease;
+  transition: transform 3500ms ease, -webkit-transform 3500ms ease;
+}
+
+c-div[transition-all-3750] {
+  -webkit-transition: all 3750ms ease;
+  transition: all 3750ms ease;
+}
+
+c-div[transition-bg-3750] {
+  -webkit-transition: background-color 3750ms ease;
+  transition: background-color 3750ms ease;
+}
+
+c-div[transition-color-3750] {
+  -webkit-transition: color 3750ms ease;
+  transition: color 3750ms ease;
+}
+
+c-div[transition-opacity-3750] {
+  -webkit-transition: opacity 3750ms ease;
+  transition: opacity 3750ms ease;
+}
+
+c-div[transition-transform-3750] {
+  -webkit-transition: -webkit-transform 3750ms ease;
+  transition: -webkit-transform 3750ms ease;
+  transition: transform 3750ms ease;
+  transition: transform 3750ms ease, -webkit-transform 3750ms ease;
+}
+
+c-div[transition-all-4000] {
+  -webkit-transition: all 4000ms ease;
+  transition: all 4000ms ease;
+}
+
+c-div[transition-bg-4000] {
+  -webkit-transition: background-color 4000ms ease;
+  transition: background-color 4000ms ease;
+}
+
+c-div[transition-color-4000] {
+  -webkit-transition: color 4000ms ease;
+  transition: color 4000ms ease;
+}
+
+c-div[transition-opacity-4000] {
+  -webkit-transition: opacity 4000ms ease;
+  transition: opacity 4000ms ease;
+}
+
+c-div[transition-transform-4000] {
+  -webkit-transition: -webkit-transform 4000ms ease;
+  transition: -webkit-transform 4000ms ease;
+  transition: transform 4000ms ease;
+  transition: transform 4000ms ease, -webkit-transform 4000ms ease;
+}
+
+c-div[transition-all-4250] {
+  -webkit-transition: all 4250ms ease;
+  transition: all 4250ms ease;
+}
+
+c-div[transition-bg-4250] {
+  -webkit-transition: background-color 4250ms ease;
+  transition: background-color 4250ms ease;
+}
+
+c-div[transition-color-4250] {
+  -webkit-transition: color 4250ms ease;
+  transition: color 4250ms ease;
+}
+
+c-div[transition-opacity-4250] {
+  -webkit-transition: opacity 4250ms ease;
+  transition: opacity 4250ms ease;
+}
+
+c-div[transition-transform-4250] {
+  -webkit-transition: -webkit-transform 4250ms ease;
+  transition: -webkit-transform 4250ms ease;
+  transition: transform 4250ms ease;
+  transition: transform 4250ms ease, -webkit-transform 4250ms ease;
+}
+
+c-div[transition-all-4500] {
+  -webkit-transition: all 4500ms ease;
+  transition: all 4500ms ease;
+}
+
+c-div[transition-bg-4500] {
+  -webkit-transition: background-color 4500ms ease;
+  transition: background-color 4500ms ease;
+}
+
+c-div[transition-color-4500] {
+  -webkit-transition: color 4500ms ease;
+  transition: color 4500ms ease;
+}
+
+c-div[transition-opacity-4500] {
+  -webkit-transition: opacity 4500ms ease;
+  transition: opacity 4500ms ease;
+}
+
+c-div[transition-transform-4500] {
+  -webkit-transition: -webkit-transform 4500ms ease;
+  transition: -webkit-transform 4500ms ease;
+  transition: transform 4500ms ease;
+  transition: transform 4500ms ease, -webkit-transform 4500ms ease;
+}
+
+c-div[transition-all-4750] {
+  -webkit-transition: all 4750ms ease;
+  transition: all 4750ms ease;
+}
+
+c-div[transition-bg-4750] {
+  -webkit-transition: background-color 4750ms ease;
+  transition: background-color 4750ms ease;
+}
+
+c-div[transition-color-4750] {
+  -webkit-transition: color 4750ms ease;
+  transition: color 4750ms ease;
+}
+
+c-div[transition-opacity-4750] {
+  -webkit-transition: opacity 4750ms ease;
+  transition: opacity 4750ms ease;
+}
+
+c-div[transition-transform-4750] {
+  -webkit-transition: -webkit-transform 4750ms ease;
+  transition: -webkit-transform 4750ms ease;
+  transition: transform 4750ms ease;
+  transition: transform 4750ms ease, -webkit-transform 4750ms ease;
+}
+
+c-div[transition-all-5000] {
+  -webkit-transition: all 5000ms ease;
+  transition: all 5000ms ease;
+}
+
+c-div[transition-bg-5000] {
+  -webkit-transition: background-color 5000ms ease;
+  transition: background-color 5000ms ease;
+}
+
+c-div[transition-color-5000] {
+  -webkit-transition: color 5000ms ease;
+  transition: color 5000ms ease;
+}
+
+c-div[transition-opacity-5000] {
+  -webkit-transition: opacity 5000ms ease;
+  transition: opacity 5000ms ease;
+}
+
+c-div[transition-transform-5000] {
+  -webkit-transition: -webkit-transform 5000ms ease;
+  transition: -webkit-transform 5000ms ease;
+  transition: transform 5000ms ease;
+  transition: transform 5000ms ease, -webkit-transform 5000ms ease;
+}
+/*# sourceMappingURL=c-div.transition.css.map */

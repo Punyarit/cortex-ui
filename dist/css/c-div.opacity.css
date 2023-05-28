@@ -1,0 +1,44 @@
+c-div[opacity-0] {
+  opacity: calc($i / 10);
+}
+
+c-div[opacity-1] {
+  opacity: calc($i / 10);
+}
+
+c-div[opacity-2] {
+  opacity: calc($i / 10);
+}
+
+c-div[opacity-3] {
+  opacity: calc($i / 10);
+}
+
+c-div[opacity-4] {
+  opacity: calc($i / 10);
+}
+
+c-div[opacity-5] {
+  opacity: calc($i / 10);
+}
+
+c-div[opacity-6] {
+  opacity: calc($i / 10);
+}
+
+c-div[opacity-7] {
+  opacity: calc($i / 10);
+}
+
+c-div[opacity-8] {
+  opacity: calc($i / 10);
+}
+
+c-div[opacity-9] {
+  opacity: calc($i / 10);
+}
+
+c-div[opacity-10] {
+  opacity: calc($i / 10);
+}
+/*# sourceMappingURL=c-div.opacity.css.map */

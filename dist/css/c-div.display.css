@@ -1,0 +1,123 @@
+c-div[flex-center] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+c-div[block] {
+  display: block;
+}
+
+c-div[inline] {
+  display: inline;
+}
+
+c-div[inline-block] {
+  display: inline-block;
+}
+
+c-div[flex] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+c-div[inline-flex] {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+c-div[grid] {
+  display: -ms-grid;
+  display: grid;
+}
+
+c-div[inline] {
+  display: inline;
+}
+
+c-div[grid] {
+  display: -ms-grid;
+  display: grid;
+}
+
+c-div[display-none] {
+  display: none;
+}
+
+c-div[display-hidden] {
+  display: hidden;
+}
+
+c-div[justify-start] {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+c-div[justify-center] {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+c-div[justify-end] {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+c-div[justify-between] {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+c-div[justify-around] {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+c-div[justify-evenly] {
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+c-div[items-start] {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+c-div[items-end] {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+c-div[items-center] {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+c-div[items-baseline] {
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+c-div[items-stretch] {
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+/*# sourceMappingURL=c-div.display.css.map */

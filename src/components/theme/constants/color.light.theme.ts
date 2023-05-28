@@ -2,10 +2,6 @@ import { css } from 'lit';
 
 export const light = css`
   :host(.light) {
-    /* Base */
-    --white: var(--base-white);
-    --black: var(--base-black);
-
     /* Gray */
     --gray-25: var(--base-gray-25);
     --gray-50: var(--base-gray-50);

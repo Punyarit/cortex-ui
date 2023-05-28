@@ -1,0 +1,30 @@
+c-div[horizontal-tb] {
+  -webkit-writing-mode: horizontal-tb;
+      -ms-writing-mode: lr-tb;
+          writing-mode: horizontal-tb;
+}
+
+c-div[sideways-lr] {
+  -webkit-writing-mode: sideways-lr;
+      -ms-writing-mode: sideways-lr;
+          writing-mode: sideways-lr;
+}
+
+c-div[sideways-rl] {
+  -webkit-writing-mode: sideways-rl;
+      -ms-writing-mode: sideways-rl;
+          writing-mode: sideways-rl;
+}
+
+c-div[vertical-lr] {
+  -webkit-writing-mode: vertical-lr;
+      -ms-writing-mode: tb-lr;
+          writing-mode: vertical-lr;
+}
+
+c-div[vertical-rl] {
+  -webkit-writing-mode: vertical-rl;
+      -ms-writing-mode: tb-rl;
+          writing-mode: vertical-rl;
+}
+/*# sourceMappingURL=c-div.writing-mode.css.map */

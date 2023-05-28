@@ -1,0 +1,21 @@
+c-div[static] {
+  position: static;
+}
+
+c-div[fixed] {
+  position: fixed;
+}
+
+c-div[absolute] {
+  position: absolute;
+}
+
+c-div[relative] {
+  position: relative;
+}
+
+c-div[sticky] {
+  position: -webkit-sticky;
+  position: sticky;
+}
+/*# sourceMappingURL=c-div.position.css.map */

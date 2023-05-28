@@ -1,0 +1,8 @@
+c-div[pointer-none] {
+  pointer-events: none;
+}
+
+c-div[pointer-auto] {
+  pointer-events: auto;
+}
+/*# sourceMappingURL=c-div.pointer.css.map */

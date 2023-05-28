@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,IAAC,AAAA,EAAM;EACV,SAAS,EAAE,CAAC;CACb;;AAED,AAAA,KAAK,CAAA,AAAA,MAAC,AAAA,EAAQ;EACZ,SAAS,EAAE,CAAC;CACb",
+    "sources": [
+        "../../styles/scss/c-div/attributes/c-div.flex-grow.scss"
+    ],
+    "names": [],
+    "file": "c-div.flex-grow.css"
+}

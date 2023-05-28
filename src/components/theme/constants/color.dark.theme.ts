@@ -1,11 +1,7 @@
 import { css } from 'lit';
-
+// FIXME: change naming to camelCase such as --modern-green to --modernGreen
 export const dark = css`
   :host(.dark) {
-    /* Base */
-    --white: var(--base-black);
-    --black: var(--base-white);
-
     /* Gray */
     --gray-25: var(--base-bluestate-900);
     --gray-50: var(--base-bluestate-800);

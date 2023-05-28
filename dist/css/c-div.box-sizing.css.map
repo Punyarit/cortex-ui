@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAGE,AAAA,KAAK,CAAA,AAAA,UAAC,AAAA,EAAS;EACb,UAAU,EAAC,UAAC;CACb;;AAFD,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAS;EACb,UAAU,EAAC,WAAC;CACb",
+    "sources": [
+        "../../styles/scss/c-div/attributes/c-div.box-sizing.scss"
+    ],
+    "names": [],
+    "file": "c-div.box-sizing.css"
+}

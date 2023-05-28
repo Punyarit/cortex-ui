@@ -1,0 +1,10 @@
+c-div[border-box] {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+c-div[content-box] {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+/*# sourceMappingURL=c-div.box-sizing.css.map */

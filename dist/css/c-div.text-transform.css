@@ -1,0 +1,16 @@
+c-div[uppercase] {
+  text-transform: uppercase;
+}
+
+c-div[lowercase] {
+  text-transform: lowercase;
+}
+
+c-div[capitalize] {
+  text-transform: capitalize;
+}
+
+c-div[normal-case] {
+  text-transform: none;
+}
+/*# sourceMappingURL=c-div.text-transform.css.map */

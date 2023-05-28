@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,MAAC,AAAA,EAAQ;EACZ,WAAW,EAAE,CAAC;CACf;;AAED,AAAA,KAAK,CAAA,AAAA,QAAC,AAAA,EAAU;EACd,WAAW,EAAE,CAAC;CACf",
+    "sources": [
+        "../../styles/scss/c-div/attributes/c-div.flex-shrink.scss"
+    ],
+    "names": [],
+    "file": "c-div.flex-shrink.css"
+}

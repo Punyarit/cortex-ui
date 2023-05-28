@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,UAAC,AAAA,EAAY;EAChB,WAAW,EAAE,IAAI;CAClB;;AAED,AAAA,KAAK,CAAA,AAAA,iBAAC,AAAA,EAAmB;EACvB,WAAW,EAAE,WAAW;CACzB",
+    "sources": [
+        "../../styles/scss/c-div/attributes/c-div.caret-color.scss"
+    ],
+    "names": [],
+    "file": "c-div.caret-color.css"
+}

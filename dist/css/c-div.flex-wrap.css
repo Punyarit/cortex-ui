@@ -1,0 +1,15 @@
+c-div[flex-wrap] {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+c-div[flex-wrap-reverse] {
+  -ms-flex-wrap: wrap-reverse;
+      flex-wrap: wrap-reverse;
+}
+
+c-div[flex-nowrap] {
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+/*# sourceMappingURL=c-div.flex-wrap.css.map */

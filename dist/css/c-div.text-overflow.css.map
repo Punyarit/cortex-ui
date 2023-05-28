@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,aAAC,AAAA,EAAe;EACnB,aAAa,EAAE,QAAQ;CACxB;;AAED,AAAA,KAAK,CAAA,AAAA,SAAC,AAAA,EAAW;EACf,aAAa,EAAE,IAAI;CACpB",
+    "sources": [
+        "../../styles/scss/c-div/attributes/c-div.text-overflow.scss"
+    ],
+    "names": [],
+    "file": "c-div.text-overflow.css"
+}

@@ -1,0 +1,12 @@
+c-div[all-initial] {
+  all: initial;
+}
+
+c-div[all-inherit] {
+  all: inherit;
+}
+
+c-div[all-unset] {
+  all: unset;
+}
+/*# sourceMappingURL=c-div.all.css.map */

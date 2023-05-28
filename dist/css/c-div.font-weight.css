@@ -1,0 +1,64 @@
+c-div[bold] {
+  font-family: var(--bold);
+}
+
+c-div[boldItalic] {
+  font-family: var(--boldItalic);
+}
+
+c-div[extraBold] {
+  font-family: var(--extraBold);
+}
+
+c-div[extraBoldItalic] {
+  font-family: var(--extraBoldItalic);
+}
+
+c-div[extraLight] {
+  font-family: var(--extraLight);
+}
+
+c-div[extraLightItalic] {
+  font-family: var(--extraLightItalic);
+}
+
+c-div[italic] {
+  font-family: var(--italic);
+}
+
+c-div[light] {
+  font-family: var(--light);
+}
+
+c-div[lightItalic] {
+  font-family: var(--lightItalic);
+}
+
+c-div[medium] {
+  font-family: var(--medium);
+}
+
+c-div[mediumItalic] {
+  font-family: var(--mediumItalic);
+}
+
+c-div[regular] {
+  font-family: var(--regular);
+}
+
+c-div[semiBoldItalic] {
+  font-family: var(--semiBoldItalic);
+}
+
+c-div[semiBold] {
+  font-family: var(--semiBold);
+}
+
+c-div[thin] {
+  font-family: var(--thin);
+}
+
+c-div[thinItalic] {
+  font-family: var(--thinItalic);
+}
+/*# sourceMappingURL=c-div.font-weight.css.map */

@@ -1,0 +1,28 @@
+c-div[select-none] {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+}
+
+c-div[select-text] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+   -ms-user-select: text;
+       user-select: text;
+}
+
+c-div[select-all] {
+  -webkit-user-select: all;
+  -moz-user-select: all;
+   -ms-user-select: all;
+       user-select: all;
+}
+
+c-div[select-auto] {
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+   -ms-user-select: auto;
+       user-select: auto;
+}
+/*# sourceMappingURL=c-div.user-select.css.map */

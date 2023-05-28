@@ -1,0 +1,19 @@
+c-div[break-inside-auto] {
+  -webkit-column-break-inside: auto;
+          break-inside: auto;
+}
+
+c-div[break-inside-avoid] {
+  -webkit-column-break-inside: avoid;
+          break-inside: avoid;
+}
+
+c-div[break-inside-avoid-column] {
+  -webkit-column-break-inside: avoid;
+          break-inside: avoid-column;
+}
+
+c-div[break-inside-avoid-page] {
+  break-inside: avoid-page;
+}
+/*# sourceMappingURL=c-div.break-inside.css.map */

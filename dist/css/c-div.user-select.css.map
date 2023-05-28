@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,mBAAmB,EAAE,IAAI;EACzB,WAAW,EAAE,IAAI;CAClB;;AAED,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,mBAAmB,EAAE,IAAI;EACzB,WAAW,EAAE,IAAI;CAClB;;AAED,AAAA,KAAK,CAAA,AAAA,UAAC,AAAA,EAAY;EAChB,mBAAmB,EAAE,GAAG;EACxB,WAAW,EAAE,GAAG;CACjB;;AAED,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,mBAAmB,EAAE,IAAI;EACzB,WAAW,EAAE,IAAI;CAClB",
+    "sources": [
+        "../../styles/scss/c-div/attributes/c-div.user-select.scss"
+    ],
+    "names": [],
+    "file": "c-div.user-select.css"
+}
