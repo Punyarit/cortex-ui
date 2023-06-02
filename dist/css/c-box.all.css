@@ -1,0 +1,12 @@
+c-box[all-initial] {
+  all: initial;
+}
+
+c-box[all-inherit] {
+  all: inherit;
+}
+
+c-box[all-unset] {
+  all: unset;
+}
+/*# sourceMappingURL=c-box.all.css.map */

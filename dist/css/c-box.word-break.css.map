@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,YAAC,AAAA,EAAc;EAClB,UAAU,EAAE,MAAM;CACnB;;AAED,AAAA,KAAK,CAAA,AAAA,cAAC,AAAA,EAAgB;EACpB,UAAU,EAAE,QAAQ;CACrB;;AAED,AAAA,KAAK,CAAA,AAAA,SAAC,AAAA,EAAW;EACf,UAAU,EAAE,SAAS;CACtB;;AAED,AAAA,KAAK,CAAA,AAAA,UAAC,AAAA,EAAY;EAChB,UAAU,EAAE,UAAU;CACvB",
+    "sources": [
+        "../../styles/scss/c-box/attributes/c-box.word-break.scss"
+    ],
+    "names": [],
+    "file": "c-box.word-break.css"
+}

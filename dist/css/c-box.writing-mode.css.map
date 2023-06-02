@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,aAAC,AAAA,EAAe;EACnB,YAAY,EAAE,aAAa;CAC5B;;AAED,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,YAAY,EAAE,WAAW;CAC1B;;AAED,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,YAAY,EAAE,WAAW;CAC1B;;AAED,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,YAAY,EAAE,WAAW;CAC1B;;AAED,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,YAAY,EAAE,WAAW;CAC1B",
+    "sources": [
+        "../../styles/scss/c-box/attributes/c-box.writing-mode.scss"
+    ],
+    "names": [],
+    "file": "c-box.writing-mode.css"
+}

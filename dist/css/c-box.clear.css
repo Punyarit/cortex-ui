@@ -1,0 +1,16 @@
+c-box[clear-none] {
+  clear: none;
+}
+
+c-box[clear-left] {
+  clear: left;
+}
+
+c-box[clear-right] {
+  clear: right;
+}
+
+c-box[clear-both] {
+  clear: both;
+}
+/*# sourceMappingURL=c-box.clear.css.map */

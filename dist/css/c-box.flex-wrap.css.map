@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,SAAC,AAAA,EAAW;EACf,SAAS,EAAE,IAAI;CAChB;;AAED,AAAA,KAAK,CAAA,AAAA,iBAAC,AAAA,EAAmB;EACvB,SAAS,EAAE,YAAY;CACxB;;AACD,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,SAAS,EAAE,MAAM;CAClB",
+    "sources": [
+        "../../styles/scss/c-box/attributes/c-box.flex-wrap.scss"
+    ],
+    "names": [],
+    "file": "c-box.flex-wrap.css"
+}

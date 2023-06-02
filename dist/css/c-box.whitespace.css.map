@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,iBAAC,AAAA,EAAmB;EACvB,WAAW,EAAE,MAAM;CACpB;;AAED,AAAA,KAAK,CAAA,AAAA,iBAAC,AAAA,EAAmB;EACvB,WAAW,EAAE,MAAM;CACpB;;AAED,AAAA,KAAK,CAAA,AAAA,cAAC,AAAA,EAAgB;EACpB,WAAW,EAAE,GAAG;CACjB;;AAED,AAAA,KAAK,CAAA,AAAA,mBAAC,AAAA,EAAqB;EACzB,WAAW,EAAE,QAAQ;CACtB;;AAED,AAAA,KAAK,CAAA,AAAA,mBAAC,AAAA,EAAqB;EACzB,WAAW,EAAE,QAAQ;CACtB",
+    "sources": [
+        "../../styles/scss/c-box/attributes/c-box.whitespace.scss"
+    ],
+    "names": [],
+    "file": "c-box.whitespace.css"
+}

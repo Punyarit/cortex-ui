@@ -1,0 +1,123 @@
+c-box {
+  display: block;
+}
+
+c-box[flex-center] {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+c-box[block] {
+  display: block !important;
+}
+
+c-box[inline] {
+  display: inline !important;
+}
+
+c-box[inline-block] {
+  display: inline-block !important;
+}
+
+c-box[flex] {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+c-box[inline-flex] {
+  display: -webkit-inline-box !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-flex !important;
+}
+
+c-box[grid] {
+  display: -ms-grid !important;
+  display: grid !important;
+}
+
+c-box[inline] {
+  display: inline !important;
+}
+
+c-box[grid] {
+  display: -ms-grid !important;
+  display: grid !important;
+}
+
+c-box[hidden] {
+  display: hidden !important;
+}
+
+c-box[justify-start] {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+c-box[justify-center] {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+c-box[justify-end] {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+c-box[justify-between] {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+c-box[justify-around] {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+c-box[justify-evenly] {
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+c-box[items-start] {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+c-box[items-end] {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+c-box[items-center] {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+c-box[items-baseline] {
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+c-box[items-stretch] {
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+/*# sourceMappingURL=c-box.display.css.map */

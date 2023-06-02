@@ -1,0 +1,60 @@
+c-box[w-full] {
+  width: 100%;
+}
+
+c-box[min-w-full] {
+  min-width: 100%;
+}
+
+c-box[max-w-full] {
+  max-width: 100%;
+}
+
+c-box[h-full] {
+  height: 100%;
+}
+
+c-box[min-h-full] {
+  min-height: 100%;
+}
+
+c-box[max-h-full] {
+  max-height: 100%;
+}
+
+c-box[w-fit] {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+c-box[w-max] {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+c-box[w-min] {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+}
+
+c-box[h-fit] {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+c-box[h-max] {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+c-box[h-min] {
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+}
+/*# sourceMappingURL=c-box.width-height.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,YAAC,AAAA,EAAc;EAClB,cAAc,EAAE,IAAI;CACrB;;AAED,AAAA,KAAK,CAAA,AAAA,YAAC,AAAA,EAAc;EAClB,cAAc,EAAE,IAAI;CACrB",
+    "sources": [
+        "../../styles/scss/c-box/attributes/c-box.pointer.scss"
+    ],
+    "names": [],
+    "file": "c-box.pointer.css"
+}

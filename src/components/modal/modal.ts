@@ -22,7 +22,6 @@ export class Modal extends ComponentBase<CXModal.Props> {
 
   private dialogState!: DialogState;
   private snackbarState!: SnackbarState;
-  private popoverState!: PopoverState;
 
   private dialogSlotRef = createRef<HTMLSlotElement>();
   private snackbarSlotRef = createRef<HTMLSlotElement>();
@@ -143,7 +142,6 @@ export class Modal extends ComponentBase<CXModal.Props> {
   private createModalState(): void {
     this.dialogState = new DialogState();
     this.snackbarState = new SnackbarState();
-    // this.popoverState = new PopoverState();
   }
 
   private createSharedCXModalRef(): void {

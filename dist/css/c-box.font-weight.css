@@ -1,0 +1,64 @@
+c-box[bold] {
+  font-family: var(--bold);
+}
+
+c-box[boldItalic] {
+  font-family: var(--boldItalic);
+}
+
+c-box[extraBold] {
+  font-family: var(--extraBold);
+}
+
+c-box[extraBoldItalic] {
+  font-family: var(--extraBoldItalic);
+}
+
+c-box[extraLight] {
+  font-family: var(--extraLight);
+}
+
+c-box[extraLightItalic] {
+  font-family: var(--extraLightItalic);
+}
+
+c-box[italic] {
+  font-family: var(--italic);
+}
+
+c-box[light] {
+  font-family: var(--light);
+}
+
+c-box[lightItalic] {
+  font-family: var(--lightItalic);
+}
+
+c-box[medium] {
+  font-family: var(--medium);
+}
+
+c-box[mediumItalic] {
+  font-family: var(--mediumItalic);
+}
+
+c-box[regular] {
+  font-family: var(--regular);
+}
+
+c-box[semiBoldItalic] {
+  font-family: var(--semiBoldItalic);
+}
+
+c-box[semiBold] {
+  font-family: var(--semiBold);
+}
+
+c-box[thin] {
+  font-family: var(--thin);
+}
+
+c-box[thinItalic] {
+  font-family: var(--thinItalic);
+}
+/*# sourceMappingURL=c-box.font-weight.css.map */

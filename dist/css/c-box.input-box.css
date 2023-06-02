@@ -1,0 +1,35 @@
+c-box[input-box] {
+  display: inline-block;
+  border: 2px solid var(--primary-400);
+  width: var(--size-300);
+  border-radius: var(--base-size-8);
+  background-color: var(--white);
+  padding: var(--size-8) var(--size-12);
+}
+
+c-box[input-box] input::-webkit-input-placeholder {
+  font-family: Sarabun-Regular;
+}
+
+c-box[input-box] input:-ms-input-placeholder {
+  font-family: Sarabun-Regular;
+}
+
+c-box[input-box] input::-ms-input-placeholder {
+  font-family: Sarabun-Regular;
+}
+
+c-box[input-box] input::placeholder {
+  font-family: Sarabun-Regular;
+}
+
+c-box[input-box='focus'] {
+  border: 2px solid var(--primary-500);
+  color: var(--primary-500);
+}
+
+c-box[input-box='default'] {
+  border: 2px solid var(--gray-400);
+  color: var(--gray-600);
+}
+/*# sourceMappingURL=c-box.input-box.css.map */

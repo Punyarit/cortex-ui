@@ -1,0 +1,100 @@
+c-box[transition-none] {
+  -webkit-transition: none;
+  transition: none;
+}
+
+c-box[transition-25] {
+  -webkit-transition: all 25ms ease;
+  transition: all 25ms ease;
+}
+
+c-box[transition-50] {
+  -webkit-transition: all 50ms ease;
+  transition: all 50ms ease;
+}
+
+c-box[transition-75] {
+  -webkit-transition: all 75ms ease;
+  transition: all 75ms ease;
+}
+
+c-box[transition-100] {
+  -webkit-transition: all 100ms ease;
+  transition: all 100ms ease;
+}
+
+c-box[transition-125] {
+  -webkit-transition: all 125ms ease;
+  transition: all 125ms ease;
+}
+
+c-box[transition-150] {
+  -webkit-transition: all 150ms ease;
+  transition: all 150ms ease;
+}
+
+c-box[transition-175] {
+  -webkit-transition: all 175ms ease;
+  transition: all 175ms ease;
+}
+
+c-box[transition-200] {
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+c-box[transition-250] {
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease;
+}
+
+c-box[transition-275] {
+  -webkit-transition: all 275ms ease;
+  transition: all 275ms ease;
+}
+
+c-box[transition-300] {
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+}
+
+c-box[transition-325] {
+  -webkit-transition: all 325ms ease;
+  transition: all 325ms ease;
+}
+
+c-box[transition-350] {
+  -webkit-transition: all 350ms ease;
+  transition: all 350ms ease;
+}
+
+c-box[transition-375] {
+  -webkit-transition: all 375ms ease;
+  transition: all 375ms ease;
+}
+
+c-box[transition-400] {
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+c-box[transition-425] {
+  -webkit-transition: all 425ms ease;
+  transition: all 425ms ease;
+}
+
+c-box[transition-450] {
+  -webkit-transition: all 450ms ease;
+  transition: all 450ms ease;
+}
+
+c-box[transition-475] {
+  -webkit-transition: all 475ms ease;
+  transition: all 475ms ease;
+}
+
+c-box[transition-500] {
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
+/*# sourceMappingURL=c-box.transition.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,SAAC,AAAA,EAAW;EACf,cAAc,EAAE,SAAS;CAC1B;;AAED,AAAA,KAAK,CAAA,AAAA,SAAC,AAAA,EAAW;EACf,cAAc,EAAE,SAAS;CAC1B;;AAED,AAAA,KAAK,CAAA,AAAA,UAAC,AAAA,EAAY;EAChB,cAAc,EAAE,UAAU;CAC3B;;AAED,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,cAAc,EAAE,IAAI;CACrB",
+    "sources": [
+        "../../styles/scss/c-box/attributes/c-box.text-transform.scss"
+    ],
+    "names": [],
+    "file": "c-box.text-transform.css"
+}

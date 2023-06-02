@@ -1,0 +1,16 @@
+c-box[break-normal] {
+  word-break: normal;
+}
+
+c-box[break-keep-all] {
+  word-break: keep-all;
+}
+
+c-box[break-all] {
+  word-break: break-all;
+}
+
+c-box[break-word] {
+  word-break: break-word;
+}
+/*# sourceMappingURL=c-box.word-break.css.map */

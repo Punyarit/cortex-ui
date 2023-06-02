@@ -1,0 +1,21 @@
+c-box[static] {
+  position: static;
+}
+
+c-box[fixed] {
+  position: fixed;
+}
+
+c-box[absolute] {
+  position: absolute;
+}
+
+c-box[relative] {
+  position: relative;
+}
+
+c-box[sticky] {
+  position: -webkit-sticky;
+  position: sticky;
+}
+/*# sourceMappingURL=c-box.position.css.map */

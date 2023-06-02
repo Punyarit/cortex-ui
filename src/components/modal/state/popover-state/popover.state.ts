@@ -49,7 +49,7 @@ export class PopoverState {
     popoverHost: HTMLElement,
     triggerEvent: Event
   ) {
-    // await this.delayWhenOldPopoverExist();
+    this.clearTooltip(popoverContent);
     this.setPopoverClosedDone(false);
     this.setProperties(popoverContent, hostRect, popoverSet, popoverHost);
     this.setPopoverContentAnimation('in');
@@ -65,6 +65,16 @@ export class PopoverState {
       this.onEvent('opened', triggerEvent);
     });
     return this;
+  }
+
+  private clearTooltip(popoverContent: HTMLElement) {
+    const isTooltip = popoverContent.hasAttribute('tooltip');
+    if (isTooltip) {
+      const tooltips = ModalSingleton.modalRef.querySelectorAll('[tooltip]');
+      tooltips.forEach((ele) => {
+        (ele as HTMLElement & { popoverState: PopoverState }).popoverState.closePopover(null);
+      });
+    }
   }
 
   private onEvent(event: 'opened' | 'closed', triggerEvent?: Event) {

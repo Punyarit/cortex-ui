@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,MAAC,AAAA,EAAQ;EACZ,MAAM,EAAE,IAAI;CACb;;AAED,AAAA,KAAK,CAAA,AAAA,QAAC,AAAA,EAAU;EACd,MAAM,EAAE,UAAU;CACnB;;AAED,AAAA,KAAK,CAAA,AAAA,QAAC,AAAA,EAAU;EACd,MAAM,EAAE,QAAQ;CACjB;;AAED,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,MAAM,EAAE,IAAI;CACb",
+    "sources": [
+        "../../styles/scss/c-box/attributes/c-box.resize.scss"
+    ],
+    "names": [],
+    "file": "c-box.resize.css"
+}

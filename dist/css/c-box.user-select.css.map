@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,WAAW,EAAE,IAAI;CAClB;;AAED,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,WAAW,EAAE,IAAI;CAClB;;AAED,AAAA,KAAK,CAAA,AAAA,UAAC,AAAA,EAAY;EAChB,WAAW,EAAE,GAAG;CACjB;;AAED,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,WAAW,EAAE,IAAI;CAClB",
+    "sources": [
+        "../../styles/scss/c-box/attributes/c-box.user-select.scss"
+    ],
+    "names": [],
+    "file": "c-box.user-select.css"
+}

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,MAAC,AAAA,EAAQ;EACZ,QAAQ,EAAE,MAAM;CACjB;;AAED,AAAA,KAAK,CAAA,AAAA,KAAC,AAAA,EAAO;EACX,QAAQ,EAAE,KAAK;CAChB;;AAED,AAAA,KAAK,CAAA,AAAA,QAAC,AAAA,EAAU;EACd,QAAQ,EAAE,QAAQ;CACnB;;AAED,AAAA,KAAK,CAAA,AAAA,QAAC,AAAA,EAAU;EACd,QAAQ,EAAE,QAAQ;CACnB;;AAED,AAAA,KAAK,CAAA,AAAA,MAAC,AAAA,EAAQ;EACZ,QAAQ,EAAE,MAAM;CACjB",
+    "sources": [
+        "../../styles/scss/c-box/attributes/c-box.position.scss"
+    ],
+    "names": [],
+    "file": "c-box.position.css"
+}

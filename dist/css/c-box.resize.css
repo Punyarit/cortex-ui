@@ -1,0 +1,16 @@
+c-box[resize] {
+  resize: both;
+}
+
+c-box[resize-x] {
+  resize: horizontal;
+}
+
+c-box[resize-y] {
+  resize: vertical;
+}
+
+c-box[resize-none] {
+  resize: none;
+}
+/*# sourceMappingURL=c-box.resize.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../../styles/scss/c-box/attributes/c-box.outline.scss"
+    ],
+    "names": [],
+    "file": "c-box.outline.css"
+}

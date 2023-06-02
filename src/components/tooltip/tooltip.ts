@@ -12,6 +12,8 @@ export class Tooltip extends ComponentBase<CXTooltip.Props> {
     openBy: 'mouseover',
     position: 'bottom-center',
     arrowPoint: false,
+    focusout: 'close',
+    mouseleave: 'close',
   };
 
   connectedCallback() {
@@ -23,15 +25,20 @@ export class Tooltip extends ComponentBase<CXTooltip.Props> {
   render(): TemplateResult {
     return html`<cx-popover
       .set="${{
-        focusout: 'close',
-        mouseleave: 'close',
+        focusout: this.set.focusout,
+        mouseleave: this.set.mouseleave,
         arrowpoint: this.set.arrowPoint,
         openby: this.set.openBy,
         position: this.set.position,
       } as CXPopover.Set}">
-      <c-box slot="host"> </c-box>
+      <c-box slot="host" inline-flex></c-box>
       <c-box slot="popover" tooltip>
-        <c-box content bg-bluestate-700 tx-white>${this.set.text}</c-box>
+        <c-box
+          content
+          tx-white
+          style="background-color:${this.var?.backgroundColor || 'var(--bluestate-700)!important'}">
+          <c-box style="color:${this.var?.textColor || 'white'}"> ${this.set.text} </c-box>
+        </c-box>
       </c-box>
     </cx-popover>`;
   }
@@ -52,33 +59,30 @@ declare global {
   namespace CXTooltip {
     type Ref = Tooltip;
 
-    type Var = unknown;
+    type Var = {
+      backgroundColor?: string;
+      textColor?: string;
+      width?: string;
+    };
 
     type Set = {
       text: string;
       position?: CXPopover.Set['position'];
-      openBy: CXPopover.Set['openby'];
-      arrowPoint: boolean;
+      openBy?: CXPopover.Set['openby'];
+      arrowPoint?: boolean;
+      focusout?: CXPopover.Set['focusout'];
+      mouseleave?: CXPopover.Set['mouseleave'];
+      ellipsis?: boolean;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
 
     type Props = {
-      var: Pick<Var, never>;
+      var: Var;
       set: Set;
       fix: Fix;
       make: Var;
     };
-
-    // type Details = {
-    //   [onPressed]: { event: string };
-    // };
-
-    // type Events = {
-    //   [onPressed]: (detail: Pressed) => void;
-    // };
-
-    // type Pressed = CustomEvent<Details[typeof onPressed]>;
   }
 
   interface HTMLElementTagNameMap {

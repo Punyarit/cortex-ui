@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA,AAAA,cAAC,AAAA,EAAgB;EACpB,YAAY,EAAE,MAAM;CACrB;;AAED,AAAA,KAAK,CAAA,AAAA,WAAC,AAAA,EAAa;EACjB,YAAY,EAAE,GAAG;CAClB",
+    "sources": [
+        "../../styles/scss/c-box/attributes/c-box.caption-side.scss"
+    ],
+    "names": [],
+    "file": "c-box.caption-side.css"
+}
