@@ -1,179 +1,87 @@
-import { getStyleResult } from './helpers/getStyleResult';
-import { stylesMapper } from './styles-mapper/styles-mapper';
-import { AllCombinations, AttrStyle, Breakpoint, State } from './types/box.types';
+import { appendSlot } from './helpers/appendSlot';
+import { getAttrStyle } from './helpers/getAttrStyle';
+import { getCssResult } from './helpers/getCssResult';
+import { getMediaRuleValue } from './helpers/getMediaRuleValue';
+import { parseStyleString } from './helpers/parseStyleString';
+import { throwUnableModifyValue } from './helpers/throwUnableModifyValue';
+import { AllCombinations, AttrStyle, CssType } from './types/box.types';
 export class Box extends HTMLElement {
   private styleSheet = new CSSStyleSheet();
+  private sxStyleSheet?: CSSStyleSheet;
+  private mainSlot = document.createElement('slot');
 
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    shadowRoot.appendChild(document.createElement('slot'));
+    shadowRoot.appendChild(this.mainSlot);
     shadowRoot.adoptedStyleSheets = [this.styleSheet];
   }
 
-  set $style(styles: CXBox.Styles) {
+  set slotOf(value: string) {
+    this.slot = value;
+    if (this.parentElement?.tagName === 'CX-BOX') {
+      appendSlot(this.parentElement, value);
+    }
+  }
+
+  set slotFor(value: string[]) {
+    for (let index = 0; index < value.length; ++index) {
+      appendSlot(this, value[index]);
+    }
+  }
+
+  set sx(styles: string) {
+    if (this.sxStyleSheet) throwUnableModifyValue('sx');
+    this.sxStyleSheet = new CSSStyleSheet();
+    this.sxStyleSheet.insertRule(`:host([sx]){${getCssResult(this, styles, 'sx')}}`);
+    this.shadowRoot!.adoptedStyleSheets.push(this.sxStyleSheet);
+    this.setAttribute('sx', '');
+  }
+
+  set css(styles: CXBox.Styles) {
+    if (this.styleSheet.cssRules.length) throwUnableModifyValue('css');
+
     let styleList = '';
     let classList = '';
     for (const styleType in styles) {
       const [type, attr1, attr2] = styleType.split('_');
       const styleValue = styles[styleType as keyof CXBox.Styles];
+      const styleGroup = parseStyleString(styleValue!);
 
-      switch (type as keyof CXBox.Styles) {
+      switch (type as CssType) {
         case 'class':
-          const attrStyle1 = this.getAttrStyle(attr1 as AttrStyle);
-          const attrStyle2 = this.getAttrStyle(attr2 as AttrStyle);
-          const styleGroup = this.parseStyleString(styleValue);
+          const attrStyle1 = getAttrStyle(attr1 as AttrStyle);
+          const attrStyle2 = getAttrStyle(attr2 as AttrStyle);
 
-          for (const styleVal of styleGroup) {
-            const [className, styleName] = styleVal;
-            const mediaRule = this.getMediaRuleValue(attrStyle1, attrStyle2);
-            const cssResult = this.getCssResult(styleName, attr1, attr2);
+          for (let index = 0; index < styleGroup.length; ++index) {
+            const [className, styleName] = styleGroup[index];
+            const mediaRule = getMediaRuleValue(attrStyle1, attrStyle2);
+            const cssResult = getCssResult(this, styleName, type, attr1, attr2);
             const styleText = `${mediaRule ? `${mediaRule}{` : ''}:host(.${className}${
               attrStyle1 && attrStyle1?.length <= 14 ? attrStyle1 : ''
             }){${cssResult}}${mediaRule ? '}' : ''}`;
             styleList += styleText + ' ';
             classList += className + ' ';
           }
-
           break;
 
-        case 'style':
+        case 'icon':
+          for (let index = 0; index < styleGroup.length; ++index) {
+            const [iconName, styleName] = styleGroup[index];
+            // @ts-ignore
+            import('../../../assets/icons/svg/icon1.svg').then((res) => {
+              console.log('box.js |res| = ', res);
+            });
+          }
           break;
 
         default:
-          throw new SyntaxError('No style type!');
+          throw new SyntaxError('No css type!');
       }
     }
 
-    this.className = classList;
+    this.className = classList.trim();
     this.styleSheet.replaceSync(styleList);
-  }
-
-  parseStyleString(styleString: string) {
-    const styles = [] as any;
-    const styleDeclarations = styleString.trim().split(';');
-
-    for (let i = 0, len = styleDeclarations.length; i < len; ++i) {
-      const styleDeclaration = styleDeclarations[i].trim();
-
-      if (styleDeclaration) {
-        const [key, value] = styleDeclaration.split(':');
-        styles[i] = [key.trim(), value.trim()];
-      }
-    }
-
-    return styles;
-  }
-
-  getCssResult(styleValue: string, attr1?: string, attr2?: string) {
-    return styleValue
-      .split(' ')
-      .filter(Boolean)
-      .map((sx) => {
-        if (sx.includes('$')) {
-          const newSx = sx.replace('$', '');
-          const [styleAttr, styleValue] = this.getStyleResult(newSx).split(':');
-          const setterName = this.setStyleProperty(styleAttr, styleValue, attr1, attr2);
-          return `${styleAttr}: var(--${setterName})${sx.endsWith('!') ? '!important' : ''};`;
-        } else {
-          const styleResult = this.getStyleResult(sx);
-          return styleResult ? `${styleResult}${sx.endsWith('!') ? '!important' : ''};` : '';
-        }
-      })
-      .join('');
-  }
-
-  setStyleProperty(styleAttr: string, styleValue: string, attr1?: string, attr2?: string) {
-    const setterName = `${styleAttr.replaceAll('-', '_')}${attr1 ? `_${attr1}` : ''}${
-      attr2 ? `_${attr2}` : ''
-    }`;
-    Object.defineProperty(this, `$${setterName}`, {
-      set: (value: string) => {
-        // if (styleAttr === 'fontSize') { font size display by theme}
-        this.style.setProperty(`--${setterName}`, value);
-      },
-    });
-    this.style.setProperty(`--${setterName}`, styleValue);
-    return setterName;
-  }
-
-  getStyleResult(style: string): string {
-    let styleResult = stylesMapper.get(`c-div[${style.replace('!', '').trim()}]`);
-    if (!styleResult) {
-      const [attr1, attr2, attr3] = style.split('-') as [string, string, string | undefined];
-      styleResult = getStyleResult(style, attr1, attr2, attr3);
-    }
-
-    return styleResult!;
-  }
-
-  getMediaRuleValue(attrStyle1?: string, attrStyle2?: string) {
-    if (attrStyle1 && attrStyle1?.length > 14) {
-      return attrStyle1;
-    } else if (attrStyle2 && attrStyle2?.length > 14) {
-      return attrStyle2;
-    }
-  }
-
-  getAttrStyle(attr: AttrStyle) {
-    console.log('box.js |attr| = ', attr);
-    if (!attr) return;
-    switch (attr) {
-      case 'active':
-      case 'focus':
-      case 'focus-visible':
-      case 'focus-within':
-      case 'hover':
-      case 'target':
-        return `:${attr}`;
-
-      case 'xs':
-      case 'sm':
-      case 'md':
-      case 'lg':
-      case 'xl':
-      case 'xxl':
-        const breakpointValue = {
-          xs: {
-            min: null,
-            max: 599,
-          },
-          sm: {
-            min: 600,
-            max: 959,
-          },
-          md: {
-            min: 960,
-            max: 1279,
-          },
-          lg: {
-            min: 1280,
-            max: 1919,
-          },
-          xl: {
-            min: 1920,
-            max: 2559,
-          },
-          xxl: {
-            min: 2560,
-            max: null,
-          },
-        };
-
-        let mediaRule = ``;
-        if (breakpointValue[attr]?.min && breakpointValue[attr]?.max) {
-          mediaRule = `@media only screen and (min-width: ${breakpointValue[attr].min}px) and (max-width: ${breakpointValue[attr].max}px)`;
-        } else if (!breakpointValue[attr]?.min && breakpointValue[attr]?.max) {
-          mediaRule = `@media only screen and (max-width: ${breakpointValue[attr].max}px)`;
-        } else if (breakpointValue[attr]?.min && !breakpointValue[attr]?.max) {
-          mediaRule = `@media only screen and (min-width: ${breakpointValue[attr].min}px)`;
-        }
-
-        return mediaRule;
-
-      default:
-        throw new SyntaxError('No style attr!');
-    }
   }
 }
 
@@ -184,7 +92,7 @@ declare global {
   namespace CXBox {
     type Ref = Box;
 
-    type Styles = Record<AllCombinations, string>;
+    type Styles = Partial<Record<AllCombinations, string>>;
   }
 
   interface HTMLElementTagNameMap {

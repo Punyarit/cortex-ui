@@ -6,15 +6,15 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w",
-    "prod": "yarn run clear-cache & yarn build & yarn convert-scss & yarn set-icons & yarn convert-c-div-attribute & yarn convert-c-div & yarn styles-mapper-c-div & yarn compress-js & yarn export-components",
+    "prod": "yarn run clear-cache & yarn convert-scss & yarn set-icons & yarn convert-box-attribute & yarn convert-box-presets & yarn styles-mapper & yarn compress-js & yarn export-components & yarn build",
     "compress-js": "yarn gulp compress",
     "convert-scss": "yarn sass styles/scss/main.scss cx/styles.css --style compressed",
-    "convert-c-div-attribute": "yarn sass styles/scss/c-div/attributes/index.scss styles/css/c-div.attributes.css --style compressed",
-    "convert-c-div": "yarn sass styles/scss/c-div/presets/index.scss styles/css/c-div.presets.css --style compressed",
+    "convert-box-attribute": "yarn sass styles/scss/cx-box/attributes/index.scss styles/css/cx-box.attributes.css --style compressed",
+    "convert-box-presets": "yarn sass styles/scss/cx-box/presets/index.scss styles/css/cx-box.presets.css --style compressed",
     "export-components": "node script/export.script.js",
     "public": "node script/publish.script.js",
     "clear-cache": "rm -rf cx",
-    "styles-mapper-c-div": "node script/styles-mapper-c-div",
+    "styles-mapper": "node script/styles-mapper",
     "set-icons": " node script/icon-name.script.js & node script/icons-registry.script.js"
   },
   "repository": {
