@@ -31,12 +31,16 @@ export function getDayOfWeek(dayNumber: number, options: Intl.DateTimeFormatOpti
 
 export function getPreviousMonth(date: Date) {
   const newDate = new Date(date);
+  newDate.setHours(0, 0, 0, 0);
+
   newDate.setMonth(newDate.getMonth() - 1);
   return newDate;
 }
 
 export function getNextMonth(date: Date) {
   const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  d.setDate(1);
   d.setMonth(d.getMonth() + 1);
   return d;
 }
