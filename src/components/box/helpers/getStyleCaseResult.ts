@@ -210,6 +210,16 @@ export const getStyleCaseResult = (
     case 'skewY':
       return `transform:${attr1}(${attr2})`;
 
+    // svg
+    case 'fill':
+      return attr2 !== 'opacity' ? `fill:var(--${attr2}-${attr3})` : `fill-opacity:${attr3}`;
+
+    case 'stroke':
+      return attr2 !== 'opacity'
+        ? `${attr3 ? `stroke:var(--${attr2}-${attr3})` : `stroke-width:${attr2}`}`
+        : `stroke-opacity:${attr3}`;
+
+    
     default:
       throwNoHaveStyle(s);
   }

@@ -1,0 +1,9 @@
+const svgStateStates: Record<string, string> = {
+  svg: `:host svg[svg] {display: block}:host svg[svg_hover],:host svg[svg_active],:host svg[svg_focus],:host svg[svg_focus_visible],:host svg[svg_focus_within],:host svg[svg_target] {display: none}`,
+  svg_hover: `:host(:hover) svg[svg_hover] {display: block}:host(:hover) svg[svg],:host(:hover) svg[svg_active],:host(:hover) svg[svg_focus],:host(:hover) svg[svg_focus_visible],:host(:hover) svg[svg_focus_within],:host(:hover) svg[svg_target] {display: none}`,
+  svg_active: `:host(:active) svg[svg_active] {display: block}:host(:active) svg[svg],:host(:active) svg[svg_hover],:host(:active) svg[svg_focus],:host(:active) svg[svg_focus_visible],:host(:active) svg[svg_focus_within],:host(:active) svg[svg_target] {display: none}`,
+  svg_focus: `:host(:focus) svg[svg_focus] {display: block !important}:host(:focus) svg[svg],:host(:focus) svg[svg_hover],:host(:focus) svg[svg_active],:host(:focus) svg[svg_focus_visible],:host(:focus) svg[svg_focus_within],:host(:focus) svg[svg_target] {display: none}`,
+  svg_focus_visible: `:host(:focus-visible) svg[svg_focus_visible] {display: block}:host(:focus-visible) svg[svg],:host(:focus-visible) svg[svg_hover],:host(:focus-visible) svg[svg_active],:host(:focus-visible) svg[svg_focus],:host(:focus-visible) svg[svg_focus_within],:host(:focus-visible) svg[svg_target] {display: none}`,
+  svg_focus_within: `:host(:focus-within) svg[svg_focus_within] {display: block}:host(:focus-within) svg[svg],:host(:focus-within) svg[svg_hover],:host(:focus-within) svg[svg_active],:host(:focus-within) svg[svg_focus],:host(:focus-within) svg[svg_focus_visible],:host(:focus-within) svg[svg_target] {display: none}`,
+  svg_target: `:host(:target) svg[svg_target] {display: block}:host(:target) svg[svg],:host(:target) svg[svg_hover],:host(:target) svg[svg_active],:host(:target) svg[svg_focus],:host(:target) svg[svg_focus_visible],:host(:target) svg[svg_focus_within] {display: none}`,
+};

@@ -18,6 +18,8 @@ export class Theme extends ComponentBase<CXTheme.Props> {
     size: 'small',
   };
 
+  static fontDisplay = 1;
+
   static styles = [colors, light, dark, fontWeights, sizes];
 
   connectedCallback() {

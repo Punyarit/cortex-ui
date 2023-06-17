@@ -24,6 +24,6 @@ export const getAttrStyle = (attr: AttrStyle) => {
       return `@media only screen and (min-width: 2560px)`;
 
     default:
-      throw new SyntaxError('No style attr!');
+      throw new SyntaxError(`No style attr "${attr}"`);
   }
 };
