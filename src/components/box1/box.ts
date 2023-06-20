@@ -1,4 +1,3 @@
-import { Theme } from '../theme/theme';
 import { getMediaScreen } from './helper/getMediaScreen';
 import { getStyleResult } from './helper/getStyleResult';
 import { parseCSS } from './helper/parseCSS';
