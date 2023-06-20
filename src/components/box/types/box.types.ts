@@ -1,4 +1,4 @@
-export type CssType = 'class' | 'svg' | 'before' | 'after' | 'animate' | 'slotted';
+export type CssType = 'class' | 'before' | 'after' | 'slotted' | 'preset';
 
 export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 

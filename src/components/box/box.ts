@@ -3,22 +3,17 @@ import { getAttrStyle } from './helpers/getAttrStyle';
 import { getCssResult } from './helpers/getCssResult';
 import { getMediaRuleValue } from './helpers/getMediaRuleValue';
 import { parseStyleString } from './helpers/parseStyleString';
-import { Theme } from '../theme/theme';
 import { throwUnableModifyValue } from './helpers/throwUnableModifyValue';
 import { AllCombinations, AttrStyle, CssType } from './types/box.types';
-import { setStyleProperty } from './helpers/setStyleProperty';
-import { svgStateStates } from './styles-mapper/svg-state';
 
 export class Box extends HTMLElement {
-  private styleSheet = new CSSStyleSheet();
-  private sxStyleSheet?: CSSStyleSheet;
-  private mainSlot = document.createElement('slot');
+  #styleSheet = new CSSStyleSheet();
 
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: 'open' });
-    shadowRoot.appendChild(this.mainSlot);
-    shadowRoot.adoptedStyleSheets = [this.styleSheet];
+    shadowRoot.appendChild(document.createElement('slot'));
+    shadowRoot.adoptedStyleSheets = [this.#styleSheet];
   }
 
   set slotOf(value: string) {
@@ -35,16 +30,11 @@ export class Box extends HTMLElement {
   }
 
   set sx(styles: string) {
-    if (this.sxStyleSheet) throwUnableModifyValue('sx');
-    this.sxStyleSheet = new CSSStyleSheet();
-    this.sxStyleSheet.insertRule(`:host([sx]){${getCssResult(this, styles, 'sx')}}`);
-    this.shadowRoot!.adoptedStyleSheets.push(this.sxStyleSheet);
-    this.setAttribute('sx', '');
+    this.style.cssText = getCssResult(this, styles, 'sx');
   }
 
   set css(styles: CXBox.Styles) {
-    console.log('box.js |this.styleSheet| = ', this.styleSheet);
-    if (this.styleSheet.cssRules.length) throwUnableModifyValue('css');
+    if (this.#styleSheet.cssRules.length) throwUnableModifyValue('css');
 
     let styleList = '';
     let classList = '';
@@ -71,30 +61,14 @@ export class Box extends HTMLElement {
             classList += className + ' ';
           }
           break;
-        case 'svg':
-          for (let mainIndex = 0; mainIndex < styleGroup.length; ++mainIndex) {
-            const [svgType, styleName] = styleGroup[mainIndex];
-            const cssResult = getCssResult(this, styleName, type, attr1val, attr2val);
-            if (mainIndex === 0 && svgType.startsWith('<svg')) {
-              const svg = new DOMParser().parseFromString(svgType, 'image/svg+xml').documentElement;
 
-              if (attr1IsState === true) {
-                svg.setAttribute('state', attr1val!);
-              }
-              this.shadowRoot?.appendChild(svg);
-              styleList += `:host svg{${cssResult}}${svgStateStates[attr1IsState ? attr1val : '']}`;
-            } else {
-              styleList += `:host${attr1IsState ? `(${attrStyle1})` : ``} ${svgType}{${cssResult}}`;
-            }
-          }
-          break;
         default:
           throw new SyntaxError(`No css type "${type}"`);
       }
     }
 
     this.className = classList.trim();
-    this.styleSheet.replaceSync(styleList);
+    this.#styleSheet.replaceSync(styleList);
   }
 }
 
