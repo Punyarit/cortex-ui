@@ -111,14 +111,11 @@ export class PopoverState {
 
   private setMouseleaveEvent() {
     if (this.popoverSet.mouseleave === 'none') return;
-    const timer = setTimeout(() => {
-      // this.popoverContent.onmouseover = () => {
-      this.popoverContent.onmouseover = () => {
-        this.popoverContent.onmouseleave = this.closePopover;
-      };
-      this.popoverHost.onmouseleave = this.closePopover;
-      clearTimeout(timer);
-    }, 100);
+    // this.popoverContent.onmouseover = () => {
+    this.popoverContent.onmouseover = () => {
+      this.popoverContent.onmouseleave = this.closePopover;
+    };
+    this.popoverHost.onmouseleave = this.closePopover;
   }
 
   private setProperties(
