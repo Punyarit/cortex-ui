@@ -18,6 +18,7 @@ export type ParsedStye = {
   hashedClasses: HashedClass;
   cssVariablesResult: string[];
   screenStyleResult: HashedClass;
+  scope: string;
 };
 
 export type StyleProperty<T extends string> = {

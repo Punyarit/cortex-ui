@@ -35,7 +35,7 @@ const fontValue = (s: string) => {
 const fontSizeFunc = (attr2: string) => {
   if (+Theme.fsDisplay > 1) {
     const size = parseFloat(attr2);
-    const fontSize = size * +Theme.fsDisplay;
+    const fontSize = Math.round(size * +Theme.fsDisplay);
     const unit = attr2.replace(`${size}`, '');
     return `font-size:${fontSize}${unit}`;
   }

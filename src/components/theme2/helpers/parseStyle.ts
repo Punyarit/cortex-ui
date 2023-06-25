@@ -4,6 +4,7 @@ import { Theme } from '../theme';
 import { HashedClass, ParsedStye } from '../types/theme.types';
 import generateHashedClass from './generateComponentId';
 import { NoScreenError } from './NoScreenError';
+import { splitScopeAndClass } from '../constant/splitScopedAndClass'
 
 export function parseStyle(stylesAbbr: string): ParsedStye {
   const { groups, scope } = groupStyles(stylesAbbr);
@@ -48,6 +49,7 @@ export function parseStyle(stylesAbbr: string): ParsedStye {
     hashedClasses,
     screenStyleResult,
     cssVariablesResult,
+    scope,
   };
 }
 
@@ -65,8 +67,8 @@ function getStyleTextFromClass(styleAbbr: string, scope: string) {
   let cssProperties: Array<string | undefined> = [];
   const [selector, styleAbbrResult] = styleAbbr.split(': ');
   const [className, selectorSplitted] = splitClassNameAndSelector(selector);
-  const classNameTrim = className.trim().slice(1);
-  console.log('parseStyle.js |classNameTrim| = ', classNameTrim);
+  const classNameTrim = `${scope}${splitScopeAndClass}${className.trim().slice(1)}`;
+
   const styleAbbrResultTrim = styleAbbrResult.trim();
   const styleAbbrResultSplitted = styleAbbrResultTrim.split(' ');
 
@@ -155,7 +157,7 @@ function groupStyles(inputString: string) {
     // if the line is not empty or indented
     if (trimmedLine && !line.startsWith('    ')) {
       if (trimmedLine.startsWith('scope')) {
-        scope = trimmedLine.slice(6).trim();
+        scope = trimmedLine.slice(6).trim().slice(0, -1);
       } else {
         if (currentGroup) {
           groups.push(currentGroup.replace(/\s+$/g, '')); // add current group to groups

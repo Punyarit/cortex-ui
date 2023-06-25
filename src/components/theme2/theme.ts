@@ -14,7 +14,7 @@ export const mappedStyle = new Map();
 // Cortex Style
 export const style = <T extends string>(styleAbbr: TemplateStringsArray): StyleProperty<T> => {
   const style = document.createElement('style');
-  const { hashedClasses, styleResult, screenStyleResult, cssVariablesResult } = parseStyle(
+  const { hashedClasses, styleResult, screenStyleResult, cssVariablesResult, scope } = parseStyle(
     styleAbbr[0]
   );
 
@@ -24,14 +24,14 @@ export const style = <T extends string>(styleAbbr: TemplateStringsArray): StyleP
     hashedClasses
   )!;
   const cssTextResult = [...styleResult, ...screenCssText!, variableResult].join('');
-  
+
   style.textContent = cssTextResult;
-  const styleId = generateComponentId(cssTextResult);
+  const styleId = `${scope}__style__${generateComponentId(cssTextResult)}`;
 
   mappedStyle.set(styleId, style);
 
   createAndInjectStyle(cssTextResult, styleId, style);
-  const accessibleClassName = getAccessibleClassName({
+  const accessibleClassName = getAccessibleClassName(scope, {
     ...hashedClasses,
     ...screenAccessibleClass,
   });
