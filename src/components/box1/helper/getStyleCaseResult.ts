@@ -26,11 +26,11 @@ export const getStyleCaseResult = (
 
     // base bg-modernGreen-500
     case 'bg':
-      return `background-color:var(--${s.slice(3)})`;
+      return `background-color:${s.slice(3)}`;
 
     // c-primary-500
     case 'c':
-      return `color:var(--${s.slice(2)})`;
+      return `color:${s.slice(2)}`;
 
     case 'fs':
       if (+Theme.fontLevel > 1) {

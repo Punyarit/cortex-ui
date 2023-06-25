@@ -11,13 +11,13 @@ export function parseCSS(box: HTMLElement, css: string): { [key: string]: string
       let [selector, styles] = line.split(' : ');
 
       if (selector.startsWith('@variable')) {
-        const [, variable] = selector.split(':');
-        (box as any)[variable] = styles.slice(0, -1);
-        Object.defineProperty(box, variable.slice(1), {
-          set: (val: string) => {
-            box.style.setProperty(`--${variable}`, val);
-          },
-        });
+        // const [, variable] = selector.split(':');
+        // (box as any)[variable] = styles.slice(0, -1);
+        // Object.defineProperty(box, variable.slice(1), {
+        //   set: (val: string) => {
+        //     box.style.setProperty(`--${variable}`, val);
+        //   },
+        // });
       } else {
         if (selector.startsWith('@keyframes')) {
           const keyframes = styles.split(';');

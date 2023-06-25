@@ -1,24 +1,19 @@
+import generateComponentId from './helper/generateComponentId';
 import { getMediaScreen } from './helper/getMediaScreen';
 import { getStyleResult } from './helper/getStyleResult';
 import { parseCSS } from './helper/parseCSS';
+import stylis, { compile, serialize, stringify } from 'stylis';
+import { StyleSheetStore } from './helper/styleSheetStore';
+import appCxss from './cxss/app.cxss';
 
 export class Box extends HTMLElement {
-  #styleSheet = new CSSStyleSheet();
-
-  constructor() {
-    super();
-    const shadowRoot = this.attachShadow({ mode: 'open' });
-    shadowRoot.appendChild(document.createElement('slot'));
-    shadowRoot.adoptedStyleSheets = [this.#styleSheet];
-  }
-
   set css(css: string) {
     const cssObj = parseCSS(this, css);
     let cssRule = ``;
     let className = ``;
     for (const selector in cssObj) {
       let selectorVal = selector;
-      let mediaSelector: string;
+      let mediaSelector: string | undefined;
       let mediaScreen: string | undefined;
       if (selector.startsWith('@media')) {
         const [media, actSelector] = selector.trim().split(' ');
@@ -26,16 +21,26 @@ export class Box extends HTMLElement {
         mediaSelector = actSelector;
         mediaScreen = `${getMediaScreen(media)}{`;
       }
-      if (selectorVal[0] === '.') className += `${selectorVal.split(':')[0].slice(1).trim()} `;
+      const classNameVal = selectorVal.split(':')[0].slice(1);
 
       cssRule += `${mediaScreen || ''}${getStyleResult(
         selector,
         cssObj,
         mediaScreen ? mediaSelector! : undefined
       )}`;
+
+      this.setAttribute(generateComponentId(cssRule), '');
+      if (selectorVal[0] === '.') className += `${classNameVal} `;
     }
-    if (className) this.className = className.slice(0, -1);
-    this.#styleSheet.replaceSync(cssRule);
+
+    this.className = className.slice(0, -1);
+
+    // StyleSheetStore.Box ||= document.getElementsByTagName('cx-box');
+    // if (this === StyleSheetStore.Box[StyleSheetStore.Box.length - 1]) {
+    //   const styleSheet = new CSSStyleSheet();
+    //   styleSheet.replaceSync(cssRule);
+    //   document.adoptedStyleSheets.push(styleSheet);
+    // }
   }
 }
 

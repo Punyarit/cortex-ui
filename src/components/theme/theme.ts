@@ -1,28 +1,34 @@
+import generateComponentId from './helpers/generateComponentId';
+
 export class Theme extends HTMLElement {
-  public static sheet?: string;
-  public static breakpoint?: Record<string, string>;
+  public static style?: string;
+
   public static fontLevel: number | string = 1;
-  public static elementRef?: Theme;
+
+  public static breakpoint?: Record<string, string>;
+
+  public static cxss = <T extends string>(style: TemplateStringsArray): Record<T, string> => {
+    console.log('theme.js |style| = ', style);
+    const styleText = style.toString();
+    const componentId = generateComponentId(styleText);
+    console.log('theme.js |componentId| = ', componentId);
+    this.createAndInjectStyle(styleText);
+    const className = `header__${componentId}`;
+
+    return {
+      header: className,
+    } as Record<T, string>;
+  };
 
   constructor() {
     super();
-    Theme.elementRef = this;
-    this.createThemeStyle();
+    Theme.createAndInjectStyle(Theme.style || '');
   }
 
-  private createThemeStyle() {
-    const shadowRoot = this.attachShadow({ mode: 'open' });
-    if (Theme.sheet) {
-      const styleSheet = new CSSStyleSheet();
-      styleSheet.replaceSync(Theme.sheet);
-      shadowRoot.adoptedStyleSheets = [styleSheet];
-    }
-    shadowRoot.appendChild(document.createElement('slot'));
-  }
-
-  public static setThemeClass(className: string) {
-    Theme.elementRef!.className = className;
+  private static createAndInjectStyle(styleText: string) {
+    const style = document.createElement('style');
+    style.textContent = styleText;
+    document.head.appendChild(style);
   }
 }
-
 customElements.define('cx-theme', Theme);

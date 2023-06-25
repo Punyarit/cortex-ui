@@ -6,7 +6,5 @@ export function getStyleResult(
   mediaSelector?: string
 ) {
   mediaSelector ||= selector;
-  return `${mediaSelector[0] === '.' ? `:host(${mediaSelector})` : mediaSelector}{${
-    cssObj[selector]
-  }}${selector.startsWith('@media') ? '}' : ''}`;
+  return `${mediaSelector}{${cssObj[selector]}}${selector.startsWith('@media') ? '}' : ''}`;
 }
