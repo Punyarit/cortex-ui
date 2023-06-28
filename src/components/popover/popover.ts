@@ -16,6 +16,7 @@ export class Popover extends ComponentBase<CXPopover.Props> {
     focusout: 'close',
     arrowpoint: false,
     transform: 'origin',
+    disabled: undefined,
   };
 
   static styles = css`
@@ -58,6 +59,7 @@ export class Popover extends ComponentBase<CXPopover.Props> {
   }
 
   private setOpenPopover = async (triggerEvent: Event) => {
+    if (this.set.disabled) return;
     const popoverContentElement = await this.getPopoverContentElement();
     if (!popoverContentElement) return;
     ModalSingleton.modalRef.openPopover(
@@ -102,6 +104,7 @@ declare global {
       focusout: 'none' | 'close';
       arrowpoint?: boolean;
       transform?: 'center' | 'origin';
+      disabled?: boolean;
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & {

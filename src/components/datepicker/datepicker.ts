@@ -1,4 +1,4 @@
-import { css, html, TemplateResult } from 'lit';
+import { css, html, PropertyValueMap, TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { ComponentBase } from '../../base/component-base/component.base';
 import { createRef, ref } from 'lit/directives/ref.js';
@@ -38,6 +38,10 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
     rangeValue: undefined,
     focusout: 'close',
     mouseleave: 'none',
+    disabled: undefined,
+    error: undefined,
+    rangeError: undefined,
+    rangeDisabled: undefined,
   };
 
   styles: CXDatePicker.Var = {
@@ -48,6 +52,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   private inputBoxWrapperRef = createRef<HTMLSlotElement>();
   private cxCalendarRef = createRef<CXCalendar.Ref>();
   private popoverContentRef = createRef<PopoverContent>();
+  private popoverRef = createRef<CXPopover.Ref>();
   private endDateCache?: Date;
 
   connectedCallback() {
@@ -65,11 +70,21 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
 
   render(): TemplateResult {
     return html`
-      <style></style>
+      <style>
+        cx-datepicker .disabled-bg {
+          background: var(--gray-200);
+          cursor: not-allowed;
+        }
+
+        cx-datepicker .error-border {
+          border-color: red !important;
+        }
+      </style>
       <cx-popover
         @opened="${this.popoverOpened}"
         @closed="${this.popoverClosed}"
         .set="${{
+          disabled: this.set.disabled,
           position: 'bottom-left',
           openby: 'click',
           mouseleave: this.set.mouseleave,
@@ -105,8 +120,24 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private renderInputBox(text: string, type: InputDateType) {
+    const { disabled, error, rangeDisabled, rangeError } = this.set;
+    const inputState =
+      !rangeDisabled && !rangeError
+        ? `${disabled ? 'disabled-bg' : ''} ${error ? 'error-border' : ''}`
+        : '';
+
+    const endDateInputState = `${
+      rangeDisabled?.endDate && type === 'enddate' ? 'disabled-bg' : ''
+    } ${rangeError?.endDate && type === 'enddate' ? 'error-border' : ''}`;
+
+    const startDateInputState = `${
+      rangeDisabled?.startDate && type === 'startdate' ? 'disabled-bg' : ''
+    } ${rangeError?.startDate && type === 'startdate' ? 'error-border' : ''}`;
+
     return html`
       <c-box
+        @mouseenter="${() => this.checkDisabledDate(type)}"
+        class="${inputState} ${endDateInputState} ${startDateInputState}"
         ui="${UI.inputDateBox}"
         icon-prefix="22 calendar-alt-line gray-600"
         input-date-type="${type}"
@@ -117,6 +148,24 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
       >
     `;
   }
+
+  private checkDisabledDate(type: InputDateType) {
+    const isEndDate = type === 'enddate';
+    const isStartDate = type === 'startdate';
+    const isEndDateDisabled = this.set.rangeDisabled?.endDate;
+    const isStartDateDisabled = this.set.rangeDisabled?.startDate;
+
+    if (isEndDate) {
+      this.toggleFixBasedOnCondition(isEndDateDisabled);
+    } else if (isStartDate) {
+      this.toggleFixBasedOnCondition(isStartDateDisabled);
+    }
+  }
+
+  private toggleFixBasedOnCondition(condition: boolean | undefined) {
+    this.fix().disabled(condition).exec();
+  }
+
   private getSelectedDateRangeText() {
     const dateRangeValue = this.set.rangeValue as RangeValueType;
 
@@ -260,6 +309,16 @@ declare global {
       valueStyle?: Intl.DateTimeFormatOptions;
       focusout?: 'close' | 'none';
       mouseleave?: 'close' | 'none';
+      disabled?: boolean;
+      error?: boolean;
+      rangeError?: {
+        startDate?: boolean;
+        endDate?: boolean;
+      };
+      rangeDisabled?: {
+        startDate?: boolean;
+        endDate?: boolean;
+      };
     };
 
     type Fix = Required<{ [K in keyof Set]: (value: Set[K]) => Fix }> & { exec: () => void };
