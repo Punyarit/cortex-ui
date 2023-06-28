@@ -52,7 +52,6 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   private inputBoxWrapperRef = createRef<HTMLSlotElement>();
   private cxCalendarRef = createRef<CXCalendar.Ref>();
   private popoverContentRef = createRef<PopoverContent>();
-  private popoverRef = createRef<CXPopover.Ref>();
   private endDateCache?: Date;
 
   connectedCallback() {
@@ -77,7 +76,7 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
         }
 
         cx-datepicker .error-border {
-          border-color: red !important;
+          border-color: #f3655c !important;
         }
       </style>
       <cx-popover
