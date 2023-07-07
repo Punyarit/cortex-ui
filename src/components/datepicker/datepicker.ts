@@ -162,7 +162,8 @@ export class DatePicker extends ComponentBase<CXDatePicker.Props> {
   }
 
   private toggleFixBasedOnCondition(condition: boolean | undefined) {
-    this.fix().disabled(condition).exec();
+    this.set.disabled = condition;
+    this.requestUpdate();
   }
 
   private getSelectedDateRangeText() {
